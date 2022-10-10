@@ -15,7 +15,8 @@ public class DiagramPresenter {
     }
 
     private void handleInput() {
-        System.out.println(model.geInputs());
+        model.processInputs();
+        System.out.println(model.getProblemData());
     }
 
     

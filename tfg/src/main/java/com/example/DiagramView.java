@@ -47,6 +47,15 @@ public class DiagramView extends GridPane {
                 
                 //poner elementos de cada objeto
                 diagramBox.setPadding(new Insets(50));
+                diagramBox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
+                        + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
+                        + "-fx-border-radius: 5;" + "-fx-border-color: blue;");
+                selectionBox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
+                        + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
+                        + "-fx-border-radius: 5;" + "-fx-border-color: red;");
+                lowerBox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
+                        + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
+                        + "-fx-border-radius: 5;" + "-fx-border-color: green;");
                 diagramBox.getChildren().addAll(inputField,confirmDataButton);
                 lowerBox.setPadding(new Insets(50));
                 lowerBox.getChildren().addAll(okBtn,otroBtn);
@@ -55,7 +64,7 @@ public class DiagramView extends GridPane {
         }
 
         private void bindModelData() {
-                inputField.textProperty().bind(model.getInputsProperty());
+                inputField.textProperty().bindBidirectional(model.getInputsProperty());
         }
 
 
