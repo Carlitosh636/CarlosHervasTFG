@@ -22,6 +22,7 @@ public class DiagramView extends GridPane {
         Button okBtn = new Button("Ok");
         Button otroBtn = new Button("otroboton");
         TextField inputField = new TextField();
+        Button confirmDataButton = new Button("Enter parameters");
 
         public DiagramView(Diagram model) {
                 this.model = model;
@@ -46,7 +47,7 @@ public class DiagramView extends GridPane {
                 
                 //poner elementos de cada objeto
                 diagramBox.setPadding(new Insets(50));
-                diagramBox.getChildren().addAll(inputField);
+                diagramBox.getChildren().addAll(inputField,confirmDataButton);
                 lowerBox.setPadding(new Insets(50));
                 lowerBox.getChildren().addAll(okBtn,otroBtn);
                 inputField.setPromptText("Introduce los numeros de input");
@@ -56,7 +57,7 @@ public class DiagramView extends GridPane {
         private void bindModelData() {
                 inputField.textProperty().bind(model.getInputsProperty());
         }
-        
+
 
 
         
