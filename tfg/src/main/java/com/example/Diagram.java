@@ -37,7 +37,12 @@ public class Diagram {
         this.problemData = problemData;
     }
 
-    public void processInputs(){
-        problemData.add(Integer.parseInt(this.inputs.get()));
+    public void processInputs() throws Exception{
+        try{
+            problemData.add(Integer.parseInt(this.inputs.get()));
+        }
+        catch (Exception e){
+            throw new Exception();
+        }
     }
 }

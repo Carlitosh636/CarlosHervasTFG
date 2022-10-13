@@ -10,6 +10,7 @@ public class DiagramPresenter {
         attachEvents();
         view.enunciado.setVisible(true);
         view.diagramPane.setVisible(false);
+        view.inputErrorLabel.setVisible(false);
     }
 
     private void attachEvents() {
@@ -17,19 +18,24 @@ public class DiagramPresenter {
     }
 
     private void handleInput() {
-        model.processInputs();
-        view.inputField.setVisible(false);
-        view.confirmDataButton.setVisible(false);
+        try {
+            model.processInputs();
+            view.inputErrorLabel.setVisible(false);
+            view.inputField.setVisible(false);
+            view.confirmDataButton.setVisible(false);
 
-        view.enunciado.setVisible(false);
-        view.diagramPane.setVisible(true);
+            view.enunciado.setVisible(false);
+            view.diagramPane.setVisible(true);
 
-        view.originalData.textProperty().set(model.getProblemData().toString());
-        view.originalSolution.textProperty().set(model.getProblemData().toString());
-        view.partialData.textProperty().set(model.getProblemData().toString());
-        view.partialSolution.textProperty().set(model.getProblemData().toString());
+            view.originalData.textProperty().set(model.getProblemData().toString());
+            view.originalSolution.textProperty().set(model.getProblemData().toString());
+            view.partialData.textProperty().set(model.getProblemData().toString());
+            view.partialSolution.textProperty().set(model.getProblemData().toString());
+        } catch (Exception e) {
+            view.inputErrorLabel.setVisible(true);
+        }
+
         System.out.println(model.getProblemData());
     }
-
     
 }

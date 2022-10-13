@@ -1,15 +1,10 @@
 package com.example;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
 public class DiagramView extends GridPane {
         private final Diagram model;
@@ -17,17 +12,17 @@ public class DiagramView extends GridPane {
         Label originalData = new Label();
         Label originalDataSolutionArrow = new Label("=====================>");
         Label originalSolution = new Label();
-        Label datasArrow = new Label("|\n|\n|\n|\n|");
+        Label datasArrow = new Label(" |\n |\n |\n |\n |");
         Label emptylabel = new Label();
-        Label solutionsArrow = new Label("|\n|\n|\n|\n|");
+        Label solutionsArrow = new Label(" |\n |\n |\n |\n |");
         Label partialData = new Label();
         Label partialSolution = new Label();
         Label partialDataSolutionArrow = new Label("=====================>");
         GridPane diagramPane = new GridPane();
-        HBox diagramBox = new HBox();
+        BorderPane diagramBox = new BorderPane();
         HBox lowerBox = new HBox();
+        Label inputErrorLabel = new Label("El valor introducido no es correcto para el problema. Introduzca datos válidos");
         VBox selectionBox = new VBox();
-        Button okBtn = new Button("Ok");
         Button otroBtn = new Button("otroboton");
         TextField inputField = new TextField();
         Button confirmDataButton = new Button("Enter parameters");
@@ -42,7 +37,6 @@ public class DiagramView extends GridPane {
                 this.setHgap(10);
                 this.setVgap(10);
                 this.setStyle("-fx-background-color: lightgray;");
-                this.add(enunciado, 0, 0, 1, 1);
                 this.add(diagramBox, 0, 1, 3, 3);
                 this.add(lowerBox, 0, 4, 3, 3);
                 this.add(selectionBox, 4, 1, 3, 1);
@@ -73,10 +67,13 @@ public class DiagramView extends GridPane {
                 diagramPane.add(partialDataSolutionArrow,1,2);
                 diagramPane.add(partialSolution,2,2);
 
+                diagramBox.setTop(enunciado);
+                diagramBox.setCenter(diagramPane);
+
+
                 diagramPane.setStyle("-fx-background-color: DAE6F3;");
-                diagramBox.getChildren().addAll(diagramPane);
                 lowerBox.setPadding(new Insets(50));
-                lowerBox.getChildren().addAll(inputField,confirmDataButton);
+                lowerBox.getChildren().addAll(inputField,confirmDataButton,inputErrorLabel);
                 selectionBox.getChildren().addAll(otroBtn);
                 inputField.setPromptText("Introduce los numeros de input");
 
