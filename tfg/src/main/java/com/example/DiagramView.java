@@ -1,14 +1,13 @@
 package com.example;
 
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 public class DiagramView extends GridPane {
         private final Diagram model;
-        Label enunciado = new Label("El enunciado necesitará su propia ventana, a poder ser que el y el diagrama se superpongan para ir alternandose");
+        TextArea enunciado = new TextArea("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis sem lectus. Maecenas vitae volutpat felis.\nVivamus fringilla pellentesque tincidunt.\nNulla et nisl ac tortor tempus sagittis id ac turpis. Ut sed posuere justo. Nam sollicitudin metus ac iaculis tempus.\nEtiam fermentum tristique tellus in blandit. Phasellus non congue ante. Aenean nec lorem ipsum.\n" +
+                "\n");
         Label originalData = new Label();
         Label originalDataSolutionArrow = new Label("=====================>");
         Label originalSolution = new Label();
@@ -20,12 +19,17 @@ public class DiagramView extends GridPane {
         Label partialDataSolutionArrow = new Label("=====================>");
         GridPane diagramPane = new GridPane();
         BorderPane diagramBox = new BorderPane();
-        HBox lowerBox = new HBox();
+        VBox lowerBox = new VBox();
         Label inputErrorLabel = new Label("El valor introducido no es correcto para el problema. Introduzca datos válidos");
         VBox selectionBox = new VBox();
         Button otroBtn = new Button("otroboton");
+        Label inputInstructions=new Label("Escribe la base y el exponente, separados por una coma");
         TextField inputField = new TextField();
-        Button confirmDataButton = new Button("Enter parameters");
+        Label reductionInstructions=new Label("Elige el método de reducción");
+        ComboBox reductionSelect = new ComboBox();
+        Label baseCaseInstructions=new Label("Elige el caso base");
+        TextField baseCaseField= new TextField();
+        Button confirmDataButton = new Button("Introducir valores");
 
         public DiagramView(Diagram model) {
                 this.model = model;
@@ -67,21 +71,26 @@ public class DiagramView extends GridPane {
                 diagramPane.add(partialDataSolutionArrow,1,2);
                 diagramPane.add(partialSolution,2,2);
 
+                enunciado.setEditable(false);
                 diagramBox.setTop(enunciado);
                 diagramBox.setCenter(diagramPane);
 
+                reductionSelect.getItems().add("-1 al exponente");
+                reductionSelect.getItems().add("/2 al exponente");
 
                 diagramPane.setStyle("-fx-background-color: DAE6F3;");
                 lowerBox.setPadding(new Insets(50));
-                lowerBox.getChildren().addAll(inputField,confirmDataButton,inputErrorLabel);
+                lowerBox.getChildren().addAll(inputInstructions,inputErrorLabel,inputField,reductionInstructions,reductionSelect,baseCaseInstructions,baseCaseField,confirmDataButton);
                 selectionBox.getChildren().addAll(otroBtn);
                 inputField.setPromptText("Introduce los numeros de input");
-
         }
-
         private void bindModelData() {
                 inputField.textProperty().bindBidirectional(model.getInputsProperty());
-
+                originalData.textProperty().bind(model.originalDataProperty());
+                originalSolution.textProperty().bind(model.originalSolProperty());
+                partialData.textProperty().bind(model.partialDataProperty());
+                partialSolution.textProperty().bind(model.partialSolProperty());
+                baseCaseField.textProperty().bindBidirectional(model.baseCaseProperty());
         }
 
 

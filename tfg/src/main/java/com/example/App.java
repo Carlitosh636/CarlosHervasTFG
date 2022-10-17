@@ -15,7 +15,7 @@ public class App extends Application {
         Diagram model = new Diagram();
         DiagramView view = new DiagramView(model);
 
-        Scene root = new Scene(view,1200,600);
+        Scene root = new Scene(view,1200,800);
         DiagramPresenter presenter = new DiagramPresenter(model, view);
         
         stage.setScene(root);

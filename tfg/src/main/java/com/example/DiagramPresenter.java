@@ -15,27 +15,26 @@ public class DiagramPresenter {
 
     private void attachEvents() {
         view.confirmDataButton.setOnAction(e->handleInput());
+        view.reductionSelect.setOnAction(e->{
+            model.setCurrentReduction(view.reductionSelect.getSelectionModel().getSelectedIndex());
+        });
     }
 
     private void handleInput() {
         try {
             model.processInputs();
-            view.inputErrorLabel.setVisible(false);
-            view.inputField.setVisible(false);
-            view.confirmDataButton.setVisible(false);
-
-            view.enunciado.setVisible(false);
             view.diagramPane.setVisible(true);
+            view.lowerBox.setVisible(false);
+            //view.originalData.textProperty().set(model.getProblemData().toString());
+            //view.originalSolution.textProperty().set(model.getProblemData().toString());
+            //view.partialData.textProperty().set(model.getProblemData().toString());
+            //view.partialSolution.textProperty().set(model.getProblemData().toString());
 
-            view.originalData.textProperty().set(model.getProblemData().toString());
-            view.originalSolution.textProperty().set(model.getProblemData().toString());
-            view.partialData.textProperty().set(model.getProblemData().toString());
-            view.partialSolution.textProperty().set(model.getProblemData().toString());
         } catch (Exception e) {
             view.inputErrorLabel.setVisible(true);
         }
 
-        System.out.println(model.getProblemData());
+        System.out.println(model.getRawData());
     }
     
 }
