@@ -18,6 +18,16 @@ public class Diagram {
     private Map<Integer, Callable> algorithmsMap = new HashMap<>();
     private int currentReduction;
 
+    public String getCurrentReductionString() {
+        return currentReductionString;
+    }
+
+    public void setCurrentReductionString(String currentReductionString) {
+        this.currentReductionString = currentReductionString;
+    }
+
+    private String currentReductionString;
+
     public int getCurrentReduction() {
         return currentReduction;
     }
@@ -107,7 +117,9 @@ public class Diagram {
                 Double[] returnVal = new Double[2];
                 returnVal[0] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseProperty().get()));
                 returnVal[1] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseProperty().get()));
+                currentReductionString="b-1";
                 return returnVal;
+
             }
         });
         algorithmsMap.put(1, new Callable<Double[]>() {
@@ -116,6 +128,7 @@ public class Diagram {
                 Double[] returnVal = new Double[2];
                 returnVal[0] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseProperty().get()));
                 returnVal[1] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseProperty().get()));
+                currentReductionString="b/2";
                 return returnVal;
             }
         });

@@ -22,8 +22,9 @@ public class DiagramView extends GridPane {
         VBox lowerBox = new VBox();
         Label inputErrorLabel = new Label("El valor introducido no es correcto para el problema. Introduzca datos válidos");
         VBox selectionBox = new VBox();
-        Button otroBtn = new Button("otroboton");
-        Label inputInstructions=new Label("Escribe la base y el exponente, separados por una coma");
+        Label solutionSelectionLabel = new Label("Selecciona el paso restante (marcado con ??)");
+        ComboBox solutionSelection = new ComboBox();
+        Label inputInstructions=new Label("Escribe la base (a) y el exponente (b), separados por una coma");
         TextField inputField = new TextField();
         Label reductionInstructions=new Label("Elige el método de reducción");
         ComboBox reductionSelect = new ComboBox();
@@ -41,9 +42,9 @@ public class DiagramView extends GridPane {
                 this.setHgap(10);
                 this.setVgap(10);
                 this.setStyle("-fx-background-color: lightgray;");
-                this.add(diagramBox, 0, 1, 3, 3);
-                this.add(lowerBox, 0, 4, 3, 3);
-                this.add(selectionBox, 4, 1, 3, 1);
+                this.add(diagramBox, 0, 1, 3, 4);
+                this.add(lowerBox, 0, 4, 3, 4);
+                this.add(selectionBox, 4, 1, 4,1);
 
                 //crecimiento vertical y horizontal 
                 GridPane.setHgrow(diagramBox, Priority.ALWAYS);
@@ -72,6 +73,8 @@ public class DiagramView extends GridPane {
                 diagramPane.add(partialSolution,2,2);
 
                 enunciado.setEditable(false);
+                enunciado.setBackground(Background.EMPTY);
+
                 diagramBox.setTop(enunciado);
                 diagramBox.setCenter(diagramPane);
 
@@ -81,7 +84,12 @@ public class DiagramView extends GridPane {
                 diagramPane.setStyle("-fx-background-color: DAE6F3;");
                 lowerBox.setPadding(new Insets(50));
                 lowerBox.getChildren().addAll(inputInstructions,inputErrorLabel,inputField,reductionInstructions,reductionSelect,baseCaseInstructions,baseCaseField,confirmDataButton);
-                selectionBox.getChildren().addAll(otroBtn);
+
+                solutionSelection.getItems().add("multiplicar por 'a'");
+                solutionSelection.getItems().add("multiplicar por 'b'");
+                solutionSelection.getItems().add("elevar a 'a'");
+
+                selectionBox.getChildren().addAll(solutionSelectionLabel,solutionSelection);
                 inputField.setPromptText("Introduce los numeros de input");
         }
         private void bindModelData() {
