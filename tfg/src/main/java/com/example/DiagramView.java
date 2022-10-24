@@ -85,9 +85,6 @@ public class DiagramView extends GridPane {
                 lowerBox.setPadding(new Insets(50));
                 lowerBox.getChildren().addAll(inputInstructions,inputErrorLabel,inputField,reductionInstructions,reductionSelect,baseCaseInstructions,baseCaseField,confirmDataButton);
 
-                solutionSelection.getItems().add("multiplicar por 'a'");
-                solutionSelection.getItems().add("multiplicar por 'b'");
-                solutionSelection.getItems().add("elevar a 'a'");
 
                 selectionBox.getChildren().addAll(solutionSelectionLabel,solutionSelection);
                 inputField.setPromptText("Introduce los numeros de input");
