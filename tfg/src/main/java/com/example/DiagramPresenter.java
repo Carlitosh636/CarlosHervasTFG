@@ -35,9 +35,13 @@ public class DiagramPresenter {
                 view.solutionSelection.getItems().add(str);
             }
         });
-        view.solutionSelection.setOnAction(e->{
-            //TODO: comprobar que la solución seleccionada sea la correcta.
-            System.out.println(view.solutionSelection.getSelectionModel().getSelectedItem());
+        view.submitSolution.setOnAction(e->{
+            if(view.solutionSelection.getSelectionModel().getSelectedIndex() == model.getCorrectChoices().get(view.reductionSelect.getSelectionModel().getSelectedIndex())){
+                view.solutionStatus.textProperty().set("Correcto!");
+            }
+            else{
+                view.solutionStatus.textProperty().set("Incorrecto! Vuelve a intentarlo.");
+            }
         });
     }
 
@@ -65,12 +69,12 @@ public class DiagramPresenter {
         //SE DEBERÍA LEER DE ARCHIVO EXTERNO O UN REPOSITORIO, ESTO ES TEMPORAL
         List<List<String>> listas = new ArrayList<>();
         List<String> test1 = new ArrayList<>();
-        test1.add("multiplicar por 'a'");
         test1.add("multiplicar por 'b'");
+        test1.add("multiplicar por 'a'");
         test1.add("elevar a 'a'");
         List<String> test2 = new ArrayList<>();
-        test2.add("falta");
-        test2.add("contenido aqui");
+        test2.add("elevar al cuadrado");
+        test2.add("multiplicar por 'b'");
         int index = 0;
         listas.add(test1);
         listas.add(test2);

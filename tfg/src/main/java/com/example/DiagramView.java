@@ -21,16 +21,18 @@ public class DiagramView extends GridPane {
         BorderPane diagramBox = new BorderPane();
         VBox lowerBox = new VBox();
         Label inputErrorLabel = new Label("El valor introducido no es correcto para el problema. Introduzca datos válidos");
-        VBox selectionBox = new VBox();
-        Label solutionSelectionLabel = new Label("Selecciona el paso restante (marcado con ??)");
-        ComboBox solutionSelection = new ComboBox();
         Label inputInstructions=new Label("Escribe la base (a) y el exponente (b), separados por una coma");
         TextField inputField = new TextField();
         Label reductionInstructions=new Label("Elige el método de reducción");
         ComboBox reductionSelect = new ComboBox();
-        Label baseCaseInstructions=new Label("Elige el caso base");
+        Label baseCaseInstructions=new Label("Introduce el caso base");
         TextField baseCaseField= new TextField();
         Button confirmDataButton = new Button("Introducir valores");
+        VBox selectionBox = new VBox();
+        Label solutionSelectionLabel = new Label("Selecciona el paso restante (marcado con ??)");
+        ComboBox solutionSelection = new ComboBox();
+        Button submitSolution = new Button("Introducir solución");
+        Label solutionStatus = new Label();
 
         public DiagramView(Diagram model) {
                 this.model = model;
@@ -86,7 +88,7 @@ public class DiagramView extends GridPane {
                 lowerBox.getChildren().addAll(inputInstructions,inputErrorLabel,inputField,reductionInstructions,reductionSelect,baseCaseInstructions,baseCaseField,confirmDataButton);
 
 
-                selectionBox.getChildren().addAll(solutionSelectionLabel,solutionSelection);
+                selectionBox.getChildren().addAll(solutionSelectionLabel,solutionSelection,submitSolution,solutionStatus);
                 inputField.setPromptText("Introduce los numeros de input");
         }
         private void bindModelData() {

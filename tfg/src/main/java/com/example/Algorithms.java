@@ -22,8 +22,8 @@ public class Algorithms {
             }
         }
         else if(exp % 2 == 0){
-            return Math.pow(recursiveExponentOption2(base,Math.floorDiv(exp,2),baseCaseValue),2);
+            return Math.pow(recursiveExponentOption2(base,exp/2,baseCaseValue),2);
         }
-        return base * Math.pow(recursiveExponentOption2(base,Math.floorDiv(exp-1,2),baseCaseValue),2);
+        return base * Math.pow(recursiveExponentOption2(base,(exp-1)/2,baseCaseValue),2);
     }
 }

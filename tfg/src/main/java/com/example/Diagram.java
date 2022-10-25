@@ -17,6 +17,18 @@ public class Diagram {
     private SimpleStringProperty baseCase;
     private Map<Integer, Callable> algorithmsMap = new HashMap<>();
     private int currentReduction;
+    private List<Integer> correctChoices;
+    private String operation;
+    private String reducedOperation;
+    public List<Integer> getCorrectChoices() {
+        return correctChoices;
+    }
+
+    public void setCorrectChoices(List<Integer> correctChoices) {
+        this.correctChoices = correctChoices;
+    }
+
+
 
     public String getCurrentReductionString() {
         return currentReductionString;
@@ -100,7 +112,9 @@ public class Diagram {
 
 
 
-    public Diagram() {
+    public Diagram(List<Integer> correctChoices,String operation) {
+        this.operation=operation;
+        this.correctChoices=correctChoices;
         this.inputs = new SimpleStringProperty();
         this.rawData = "";
         this.problemData=new ArrayList<>();
@@ -117,6 +131,7 @@ public class Diagram {
                 Double[] returnVal = new Double[2];
                 returnVal[0] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseProperty().get()));
                 returnVal[1] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseProperty().get()));
+                reducedOperation=problemData.get(0)+operation+(Integer.parseInt(problemData.get(1))-1);
                 currentReductionString="b-1";
                 return returnVal;
 
@@ -127,7 +142,8 @@ public class Diagram {
             public Double[] call() throws Exception {
                 Double[] returnVal = new Double[2];
                 returnVal[0] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseProperty().get()));
-                returnVal[1] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseProperty().get()));
+                returnVal[1] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))/2,Integer.parseInt(baseCaseProperty().get()));
+                reducedOperation=problemData.get(0)+operation+(Integer.parseInt(problemData.get(1))/2);
                 currentReductionString="b/2";
                 return returnVal;
             }
@@ -154,18 +170,17 @@ public class Diagram {
 
     public void processInputs() throws Exception{
         try{
-            //problemData.add(Integer.parseInt(this.inputs.get()));
+            //problemData.add(Integer.parseInt(this.inputs.get()))
             problemData = List.of(this.inputs.get().split(","));
-            rawData =problemData.get(0)+'^'+problemData.get(1);
-            //ogSol=Algorithms.recursiveExponentOption1(Integer.parseInt(rawData[0]),Integer.parseInt(rawData[1]), Integer.parseInt(baseCaseProperty().get()));
-            //partSol=Algorithms.recursiveExponentOption1(Integer.parseInt(rawData[0]),Integer.parseInt(rawData[1])-1, Integer.parseInt(baseCaseProperty().get()));
+            rawData =problemData.get(0)+operation+problemData.get(1);
+
             Double[] values = (Double[]) algorithmsMap.get(currentReduction).call();
 
             ogSol = values[0];
             partSol = values[1];
             originalData.set(this.rawData);
             originalSol.set(String.valueOf(ogSol));
-            partialData.set(problemData.get(0)+'^'+(Integer.parseInt(problemData.get(1))-1));
+            partialData.set(reducedOperation);
             partialSol.set(String.valueOf(partSol));
         }
         catch (Exception e){
