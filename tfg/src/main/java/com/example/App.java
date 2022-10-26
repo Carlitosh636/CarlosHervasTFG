@@ -18,6 +18,7 @@ public class App extends Application {
         List<Integer> correctChoices = new ArrayList<>();
         correctChoices.add(1);
         correctChoices.add(0);
+        correctChoices.add(2);
         Diagram model = new Diagram(correctChoices,"^");
         DiagramView view = new DiagramView(model);
         Scene root = new Scene(view);

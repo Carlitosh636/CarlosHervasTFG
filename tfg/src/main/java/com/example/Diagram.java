@@ -17,6 +17,7 @@ public class Diagram {
     private SimpleStringProperty baseCase;
     private Map<Integer, Callable> algorithmsMap = new HashMap<>();
     private int currentReduction;
+    private int currentReductionSolutions;
     private List<Integer> correctChoices;
     private String operation;
     private String reducedOperation;
@@ -109,6 +110,13 @@ public class Diagram {
     }
 
 
+    public int getCurrentReductionSolutions() {
+        return currentReductionSolutions;
+    }
+
+    public void setCurrentReductionSolutions(int currentReductionSolutions) {
+        this.currentReductionSolutions = currentReductionSolutions;
+    }
 
 
 
@@ -133,6 +141,7 @@ public class Diagram {
                 returnVal[1] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseProperty().get()));
                 reducedOperation=problemData.get(0)+operation+(Integer.parseInt(problemData.get(1))-1);
                 currentReductionString="b-1";
+                currentReductionSolutions=0;
                 return returnVal;
 
             }
@@ -143,8 +152,17 @@ public class Diagram {
                 Double[] returnVal = new Double[2];
                 returnVal[0] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseProperty().get()));
                 returnVal[1] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))/2,Integer.parseInt(baseCaseProperty().get()));
-                reducedOperation=problemData.get(0)+operation+(Integer.parseInt(problemData.get(1))/2);
-                currentReductionString="b/2";
+
+                if(Integer.parseInt(problemData.get(1))%2==0){
+                    currentReductionString="b/2";
+                    reducedOperation=problemData.get(0)+operation+(Integer.parseInt(problemData.get(1))/2);
+                    currentReductionSolutions=1;
+                }
+                else{
+                    currentReductionString="(b-1)/2";
+                    reducedOperation=problemData.get(0)+operation+((Integer.parseInt(problemData.get(1))-1)/2);
+                    currentReductionSolutions=2;
+                }
                 return returnVal;
             }
         });
@@ -171,11 +189,11 @@ public class Diagram {
     public void processInputs() throws Exception{
         try{
             //problemData.add(Integer.parseInt(this.inputs.get()))
-            problemData = List.of(this.inputs.get().split(","));
+            problemData = Arrays.asList(this.inputs.get().split(","));
             rawData =problemData.get(0)+operation+problemData.get(1);
 
             Double[] values = (Double[]) algorithmsMap.get(currentReduction).call();
-
+            System.out.println("currentRedSolutions: "+ currentReductionSolutions);
             ogSol = values[0];
             partSol = values[1];
             originalData.set(this.rawData);
