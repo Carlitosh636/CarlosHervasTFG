@@ -133,6 +133,8 @@ public class Diagram {
         this.partialData=new SimpleStringProperty();
         this.partialSol=new SimpleStringProperty();
         this.baseCase=new SimpleStringProperty();
+        //ELIMINAR LUEGO
+        this.baseCase.set("1");
         algorithmsMap.put(0, new Callable<Double[]>() {
             @Override
             public Double[] call() throws Exception {

@@ -17,26 +17,23 @@ public class DiagramPresenter {
         mappingReductionSolution = new HashMap<>();
         attachEvents();
         prepareSolutions();
-        view.enunciado.setVisible(true);
-        view.diagramPane.setVisible(false);
-        view.inputErrorLabel.setVisible(false);
-        view.solutionSelectionLabel.setVisible(false);
         view.solutionSelection.setVisible(false);
     }
 
     private void attachEvents() {
-        view.confirmDataButton.setOnAction(e->handleInput());
         view.reductionSelect.setOnAction(e->{
             //cambiar el diagrama segun reduccion
             model.setCurrentReduction(view.reductionSelect.getSelectionModel().getSelectedIndex());
-
+            handleInput();
         });
-        view.submitSolution.setOnAction(e->{
+        view.solutionSelection.setOnAction(e->{
             if(view.solutionSelection.getSelectionModel().getSelectedIndex() == model.getCorrectChoices().get(model.getCurrentReductionSolutions())){
-                view.solutionStatus.textProperty().set("Correcto!");
+                //view.solutionStatus.textProperty().set("Correcto!");
+                System.out.println("Correcto!");
             }
             else{
-                view.solutionStatus.textProperty().set("Incorrecto! Vuelve a intentarlo.");
+                //view.solutionStatus.textProperty().set("Incorrecto! Vuelve a intentarlo.");
+                System.out.println("Incorrecto! Vuelve a intentarlo");
             }
         });
     }
@@ -44,14 +41,10 @@ public class DiagramPresenter {
     private void handleInput() {
         try {
             model.processInputs();
-            view.diagramPane.setVisible(true);
-            view.lowerBox.setVisible(false);
-            view.solutionSelectionLabel.setVisible(true);
             view.solutionSelection.setVisible(true);
             view.datasArrow.textProperty().set(" |\n |\n "+model.getCurrentReductionString()+"\n |\n |");
             view.solutionsArrow.textProperty().set(" |\n |\n ??\n |\n |");
             //cambiar los valores de elegir en la solucion
-            System.out.println("Recieved currRedSols: "+ model.getCurrentReductionSolutions());
             List<String> listVals = mappingReductionSolution.get(model.getCurrentReductionSolutions());
             for(String str : listVals){
                 view.solutionSelection.getItems().add(str);
@@ -62,7 +55,8 @@ public class DiagramPresenter {
             //view.partialSolution.textProperty().set(model.getProblemData().toString());
 
         } catch (Exception e) {
-            view.inputErrorLabel.setVisible(true);
+            //view.inputErrorLabel.setVisible(true);
+            System.out.println("Error en el input");
         }
 
         System.out.println(model.getRawData());

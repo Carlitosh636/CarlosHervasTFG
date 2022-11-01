@@ -1,0 +1,5 @@
+cambiar el diagrama para que sea el elemento principal interactuable, los datos de entrada originales, la reducción y
+la operación de solucion parcial->solución final los edita el usuario, VER LOS PANTALLAZOS EN PICTURES para posible estructura.
+
+en algunos problemas se debería mostrar las soluciones como fórmulas (1+2+3+4...) en vez de un valor final. Para aclarar
+mejor cómo llegar a la sol.
