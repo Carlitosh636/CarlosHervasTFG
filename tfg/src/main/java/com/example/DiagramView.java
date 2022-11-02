@@ -6,33 +6,6 @@ import javafx.scene.layout.*;
 
 public class DiagramView extends GridPane {
         private final Diagram model;
-        /*TextArea enunciado = new TextArea("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis sem lectus. Maecenas vitae volutpat felis.\nVivamus fringilla pellentesque tincidunt.\nNulla et nisl ac tortor tempus sagittis id ac turpis. Ut sed posuere justo. Nam sollicitudin metus ac iaculis tempus.\nEtiam fermentum tristique tellus in blandit. Phasellus non congue ante. Aenean nec lorem ipsum.\n" +
-                "\n");
-        Label originalData = new Label();
-        Label originalDataSolutionArrow = new Label("=====================>");
-        Label originalSolution = new Label();
-        Label datasArrow = new Label(" |\n |\n |\n |\n |");
-        Label emptylabel = new Label();
-        Label partialData = new Label();
-        Label partialSolution = new Label();
-        Label partialDataSolutionArrow = new Label("=====================>");
-        GridPane diagramPane = new GridPane();
-        BorderPane diagramBox = new BorderPane();
-        VBox lowerBox = new VBox();
-        Label inputErrorLabel = new Label("El valor introducido no es correcto para el problema. Introduzca datos válidos");
-        Label inputInstructions=new Label("Escribe la base (a) y el exponente (b), separados por una coma");
-        TextField inputField = new TextField();
-        Label reductionInstructions=new Label("Elige el método de reducción");
-        ComboBox reductionSelect = new ComboBox();
-        Label baseCaseInstructions=new Label("Introduce el caso base");
-        TextField baseCaseField= new TextField();
-        Button confirmDataButton = new Button("Introducir valores");
-        VBox selectionBox = new VBox();
-        Label solutionSelectionLabel = new Label("Selecciona el paso restante (marcado con ??)");
-        ComboBox solutionSelection = new ComboBox();
-        Button submitSolution = new Button("Introducir solución");
-        Label solutionStatus = new Label();*/
-
         TextField parameters = new TextField();
         Label originalDataSolutionArrow = new Label("=====================>");
         Label originalSolution = new Label();
@@ -41,21 +14,21 @@ public class DiagramView extends GridPane {
         ComboBox reductionSelect = new ComboBox();
         Label subParameters = new Label();
         Label partialSolution = new Label();
-        ComboBox solutionSelection = new ComboBox();
+        ComboBox solutionSelect = new ComboBox();
         Label partialDataSolutionArrow = new Label("=====================>");
-        Label emptylabel = new Label();
         Label solutionsArrow = new Label(" |\n |\n |\n |\n |");
-
 
         public DiagramView(Diagram model) {
                 this.model = model;
                 setLayout();
+                setStyle();
                 bindModelData();
-
         }
+
         private void setLayout() {
                 this.setHgap(10);
                 this.setVgap(10);
+                this.setPadding(new Insets(10, 10, 10, 10));
                 this.add(parameters,0,0);
                 this.add(originalDataSolutionArrow,1,0);
                 this.add(originalSolution,2,0);
@@ -65,16 +38,29 @@ public class DiagramView extends GridPane {
                 this.add(partialDataSolutionArrow,1,3);
                 this.add(partialSolution,2,3);
                 this.add(solutionsArrow,2,1);
-                this.add(solutionSelection,2,2);
-
-                this.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
-                        + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
-                        + "-fx-border-radius: 5;" + "-fx-border-color: blue;");
-
+                this.add(solutionSelect,2,2);
 
                 reductionSelect.getItems().add("-1 al exponente");
                 reductionSelect.getItems().add("/2 al exponente");
 
+
+
+        }
+        private void setStyle() {
+                this.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
+                        + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
+                        + "-fx-border-radius: 5;" + "-fx-border-color: blue;");
+
+                parameters.setStyle("-fx-font: 24 arial;");
+                reductionSelect.setStyle("-fx-font: 24 arial;");
+                solutionSelect.setStyle("-fx-font: 24 arial;");
+                originalDataSolutionArrow.setStyle("-fx-font: 24 arial;");
+                originalSolution.setStyle("-fx-font: 24 arial;");
+                datasArrow.setStyle("-fx-font: 24 arial;");
+                subParameters.setStyle("-fx-font: 24 arial;");
+                partialDataSolutionArrow.setStyle("-fx-font: 24 arial;");
+                partialSolution.setStyle("-fx-font: 24 arial;");
+                solutionsArrow.setStyle("-fx-font: 24 arial;");
         }
         private void bindModelData() {
                 parameters.textProperty().bindBidirectional(model.getInputsProperty());
@@ -82,7 +68,13 @@ public class DiagramView extends GridPane {
                 subParameters.textProperty().bind(model.partialDataProperty());
                 partialSolution.textProperty().bind(model.partialSolProperty());
         }
-
+        public void showErrorInputAlert(){
+                Alert inputErrorAlert = new Alert(Alert.AlertType.ERROR);
+                inputErrorAlert.setTitle("Error");
+                inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
+                inputErrorAlert.setContentText("Revisa el contenido, debe ser en el formato 'A,B' ");
+                inputErrorAlert.showAndWait();
+        }
 
 
         

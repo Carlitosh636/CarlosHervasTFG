@@ -17,7 +17,7 @@ public class DiagramPresenter {
         mappingReductionSolution = new HashMap<>();
         attachEvents();
         prepareSolutions();
-        view.solutionSelection.setVisible(false);
+        view.solutionSelect.setVisible(false);
     }
 
     private void attachEvents() {
@@ -26,13 +26,11 @@ public class DiagramPresenter {
             model.setCurrentReduction(view.reductionSelect.getSelectionModel().getSelectedIndex());
             handleInput();
         });
-        view.solutionSelection.setOnAction(e->{
-            if(view.solutionSelection.getSelectionModel().getSelectedIndex() == model.getCorrectChoices().get(model.getCurrentReductionSolutions())){
-                //view.solutionStatus.textProperty().set("Correcto!");
+        view.solutionSelect.setOnAction(e->{
+            if(view.solutionSelect.getSelectionModel().getSelectedIndex() == model.getCorrectChoices().get(model.getCurrentReductionSolutions())){
                 System.out.println("Correcto!");
             }
             else{
-                //view.solutionStatus.textProperty().set("Incorrecto! Vuelve a intentarlo.");
                 System.out.println("Incorrecto! Vuelve a intentarlo");
             }
         });
@@ -41,22 +39,17 @@ public class DiagramPresenter {
     private void handleInput() {
         try {
             model.processInputs();
-            view.solutionSelection.setVisible(true);
+            view.solutionSelect.setVisible(true);
             view.datasArrow.textProperty().set(" |\n |\n "+model.getCurrentReductionString()+"\n |\n |");
             view.solutionsArrow.textProperty().set(" |\n |\n ??\n |\n |");
             //cambiar los valores de elegir en la solucion
             List<String> listVals = mappingReductionSolution.get(model.getCurrentReductionSolutions());
             for(String str : listVals){
-                view.solutionSelection.getItems().add(str);
+                view.solutionSelect.getItems().add(str);
             }
-            //view.originalData.textProperty().set(model.getProblemData().toString());
-            //view.originalSolution.textProperty().set(model.getProblemData().toString());
-            //view.partialData.textProperty().set(model.getProblemData().toString());
-            //view.partialSolution.textProperty().set(model.getProblemData().toString());
 
         } catch (Exception e) {
-            //view.inputErrorLabel.setVisible(true);
-            System.out.println("Error en el input");
+            view.showErrorInputAlert();
         }
 
         System.out.println(model.getRawData());

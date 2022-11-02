@@ -1,7 +1,9 @@
 package com.example;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -21,9 +23,10 @@ public class App extends Application {
         correctChoices.add(2);
         Diagram model = new Diagram(correctChoices,"^");
         DiagramView view = new DiagramView(model);
-        Scene root = new Scene(view);
+        Scene root = new Scene(view,600,400);
         DiagramPresenter presenter = new DiagramPresenter(model, view);
 
+        view.setAlignment(Pos.CENTER);
         stage.sizeToScene();
         stage.setScene(root);
         stage.setTitle("Mi TFG");
