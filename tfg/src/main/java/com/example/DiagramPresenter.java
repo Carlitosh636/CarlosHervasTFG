@@ -8,7 +8,6 @@ import java.util.Map;
 public class DiagramPresenter {
     private final Diagram model;
     private final DiagramView view;
-
     private Map<Integer, List<String>> mappingReductionSolution;
 
     public DiagramPresenter(Diagram model, DiagramView view) {
@@ -17,6 +16,7 @@ public class DiagramPresenter {
         mappingReductionSolution = new HashMap<>();
         attachEvents();
         prepareSolutions();
+        view.reductionSelect.getItems().addAll(model.getReductionChoices());
         view.solutionSelect.setVisible(false);
     }
 
@@ -43,6 +43,7 @@ public class DiagramPresenter {
             view.datasArrow.textProperty().set(" |\n |\n "+model.getCurrentReductionString()+"\n |\n |");
             view.solutionsArrow.textProperty().set(" |\n |\n ??\n |\n |");
             //cambiar los valores de elegir en la solucion
+            view.solutionSelect.getItems().clear();
             List<String> listVals = mappingReductionSolution.get(model.getCurrentReductionSolutions());
             for(String str : listVals){
                 view.solutionSelect.getItems().add(str);
@@ -59,7 +60,8 @@ public class DiagramPresenter {
     //en este ejemplo hay 2 reducciones pero 3 posibles casos (la segunda se divide en caso par y caso impar) asi que según el expediente
     //tiene que dar un set de soluciones u otro, y modificar el diagrama (lo cual se hace en el callable)
     private void prepareSolutions() {
-        //SE DEBERÍA LEER DE ARCHIVO EXTERNO O UN REPOSITORIO, ESTO ES TEMPORAL
+        //SE DEBERÍAN LEER LAS SOLUCIONES O DE LOS PROPIOS DIAGRAMAS O DE UN ARCHIVO O COMO SEA
+        //CAMBIAR ESTO YA
         List<List<String>> listas = new ArrayList<>();
         List<String> test1 = new ArrayList<>();
         test1.add("multiplicar por 'b'");

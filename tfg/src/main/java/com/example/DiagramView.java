@@ -40,11 +40,6 @@ public class DiagramView extends GridPane {
                 this.add(solutionsArrow,2,1);
                 this.add(solutionSelect,2,2);
 
-                reductionSelect.getItems().add("-1 al exponente");
-                reductionSelect.getItems().add("/2 al exponente");
-
-
-
         }
         private void setStyle() {
                 this.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"

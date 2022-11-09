@@ -5,22 +5,33 @@ import java.util.concurrent.Callable;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Diagram {
-    private SimpleStringProperty inputs;
-    private String rawData;
-    private List<String> problemData;
-    private double ogSol,partSol;
-    private SimpleStringProperty originalData;
-    private SimpleStringProperty originalSol;
-    private SimpleStringProperty partialData;
-    private SimpleStringProperty partialSol;
-    private SimpleStringProperty baseCase;
-    private Map<Integer, Callable> algorithmsMap = new HashMap<>();
-    private int currentReduction;
-    private int currentReductionSolutions;
+public abstract class Diagram {
+    protected SimpleStringProperty inputs;
+    protected String rawData;
+    protected List<String> problemData;
+    protected double ogSol;
+    protected double partSol;
+    protected SimpleStringProperty originalData;
+    protected SimpleStringProperty originalSol;
+    protected SimpleStringProperty partialData;
+    protected SimpleStringProperty partialSol;
+    protected SimpleStringProperty baseCase;
+    protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
+    protected int currentReduction;
+    protected int currentReductionSolutions;
     private List<Integer> correctChoices;
-    private String operation;
-    private String reducedOperation;
+    protected String operation;
+    protected String reducedOperation;
+    protected List<String> reductionChoices;
+
+    public List<String> getReductionChoices() {
+        return reductionChoices;
+    }
+
+    public void setReductionChoices(List<String> reductionChoices) {
+        this.reductionChoices = reductionChoices;
+    }
+
     public List<Integer> getCorrectChoices() {
         return correctChoices;
     }
@@ -39,7 +50,7 @@ public class Diagram {
         this.currentReductionString = currentReductionString;
     }
 
-    private String currentReductionString;
+    protected String currentReductionString;
 
     public int getCurrentReduction() {
         return currentReduction;
@@ -118,58 +129,6 @@ public class Diagram {
         this.currentReductionSolutions = currentReductionSolutions;
     }
 
-
-
-    public Diagram(List<Integer> correctChoices,String operation) {
-        this.operation=operation;
-        this.correctChoices=correctChoices;
-        this.inputs = new SimpleStringProperty();
-        this.rawData = "";
-        this.problemData=new ArrayList<>();
-        this.ogSol=0;
-        this.partSol=0;
-        this.originalData=new SimpleStringProperty();
-        this.originalSol=new SimpleStringProperty();
-        this.partialData=new SimpleStringProperty();
-        this.partialSol=new SimpleStringProperty();
-        this.baseCase=new SimpleStringProperty();
-        //ELIMINAR LUEGO
-        this.baseCase.set("1");
-        algorithmsMap.put(0, new Callable<Double[]>() {
-            @Override
-            public Double[] call() throws Exception {
-                Double[] returnVal = new Double[2];
-                returnVal[0] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseProperty().get()));
-                returnVal[1] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseProperty().get()));
-                reducedOperation=problemData.get(0)+operation+(Integer.parseInt(problemData.get(1))-1);
-                currentReductionString="b-1";
-                currentReductionSolutions=0;
-                return returnVal;
-
-            }
-        });
-        algorithmsMap.put(1, new Callable<Double[]>() {
-            @Override
-            public Double[] call() throws Exception {
-                Double[] returnVal = new Double[2];
-                returnVal[0] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseProperty().get()));
-                returnVal[1] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))/2,Integer.parseInt(baseCaseProperty().get()));
-
-                if(Integer.parseInt(problemData.get(1))%2==0){
-                    currentReductionString="b/2";
-                    reducedOperation=problemData.get(0)+operation+(Integer.parseInt(problemData.get(1))/2);
-                    currentReductionSolutions=1;
-                }
-                else{
-                    currentReductionString="(b-1)/2";
-                    reducedOperation=problemData.get(0)+operation+((Integer.parseInt(problemData.get(1))-1)/2);
-                    currentReductionSolutions=2;
-                }
-                return returnVal;
-            }
-        });
-    }
-
     public SimpleStringProperty getInputsProperty() {
         return inputs;
     }
@@ -188,20 +147,29 @@ public class Diagram {
         this.rawData = rawData;
     }
 
+
+    public Diagram(List<Integer> correctChoices,String operation) {
+        this.operation=operation;
+        this.correctChoices=correctChoices;
+        this.inputs = new SimpleStringProperty();
+        this.rawData = "";
+        this.problemData=new ArrayList<>();
+        this.reductionChoices=new ArrayList<>();
+        this.ogSol=0;
+        this.partSol=0;
+        this.originalData=new SimpleStringProperty();
+        this.originalSol=new SimpleStringProperty();
+        this.partialData=new SimpleStringProperty();
+        this.partialSol=new SimpleStringProperty();
+        this.baseCase=new SimpleStringProperty();
+    }
     public void processInputs() throws Exception{
         try{
-            //problemData.add(Integer.parseInt(this.inputs.get()))
             problemData = Arrays.asList(this.inputs.get().split(","));
             rawData =problemData.get(0)+operation+problemData.get(1);
-
             Double[] values = (Double[]) algorithmsMap.get(currentReduction).call();
-            System.out.println("currentRedSolutions: "+ currentReductionSolutions);
             ogSol = values[0];
             partSol = values[1];
-            originalData.set(this.rawData);
-            originalSol.set(String.valueOf(ogSol));
-            partialData.set(reducedOperation);
-            partialSol.set(String.valueOf(partSol));
         }
         catch (Exception e){
             System.out.println(e);

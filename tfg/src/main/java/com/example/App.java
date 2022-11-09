@@ -21,7 +21,9 @@ public class App extends Application {
         correctChoices.add(1);
         correctChoices.add(0);
         correctChoices.add(2);
-        Diagram model = new Diagram(correctChoices,"^");
+        Diagram model = new RecursivePotencyDiagram(correctChoices,"^");
+        //Diagram model = new SlowAdditionDiagram(correctChoices,",");
+
         DiagramView view = new DiagramView(model);
         Scene root = new Scene(view,600,400);
         DiagramPresenter presenter = new DiagramPresenter(model, view);

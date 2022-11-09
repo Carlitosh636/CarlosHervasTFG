@@ -26,4 +26,15 @@ public class Algorithms {
         }
         return base * Math.pow(recursiveExponentOption2(base,(exp-1)/2,baseCaseValue),2);
     }
+    public static double slowAdditionOption1(int a,int b, int baseCaseValue){
+        if(a==baseCaseValue){
+            return b;
+        }
+        if(b==baseCaseValue){
+            return a;
+        }
+        else{
+            return slowAdditionOption1(a-1,b,baseCaseValue)+1;
+        }
+    }
 }
