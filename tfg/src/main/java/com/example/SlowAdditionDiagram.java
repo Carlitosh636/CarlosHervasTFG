@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -11,6 +12,11 @@ public class SlowAdditionDiagram extends Diagram{
         //que sea un numero positivo, sino que sea mayor a 0
         this.baseCase.set("0");
         this.reductionChoices.add("a - 1");
+        List<String> sols1 = new ArrayList<>();
+        sols1.add(" + 1");
+        sols1.add(" - 1");
+        sols1.add(" + a");
+        this.solutionsChoices=Arrays.asList(sols1);
         algorithmsMap.put(0, new Callable<Double[]>() {
             @Override
             public Double[] call() throws Exception {

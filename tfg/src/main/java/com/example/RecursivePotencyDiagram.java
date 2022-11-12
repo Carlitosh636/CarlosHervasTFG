@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -10,6 +11,18 @@ public class RecursivePotencyDiagram extends Diagram{
         this.baseCase.set("1");
         this.reductionChoices.add("b - 1");
         this.reductionChoices.add("b / 2");
+        List<String> sols1 = new ArrayList<>();
+        sols1.add("multiplicar por 'b'");
+        sols1.add("multiplicar por 'a'");
+        sols1.add("elevar a 'a'");
+        List<String> sols2 = new ArrayList<>();
+        sols2.add("elevar al cuadrado");
+        sols2.add("multiplicar por 'b'");
+        List<String> sols3 = new ArrayList<>();
+        sols3.add("elevar al cuadrado");
+        sols3.add("multiplicar por 'b'");
+        sols3.add("las 2 anteriores juntas");
+        this.solutionsChoices=Arrays.asList(sols1,sols2,sols3);
 
         algorithmsMap.put(0, new Callable<Double[]>() {
             @Override

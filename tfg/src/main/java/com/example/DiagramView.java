@@ -9,12 +9,12 @@ public class DiagramView extends GridPane {
         TextField parameters = new TextField();
         Label originalDataSolutionArrow = new Label("=====================>");
         Label originalSolution = new Label();
-
         Label datasArrow = new Label(" |\n |\n |\n |\n |");
         ComboBox reductionSelect = new ComboBox();
         Label subParameters = new Label();
         Label partialSolution = new Label();
         ComboBox solutionSelect = new ComboBox();
+        ComboBox problemSizeSelect = new ComboBox();
         Label partialDataSolutionArrow = new Label("=====================>");
         Label solutionsArrow = new Label(" |\n |\n |\n |\n |");
 
@@ -29,16 +29,17 @@ public class DiagramView extends GridPane {
                 this.setHgap(10);
                 this.setVgap(10);
                 this.setPadding(new Insets(10, 10, 10, 10));
-                this.add(parameters,0,0);
-                this.add(originalDataSolutionArrow,1,0);
-                this.add(originalSolution,2,0);
-                this.add(datasArrow,0,1);
-                this.add(reductionSelect,0,2);
-                this.add(subParameters,0,3);
-                this.add(partialDataSolutionArrow,1,3);
-                this.add(partialSolution,2,3);
-                this.add(solutionsArrow,2,1);
-                this.add(solutionSelect,2,2);
+                this.add(problemSizeSelect,0,0);
+                this.add(parameters,1,0);
+                this.add(originalDataSolutionArrow,2,0);
+                this.add(originalSolution,3,0);
+                this.add(datasArrow,1,1);
+                this.add(reductionSelect,0,1);
+                this.add(subParameters,1,3);
+                this.add(partialDataSolutionArrow,2,3);
+                this.add(partialSolution,3,3);
+                this.add(solutionsArrow,3,1);
+                this.add(solutionSelect,3,2);
 
         }
         private void setStyle() {

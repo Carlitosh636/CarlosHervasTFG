@@ -23,7 +23,7 @@ public abstract class Diagram {
     protected String operation;
     protected String reducedOperation;
     protected List<String> reductionChoices;
-
+    protected List<List<String>> solutionsChoices;
     public List<String> getReductionChoices() {
         return reductionChoices;
     }

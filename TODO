@@ -1,5 +1,1 @@
-La función de prepareSolutions está hecha solo para el primer tipo de diagrama. Las soluciones deben tenerlas los diagramas, no la clase
-de DiagramPresenter. El Presenter debe tomar las soluciones del diagrama
-y ponerlas en el view.
-
-Otra cosa es recordar que hay que incluir lo de seleccionar tamaño del problema y caso base. Ambos seguramente con menu dropdown también
+Incluir lo de seleccionar tamaño del problema y caso base. Ambos seguramente con menu dropdown también

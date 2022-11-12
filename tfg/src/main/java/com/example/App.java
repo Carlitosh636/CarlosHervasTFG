@@ -18,14 +18,18 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         List<Integer> correctChoices = new ArrayList<>();
-        correctChoices.add(1);
+        //recusrive potency diagram sols
+        /*correctChoices.add(1);
         correctChoices.add(0);
-        correctChoices.add(2);
-        Diagram model = new RecursivePotencyDiagram(correctChoices,"^");
-        //Diagram model = new SlowAdditionDiagram(correctChoices,",");
+        correctChoices.add(2);*/
+        //slowadditiondiagramsols
+        correctChoices.add(0);
+
+        //Diagram model = new RecursivePotencyDiagram(correctChoices,"^");
+        Diagram model = new SlowAdditionDiagram(correctChoices,",");
 
         DiagramView view = new DiagramView(model);
-        Scene root = new Scene(view,600,400);
+        Scene root = new Scene(view,1200,800);
         DiagramPresenter presenter = new DiagramPresenter(model, view);
 
         view.setAlignment(Pos.CENTER);
