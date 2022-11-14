@@ -8,12 +8,9 @@ import java.util.Map;
 public class DiagramPresenter {
     private final Diagram model;
     private final DiagramView view;
-    private Map<Integer, List<String>> mappingReductionSolution;
-
     public DiagramPresenter(Diagram model, DiagramView view) {
         this.model = model;
         this.view = view;
-        mappingReductionSolution = new HashMap<>();
         attachEvents();
         view.reductionSelect.getItems().addAll(model.getReductionChoices());
         view.solutionSelect.setVisible(false);

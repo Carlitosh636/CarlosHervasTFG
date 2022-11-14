@@ -4,7 +4,8 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-public class DiagramView extends GridPane {
+public class DiagramView {
+        private final GridPane root;
         private final Diagram model;
         TextField parameters = new TextField();
         Label originalDataSolutionArrow = new Label("=====================>");
@@ -14,36 +15,43 @@ public class DiagramView extends GridPane {
         Label subParameters = new Label();
         Label partialSolution = new Label();
         ComboBox solutionSelect = new ComboBox();
+        VBox NandBaseCaseBox = new VBox();
         ComboBox problemSizeSelect = new ComboBox();
+        ComboBox baseCaseSelect = new ComboBox();
         Label partialDataSolutionArrow = new Label("=====================>");
         Label solutionsArrow = new Label(" |\n |\n |\n |\n |");
 
         public DiagramView(Diagram model) {
                 this.model = model;
+                this.root=new GridPane();
                 setLayout();
                 setStyle();
                 bindModelData();
         }
 
         private void setLayout() {
-                this.setHgap(10);
-                this.setVgap(10);
-                this.setPadding(new Insets(10, 10, 10, 10));
-                this.add(problemSizeSelect,0,0);
-                this.add(parameters,1,0);
-                this.add(originalDataSolutionArrow,2,0);
-                this.add(originalSolution,3,0);
-                this.add(datasArrow,1,1);
-                this.add(reductionSelect,0,1);
-                this.add(subParameters,1,3);
-                this.add(partialDataSolutionArrow,2,3);
-                this.add(partialSolution,3,3);
-                this.add(solutionsArrow,3,1);
-                this.add(solutionSelect,3,2);
+                root.setHgap(10);
+                root.setVgap(10);
+                root.setPadding(new Insets(10, 10, 10, 10));
+
+                NandBaseCaseBox.setPadding(new Insets(5,5,5,5));
+                NandBaseCaseBox.getChildren().addAll(problemSizeSelect,baseCaseSelect);
+
+                root.add(NandBaseCaseBox,0,0);
+                root.add(parameters,1,0);
+                root.add(originalDataSolutionArrow,2,0);
+                root.add(originalSolution,3,0);
+                root.add(datasArrow,1,1);
+                root.add(reductionSelect,0,1);
+                root.add(subParameters,1,3);
+                root.add(partialDataSolutionArrow,2,3);
+                root.add(partialSolution,3,3);
+                root.add(solutionsArrow,3,1);
+                root.add(solutionSelect,3,2);
 
         }
         private void setStyle() {
-                this.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
+                root.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
                         + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
                         + "-fx-border-radius: 5;" + "-fx-border-color: blue;");
 
@@ -71,7 +79,9 @@ public class DiagramView extends GridPane {
                 inputErrorAlert.setContentText("Revisa el contenido, debe ser en el formato 'A,B' ");
                 inputErrorAlert.showAndWait();
         }
-
+        public GridPane getRoot(){
+                return this.root;
+        }
 
         
 }

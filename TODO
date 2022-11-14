@@ -1,1 +1,13 @@
-Incluir lo de seleccionar tamaño del problema y caso base. Ambos seguramente con menu dropdown también
+Incluir lo de seleccionar tamaño del problema y caso base. Ambos seguramente con menu dropdown también.
+El problema es ya son 3 valores (tamaño problema, caso base y reducción) los que determinan el tipo de algoritmo y otras cosas.
+Hay que pensar esto bien, ya que puede que haga falta hacer refactorización y cambiar el cómo se selecciona el diagrama.
+Puede que sea mejor en vez de seleccionar las soluciones y el algoritmo de golpe solo con un parametro (reduccion por ahora), ir poco a poco.
+
+Probar por ahora esto con el nuevo diagrama, el de SlowAddition, que tiene al menos 3 versiones dependiendo de los 3 parámetros.
+
+Idea inicial: Cada tipo de problema tiene una pool de posibles diagramas. Seleccionar N y caso base la van reduciendo, y seleccionar el
+tipo de reducción ya se queda solo con uno.
+
+Otra cosa, ya tengo el mínimo del menú para elegir problema y que cambie la escena, sin embargo funciona muy feo ya que para refrescar
+tengo que hacer un close y un show, lo cual no se ve nada bien. Puede que si los view fuesen FXML fuese mejor, hay que ver de cambiarlo asi
+y cargarlo con FXML.
