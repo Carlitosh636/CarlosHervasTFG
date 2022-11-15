@@ -10,8 +10,13 @@ public class SlowAdditionDiagram extends Diagram{
         super(correctChoices, operation);
         //En este problema concreto es interesante ya que si en los parametros de entrada ponemos A o B = 0 entonces no hay cosa, hayq ue comprobar no solo
         //que sea un numero positivo, sino que sea mayor a 0
+        this.problemSizeChoices.add("a + b");
+        this.problemSizeChoices.add("min(a,b)");
         this.baseCase.set("0");
-        this.reductionChoices.add("a - 1");
+        List<String> reds1 = Arrays.asList("a - 1");
+        List<String> reds2 = Arrays.asList("min(a,b) - 1","min(a-1,b-1)");
+        this.reductionChoices.add(reds1);
+        this.reductionChoices.add(reds2);
         List<String> sols1 = new ArrayList<>();
         sols1.add(" + 1");
         sols1.add(" - 1");
@@ -27,7 +32,20 @@ public class SlowAdditionDiagram extends Diagram{
                 currentReductionString="a-1";
                 currentReductionSolutions=0;
                 return returnVal;
-
+            }
+        });
+        algorithmsMap.put(1, new Callable<Double[]>() {
+            @Override
+            public Double[] call() throws Exception {
+                //TODO
+                return null;
+            }
+        });
+        algorithmsMap.put(2, new Callable<Double[]>() {
+            @Override
+            public Double[] call() throws Exception {
+                //TODO
+                return null;
             }
         });
 

@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -51,8 +50,8 @@ public class App extends Application {
         stage.setScene(mainMenuRoot);
         stage.setTitle("Mi TFG");
         stage.show();
-        stage.setMaxHeight(800);
-        stage.setMaxWidth(1200);
+        stage.setMaxHeight(1000);
+        stage.setMaxWidth(1600);
         stage.setMinHeight(stage.getHeight());
         stage.setMinWidth(stage.getWidth());
 

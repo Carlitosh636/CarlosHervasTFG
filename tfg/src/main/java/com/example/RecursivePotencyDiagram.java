@@ -8,9 +8,10 @@ import java.util.concurrent.Callable;
 public class RecursivePotencyDiagram extends Diagram{
     public RecursivePotencyDiagram(List<Integer> correctChoices, String operation) {
         super(correctChoices, operation);
+        this.problemSizeChoices.add("b");
         this.baseCase.set("1");
-        this.reductionChoices.add("b - 1");
-        this.reductionChoices.add("b / 2");
+        List<String> reds1 = Arrays.asList("b - 1","b / 2");
+        this.reductionChoices.add(reds1);
         List<String> sols1 = new ArrayList<>();
         sols1.add("multiplicar por 'b'");
         sols1.add("multiplicar por 'a'");

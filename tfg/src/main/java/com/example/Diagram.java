@@ -3,6 +3,7 @@ package com.example;
 import java.util.*;
 import java.util.concurrent.Callable;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public abstract class Diagram {
@@ -16,22 +17,16 @@ public abstract class Diagram {
     protected SimpleStringProperty partialData;
     protected SimpleStringProperty partialSol;
     protected SimpleStringProperty baseCase;
-    protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
+    protected int currentProblemSize;
     protected int currentReduction;
     protected int currentReductionSolutions;
     private List<Integer> correctChoices;
     protected String operation;
     protected String reducedOperation;
-    protected List<String> reductionChoices;
+    protected List<String> problemSizeChoices;
+    protected List<List<String>> reductionChoices;
     protected List<List<String>> solutionsChoices;
-    public List<String> getReductionChoices() {
-        return reductionChoices;
-    }
-
-    public void setReductionChoices(List<String> reductionChoices) {
-        this.reductionChoices = reductionChoices;
-    }
-
+    protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
     public List<Integer> getCorrectChoices() {
         return correctChoices;
     }
@@ -41,6 +36,13 @@ public abstract class Diagram {
     }
 
 
+    public List<List<String>> getReductionChoices() {
+        return reductionChoices;
+    }
+
+    public void setReductionChoices(List<List<String>> reductionChoices) {
+        this.reductionChoices = reductionChoices;
+    }
 
     public String getCurrentReductionString() {
         return currentReductionString;
@@ -51,6 +53,14 @@ public abstract class Diagram {
     }
 
     protected String currentReductionString;
+
+    public int getCurrentProblemSize() {
+        return currentProblemSize;
+    }
+
+    public void setCurrentProblemSize(int currentProblemSize) {
+        this.currentProblemSize = currentProblemSize;
+    }
 
     public int getCurrentReduction() {
         return currentReduction;
@@ -129,6 +139,14 @@ public abstract class Diagram {
         this.currentReductionSolutions = currentReductionSolutions;
     }
 
+    public List<String> getProblemSizeChoices() {
+        return problemSizeChoices;
+    }
+
+    public void setProblemSizeChoices(List<String> problemSizeChoices) {
+        this.problemSizeChoices = problemSizeChoices;
+    }
+
     public SimpleStringProperty getInputsProperty() {
         return inputs;
     }
@@ -155,6 +173,7 @@ public abstract class Diagram {
         this.rawData = "";
         this.problemData=new ArrayList<>();
         this.reductionChoices=new ArrayList<>();
+        this.problemSizeChoices=new ArrayList<>();
         this.ogSol=0;
         this.partSol=0;
         this.originalData=new SimpleStringProperty();
@@ -167,7 +186,8 @@ public abstract class Diagram {
         try{
             problemData = Arrays.asList(this.inputs.get().split(","));
             rawData =problemData.get(0)+operation+problemData.get(1);
-            Double[] values = (Double[]) algorithmsMap.get(currentReduction).call();
+            int algorithmIndex = currentProblemSize+currentReduction;
+            Double[] values = (Double[]) algorithmsMap.get(algorithmIndex).call();
             ogSol = values[0];
             partSol = values[1];
         }

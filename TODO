@@ -1,13 +1,12 @@
-Incluir lo de seleccionar tamaño del problema y caso base. Ambos seguramente con menu dropdown también.
-El problema es ya son 3 valores (tamaño problema, caso base y reducción) los que determinan el tipo de algoritmo y otras cosas.
-Hay que pensar esto bien, ya que puede que haga falta hacer refactorización y cambiar el cómo se selecciona el diagrama.
-Puede que sea mejor en vez de seleccionar las soluciones y el algoritmo de golpe solo con un parametro (reduccion por ahora), ir poco a poco.
+Hay que implementar los algoritmos y toda la parafernalia en SlowAdditionDiagram para el caso donde el tamaño del problema es
+min(a,b).
 
-Probar por ahora esto con el nuevo diagrama, el de SlowAddition, que tiene al menos 3 versiones dependiendo de los 3 parámetros.
+Recordar que para un problema es: Selecciona tamaño problema -> Selecciona caso base -> Introduce datos -> Selecciona reducción -> Selecciona solución.
 
-Idea inicial: Cada tipo de problema tiene una pool de posibles diagramas. Seleccionar N y caso base la van reduciendo, y seleccionar el
-tipo de reducción ya se queda solo con uno.
+Ver que hacer con el tema del caso base, al seleccionarlo qué debería ocurrir.
 
 Otra cosa, ya tengo el mínimo del menú para elegir problema y que cambie la escena, sin embargo funciona muy feo ya que para refrescar
 tengo que hacer un close y un show, lo cual no se ve nada bien. Puede que si los view fuesen FXML fuese mejor, hay que ver de cambiarlo asi
 y cargarlo con FXML.
+
+Otra opción: Podría hacerse toda la app en un solo scene?
