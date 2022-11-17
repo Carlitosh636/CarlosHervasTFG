@@ -1,5 +1,11 @@
+
+Bug al poner los datos de entrada incorrectamente, la selección de la reduccion se queda y no puedes continuar. Arreglarlo ASAP
+
 Hay que implementar los algoritmos y toda la parafernalia en SlowAdditionDiagram para el caso donde el tamaño del problema es
 min(a,b).
+
+Para la refactorización de los diagramas, muchas de las propiedades pueden transformarse en objetos para tenerlo mucho mejor organizado. Aunque si
+pasamos a JSON, hay que tener cuidado con eso. Mirar "java serialization with aggregation" para ver como hacerlo
 
 Recordar que para un problema es: Selecciona tamaño problema -> Selecciona caso base -> Introduce datos -> Selecciona reducción -> Selecciona solución.
 

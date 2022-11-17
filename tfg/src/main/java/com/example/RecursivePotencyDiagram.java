@@ -9,9 +9,16 @@ public class RecursivePotencyDiagram extends Diagram{
     public RecursivePotencyDiagram(List<Integer> correctChoices, String operation) {
         super(correctChoices, operation);
         this.problemSizeChoices.add("b");
-        this.baseCase.set("1");
+
+        List<String> bCases1 = Arrays.asList("b<1");
+        this.baseCaseChoices.add(bCases1);
+        List<String> bc1 = Arrays.asList("0");
+
+        this.baseCaseParameters.add(bc1);
+
         List<String> reds1 = Arrays.asList("b - 1","b / 2");
         this.reductionChoices.add(reds1);
+
         List<String> sols1 = new ArrayList<>();
         sols1.add("multiplicar por 'b'");
         sols1.add("multiplicar por 'a'");
@@ -29,8 +36,8 @@ public class RecursivePotencyDiagram extends Diagram{
             @Override
             public Double[] call() throws Exception {
                 Double[] returnVal = new Double[2];
-                returnVal[0] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseProperty().get()));
-                returnVal[1] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseProperty().get()));
+                returnVal[0] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
+                returnVal[1] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
                 reducedOperation=problemData.get(0)+operation+(Integer.parseInt(problemData.get(1))-1);
                 currentReductionString="b-1";
                 currentReductionSolutions=0;
@@ -42,8 +49,8 @@ public class RecursivePotencyDiagram extends Diagram{
             @Override
             public Double[] call() throws Exception {
                 Double[] returnVal = new Double[2];
-                returnVal[0] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseProperty().get()));
-                returnVal[1] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))/2,Integer.parseInt(baseCaseProperty().get()));
+                returnVal[0] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
+                returnVal[1] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))/2,Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
 
                 if(Integer.parseInt(problemData.get(1))%2==0){
                     currentReductionString="b/2";

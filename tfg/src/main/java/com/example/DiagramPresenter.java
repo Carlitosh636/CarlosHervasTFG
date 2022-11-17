@@ -15,16 +15,23 @@ public class DiagramPresenter {
         view.problemSizeSelect.getItems().addAll(model.getProblemSizeChoices());
         view.solutionSelect.setVisible(false);
         view.reductionSelect.setVisible(false);
+        view.baseCaseSelect.setVisible(false);
     }
 
     private void attachEvents() {
         view.problemSizeSelect.setOnAction(e->{
             model.setCurrentProblemSize(view.problemSizeSelect.getSelectionModel().getSelectedIndex());
+            view.baseCaseSelect.setVisible(true);
+            view.baseCaseSelect.getItems().clear();
+            view.baseCaseSelect.getItems().addAll(model.getBaseCaseChoices().get(model.getCurrentProblemSize()));
+        });
+        view.baseCaseSelect.setOnAction(e->{
+            model.setCurrentBaseCaseIndex(view.baseCaseSelect.getSelectionModel().getSelectedIndex());
             view.reductionSelect.setVisible(true);
+            view.reductionSelect.getItems().clear();
             view.reductionSelect.getItems().addAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
         });
         view.reductionSelect.setOnAction(e->{
-            //cambiar el diagrama segun reduccion
             model.setCurrentReduction(view.reductionSelect.getSelectionModel().getSelectedIndex());
             handleInput();
         });

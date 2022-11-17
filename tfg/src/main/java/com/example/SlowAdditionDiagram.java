@@ -12,11 +12,21 @@ public class SlowAdditionDiagram extends Diagram{
         //que sea un numero positivo, sino que sea mayor a 0
         this.problemSizeChoices.add("a + b");
         this.problemSizeChoices.add("min(a,b)");
-        this.baseCase.set("0");
+
+        List<String> bCases1 = Arrays.asList("a=b=0");
+        List<String> bcases2 = Arrays.asList("a=b=0");
+        this.baseCaseChoices.add(bCases1);
+        this.baseCaseChoices.add(bcases2);
+        List<String> bc1 = Arrays.asList("0");
+        List<String> bc2 = Arrays.asList("0");
+        this.baseCaseParameters.add(bc1);
+        this.baseCaseParameters.add(bc2);
+
         List<String> reds1 = Arrays.asList("a - 1");
         List<String> reds2 = Arrays.asList("min(a,b) - 1","min(a-1,b-1)");
         this.reductionChoices.add(reds1);
         this.reductionChoices.add(reds2);
+
         List<String> sols1 = new ArrayList<>();
         sols1.add(" + 1");
         sols1.add(" - 1");
@@ -26,9 +36,9 @@ public class SlowAdditionDiagram extends Diagram{
             @Override
             public Double[] call() throws Exception {
                 Double[] returnVal = new Double[2];
-                returnVal[0] = Algorithms.slowAdditionOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseProperty().get()));
-                returnVal[1] = Algorithms.slowAdditionOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseProperty().get()));
-                reducedOperation=problemData.get(0)+operation+(Integer.parseInt(problemData.get(1))-1);
+                returnVal[0] = Algorithms.slowAdditionOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
+                returnVal[1] = Algorithms.slowAdditionOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
+                reducedOperation=Integer.parseInt(problemData.get(0))-1+operation+problemData.get(1);
                 currentReductionString="a-1";
                 currentReductionSolutions=0;
                 return returnVal;

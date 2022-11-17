@@ -16,7 +16,6 @@ public abstract class Diagram {
     protected SimpleStringProperty originalSol;
     protected SimpleStringProperty partialData;
     protected SimpleStringProperty partialSol;
-    protected SimpleStringProperty baseCase;
     protected int currentProblemSize;
     protected int currentReduction;
     protected int currentReductionSolutions;
@@ -24,6 +23,9 @@ public abstract class Diagram {
     protected String operation;
     protected String reducedOperation;
     protected List<String> problemSizeChoices;
+    protected int currentBaseCaseIndex;
+    protected List<List<String>> baseCaseChoices;
+    protected List<List<String>> baseCaseParameters;
     protected List<List<String>> reductionChoices;
     protected List<List<String>> solutionsChoices;
     protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
@@ -68,18 +70,6 @@ public abstract class Diagram {
 
     public void setCurrentReduction(int currentReduction) {
         this.currentReduction = currentReduction;
-    }
-
-    public String getBaseCase() {
-        return baseCase.get();
-    }
-
-    public SimpleStringProperty baseCaseProperty() {
-        return baseCase;
-    }
-
-    public void setBaseCase(String baseCase) {
-        this.baseCase.set(baseCase);
     }
 
     public String getOriginalData() {
@@ -165,8 +155,31 @@ public abstract class Diagram {
         this.rawData = rawData;
     }
 
+    public int getCurrentBaseCaseIndex() {
+        return currentBaseCaseIndex;
+    }
 
-    public Diagram(List<Integer> correctChoices,String operation) {
+    public void setCurrentBaseCaseIndex(int currentBaseCaseIndex) {
+        this.currentBaseCaseIndex = currentBaseCaseIndex;
+    }
+
+    public List<List<String>> getBaseCaseChoices() {
+        return baseCaseChoices;
+    }
+
+    public void setBaseCaseChoices(List<List<String>> baseCaseChoices) {
+        this.baseCaseChoices = baseCaseChoices;
+    }
+
+    public List<List<String>> getBaseCaseParameters() {
+        return baseCaseParameters;
+    }
+
+    public void setBaseCaseParameters(List<List<String>> baseCaseParameters) {
+        this.baseCaseParameters = baseCaseParameters;
+    }
+
+    public Diagram(List<Integer> correctChoices, String operation) {
         this.operation=operation;
         this.correctChoices=correctChoices;
         this.inputs = new SimpleStringProperty();
@@ -174,13 +187,14 @@ public abstract class Diagram {
         this.problemData=new ArrayList<>();
         this.reductionChoices=new ArrayList<>();
         this.problemSizeChoices=new ArrayList<>();
+        this.baseCaseChoices=new ArrayList<>();
+        this.baseCaseParameters=new ArrayList<>();
         this.ogSol=0;
         this.partSol=0;
         this.originalData=new SimpleStringProperty();
         this.originalSol=new SimpleStringProperty();
         this.partialData=new SimpleStringProperty();
         this.partialSol=new SimpleStringProperty();
-        this.baseCase=new SimpleStringProperty();
     }
     public void processInputs() throws Exception{
         try{
