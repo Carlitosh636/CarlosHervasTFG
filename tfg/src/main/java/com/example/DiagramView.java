@@ -20,6 +20,7 @@ public class DiagramView {
         ComboBox baseCaseSelect = new ComboBox();
         Label partialDataSolutionArrow = new Label("=====================>");
         Label solutionsArrow = new Label(" |\n |\n |\n |\n |");
+        Button confirmDataButton = new Button("Confirmar datos");
 
         public DiagramView(Diagram model) {
                 this.model = model;
@@ -43,6 +44,7 @@ public class DiagramView {
                 root.add(originalSolution,3,0);
                 root.add(datasArrow,1,1);
                 root.add(reductionSelect,0,1);
+                root.add(confirmDataButton,0,2);
                 root.add(subParameters,1,3);
                 root.add(partialDataSolutionArrow,2,3);
                 root.add(partialSolution,3,3);

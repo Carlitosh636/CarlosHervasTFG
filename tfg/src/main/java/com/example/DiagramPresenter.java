@@ -33,6 +33,8 @@ public class DiagramPresenter {
         });
         view.reductionSelect.setOnAction(e->{
             model.setCurrentReduction(view.reductionSelect.getSelectionModel().getSelectedIndex());
+        });
+        view.confirmDataButton.setOnAction(e->{
             handleInput();
         });
         view.solutionSelect.setOnAction(e->{
