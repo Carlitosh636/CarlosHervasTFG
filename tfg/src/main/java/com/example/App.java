@@ -36,6 +36,8 @@ public class App extends Application {
         diagram2.setOnAction(e->{
             List<Integer> correctChoices = new ArrayList<>();
             correctChoices.add(0);
+            correctChoices.add(0);
+            correctChoices.add(2);
             Diagram model = new SlowAdditionDiagram(correctChoices,",");
             DiagramView view = new DiagramView(model);
             DiagramPresenter presenter = new DiagramPresenter(model, view);

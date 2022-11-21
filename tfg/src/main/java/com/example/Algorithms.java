@@ -37,4 +37,31 @@ public class Algorithms {
             return slowAdditionOption1(a-1,b,baseCaseValue)+1;
         }
     }
+
+    public static double slowAdditionOption2(int a, int b, int baseCaseValue) {
+        if(a==baseCaseValue){
+            return b;
+        }
+        if(b==baseCaseValue){
+            return a;
+        }
+        else if (a<b){
+            return slowAdditionOption2(a-1,b,baseCaseValue)+1;
+        }
+        else{
+            return slowAdditionOption2(a,b-1,baseCaseValue)+1;
+        }
+    }
+
+    public static double slowAdditionOption3(int a, int b, int baseCaseValue) {
+        if(a==baseCaseValue){
+            return b;
+        }
+        if(b==baseCaseValue){
+            return a;
+        }
+        else{
+            return slowAdditionOption2(a-1,b-1,baseCaseValue)+1+1;
+        }
+    }
 }

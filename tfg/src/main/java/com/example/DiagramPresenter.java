@@ -60,8 +60,6 @@ public class DiagramPresenter {
         } catch (Exception e) {
             view.showErrorInputAlert();
         }
-
-        System.out.println(model.getRawData());
     }
 
 }
