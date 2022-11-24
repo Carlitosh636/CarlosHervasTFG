@@ -1,4 +1,7 @@
 
+Ya está el main menu con FXML, sin embargo da problemas para cambiar a otro view. Ver que le pasa, si es el ScreenController o el DiagramView o que coño.
+Ver el articulo de stack overflow.
+
 Cosas que hacer:
 -Hacer otras cosillas, como la pantalla de selección, mejorar la UI, entre otras cosas QoL.
 -Plantearse si es necesario refactorizar los diagramas. Si lo es, hacer eso
@@ -10,9 +13,3 @@ pasamos a JSON, hay que tener cuidado con eso. Mirar "java serialization with ag
 Recordar que para un problema es: Selecciona tamaño problema -> Selecciona caso base -> Introduce datos -> Selecciona reducción -> Selecciona solución.
 Otra cosa importante es que el algoritmo seleccionado es la suma del id del tamaño problema + id de la reducción. Cuidao con eso
 Ver que hacer con el tema del caso base, al seleccionarlo qué debería ocurrir.
-
-Otra cosa, ya tengo el mínimo del menú para elegir problema y que cambie la escena, sin embargo funciona muy feo ya que para refrescar
-tengo que hacer un close y un show, lo cual no se ve nada bien. Puede que si los view fuesen FXML fuese mejor, hay que ver de cambiarlo asi
-y cargarlo con FXML.
-
-Otra opción: Podría hacerse toda la app en un solo scene?

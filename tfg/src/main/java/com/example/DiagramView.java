@@ -5,8 +5,13 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 public class DiagramView {
-        private final GridPane root;
-        private final Diagram model;
+        private GridPane root;
+
+        public void setModel(Diagram model) {
+                this.model = model;
+        }
+
+        private Diagram model;
         TextField parameters = new TextField();
         Label originalDataSolutionArrow = new Label("=====================>");
         Label originalSolution = new Label();
@@ -22,6 +27,9 @@ public class DiagramView {
         Label solutionsArrow = new Label(" |\n |\n |\n |\n |");
         Button confirmDataButton = new Button("Confirmar datos");
 
+        public DiagramView(){
+
+        }
         public DiagramView(Diagram model) {
                 this.model = model;
                 this.root=new GridPane();
