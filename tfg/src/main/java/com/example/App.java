@@ -1,7 +1,9 @@
 package com.example;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -11,16 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App extends Application {
-    HBox diagramSelection = new HBox();
-    Button diagram1 = new Button("Recursive Potency");
-    Button diagram2 = new Button("Slow Addition");
+    private ScreenController screenController;
     public static void main(String[] args) {
         launch(args);
     }
     @Override
     public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DiagramSelector.fxml"));
+        System.out.println(getClass().getResource("/DiagramSelector.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene main = new Scene(root);
+        screenController = new ScreenController(main);
 
-        diagram1.setOnAction(e->{
+        /*diagram1.setOnAction(e->{
             List<Integer> correctChoices = new ArrayList<>();
             correctChoices.add(1);
             correctChoices.add(0);
@@ -45,11 +50,8 @@ public class App extends Application {
             stage.setScene(new Scene(view.getRoot()));
             stage.close();
             stage.show();
-        });
-        diagramSelection.getChildren().addAll(diagram1,diagram2);
-        Scene mainMenuRoot = new Scene(diagramSelection,1200,800);
-
-        stage.setScene(mainMenuRoot);
+        });*/
+        stage.setScene(main);
         stage.setTitle("Mi TFG");
         stage.show();
         stage.setMaxHeight(1000);

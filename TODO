@@ -1,7 +1,8 @@
 
-Hay que implementar los algoritmos y toda la parafernalia en SlowAdditionDiagram para el caso donde el tamaño del problema es
-min(a,b).
-Luego, ir aplicando el resto de algoritmos del libro.
+Cosas que hacer:
+-Hacer otras cosillas, como la pantalla de selección, mejorar la UI, entre otras cosas QoL.
+-Plantearse si es necesario refactorizar los diagramas. Si lo es, hacer eso
+-Haya refactorización o no, implementar el resto de diagramas. Ojo porque algunos tienen 2 subproblemas
 
 Para la refactorización de los diagramas, muchas de las propiedades pueden transformarse en objetos para tenerlo mucho mejor organizado. Aunque si
 pasamos a JSON, hay que tener cuidado con eso. Mirar "java serialization with aggregation" para ver como hacerlo
