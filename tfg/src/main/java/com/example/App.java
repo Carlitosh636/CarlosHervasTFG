@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App extends Application {
-    private ScreenController screenController;
+    private static ScreenController screenController;
     public static void main(String[] args) {
         launch(args);
     }
@@ -63,7 +63,6 @@ public class App extends Application {
     }
     @FXML
     public void handleMainMenuButton(javafx.event.ActionEvent actionEvent) {
-        //aqui algo está mal
         List<Integer> correctChoices = new ArrayList<>();
         correctChoices.add(1);
         correctChoices.add(0);
