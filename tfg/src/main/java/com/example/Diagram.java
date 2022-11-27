@@ -3,7 +3,6 @@ package com.example;
 import java.util.*;
 import java.util.concurrent.Callable;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public abstract class Diagram {

@@ -1,11 +1,14 @@
 
-Ya está el main menu con FXML, sin embargo da problemas para cambiar a otro view. Ver que le pasa, si es el ScreenController o el DiagramView o que coño.
-Ver el articulo de stack overflow.
-
 Cosas que hacer:
--Hacer otras cosillas, como la pantalla de selección, mejorar la UI, entre otras cosas QoL.
+-Toca hacer la view del diagrama simple en FXML. Ver como tiene que ligarse y tal
 -Plantearse si es necesario refactorizar los diagramas. Si lo es, hacer eso
 -Haya refactorización o no, implementar el resto de diagramas. Ojo porque algunos tienen 2 subproblemas
+-la build para el jar.
+
+Problemas:
+-El puto asqueroso javafx de mierda no permite hacer build de forma sencilla, me lleva jodiendo todo el día.
+Probablemente haya que pasar el codigo a un nuevo proyecto, el cual esté inicializado desde 0 con java 11 y javafx 19.
+Ver la pagina principal de JavaFX (la de gluon) y el apartado de Documentación.
 
 Para la refactorización de los diagramas, muchas de las propiedades pueden transformarse en objetos para tenerlo mucho mejor organizado. Aunque si
 pasamos a JSON, hay que tener cuidado con eso. Mirar "java serialization with aggregation" para ver como hacerlo
