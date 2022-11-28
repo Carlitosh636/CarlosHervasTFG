@@ -1,6 +1,9 @@
 
+Ahora hay que ligar el FXML a una clase controladora. ¿Lo hago al DiagramView o al Presenter?
+Cada view debe estar ligada a una clase para evitar problemas, osea que hay que hacer 2 clases distintas. Intentar usar herencia para
+que el presenter pueda usar una o la otra sin problemas.
+
 Cosas que hacer:
--Toca hacer la view del diagrama simple en FXML. Ver como tiene que ligarse y tal
 -Plantearse si es necesario refactorizar los diagramas. Si lo es, hacer eso
 -Haya refactorización o no, implementar el resto de diagramas. Ojo porque algunos tienen 2 subproblemas
 -la build para el jar.
