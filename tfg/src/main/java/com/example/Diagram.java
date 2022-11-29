@@ -45,15 +45,6 @@ public abstract class Diagram {
         this.reductionChoices = reductionChoices;
     }
 
-    public String getCurrentReductionString() {
-        return currentReductionString;
-    }
-
-    public void setCurrentReductionString(String currentReductionString) {
-        this.currentReductionString = currentReductionString;
-    }
-
-    protected String currentReductionString;
 
     public int getCurrentProblemSize() {
         return currentProblemSize;

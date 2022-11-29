@@ -47,7 +47,6 @@ public class SlowAdditionDiagram extends Diagram{
                 returnVal[0] = Algorithms.slowAdditionOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
                 returnVal[1] = Algorithms.slowAdditionOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
                 reducedOperation=Integer.parseInt(problemData.get(0))-1+operation+problemData.get(1);
-                currentReductionString="a-1";
                 currentReductionSolutions=0;
                 return returnVal;
             }
@@ -59,7 +58,6 @@ public class SlowAdditionDiagram extends Diagram{
                 returnVal[0] = Algorithms.slowAdditionOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
                 returnVal[1] = Algorithms.slowAdditionOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
                 reducedOperation= String.valueOf(Math.min(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))));
-                currentReductionString=String.format("(%d, %d) - 1",Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)));
                 currentReductionSolutions=1;
                 return returnVal;
             }
@@ -71,7 +69,6 @@ public class SlowAdditionDiagram extends Diagram{
                 returnVal[0] = Algorithms.slowAdditionOption3(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
                 returnVal[1] = Algorithms.slowAdditionOption3(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
                 reducedOperation= String.format("(%d - 1 , %d - 1)",Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)));
-                currentReductionString="min(a - 1,b - 1)";
                 currentReductionSolutions=2;
                 return returnVal;
             }

@@ -39,7 +39,6 @@ public class RecursivePotencyDiagram extends Diagram{
                 returnVal[0] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
                 returnVal[1] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
                 reducedOperation=problemData.get(0)+operation+(Integer.parseInt(problemData.get(1))-1);
-                currentReductionString="b-1";
                 currentReductionSolutions=0;
                 return returnVal;
 
@@ -53,12 +52,10 @@ public class RecursivePotencyDiagram extends Diagram{
                 returnVal[1] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))/2,Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
 
                 if(Integer.parseInt(problemData.get(1))%2==0){
-                    currentReductionString="b/2";
                     reducedOperation=problemData.get(0)+operation+(Integer.parseInt(problemData.get(1))/2);
                     currentReductionSolutions=1;
                 }
                 else{
-                    currentReductionString="(b-1)/2";
                     reducedOperation=problemData.get(0)+operation+((Integer.parseInt(problemData.get(1))-1)/2);
                     currentReductionSolutions=2;
                 }

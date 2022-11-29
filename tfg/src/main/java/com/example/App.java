@@ -3,14 +3,12 @@ package com.example;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +17,14 @@ public class App extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    private static Scene main;
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/DiagramSelector.fxml"));
         Parent root = (Parent) loader.load();
-        Scene main = new Scene(root);
-        screenController = new ScreenController(main);
-        screenController.addScreen("simpleDiagram", FXMLLoader.load(getClass().getResource("/SimpleDiagramView.fxml")));
+        main = new Scene(root);
+        //screenController = new ScreenController(main);
+        //screenController.addScreen("simpleDiagram", FXMLLoader.load(getClass().getResource("/SimpleDiagramView.fxml")));
         //TODO: ahora hay que pasar todo esto comentado a las funciones para los botones de FXML
         /*diagram1.setOnAction(e->{
             List<Integer> correctChoices = new ArrayList<>();
@@ -33,7 +32,6 @@ public class App extends Application {
             correctChoices.add(0);
             correctChoices.add(2);
             Diagram model = new RecursivePotencyDiagram(correctChoices,"^");
-            DiagramView view = new DiagramView(model);
             DiagramPresenter presenter = new DiagramPresenter(model, view);
             view.getRoot().setAlignment(Pos.CENTER);
             stage.setScene(new Scene(view.getRoot()));
@@ -46,7 +44,6 @@ public class App extends Application {
             correctChoices.add(0);
             correctChoices.add(2);
             Diagram model = new SlowAdditionDiagram(correctChoices,",");
-            DiagramView view = new DiagramView(model);
             DiagramPresenter presenter = new DiagramPresenter(model, view);
             view.getRoot().setAlignment(Pos.CENTER);
             stage.setScene(new Scene(view.getRoot()));
@@ -62,15 +59,17 @@ public class App extends Application {
         stage.setMinWidth(stage.getWidth());
     }
     @FXML
-    public void handleMainMenuButton(javafx.event.ActionEvent actionEvent) {
+    public void handleMainMenuButton(javafx.event.ActionEvent actionEvent) throws IOException {
         List<Integer> correctChoices = new ArrayList<>();
         correctChoices.add(1);
         correctChoices.add(0);
         correctChoices.add(2);
         Diagram model = new RecursivePotencyDiagram(correctChoices,"^");
-        DiagramView view = new DiagramView();
-        view.setModel(model);
-        screenController.activate("simpleDiagram");
+        //screenController.activate("simpleDiagram");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SimpleDiagramView.fxml"));
+        loader.setControllerFactory(controller->new DiagramPresenter(model));
+        Pane pane = loader.load();
+        main.setRoot(pane);
     }
 
 }

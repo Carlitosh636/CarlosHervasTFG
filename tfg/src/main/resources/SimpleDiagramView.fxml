@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="800.0" prefWidth="1200.0" vgap="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DiagramView">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="800.0" prefWidth="1200.0" vgap="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DiagramPresenter">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
@@ -21,8 +21,8 @@
    <children>
       <VBox fx:id="NandBaseCaseBox" spacing="5.0">
          <children>
-            <ComboBox fx:id="problemSizeSelect" promptText="Problem size" style="-fx-background-color: #8FFCFF; -fx-border-style: solid 2px; -fx-border-color: #7AD0D2;" />
-            <ComboBox fx:id="baseCaseSelect" promptText="Base case" style="-fx-background-color: #FFFA8F; -fx-border-style: solid; -fx-border-color: #E8E383;">
+            <ComboBox fx:id="problemSizeSelect" onAction="#onChangeProblemSize" promptText="Problem size" style="-fx-background-color: #8FFCFF; -fx-border-style: solid 2px; -fx-border-color: #7AD0D2;" />
+            <ComboBox fx:id="baseCaseSelect" onAction="#onChangeBaseCase" promptText="Base case" style="-fx-background-color: #FFFA8F; -fx-border-style: solid; -fx-border-color: #E8E383;">
                <VBox.margin>
                   <Insets />
                </VBox.margin></ComboBox>
@@ -36,15 +36,15 @@
       <Label fx:id="originalSolution" GridPane.columnIndex="3" GridPane.rowIndex="0" />
       <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
       <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-      <ComboBox fx:id="reductionSelect" promptText="Reduction" style="-fx-background-color: #FFD58C; -fx-border-style: solid; -fx-border-color: #DFBA7B;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+      <ComboBox fx:id="reductionSelect" onAction="#onChangeReduction" promptText="Reduction" style="-fx-background-color: #FFD58C; -fx-border-style: solid; -fx-border-color: #DFBA7B;" GridPane.columnIndex="0" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin></ComboBox>
       <Label fx:id="subParameters" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Button fx:id="confirmDataButton" text="Confirm Data" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      <Button fx:id="confirmDataButton" onAction="#handleInput" text="Confirm Data" GridPane.columnIndex="0" GridPane.rowIndex="2" />
       <Label fx:id="partialDataSolutionArrow" text="=====================&gt;" GridPane.columnIndex="2" GridPane.rowIndex="3" />
       <Label fx:id="partialSolution" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-      <ComboBox fx:id="solutionSelect" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <ComboBox fx:id="solutionSelect" onAction="#onSolutionChange" GridPane.columnIndex="3" GridPane.rowIndex="2" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
