@@ -11,7 +11,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button mnemonicParsing="false" onAction="#handleMainMenuButton" text="Slow Addition" GridPane.columnIndex="1" GridPane.rowIndex="0">
+      <Button mnemonicParsing="false" onAction="#handleMainMenuButton2" text="Slow Addition" GridPane.columnIndex="1" GridPane.rowIndex="0">
          <font>
             <Font size="14.0" />
          </font></Button>

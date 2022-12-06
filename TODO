@@ -1,11 +1,11 @@
 
-Hay que abstraer el DiagramPresenter para tener una clase abstracta madre y otras que hereden y que sean las que los FXML usen.
-En principio una para el Diagrama Simple y otra para el Complejo (el que tiene 2 sub problemas como los de arrays)
-
 Ahora queda mejorar la presentación del view FXML y hacer que cada botón cargue un modelo distinto al Presenter.
 Ver como se pueden pasar parámetros por funciones ligadas a FXML.
 
 Cosas que hacer:
+-Mejorar un poco la presentación de los View con el styles css
+-Hacer un diagrama para el view complejo (como quicksort o alguno de esos con arrays)
+--LLAMADA AL PROFE
 -Plantearse si es necesario refactorizar los diagramas. Si lo es, hacer eso
 -Haya refactorización o no, implementar el resto de diagramas. Ojo porque algunos tienen 2 subproblemas
 -la build para el jar.

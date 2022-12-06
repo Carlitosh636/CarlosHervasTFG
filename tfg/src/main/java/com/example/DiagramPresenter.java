@@ -9,8 +9,8 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DiagramPresenter implements Initializable {
-    private Diagram model;
+public abstract class DiagramPresenter implements Initializable {
+    protected Diagram model;
     @FXML
     TextField parameters = new TextField();
     @FXML
@@ -19,10 +19,6 @@ public class DiagramPresenter implements Initializable {
     Label originalSolution = new Label();
     @FXML
     ComboBox reductionSelect = new ComboBox();
-    @FXML
-    Label subParameters = new Label();
-    @FXML
-    Label partialSolution = new Label();
     @FXML
     ComboBox solutionSelect = new ComboBox();
     @FXML
@@ -36,9 +32,6 @@ public class DiagramPresenter implements Initializable {
     @FXML
     Button confirmDataButton = new Button("Confirmar datos");
 
-    public DiagramPresenter() {
-
-    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
@@ -50,14 +43,12 @@ public class DiagramPresenter implements Initializable {
     public DiagramPresenter(Diagram model) {
         this.model = model;
     }
-    private void bindModelData() {
+    protected void bindModelData() {
         parameters.textProperty().bindBidirectional(model.getInputsProperty());
         originalSolution.textProperty().bind(model.originalSolProperty());
-        subParameters.textProperty().bind(model.partialDataProperty());
-        partialSolution.textProperty().bind(model.partialSolProperty());
     }
     @FXML
-    private void handleInput() {
+    protected void handleInput() {
         try {
             model.processInputs();
             solutionSelect.setVisible(true);
