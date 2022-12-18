@@ -14,7 +14,7 @@ public class SimpleDiagramPresenter extends DiagramPresenter{
 
     protected void bindModelData(){
         super.bindModelData();
-        subParameters.textProperty().bind(model.partialDataProperty());
-        partialSolution.textProperty().bind(model.partialSolProperty());
+        subParameters.textProperty().bind(model.partialDataPropertyByIndex(0));
+        partialSolution.textProperty().bind(model.partialSolPropertyByIndex(0));
     }
 }

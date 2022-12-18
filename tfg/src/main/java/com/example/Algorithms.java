@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.ArrayList;
+
 public class Algorithms {
     public static double recursiveExponentOption1(int base, int exp, int baseCaseValue){
         if(exp==baseCaseValue){
@@ -63,5 +65,57 @@ public class Algorithms {
         else{
             return slowAdditionOption2(a-1,b-1,baseCaseValue)+1+1;
         }
+    }
+
+    public static int[] mergeSort(int[] a){
+        int n = a.length;
+        if (n<=1){
+            return a;
+        }
+        else{
+            int mid = n / 2;
+            int[] l = new int[mid];
+            int[] r = new int[n - mid];
+            for (int i = 0; i < mid; i++) {
+                l[i] = a[i];
+            }
+            for (int i = mid; i < n; i++) {
+                r[i - mid] = a[i];
+            }
+            l = mergeSort(l);
+            r = mergeSort(r);
+            return merge(a,l,r,mid,n-mid);
+        }
+    }
+    public static int[] merge(
+            int[] a, int[] l, int[] r, int left, int right) {
+
+        int i = 0, j = 0, k = 0;
+        while (i < left && j < right) {
+            if (l[i] <= r[j]) {
+                a[k++] = l[i++];
+            }
+            else {
+                a[k++] = r[j++];
+            }
+        }
+        while (i < left) {
+            a[k++] = l[i++];
+        }
+        while (j < right) {
+            a[k++] = r[j++];
+        }
+        return a;
+    }
+    static int[] stringToArrayInt(String str)
+    {
+
+        String[] splitArray = str.split(",");
+        int[] array = new int[splitArray.length];
+
+        for (int i = 0; i < splitArray.length; i++) {
+            array[i] = Integer.parseInt(splitArray[i]);
+        }
+        return array;
     }
 }

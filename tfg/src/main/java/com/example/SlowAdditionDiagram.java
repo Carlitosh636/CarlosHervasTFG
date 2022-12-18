@@ -1,5 +1,7 @@
 package com.example;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,6 +42,9 @@ public class SlowAdditionDiagram extends Diagram{
         sols3.add(" - 1 + 1");
         sols3.add(" + 1 + 1");
         this.solutionsChoices=Arrays.asList(sols1,sols2,sols3);
+
+        this.partialData.add(new SimpleStringProperty());
+        this.partialSol.add(new SimpleStringProperty());
         algorithmsMap.put(0, new Callable<Double[]>() {
             @Override
             public Double[] call() throws Exception {
@@ -80,10 +85,12 @@ public class SlowAdditionDiagram extends Diagram{
     public void processInputs() throws Exception {
         try{
             super.processInputs();
+            algorithmIndex = currentProblemSize+currentReduction;
+            Double[] values = (Double[]) algorithmsMap.get(algorithmIndex).call();
             originalData.set(this.rawData);
             originalSol.set(this.problemData.get(0)+" + "+this.problemData.get(1));
-            partialData.set(reducedOperation);
-            partialSol.set(this.problemData.get(0)+" - 1 + "+this.problemData.get(1));
+            partialData.get(0).set(reducedOperation);
+            partialSol.get(0).set(this.problemData.get(0)+" - 1 + "+this.problemData.get(1));
         }
         catch (Exception e){
             System.out.println(e);

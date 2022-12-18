@@ -15,6 +15,10 @@
          <font>
             <Font size="14.0" />
          </font></Button>
+      <Button mnemonicParsing="false" onAction="#handleMainMenuButton3" text="Merge Sort" GridPane.columnIndex="2" GridPane.rowIndex="0">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
    </children>
    <columnConstraints>
       <ColumnConstraints />

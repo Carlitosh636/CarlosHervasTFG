@@ -9,12 +9,10 @@ public abstract class Diagram {
     protected SimpleStringProperty inputs;
     protected String rawData;
     protected List<String> problemData;
-    protected double ogSol;
-    protected double partSol;
     protected SimpleStringProperty originalData;
     protected SimpleStringProperty originalSol;
-    protected SimpleStringProperty partialData;
-    protected SimpleStringProperty partialSol;
+    protected List<SimpleStringProperty> partialData;
+    protected List<SimpleStringProperty> partialSol;
     protected int currentProblemSize;
     protected int currentReduction;
     protected int currentReductionSolutions;
@@ -28,6 +26,7 @@ public abstract class Diagram {
     protected List<List<String>> reductionChoices;
     protected List<List<String>> solutionsChoices;
     protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
+    protected int algorithmIndex;
     public List<Integer> getCorrectChoices() {
         return correctChoices;
     }
@@ -86,31 +85,8 @@ public abstract class Diagram {
         this.originalSol.set(originalSol);
     }
 
-    public String getPartialData() {
-        return partialData.get();
-    }
-
-    public SimpleStringProperty partialDataProperty() {
-        return partialData;
-    }
-
-    public void setPartialData(String partialData) {
-        this.partialData.set(partialData);
-    }
-
-    public String getPartialSol() {
-        return partialSol.get();
-    }
-
-    public SimpleStringProperty partialSolProperty() {
-        return partialSol;
-    }
-
-    public void setPartialSol(String partialSol) {
-        this.partialSol.set(partialSol);
-    }
-
-
+    public SimpleStringProperty partialDataPropertyByIndex(int i){return this.partialData.get(i);}
+    public SimpleStringProperty partialSolPropertyByIndex(int i){return this.partialSol.get(i);}
     public int getCurrentReductionSolutions() {
         return currentReductionSolutions;
     }
@@ -179,21 +155,16 @@ public abstract class Diagram {
         this.problemSizeChoices=new ArrayList<>();
         this.baseCaseChoices=new ArrayList<>();
         this.baseCaseParameters=new ArrayList<>();
-        this.ogSol=0;
-        this.partSol=0;
         this.originalData=new SimpleStringProperty();
         this.originalSol=new SimpleStringProperty();
-        this.partialData=new SimpleStringProperty();
-        this.partialSol=new SimpleStringProperty();
+        this.partialData=new ArrayList<>();
+        this.partialSol=new ArrayList<>();
     }
     public void processInputs() throws Exception{
         try{
             problemData = Arrays.asList(this.inputs.get().split(","));
             rawData =problemData.get(0)+operation+problemData.get(1);
-            int algorithmIndex = currentProblemSize+currentReduction;
-            Double[] values = (Double[]) algorithmsMap.get(algorithmIndex).call();
-            ogSol = values[0];
-            partSol = values[1];
+
         }
         catch (Exception e){
             System.out.println(e);

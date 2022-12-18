@@ -1,5 +1,7 @@
 package com.example;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +34,8 @@ public class RecursivePotencyDiagram extends Diagram{
         sols3.add("las 2 anteriores juntas");
         this.solutionsChoices=Arrays.asList(sols1,sols2,sols3);
 
+        this.partialData.add(new SimpleStringProperty());
+        this.partialSol.add(new SimpleStringProperty());
         algorithmsMap.put(0, new Callable<Double[]>() {
             @Override
             public Double[] call() throws Exception {
@@ -68,10 +72,12 @@ public class RecursivePotencyDiagram extends Diagram{
     public void processInputs() throws Exception{
         try{
             super.processInputs();
+            algorithmIndex = currentProblemSize+currentReduction;
+            Double[] values = (Double[]) algorithmsMap.get(algorithmIndex).call();
             originalData.set(this.rawData);
-            originalSol.set(String.valueOf(ogSol));
-            partialData.set(reducedOperation);
-            partialSol.set(String.valueOf(partSol));
+            originalSol.set(String.valueOf(values[0]));
+            partialData.get(0).set(reducedOperation);
+            partialSol.get(0).set(String.valueOf(values[1]));
         }
         catch (Exception e){
             System.out.println(e);

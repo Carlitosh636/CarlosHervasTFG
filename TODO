@@ -2,21 +2,24 @@
 Ahora queda mejorar la presentación del view FXML y hacer que cada botón cargue un modelo distinto al Presenter.
 Ver como se pueden pasar parámetros por funciones ligadas a FXML.
 
+Nota: Habría que eliminar el parámetro Operation de los constructores de los diagramas, es bastante isulso.+--LLAMADA AL PROFE
+
+
 Cosas que hacer:
 -Mejorar un poco la presentación de los View con el styles css
--Hacer un diagrama para el view complejo (como quicksort o alguno de esos con arrays)
---LLAMADA AL PROFE
--Plantearse si es necesario refactorizar los diagramas. Si lo es, hacer eso
++-Plantearse si es necesario refactorizar los diagramas. Si lo es, hacer eso
 -Haya refactorización o no, implementar el resto de diagramas. Ojo porque algunos tienen 2 subproblemas
 -la build para el jar.
 
 Problemas:
--El puto asqueroso javafx de mierda no permite hacer build de forma sencilla, me lleva jodiendo todo el día.
-Probablemente haya que pasar el codigo a un nuevo proyecto, el cual esté inicializado desde 0 con java 11 y javafx 19.
-Ver la pagina principal de JavaFX (la de gluon) y el apartado de Documentación.
+-Hay problemas de compatibilidad para hacer la build, pero puede que se puedan arreglar cambiando el POM. Fijarse en los campos
+de la versión de Java y <parent> <Version>
 
 Para la refactorización de los diagramas, muchas de las propiedades pueden transformarse en objetos para tenerlo mucho mejor organizado. Aunque si
 pasamos a JSON, hay que tener cuidado con eso. Mirar "java serialization with aggregation" para ver como hacerlo
+
+Para el tema de la clase de algoritmos, podría mirarse de hacer en vez de una clase estática sola, crear una librería propia que poder importar.
+Mirar cómo se puede hacer.
 
 Recordar que para un problema es: Selecciona tamaño problema -> Selecciona caso base -> Introduce datos -> Selecciona reducción -> Selecciona solución.
 Otra cosa importante es que el algoritmo seleccionado es la suma del id del tamaño problema + id de la reducción. Cuidao con eso

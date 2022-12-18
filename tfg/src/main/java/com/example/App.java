@@ -39,7 +39,6 @@ public class App extends Application {
         correctChoices.add(0);
         correctChoices.add(2);
         Diagram model = new RecursivePotencyDiagram(correctChoices,"^");
-        //screenController.activate("simpleDiagram");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/SimpleDiagramView.fxml"));
         loader.setControllerFactory(controller->new SimpleDiagramPresenter(model));
         Pane pane = loader.load();
@@ -52,9 +51,18 @@ public class App extends Application {
         correctChoices.add(0);
         correctChoices.add(2);
         Diagram model = new SlowAdditionDiagram(correctChoices,",");
-        //screenController.activate("simpleDiagram");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/SimpleDiagramView.fxml"));
         loader.setControllerFactory(controller->new SimpleDiagramPresenter(model));
+        Pane pane = loader.load();
+        main.setRoot(pane);
+    }
+    @FXML
+    public void handleMainMenuButton3(ActionEvent actionEvent) throws IOException {
+        List<Integer> correctChoices = new ArrayList<>();
+        correctChoices.add(2);
+        Diagram model = new MergesortDiagram(correctChoices,null);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ComplexDiagramView.fxml"));
+        loader.setControllerFactory(controller->new ComplexDiagramPresenter(model));
         Pane pane = loader.load();
         main.setRoot(pane);
     }
