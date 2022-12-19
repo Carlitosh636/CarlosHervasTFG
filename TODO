@@ -1,14 +1,29 @@
 
-Ahora queda mejorar la presentación del view FXML y hacer que cada botón cargue un modelo distinto al Presenter.
-Ver como se pueden pasar parámetros por funciones ligadas a FXML.
-
 Nota: Habría que eliminar el parámetro Operation de los constructores de los diagramas, es bastante isulso.+--LLAMADA AL PROFE
 
-
 Cosas que hacer:
--Mejorar un poco la presentación de los View con el styles css
+-Todos los diagramas deben contemplar si en los parámetros se ha pasado un valor del caso base. En tal caso, avisar al usuario
+y no se muestra el diagrama.
+
+-Los pasos de construir un problema deberían estar más separados. Es decir, poner una lista tipo
+"1: Selecciona tamaño problema: (combobox)
+2: Selecciona Caso base: (combobox)
+3: Introduce parámetros: (lista de TextInput)
+4: Selecciona reducción: (combobox)
+   Confirmar datos"
+  y entonces se muestra abajo de esa lista el diagrama. Al igual que ahora, cada paso muestra el siguiente hasta al final mostrar el diagrama
+  La solución también viene en el diagrama, como está ahora exactamente.
+
+-Que al seleccionar una solución incorrecta muestre el resultado de esa operación (en rojo si es incorrecto y en verde si es correcto) al lado
+ de la solución original.
+
+-Hacerlo más bonito
+
+-Generador de pseudocódigo o código python. El petate del diagrama iría en la izquierda y en la derecha, un campo de texto donde se va poniendo el
+pseudocódigo. Depende de que se seleccione en los pasos anteriores pone un código u otro
+
 +-Plantearse si es necesario refactorizar los diagramas. Si lo es, hacer eso
--Haya refactorización o no, implementar el resto de diagramas. Ojo porque algunos tienen 2 subproblemas
+
 -la build para el jar.
 
 Problemas:

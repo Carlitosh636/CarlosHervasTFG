@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.shape.Line?>
-<?import javafx.geometry.Insets?>
 <GridPane alignment="CENTER" hgap="10.0" prefHeight="800.0" prefWidth="1200.0" vgap="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ComplexDiagramPresenter">
     <columnConstraints>
         <ColumnConstraints />
@@ -20,12 +18,13 @@
         <RowConstraints />
         <RowConstraints />
         <RowConstraints />
+      <RowConstraints />
     </rowConstraints>
     <children>
         <VBox fx:id="NandBaseCaseBox" spacing="5.0">
             <children>
-                <ComboBox fx:id="problemSizeSelect" onAction="#onChangeProblemSize" promptText="Problem size" style="-fx-background-color: #8FFCFF; -fx-border-style: solid 2px; -fx-border-color: #7AD0D2;" />
-                <ComboBox fx:id="baseCaseSelect" onAction="#onChangeBaseCase" promptText="Base case" style="-fx-background-color: #FFFA8F; -fx-border-style: solid; -fx-border-color: #E8E383;">
+                <ComboBox fx:id="problemSizeSelect" onAction="#onChangeProblemSize" prefHeight="30.0" prefWidth="125.0" promptText="Problem size" style="-fx-background-color: #8FFCFF; -fx-border-style: solid 2px; -fx-border-color: #7AD0D2;" />
+                <ComboBox fx:id="baseCaseSelect" onAction="#onChangeBaseCase" prefHeight="30.0" prefWidth="125.0" promptText="Base case" style="-fx-background-color: #FFFA8F; -fx-border-style: solid; -fx-border-color: #E8E383;">
                     <VBox.margin>
                         <Insets />
                     </VBox.margin></ComboBox>
@@ -34,22 +33,52 @@
                 <Insets left="5.0" />
             </padding>
         </VBox>
-        <TextField fx:id="parameters" promptText="Introduce los parámetros (ej: 2,3)" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <Label fx:id="originalDataSolutionArrow" text="=====================&gt;" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-        <Label fx:id="originalSolution" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+        <TextField fx:id="parameters" promptText="Introduce los parámetros (ej: 2,3)" GridPane.columnIndex="1" GridPane.rowIndex="0">
+         <font>
+            <Font size="15.0" />
+         </font></TextField>
+        <Label fx:id="originalDataSolutionArrow" text="=====================&gt;" GridPane.columnIndex="2" GridPane.rowIndex="0">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+        <Label fx:id="originalSolution" contentDisplay="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="0">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
         <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
         <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        <ComboBox fx:id="reductionSelect" onAction="#onChangeReduction" promptText="Reduction" style="-fx-background-color: #FFD58C; -fx-border-style: solid; -fx-border-color: #DFBA7B;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <ComboBox fx:id="reductionSelect" onAction="#onChangeReduction" prefHeight="30.0" prefWidth="125.0" promptText="Reduction" style="-fx-background-color: #FFD58C; -fx-border-style: solid; -fx-border-color: #DFBA7B;" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <GridPane.margin>
                 <Insets left="5.0" />
             </GridPane.margin></ComboBox>
-        <Label fx:id="subParameters1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <Label fx:id="subParameters2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <Button fx:id="confirmDataButton" onAction="#handleInput" text="Confirm Data" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <Label fx:id="partialDataSolutionArrow" text="=====================&gt;" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-        <Label fx:id="partialSolution1" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-        <Label fx:id="partialSolution2" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-        <ComboBox fx:id="solutionSelect" onAction="#onSolutionChange" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+        <Label fx:id="subParameters1" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+        <Label fx:id="subParameters2" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+        <Button fx:id="confirmDataButton" onAction="#handleInput" text="Confirm Data" GridPane.columnIndex="0" GridPane.rowIndex="2">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin></Button>
+        <Label fx:id="partialDataSolutionArrow" text="=====================&gt;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+        <Label fx:id="partialSolution1" contentDisplay="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+        <Label fx:id="partialSolution2" contentDisplay="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="4">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+        <ComboBox fx:id="solutionSelect" onAction="#onSolutionChange" prefHeight="30.0" prefWidth="125.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

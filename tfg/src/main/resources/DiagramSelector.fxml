@@ -7,20 +7,21 @@
 
 <GridPane hgap="10.0" prefHeight="600.0" prefWidth="1000.0" vgap="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.App">
    <children>
-      <Button mnemonicParsing="false" onAction="#handleMainMenuButton" text="Recursive Potency" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <Button mnemonicParsing="false" onAction="#handleMainMenuButton" prefHeight="50.0" prefWidth="200.0" text="Recursive Potency" GridPane.columnIndex="0" GridPane.rowIndex="0">
          <font>
-            <Font size="14.0" />
+            <Font size="16.0" />
          </font></Button>
-      <Button mnemonicParsing="false" onAction="#handleMainMenuButton2" text="Slow Addition" GridPane.columnIndex="1" GridPane.rowIndex="0">
+      <Button mnemonicParsing="false" onAction="#handleMainMenuButton2" prefHeight="50.0" prefWidth="200.0" text="Slow Addition" GridPane.columnIndex="1" GridPane.rowIndex="0">
          <font>
-            <Font size="14.0" />
+            <Font size="16.0" />
          </font></Button>
-      <Button mnemonicParsing="false" onAction="#handleMainMenuButton3" text="Merge Sort" GridPane.columnIndex="2" GridPane.rowIndex="0">
+      <Button mnemonicParsing="false" onAction="#handleMainMenuButton3" prefHeight="50.0" prefWidth="200.0" text="Merge Sort" GridPane.columnIndex="2" GridPane.rowIndex="0">
          <font>
-            <Font size="14.0" />
+            <Font size="16.0" />
          </font></Button>
    </children>
    <columnConstraints>
+      <ColumnConstraints />
       <ColumnConstraints />
       <ColumnConstraints />
    </columnConstraints>
