@@ -59,7 +59,7 @@ public class MergesortDiagram extends Diagram{
             super.processInputs();
             algorithmIndex = currentProblemSize+currentReduction;
             int[][] values = (int[][]) algorithmsMap.get(algorithmIndex).call();
-            originalData.set(this.rawData);
+            originalData.set(this.problemData.toString());
             originalSol.set(Arrays.toString(values[0]));
             partialSol.get(0).set(Arrays.toString(values[1]));
             partialSol.get(1).set(Arrays.toString(values[2]));

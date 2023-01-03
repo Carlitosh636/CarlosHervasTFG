@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -12,32 +13,36 @@ import java.util.ResourceBundle;
 public abstract class DiagramPresenter implements Initializable {
     protected Diagram model;
     @FXML
-    TextField parameters = new TextField();
+    TextField parameters;
     @FXML
-    Label originalDataSolutionArrow = new Label("=====================>");
+    Label originalDataSolutionArrow;
     @FXML
-    Label originalSolution = new Label();
+    Label originalSolution;
     @FXML
-    ComboBox reductionSelect = new ComboBox();
+    ComboBox reductionSelect;
     @FXML
-    ComboBox solutionSelect = new ComboBox();
+    ComboBox solutionSelect;
     @FXML
-    VBox NandBaseCaseBox = new VBox();
+    VBox NandBaseCaseBox;
     @FXML
-    ComboBox problemSizeSelect = new ComboBox();
+    ComboBox problemSizeSelect;
     @FXML
-    ComboBox baseCaseSelect = new ComboBox();
+    ComboBox baseCaseSelect;
     @FXML
-    Label partialDataSolutionArrow = new Label("=====================>");
+    Label partialDataSolutionArrow;
     @FXML
-    Button confirmDataButton = new Button("Confirmar datos");
+    Button confirmDataButton;
+    @FXML
+    GridPane diagramGrid;
+    @FXML
+    Label originalData;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
-        solutionSelect.setVisible(false);
         reductionSelect.setVisible(false);
         baseCaseSelect.setVisible(false);
+        diagramGrid.setVisible(false);
         bindModelData();
     }
     public DiagramPresenter(Diagram model) {
@@ -46,12 +51,13 @@ public abstract class DiagramPresenter implements Initializable {
     protected void bindModelData() {
         parameters.textProperty().bindBidirectional(model.getInputsProperty());
         originalSolution.textProperty().bind(model.originalSolProperty());
+        originalData.textProperty().bind(model.originalDataProperty());
     }
     @FXML
     protected void handleInput() {
         try {
             model.processInputs();
-            solutionSelect.setVisible(true);
+            diagramGrid.setVisible(true);
             solutionSelect.getItems().clear();
             solutionSelect.getItems().setAll(model.solutionsChoices.get(model.getCurrentReductionSolutions()));
 
