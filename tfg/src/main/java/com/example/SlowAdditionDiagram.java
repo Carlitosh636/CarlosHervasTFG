@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 
 public class SlowAdditionDiagram extends Diagram{
@@ -86,15 +87,28 @@ public class SlowAdditionDiagram extends Diagram{
         try{
             super.processInputs();
             algorithmIndex = currentProblemSize+currentReduction;
+            if(!checkNotBaseCase(algorithmIndex)){
+                throw new BaseCaseException("Cannot introduce a base case in parameters");
+            }
             Double[] values = (Double[]) algorithmsMap.get(algorithmIndex).call();
             originalData.set(this.rawData);
             originalSol.set(this.problemData.get(0)+" + "+this.problemData.get(1));
             partialData.get(0).set(reducedOperation);
             partialSol.get(0).set(this.problemData.get(0)+" - 1 + "+this.problemData.get(1));
         }
-        catch (Exception e){
+        catch (RuntimeException e){
             System.out.println(e);
-            throw new Exception();
+            throw new RuntimeException();
         }
+    }
+
+    @Override
+    public boolean checkNotBaseCase(int index) {
+        for (String baseCase : baseCaseParameters.get(index)) {
+            if((Objects.equals(problemData.get(1), baseCase)) || (Objects.equals(problemData.get(0), baseCase))){
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -164,12 +164,12 @@ public abstract class Diagram {
         try{
             problemData = Arrays.asList(this.inputs.get().split(","));
             rawData =problemData.get(0)+operation+problemData.get(1);
-
         }
         catch (Exception e){
             System.out.println(e);
             throw new Exception();
         }
     }
+    public abstract boolean checkNotBaseCase(int index);
 
 }

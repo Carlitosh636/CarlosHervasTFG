@@ -62,7 +62,7 @@ public abstract class DiagramPresenter implements Initializable {
             solutionSelect.getItems().setAll(model.solutionsChoices.get(model.getCurrentReductionSolutions()));
 
         } catch (Exception e) {
-            showErrorInputAlert();
+            showErrorInputAlert(e);
         }
     }
     public void onChangeProblemSize(ActionEvent actionEvent) {
@@ -91,11 +91,22 @@ public abstract class DiagramPresenter implements Initializable {
             System.out.println("Incorrecto! Vuelve a intentarlo");
         }
     }
-    public void showErrorInputAlert(){
+    public void showErrorInputAlert(Exception e){
         Alert inputErrorAlert = new Alert(Alert.AlertType.ERROR);
         inputErrorAlert.setTitle("Error");
-        inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
-        inputErrorAlert.setContentText("Revisa el contenido, debe ser en el formato 'A,B' ");
+        if(e instanceof RuntimeException){
+            inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
+            inputErrorAlert.setContentText("Revisa el contenido y que concuerde con el formato");
+        }
+        if(e instanceof BaseCaseException){
+            inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
+            inputErrorAlert.setContentText("Revisa el contenido, no puedes introducir un caso base como parámetro");
+        }
+        //si no se que es el error, poner el básico "introducelo de nuevo"
+        else{
+            inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
+            inputErrorAlert.setContentText("Revisa el contenido y que concuerde con el formato");
+        }
         inputErrorAlert.showAndWait();
     }
 }
