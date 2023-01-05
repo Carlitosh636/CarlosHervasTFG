@@ -35,6 +35,21 @@
                <ComboBox fx:id="baseCaseSelect" onAction="#onChangeBaseCase" prefHeight="30.0" prefWidth="125.0" promptText="Base case" style="-fx-background-color: #FFFA8F; -fx-border-style: solid; -fx-border-color: #E8E383;" />
             </children>
          </HBox>
+         <HBox>
+            <children>
+               <Label fx:id="parametersFormat" text="Label" textFill="#00cd0a">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+                  <opaqueInsets>
+                     <Insets left="10.0" />
+                  </opaqueInsets>
+               </Label>
+            </children>
+            <VBox.margin>
+               <Insets left="20.0" />
+            </VBox.margin>
+         </HBox>
          <HBox layoutX="15.0" layoutY="80.0" prefHeight="30.0" prefWidth="200.0">
             <children>
                <Label text="3. Introducir parámetros">

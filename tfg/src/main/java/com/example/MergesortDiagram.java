@@ -28,6 +28,7 @@ public class MergesortDiagram extends Diagram{
         this.partialSol.add(new SimpleStringProperty());
         this.partialData.add(new SimpleStringProperty());
         this.partialSol.add(new SimpleStringProperty());
+        this.parametersFormat.set("Formato: a,b,c,d,e...");
         algorithmsMap.put(0, new Callable<int[][]>() {
             @Override
             public int[][] call() throws Exception {

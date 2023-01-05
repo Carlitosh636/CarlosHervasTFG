@@ -52,6 +52,21 @@
                     </TextField>
                 </children>
             </HBox>
+         <HBox>
+            <children>
+               <Label fx:id="parametersFormat" text="Label" textFill="#00cd0a">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+                  <opaqueInsets>
+                     <Insets left="10.0" />
+                  </opaqueInsets>
+               </Label>
+            </children>
+            <VBox.margin>
+               <Insets left="20.0" />
+            </VBox.margin>
+         </HBox>
             <HBox prefHeight="30.0" prefWidth="200.0">
                 <children>
                     <Label text="4. Reduction formula">

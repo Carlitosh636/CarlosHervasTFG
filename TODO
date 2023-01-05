@@ -2,8 +2,6 @@
 Nota: Habría que eliminar el parámetro Operation de los constructores de los diagramas, es bastante isulso.+--LLAMADA AL PROFE
 
 Cosas que hacer:
--Poner un ejemplo al usuario de cómo debe poner los datos en el campo de parámetros
-
 -Que al seleccionar una solución incorrecta muestre el resultado de esa operación (en rojo si es incorrecto y en verde si es correcto) al lado
  de la solución original.
 

@@ -34,7 +34,7 @@ public class RecursivePotencyDiagram extends Diagram{
         sols3.add("multiplicar por 'b'");
         sols3.add("las 2 anteriores juntas");
         this.solutionsChoices=Arrays.asList(sols1,sols2,sols3);
-
+        this.parametersFormat.set("Formato: a,b");
         this.partialData.add(new SimpleStringProperty());
         this.partialSol.add(new SimpleStringProperty());
         algorithmsMap.put(0, new Callable<Double[]>() {

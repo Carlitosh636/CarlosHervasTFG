@@ -13,6 +13,7 @@ public class ComplexDiagramPresenter extends DiagramPresenter {
     @FXML
     public Label partialSolution2 = new Label();;
 
+
     public ComplexDiagramPresenter(Diagram model) {
         super(model);
     }

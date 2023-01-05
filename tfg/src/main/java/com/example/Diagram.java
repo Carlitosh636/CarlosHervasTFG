@@ -27,6 +27,21 @@ public abstract class Diagram {
     protected List<List<String>> solutionsChoices;
     protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
     protected int algorithmIndex;
+    protected SimpleStringProperty parametersFormat;
+
+    public String getParametersFormat() {
+        return parametersFormat.get();
+    }
+
+    public SimpleStringProperty parametersFormatProperty() {
+        return parametersFormat;
+    }
+
+    public void setParametersFormat(String parametersFormat) {
+        this.parametersFormat.set(parametersFormat);
+    }
+
+
     public List<Integer> getCorrectChoices() {
         return correctChoices;
     }
@@ -157,6 +172,7 @@ public abstract class Diagram {
         this.baseCaseParameters=new ArrayList<>();
         this.originalData=new SimpleStringProperty();
         this.originalSol=new SimpleStringProperty();
+        this.parametersFormat = new SimpleStringProperty();
         this.partialData=new ArrayList<>();
         this.partialSol=new ArrayList<>();
     }

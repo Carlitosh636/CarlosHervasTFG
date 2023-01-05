@@ -43,7 +43,7 @@ public class SlowAdditionDiagram extends Diagram{
         sols3.add(" - 1 + 1");
         sols3.add(" + 1 + 1");
         this.solutionsChoices=Arrays.asList(sols1,sols2,sols3);
-
+        this.parametersFormat.set("Formato: a,b");
         this.partialData.add(new SimpleStringProperty());
         this.partialSol.add(new SimpleStringProperty());
         algorithmsMap.put(0, new Callable<Double[]>() {

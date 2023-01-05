@@ -36,6 +36,8 @@ public abstract class DiagramPresenter implements Initializable {
     GridPane diagramGrid;
     @FXML
     Label originalData;
+    @FXML
+    public Label parametersFormat;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,6 +54,7 @@ public abstract class DiagramPresenter implements Initializable {
         parameters.textProperty().bindBidirectional(model.getInputsProperty());
         originalSolution.textProperty().bind(model.originalSolProperty());
         originalData.textProperty().bind(model.originalDataProperty());
+        parametersFormat.textProperty().bind(model.parametersFormatProperty());
     }
     @FXML
     protected void handleInput() {
