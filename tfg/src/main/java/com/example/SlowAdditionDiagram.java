@@ -87,7 +87,7 @@ public class SlowAdditionDiagram extends Diagram{
         try{
             super.processInputs();
             algorithmIndex = currentProblemSize+currentReduction;
-            if(!checkNotBaseCase(algorithmIndex)){
+            if(checkNotBaseCase(algorithmIndex)){
                 throw new BaseCaseException("Cannot introduce a base case in parameters");
             }
             Double[] values = (Double[]) algorithmsMap.get(algorithmIndex).call();
@@ -106,9 +106,9 @@ public class SlowAdditionDiagram extends Diagram{
     public boolean checkNotBaseCase(int index) {
         for (String baseCase : baseCaseParameters.get(index)) {
             if((Objects.equals(problemData.get(1), baseCase)) || (Objects.equals(problemData.get(0), baseCase))){
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }

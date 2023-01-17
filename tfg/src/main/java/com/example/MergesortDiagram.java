@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleStringProperty;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.Callable;
 
 public class MergesortDiagram extends Diagram{
@@ -60,7 +59,7 @@ public class MergesortDiagram extends Diagram{
         try{
             super.processInputs();
             algorithmIndex = currentProblemSize+currentReduction;
-            if(!checkNotBaseCase(algorithmIndex)){
+            if(checkNotBaseCase(algorithmIndex)){
                 throw new BaseCaseException("Cannot introduce a base case in parameters");
             }
             int[][] values = (int[][]) algorithmsMap.get(algorithmIndex).call();
@@ -77,6 +76,6 @@ public class MergesortDiagram extends Diagram{
 
     @Override
     public boolean checkNotBaseCase(int index) {
-        return problemData.size() != 1;
+        return problemData.size() == 1;
     }
 }

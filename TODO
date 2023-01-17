@@ -1,11 +1,7 @@
 
-Nota: Habría que eliminar el parámetro Operation de los constructores de los diagramas, es bastante isulso.+--LLAMADA AL PROFE
-
 Cosas que hacer:
 -Que al seleccionar una solución incorrecta muestre el resultado de esa operación (en rojo si es incorrecto y en verde si es correcto) al lado
  de la solución original.
-
--la build para el jar.
 
 -Hacerlo más bonito
 
@@ -15,8 +11,6 @@ pseudocódigo. Depende de que se seleccione en los pasos anteriores pone un cód
 -Plantearse si es necesario refactorizar los diagramas. Si lo es, hacer eso
 
 Problemas:
--Hay problemas de compatibilidad para hacer la build, pero puede que se puedan arreglar cambiando el POM. Fijarse en los campos
-de la versión de Java y <parent> <Version>
 
 Para la refactorización de los diagramas, muchas de las propiedades pueden transformarse en objetos para tenerlo mucho mejor organizado. Aunque si
 pasamos a JSON, hay que tener cuidado con eso. Mirar "java serialization with aggregation" para ver como hacerlo

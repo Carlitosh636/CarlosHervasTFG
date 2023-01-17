@@ -28,132 +28,48 @@ public abstract class Diagram {
     protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
     protected int algorithmIndex;
     protected SimpleStringProperty parametersFormat;
-
-    public String getParametersFormat() {
-        return parametersFormat.get();
-    }
-
     public SimpleStringProperty parametersFormatProperty() {
         return parametersFormat;
     }
-
-    public void setParametersFormat(String parametersFormat) {
-        this.parametersFormat.set(parametersFormat);
-    }
-
-
     public List<Integer> getCorrectChoices() {
         return correctChoices;
     }
-
-    public void setCorrectChoices(List<Integer> correctChoices) {
-        this.correctChoices = correctChoices;
-    }
-
-
     public List<List<String>> getReductionChoices() {
         return reductionChoices;
     }
-
-    public void setReductionChoices(List<List<String>> reductionChoices) {
-        this.reductionChoices = reductionChoices;
-    }
-
-
     public int getCurrentProblemSize() {
         return currentProblemSize;
     }
-
     public void setCurrentProblemSize(int currentProblemSize) {
         this.currentProblemSize = currentProblemSize;
     }
-
-    public int getCurrentReduction() {
-        return currentReduction;
-    }
-
     public void setCurrentReduction(int currentReduction) {
         this.currentReduction = currentReduction;
     }
-
-    public String getOriginalData() {
-        return originalData.get();
-    }
-
     public SimpleStringProperty originalDataProperty() {
         return originalData;
     }
-
-    public void setOriginalData(String originalData) {
-        this.originalData.set(originalData);
-    }
-
-    public String getOriginalSol() {
-        return originalSol.get();
-    }
-
     public SimpleStringProperty originalSolProperty() {
         return originalSol;
     }
-
-    public void setOriginalSol(String originalSol) {
-        this.originalSol.set(originalSol);
-    }
-
     public SimpleStringProperty partialDataPropertyByIndex(int i){return this.partialData.get(i);}
     public SimpleStringProperty partialSolPropertyByIndex(int i){return this.partialSol.get(i);}
     public int getCurrentReductionSolutions() {
         return currentReductionSolutions;
     }
-
-    public void setCurrentReductionSolutions(int currentReductionSolutions) {
-        this.currentReductionSolutions = currentReductionSolutions;
-    }
-
     public List<String> getProblemSizeChoices() {
         return problemSizeChoices;
-    }
-
-    public void setProblemSizeChoices(List<String> problemSizeChoices) {
-        this.problemSizeChoices = problemSizeChoices;
     }
 
     public SimpleStringProperty getInputsProperty() {
         return inputs;
     }
-    public String getInputs(){
-        return this.inputs.get();
-    }
-
-    public void setInputs(SimpleStringProperty inputs) {
-        this.inputs = inputs;
-    }
-    public String getRawData() {
-        return rawData;
-    }
-
-    public void setRawData(String rawData) {
-        this.rawData = rawData;
-    }
-
-    public int getCurrentBaseCaseIndex() {
-        return currentBaseCaseIndex;
-    }
-
     public void setCurrentBaseCaseIndex(int currentBaseCaseIndex) {
         this.currentBaseCaseIndex = currentBaseCaseIndex;
     }
 
     public List<List<String>> getBaseCaseChoices() {
         return baseCaseChoices;
-    }
-
-    public void setBaseCaseChoices(List<List<String>> baseCaseChoices) {
-        this.baseCaseChoices = baseCaseChoices;
-    }
-
-    public List<List<String>> getBaseCaseParameters() {
-        return baseCaseParameters;
     }
 
     public void setBaseCaseParameters(List<List<String>> baseCaseParameters) {

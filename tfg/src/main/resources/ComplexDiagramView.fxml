@@ -19,7 +19,7 @@
                             <Insets right="10.0" />
                         </padding>
                     </Label>
-                    <ComboBox fx:id="problemSizeSelect" onAction="#onChangeProblemSize" prefHeight="30.0" prefWidth="125.0" promptText="Problem size" style="-fx-background-color: #8FFCFF; -fx-border-style: solid 2px; -fx-border-color: #7AD0D2;" />
+                    <ComboBox fx:id="problemSizeSelect" onAction="#onChangeProblemSize" prefHeight="30.0" prefWidth="125.0" promptText="Problem size" style="-fx-background-color: #8FFF; -fx-border-style: solid 2px; -fx-border-color: #7AD0D2;" />
                 </children>
             </HBox>
             <HBox prefHeight="30.0" prefWidth="200.0">

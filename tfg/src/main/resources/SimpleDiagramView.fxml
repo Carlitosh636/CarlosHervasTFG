@@ -19,7 +19,7 @@
                      <Insets right="10.0" />
                   </padding>
                </Label>
-               <ComboBox fx:id="problemSizeSelect" onAction="#onChangeProblemSize" prefHeight="30.0" prefWidth="125.0" promptText="Problem size" style="-fx-background-color: #8FFCFF; -fx-border-style: solid 2px; -fx-border-color: #7AD0D2;" />
+               <ComboBox fx:id="problemSizeSelect" onAction="#onChangeProblemSize" prefHeight="30.0" prefWidth="125.0" promptText="Problem size" style="-fx-background-color: #8FFF; -fx-border-color: #7AD0D2;" />
             </children>
          </HBox>
          <HBox prefHeight="30.0" prefWidth="200.0">
@@ -32,7 +32,7 @@
                      <Insets right="10.0" />
                   </padding>
                </Label>
-               <ComboBox fx:id="baseCaseSelect" onAction="#onChangeBaseCase" prefHeight="30.0" prefWidth="125.0" promptText="Base case" style="-fx-background-color: #FFFA8F; -fx-border-style: solid; -fx-border-color: #E8E383;" />
+               <ComboBox fx:id="baseCaseSelect" onAction="#onChangeBaseCase" prefHeight="30.0" prefWidth="125.0" promptText="Base case" style="-fx-background-color: #FFFA8F; -fx-border-color: #E8E383;" />
             </children>
          </HBox>
          <HBox>
@@ -77,7 +77,7 @@
                      <Insets right="10.0" />
                   </padding>
                </Label>
-               <ComboBox fx:id="reductionSelect" onAction="#onChangeReduction" prefHeight="30.0" prefWidth="125.0" promptText="Reduction" style="-fx-background-color: #FFD58C; -fx-border-style: solid; -fx-border-color: #DFBA7B;" />
+               <ComboBox fx:id="reductionSelect" onAction="#onChangeReduction" prefHeight="30.0" prefWidth="125.0" promptText="Reduction" style="-fx-background-color: #FFD58C; -fx-border-color: #DFBA7B;" />
             </children>
          </HBox>
          <Button fx:id="confirmDataButton" onAction="#handleInput" text="Confirm Data">
