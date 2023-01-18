@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class SimpleDiagramPresenter extends DiagramPresenter{
+    
     @FXML
     Label subParameters = new Label();
     @FXML

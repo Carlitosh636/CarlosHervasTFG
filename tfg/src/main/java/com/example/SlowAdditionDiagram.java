@@ -9,17 +9,15 @@ import java.util.Objects;
 import java.util.concurrent.Callable;
 
 public class SlowAdditionDiagram extends Diagram{
-    public SlowAdditionDiagram(List<Integer> correctChoices, String operation) {
-        super(correctChoices, operation);
-        //En este problema concreto es interesante ya que si en los parametros de entrada ponemos A o B = 0 entonces no hay cosa, hayq ue comprobar no solo
-        //que sea un numero positivo, sino que sea mayor a 0
+    public SlowAdditionDiagram(String operation) {
+        super(operation);
         this.problemSizeChoices.add("a + b");
         this.problemSizeChoices.add("min(a,b)");
 
         List<String> bCases1 = Arrays.asList("a=b=0");
-        List<String> bcases2 = Arrays.asList("a=b=0");
+        List<String> bCases2 = Arrays.asList("a=b=0");
         this.baseCaseChoices.add(bCases1);
-        this.baseCaseChoices.add(bcases2);
+        this.baseCaseChoices.add(bCases2);
         List<String> bc1 = Arrays.asList("0");
         List<String> bc2 = Arrays.asList("0");
         this.baseCaseParameters.add(bc1);
@@ -48,7 +46,7 @@ public class SlowAdditionDiagram extends Diagram{
         this.partialSol.add(new SimpleStringProperty());
         algorithmsMap.put(0, new Callable<Double[]>() {
             @Override
-            public Double[] call() throws Exception {
+            public Double[] call() {
                 Double[] returnVal = new Double[2];
                 returnVal[0] = Algorithms.slowAdditionOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
                 returnVal[1] = Algorithms.slowAdditionOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
@@ -59,7 +57,7 @@ public class SlowAdditionDiagram extends Diagram{
         });
         algorithmsMap.put(1, new Callable<Double[]>() {
             @Override
-            public Double[] call() throws Exception {
+            public Double[] call() {
                 Double[] returnVal = new Double[2];
                 returnVal[0] = Algorithms.slowAdditionOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
                 returnVal[1] = Algorithms.slowAdditionOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
@@ -70,7 +68,7 @@ public class SlowAdditionDiagram extends Diagram{
         });
         algorithmsMap.put(2, new Callable<Double[]>() {
             @Override
-            public Double[] call() throws Exception {
+            public Double[] call() {
                 Double[] returnVal = new Double[2];
                 returnVal[0] = Algorithms.slowAdditionOption3(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
                 returnVal[1] = Algorithms.slowAdditionOption3(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
@@ -110,5 +108,10 @@ public class SlowAdditionDiagram extends Diagram{
             }
         }
         return false;
+    }
+
+    @Override
+    public String calculate(int index) {
+        return null;
     }
 }

@@ -13,10 +13,10 @@ public abstract class Diagram {
     protected SimpleStringProperty originalSol;
     protected List<SimpleStringProperty> partialData;
     protected List<SimpleStringProperty> partialSol;
+    protected SimpleStringProperty calculatedSol;
     protected int currentProblemSize;
     protected int currentReduction;
     protected int currentReductionSolutions;
-    private List<Integer> correctChoices;
     protected String operation;
     protected String reducedOperation;
     protected List<String> problemSizeChoices;
@@ -24,15 +24,13 @@ public abstract class Diagram {
     protected List<List<String>> baseCaseChoices;
     protected List<List<String>> baseCaseParameters;
     protected List<List<String>> reductionChoices;
+    protected List<List<MidOperation>> solutionOperations;
     protected List<List<String>> solutionsChoices;
     protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
     protected int algorithmIndex;
     protected SimpleStringProperty parametersFormat;
     public SimpleStringProperty parametersFormatProperty() {
         return parametersFormat;
-    }
-    public List<Integer> getCorrectChoices() {
-        return correctChoices;
     }
     public List<List<String>> getReductionChoices() {
         return reductionChoices;
@@ -51,6 +49,9 @@ public abstract class Diagram {
     }
     public SimpleStringProperty originalSolProperty() {
         return originalSol;
+    }
+    public SimpleStringProperty calculatedSolProperty() {
+        return calculatedSol;
     }
     public SimpleStringProperty partialDataPropertyByIndex(int i){return this.partialData.get(i);}
     public SimpleStringProperty partialSolPropertyByIndex(int i){return this.partialSol.get(i);}
@@ -76,9 +77,8 @@ public abstract class Diagram {
         this.baseCaseParameters = baseCaseParameters;
     }
 
-    public Diagram(List<Integer> correctChoices, String operation) {
+    public Diagram(String operation) {
         this.operation=operation;
-        this.correctChoices=correctChoices;
         this.inputs = new SimpleStringProperty();
         this.rawData = "";
         this.problemData=new ArrayList<>();
@@ -89,6 +89,7 @@ public abstract class Diagram {
         this.originalData=new SimpleStringProperty();
         this.originalSol=new SimpleStringProperty();
         this.parametersFormat = new SimpleStringProperty();
+        this.calculatedSol = new SimpleStringProperty();
         this.partialData=new ArrayList<>();
         this.partialSol=new ArrayList<>();
     }
@@ -104,4 +105,5 @@ public abstract class Diagram {
     }
     public abstract boolean checkNotBaseCase(int index);
 
+    public abstract String calculate(int index);
 }

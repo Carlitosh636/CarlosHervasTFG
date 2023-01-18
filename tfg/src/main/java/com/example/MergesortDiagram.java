@@ -9,8 +9,8 @@ import java.util.concurrent.Callable;
 
 public class MergesortDiagram extends Diagram{
 
-    public MergesortDiagram(List<Integer> correctChoices, String operation) {
-        super(correctChoices, operation);
+    public MergesortDiagram(String operation) {
+        super(operation);
         this.problemSizeChoices.add("N");
         List<String> bCases1 = Arrays.asList("1");
         this.baseCaseChoices.add(bCases1);
@@ -27,25 +27,21 @@ public class MergesortDiagram extends Diagram{
         this.partialSol.add(new SimpleStringProperty());
         this.partialData.add(new SimpleStringProperty());
         this.partialSol.add(new SimpleStringProperty());
-        this.parametersFormat.set("Formato: a,b,c,d,e...");
+        this.parametersFormat.set("Formato: a,b,c,d,e...z");
         algorithmsMap.put(0, new Callable<int[][]>() {
             @Override
-            public int[][] call() throws Exception {
+            public int[][] call() {
                 //0 es para la solucion final, 1 para el L y 2 para el R
                 int[][] solutions = new int[3][];
                 int[] data = Algorithms.stringToArrayInt(inputs.get());
                 int mid = data.length / 2;
                 int[] l = new int[mid];
                 int[] r = new int[data.length - mid];
-                for (int i = 0; i < mid; i++) {
-                    l[i] = data[i];
-                }
-                for (int i = mid; i < data.length; i++) {
-                    r[i - mid] = data[i];
-                }
+                System.arraycopy(data, 0, l, 0, mid);
+                if (data.length - mid >= 0) System.arraycopy(data, mid, r, mid - mid, data.length - mid);
+
                 partialData.get(0).set(Arrays.toString(l));
                 partialData.get(1).set(Arrays.toString(r));
-
                 solutions[0] = Algorithms.mergeSort(data);
                 solutions[1] = Algorithms.mergeSort(l);
                 solutions[2] = Algorithms.mergeSort(r);
@@ -69,7 +65,6 @@ public class MergesortDiagram extends Diagram{
             partialSol.get(1).set(Arrays.toString(values[2]));
         }
         catch (RuntimeException e){
-            System.out.println(e);
             throw new RuntimeException();
         }
     }
@@ -77,5 +72,10 @@ public class MergesortDiagram extends Diagram{
     @Override
     public boolean checkNotBaseCase(int index) {
         return problemData.size() == 1;
+    }
+
+    @Override
+    public String calculate(int index) {
+        return null;
     }
 }

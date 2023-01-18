@@ -19,11 +19,13 @@ public abstract class DiagramPresenter implements Initializable {
     @FXML
     Label originalSolution;
     @FXML
+    Label calculatedSolution;
+    @FXML
     ComboBox reductionSelect;
     @FXML
     ComboBox solutionSelect;
     @FXML
-    VBox NandBaseCaseBox;
+    VBox SizeAndBaseCaseBox;
     @FXML
     ComboBox problemSizeSelect;
     @FXML
@@ -55,6 +57,7 @@ public abstract class DiagramPresenter implements Initializable {
         originalSolution.textProperty().bind(model.originalSolProperty());
         originalData.textProperty().bind(model.originalDataProperty());
         parametersFormat.textProperty().bind(model.parametersFormatProperty());
+        calculatedSolution.textProperty().bind(model.calculatedSolProperty());
     }
     @FXML
     protected void handleInput() {
@@ -62,8 +65,8 @@ public abstract class DiagramPresenter implements Initializable {
             model.processInputs();
             diagramGrid.setVisible(true);
             solutionSelect.getItems().clear();
+            //aquí probablemente debería haber un control con semáforos
             solutionSelect.getItems().setAll(model.solutionsChoices.get(model.getCurrentReductionSolutions()));
-
         } catch (Exception e) {
             showErrorInputAlert(e);
         }
@@ -87,10 +90,19 @@ public abstract class DiagramPresenter implements Initializable {
     }
 
     public void onSolutionChange(ActionEvent actionEvent) {
-        if(solutionSelect.getSelectionModel().getSelectedIndex() == model.getCorrectChoices().get(model.getCurrentReductionSolutions())){
+        /*if(solutionSelect.getSelectionModel().getSelectedIndex() == model.getCorrectChoices().get(model.getCurrentReductionSolutions())){
             System.out.println("Correcto!");
         }
         else{
+            System.out.println("Incorrecto! Vuelve a intentarlo");
+        }*/
+        String calcSol = model.calculate(solutionSelect.getSelectionModel().getSelectedIndex());
+        if(originalSolution.getText().equals(calcSol)){
+            //Muestra en pantalla CORRECTO, y pon el calculatedSol en VERDE
+            System.out.println("Correcto!");
+        }
+        else{
+            //Muestra en pantalla INCORRECTO, y pon el calculatedSol en ROJO
             System.out.println("Incorrecto! Vuelve a intentarlo");
         }
     }

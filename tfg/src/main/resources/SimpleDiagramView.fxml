@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.SimpleDiagramPresenter">
-   <VBox fx:id="NandBaseCaseBox" prefHeight="300.0" prefWidth="500.0" spacing="10.0">
+   <VBox fx:id="SizeAndBaseCaseBox" prefHeight="300.0" prefWidth="500.0" spacing="10.0">
       <children>
          <HBox prefHeight="30.0" prefWidth="200.0">
             <children>
@@ -121,6 +121,11 @@
             <font>
                <Font size="15.0" />
             </font></Label>
+         <Label fx:id="calculatedSolution" contentDisplay="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="0" layoutX="339.0" layoutY="340.0" textFill="RED">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Label>
          <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
          <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
          <Label fx:id="subParameters" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">

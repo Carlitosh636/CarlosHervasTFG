@@ -1,12 +1,14 @@
 
 Cosas que hacer:
--Que al seleccionar una solución incorrecta muestre el resultado de esa operación (en rojo si es incorrecto y en verde si es correcto) al lado
- de la solución original.
+-Lo de las soluciones: Está casi hecho, ahora queda expandirlo a los otros 2 tipos de diagramas que tengo, y refinarlo un poco.
+Además hay que ver cómo hacer la parte visual de esto, ya que ahora mismo solo lo muestra por consola el si acierta o no.
 
 -Hacerlo más bonito
 
 -Generador de pseudocódigo o código python. El petate del diagrama iría en la izquierda y en la derecha, un campo de texto donde se va poniendo el
 pseudocódigo. Depende de que se seleccione en los pasos anteriores pone un código u otro
+
+-Los datos para construir cada diagrama podrían sacarse de archivos JSON en resources en vez de ponerlos a mano en su implementación
 
 -Plantearse si es necesario refactorizar los diagramas. Si lo es, hacer eso
 
