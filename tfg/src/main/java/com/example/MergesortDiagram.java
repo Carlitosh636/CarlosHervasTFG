@@ -45,7 +45,7 @@ public class MergesortDiagram extends Diagram{
                 solutions[0] = Algorithms.mergeSort(data);
                 solutions[1] = Algorithms.mergeSort(l);
                 solutions[2] = Algorithms.mergeSort(r);
-                currentReductionSolutions=0;
+                currentReductionSolutions.set(0);
                 return solutions;
             }
         });
@@ -54,8 +54,8 @@ public class MergesortDiagram extends Diagram{
     public void processInputs() throws Exception {
         try{
             super.processInputs();
-            algorithmIndex = currentProblemSize+currentReduction;
-            if(checkNotBaseCase(algorithmIndex)){
+            algorithmIndex = currentProblemSize.get()+currentReduction.get();
+            if(checkNotBaseCase(currentProblemSize.get()+currentBaseCase.get())){
                 throw new BaseCaseException("Cannot introduce a base case in parameters");
             }
             int[][] values = (int[][]) algorithmsMap.get(algorithmIndex).call();

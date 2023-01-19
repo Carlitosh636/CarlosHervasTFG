@@ -77,7 +77,7 @@
                             <Insets right="10.0" />
                         </padding>
                     </Label>
-                    <ComboBox fx:id="reductionSelect" onAction="#onChangeReduction" prefHeight="30.0" prefWidth="125.0" promptText="Reduction" style="-fx-background-color: #FFD58C; -fx-border-style: solid; -fx-border-color: #DFBA7B;" />
+                    <ComboBox fx:id="reductionSelect" prefHeight="30.0" prefWidth="125.0" promptText="Reduction" style="-fx-background-color: #FFD58C; -fx-border-style: solid; -fx-border-color: #DFBA7B;" />
                 </children>
             </HBox>
             <Button fx:id="confirmDataButton" onAction="#handleInput" text="Confirm Data">

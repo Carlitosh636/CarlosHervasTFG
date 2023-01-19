@@ -23,17 +23,17 @@ public class RecursivePotencyDiagram extends Diagram{
         this.reductionChoices.add(reds1);
 
         List<MidOperation> sols1 = new ArrayList<>();
-        sols1.add((val,a, b) -> val*b);
-        sols1.add((val,a, b)-> val*a);
-        sols1.add((val,a, b)-> Math.pow(val,a));
+        sols1.add((val, a, b) -> val * b);
+        sols1.add((val, a, b) -> val * a);
+        sols1.add((val, a, b) -> Math.pow(val, a));
         List<MidOperation> sols2 = new ArrayList<>();
-        sols2.add((val,a, b)->Math.pow(val,2));
-        sols2.add((val,a, b) -> val*b);
+        sols2.add((val, a, b) -> Math.pow(val, 2));
+        sols2.add((val, a, b) -> val * b);
         List<MidOperation> sols3 = new ArrayList<>();
-        sols3.add((val,a, b)->Math.pow(val,2));
-        sols3.add((val,a, b) -> val*b);
-        sols1.add((val,a, b) -> b*(Math.pow(val,2)));
-        this.solutionOperations = Arrays.asList(sols1,sols2,sols3);
+        sols3.add((val, a, b) -> Math.pow(val, 2));
+        sols3.add((val, a, b) -> val * b);
+        sols3.add((val, a, b) -> a * (Math.pow(val, 2)));
+        this.solutionOperations = Arrays.asList(sols1, sols2, sols3);
 
         List<String> solsChoices1 = new ArrayList<>();
         solsChoices1.add("multiplicar por 'b'");
@@ -45,7 +45,7 @@ public class RecursivePotencyDiagram extends Diagram{
         List<String> solsChoices3 = new ArrayList<>();
         solsChoices3.add("elevar al cuadrado");
         solsChoices3.add("multiplicar por 'b'");
-        solsChoices3.add("b*(a²)");
+        solsChoices3.add("a*((a^(b-1/2)))²))");
         this.solutionsChoices=Arrays.asList(solsChoices1,solsChoices2,solsChoices3);
 
         this.parametersFormat.set("Formato: a,b");
@@ -55,10 +55,10 @@ public class RecursivePotencyDiagram extends Diagram{
             @Override
             public Double[] call() {
                 Double[] returnVal = new Double[2];
-                returnVal[0] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
-                returnVal[1] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
+                returnVal[0] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
+                returnVal[1] = Algorithms.recursiveExponentOption1(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))-1,Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
                 reducedOperation=problemData.get(0)+operation+(Integer.parseInt(problemData.get(1))-1);
-                currentReductionSolutions=0;
+                currentReductionSolutions.set(0);
                 return returnVal;
 
             }
@@ -67,16 +67,16 @@ public class RecursivePotencyDiagram extends Diagram{
             @Override
             public Double[] call() {
                 Double[] returnVal = new Double[2];
-                returnVal[0] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
-                returnVal[1] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))/2,Integer.parseInt(baseCaseParameters.get(currentProblemSize).get(currentBaseCaseIndex)));
+                returnVal[0] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1)),Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
+                returnVal[1] = Algorithms.recursiveExponentOption2(Integer.parseInt(problemData.get(0)),Integer.parseInt(problemData.get(1))/2,Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
 
                 if(Integer.parseInt(problemData.get(1))%2==0){
                     reducedOperation=problemData.get(0)+operation+(Integer.parseInt(problemData.get(1))/2);
-                    currentReductionSolutions=1;
+                    currentReductionSolutions.set(1);
                 }
                 else{
                     reducedOperation=problemData.get(0)+operation+((Integer.parseInt(problemData.get(1))-1)/2);
-                    currentReductionSolutions=2;
+                    currentReductionSolutions.set(2);
                 }
                 return returnVal;
             }
@@ -87,15 +87,15 @@ public class RecursivePotencyDiagram extends Diagram{
     public void processInputs() throws Exception{
         try{
             super.processInputs();
-            algorithmIndex = currentProblemSize+currentReduction;
-            if(checkNotBaseCase(algorithmIndex)){
+            algorithmIndex = currentProblemSize.get()+currentReduction.get();
+            if(checkNotBaseCase(currentProblemSize.get()+currentBaseCase.get())){
                 throw new BaseCaseException("Cannot introduce a base case in parameters");
             }
-            Double[] values = (Double[]) algorithmsMap.get(algorithmIndex).call();
+            trueValues = (Double[]) algorithmsMap.get(algorithmIndex).call();
             originalData.set(this.rawData);
-            originalSol.set(String.valueOf(values[0]));
+            originalSol.set(String.valueOf(trueValues[0]));
             partialData.get(0).set(reducedOperation);
-            partialSol.get(0).set(String.valueOf(values[1]));
+            partialSol.get(0).set(String.valueOf(trueValues[1]));
         }
         catch (RuntimeException e){
             System.out.println(e);
@@ -116,8 +116,8 @@ public class RecursivePotencyDiagram extends Diagram{
     @Override
     public String calculate(int index) {
         //aplicamos la expresión de la solución escogida a la solución parcial
-        return String.valueOf(solutionOperations.get(currentReductionSolutions).get(index).operateWithTwoIntegerParams(
-                Double.parseDouble(partialSol.get(0).get()),//partial sol
+        return String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).operateWithTwoIntegerParams(
+                trueValues[1],//partial sol
                 Integer.parseInt(problemData.get(0)), //a
                 Integer.parseInt(problemData.get(1))));//b
     }

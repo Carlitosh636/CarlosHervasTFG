@@ -58,6 +58,10 @@ public abstract class DiagramPresenter implements Initializable {
         originalData.textProperty().bind(model.originalDataProperty());
         parametersFormat.textProperty().bind(model.parametersFormatProperty());
         calculatedSolution.textProperty().bind(model.calculatedSolProperty());
+        model.currentProblemSize.bind(problemSizeSelect.getSelectionModel().selectedIndexProperty());
+        model.currentBaseCase.bind(baseCaseSelect.getSelectionModel().selectedIndexProperty());
+        model.currentReduction.bind(reductionSelect.getSelectionModel().selectedIndexProperty());
+
     }
     @FXML
     protected void handleInput() {
@@ -72,7 +76,6 @@ public abstract class DiagramPresenter implements Initializable {
         }
     }
     public void onChangeProblemSize(ActionEvent actionEvent) {
-        model.setCurrentProblemSize(problemSizeSelect.getSelectionModel().getSelectedIndex());
         baseCaseSelect.setVisible(true);
         baseCaseSelect.getItems().clear();
         baseCaseSelect.getItems().setAll(model.getBaseCaseChoices().get(model.getCurrentProblemSize()));
@@ -85,19 +88,9 @@ public abstract class DiagramPresenter implements Initializable {
         reductionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
     }
 
-    public void onChangeReduction(ActionEvent actionEvent) {
-        model.setCurrentReduction(reductionSelect.getSelectionModel().getSelectedIndex());
-    }
-
     public void onSolutionChange(ActionEvent actionEvent) {
-        /*if(solutionSelect.getSelectionModel().getSelectedIndex() == model.getCorrectChoices().get(model.getCurrentReductionSolutions())){
-            System.out.println("Correcto!");
-        }
-        else{
-            System.out.println("Incorrecto! Vuelve a intentarlo");
-        }*/
         String calcSol = model.calculate(solutionSelect.getSelectionModel().getSelectedIndex());
-        if(originalSolution.getText().equals(calcSol)){
+        if(model.checkSolutionsEqual(calcSol)){
             //Muestra en pantalla CORRECTO, y pon el calculatedSol en VERDE
             System.out.println("Correcto!");
         }
@@ -106,6 +99,7 @@ public abstract class DiagramPresenter implements Initializable {
             System.out.println("Incorrecto! Vuelve a intentarlo");
         }
     }
+
     public void showErrorInputAlert(Exception e){
         Alert inputErrorAlert = new Alert(Alert.AlertType.ERROR);
         inputErrorAlert.setTitle("Error");
@@ -120,7 +114,7 @@ public abstract class DiagramPresenter implements Initializable {
         //si no se que es el error, poner el básico "introducelo de nuevo"
         else{
             inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
-            inputErrorAlert.setContentText("Revisa el contenido y que concuerde con el formato");
+            inputErrorAlert.setContentText("Ha ocurrido un error desconocido");
         }
         inputErrorAlert.showAndWait();
     }

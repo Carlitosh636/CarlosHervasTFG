@@ -3,6 +3,7 @@ package com.example;
 import java.util.*;
 import java.util.concurrent.Callable;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public abstract class Diagram {
@@ -14,9 +15,10 @@ public abstract class Diagram {
     protected List<SimpleStringProperty> partialData;
     protected List<SimpleStringProperty> partialSol;
     protected SimpleStringProperty calculatedSol;
-    protected int currentProblemSize;
-    protected int currentReduction;
-    protected int currentReductionSolutions;
+    protected SimpleIntegerProperty currentProblemSize;
+    protected SimpleIntegerProperty currentBaseCase;
+    protected SimpleIntegerProperty currentReduction;
+    protected SimpleIntegerProperty currentReductionSolutions;
     protected String operation;
     protected String reducedOperation;
     protected List<String> problemSizeChoices;
@@ -29,20 +31,12 @@ public abstract class Diagram {
     protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
     protected int algorithmIndex;
     protected SimpleStringProperty parametersFormat;
+    protected Double[] trueValues = new Double[2];
     public SimpleStringProperty parametersFormatProperty() {
         return parametersFormat;
     }
     public List<List<String>> getReductionChoices() {
         return reductionChoices;
-    }
-    public int getCurrentProblemSize() {
-        return currentProblemSize;
-    }
-    public void setCurrentProblemSize(int currentProblemSize) {
-        this.currentProblemSize = currentProblemSize;
-    }
-    public void setCurrentReduction(int currentReduction) {
-        this.currentReduction = currentReduction;
     }
     public SimpleStringProperty originalDataProperty() {
         return originalData;
@@ -55,9 +49,6 @@ public abstract class Diagram {
     }
     public SimpleStringProperty partialDataPropertyByIndex(int i){return this.partialData.get(i);}
     public SimpleStringProperty partialSolPropertyByIndex(int i){return this.partialSol.get(i);}
-    public int getCurrentReductionSolutions() {
-        return currentReductionSolutions;
-    }
     public List<String> getProblemSizeChoices() {
         return problemSizeChoices;
     }
@@ -68,13 +59,39 @@ public abstract class Diagram {
     public void setCurrentBaseCaseIndex(int currentBaseCaseIndex) {
         this.currentBaseCaseIndex = currentBaseCaseIndex;
     }
-
     public List<List<String>> getBaseCaseChoices() {
         return baseCaseChoices;
     }
+    public int getCurrentProblemSize() {
+        return currentProblemSize.get();
+    }
 
-    public void setBaseCaseParameters(List<List<String>> baseCaseParameters) {
-        this.baseCaseParameters = baseCaseParameters;
+    public SimpleIntegerProperty currentProblemSizeProperty() {
+        return currentProblemSize;
+    }
+
+    public int getCurrentBaseCase() {
+        return currentBaseCase.get();
+    }
+
+    public SimpleIntegerProperty currentBaseCaseProperty() {
+        return currentBaseCase;
+    }
+
+    public int getCurrentReduction() {
+        return currentReduction.get();
+    }
+
+    public SimpleIntegerProperty currentReductionProperty() {
+        return currentReduction;
+    }
+
+    public int getCurrentReductionSolutions() {
+        return currentReductionSolutions.get();
+    }
+
+    public SimpleIntegerProperty currentReductionSolutionsProperty() {
+        return currentReductionSolutions;
     }
 
     public Diagram(String operation) {
@@ -90,6 +107,10 @@ public abstract class Diagram {
         this.originalSol=new SimpleStringProperty();
         this.parametersFormat = new SimpleStringProperty();
         this.calculatedSol = new SimpleStringProperty();
+        this.currentProblemSize = new SimpleIntegerProperty();
+        this.currentBaseCase = new SimpleIntegerProperty();
+        this.currentReductionSolutions = new SimpleIntegerProperty();
+        this.currentReduction = new SimpleIntegerProperty();
         this.partialData=new ArrayList<>();
         this.partialSol=new ArrayList<>();
     }
@@ -106,4 +127,10 @@ public abstract class Diagram {
     public abstract boolean checkNotBaseCase(int index);
 
     public abstract String calculate(int index);
+
+    public boolean checkSolutionsEqual(String ourSol){
+        System.out.println("Calculated sol: "+ourSol);
+        System.out.println("Real sol: "+trueValues[0].toString());
+        return ourSol.equals(trueValues[0].toString());
+    }
 }
