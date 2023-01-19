@@ -64,7 +64,7 @@ public class SlowAdditionDiagram extends Diagram {
             public Double[] call() {
                 Double[] returnVal = new Double[2];
                 returnVal[0] = Algorithms.slowAdditionOption1(Integer.parseInt(problemData.get(0)), Integer.parseInt(problemData.get(1)), Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
-                returnVal[1] = Algorithms.slowAdditionOption1(Integer.parseInt(problemData.get(0)), Integer.parseInt(problemData.get(1)) - 1, Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
+                returnVal[1] = Algorithms.slowAdditionOption1(Integer.parseInt(problemData.get(0))-1, Integer.parseInt(problemData.get(1)), Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
                 reducedOperation = Integer.parseInt(problemData.get(0)) - 1 + operation + problemData.get(1);
                 currentReductionSolutions.set(0);
                 return returnVal;
@@ -74,8 +74,18 @@ public class SlowAdditionDiagram extends Diagram {
             @Override
             public Double[] call() {
                 Double[] returnVal = new Double[2];
+                int a = Integer.parseInt(problemData.get(0));
+                int b = Integer.parseInt(problemData.get(1));
                 returnVal[0] = Algorithms.slowAdditionOption2(Integer.parseInt(problemData.get(0)), Integer.parseInt(problemData.get(1)), Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
-                returnVal[1] = Algorithms.slowAdditionOption2(Integer.parseInt(problemData.get(0)), Integer.parseInt(problemData.get(1)), Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
+                //muy feo pero no se me ocurre otra forma
+                if(a<b){
+                    returnVal[1] = Algorithms.slowAdditionOption2(a-1, b, Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
+
+                }
+                else{
+                    returnVal[1] = Algorithms.slowAdditionOption2(a, b-1, Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
+
+                }
                 reducedOperation = String.valueOf(Math.min(Integer.parseInt(problemData.get(0)), Integer.parseInt(problemData.get(1)))-1);
                 currentReductionSolutions.set(1);
                 return returnVal;
@@ -86,9 +96,9 @@ public class SlowAdditionDiagram extends Diagram {
             public Double[] call() {
                 Double[] returnVal = new Double[2];
                 returnVal[0] = Algorithms.slowAdditionOption3(Integer.parseInt(problemData.get(0)), Integer.parseInt(problemData.get(1)), Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
-                returnVal[1] = Algorithms.slowAdditionOption3(Integer.parseInt(problemData.get(0)), Integer.parseInt(problemData.get(1)), Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
+                returnVal[1] = Algorithms.slowAdditionOption3(Integer.parseInt(problemData.get(0))-1, Integer.parseInt(problemData.get(1))-1, Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
                 reducedOperation = String.format("(%d - 1 , %d - 1)", Integer.parseInt(problemData.get(0)), Integer.parseInt(problemData.get(1)));
-                currentReductionSolutions.set(1);
+                currentReductionSolutions.set(2);
                 return returnVal;
             }
         });
@@ -126,7 +136,7 @@ public class SlowAdditionDiagram extends Diagram {
 
     @Override
     public String calculate(int index) {
-        //no devuelve valores correctos porque se le pasan los atributos no reducidos, sino originales.
+        System.out.println("Partial sol: "+trueValues[1]);
         return String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).operateWithTwoIntegerParams(
                 trueValues[1],
                 Integer.parseInt(problemData.get(0)),
