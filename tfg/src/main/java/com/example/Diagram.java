@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public abstract class Diagram {
+    protected DiagramType type;
     protected SimpleStringProperty inputs;
     protected String rawData;
     protected List<String> problemData;
@@ -26,12 +27,12 @@ public abstract class Diagram {
     protected List<List<String>> baseCaseChoices;
     protected List<List<String>> baseCaseParameters;
     protected List<List<String>> reductionChoices;
-    protected List<List<MidOperation>> solutionOperations;
+    protected List<List<Callable>> solutionOperations;
     protected List<List<String>> solutionsChoices;
     protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
     protected int algorithmIndex;
     protected SimpleStringProperty parametersFormat;
-    protected ArrayList<String> trueValues = new ArrayList<>();
+    protected ArrayList<String> storedSolutions = new ArrayList<>();
     public SimpleStringProperty parametersFormatProperty() {
         return parametersFormat;
     }
@@ -126,11 +127,17 @@ public abstract class Diagram {
     }
     public abstract boolean checkNotBaseCase(int index);
 
-    public abstract String calculate(int index);
+    public String calculate(int index) throws Exception{
+        //aplicamos la expresión de la solución escogida a la solución parcial
+        if(this.type == DiagramType.COMPLEX){
+            return Arrays.toString((int[]) solutionOperations.get(currentReductionSolutions.get()).get(index).call());
+        }
+        return String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).call());
+    };
 
     public boolean checkSolutionsEqual(String ourSol){
         System.out.println("Calculated sol: "+ourSol);
-        System.out.println("Real sol: "+trueValues.get(0));
-        return ourSol.equals(trueValues.get(0));
+        System.out.println("Real sol: "+ storedSolutions.get(0));
+        return ourSol.equals(storedSolutions.get(0));
     }
 }

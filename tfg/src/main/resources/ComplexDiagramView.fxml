@@ -122,6 +122,11 @@
                 <font>
                     <Font size="15.0" />
                 </font></Label>
+            <Label fx:id="calculatedSolution" contentDisplay="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="0" layoutX="339.0" layoutY="340.0" textFill="RED">
+                <font>
+                    <Font size="15.0" />
+                </font>
+            </Label>
             <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Label fx:id="subParameters1" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">

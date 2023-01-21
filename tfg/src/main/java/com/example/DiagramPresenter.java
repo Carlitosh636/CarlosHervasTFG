@@ -88,16 +88,23 @@ public abstract class DiagramPresenter implements Initializable {
         reductionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
     }
 
-    public void onSolutionChange(ActionEvent actionEvent) {
-        String calcSol = model.calculate(solutionSelect.getSelectionModel().getSelectedIndex());
-        if(model.checkSolutionsEqual(calcSol)){
-            //Muestra en pantalla CORRECTO, y pon el calculatedSol en VERDE
-            System.out.println("Correcto!");
+    public void onSolutionChange(ActionEvent actionEvent) throws Exception {
+        try{
+            String calcSol = model.calculate(solutionSelect.getSelectionModel().getSelectedIndex());
+            if(model.checkSolutionsEqual(calcSol)){
+                //Muestra en pantalla CORRECTO, y pon el calculatedSol en VERDE
+                System.out.println("Correcto!");
+            }
+            else{
+                //Muestra en pantalla INCORRECTO, y pon el calculatedSol en ROJO
+                System.out.println("Incorrecto! Vuelve a intentarlo");
+            }
         }
-        else{
-            //Muestra en pantalla INCORRECTO, y pon el calculatedSol en ROJO
-            System.out.println("Incorrecto! Vuelve a intentarlo");
+        catch (Exception e){
+            System.out.println("Algo malo ocurrió al calcular la solución :(");
+            System.out.println(e);
         }
+
     }
 
     public void showErrorInputAlert(Exception e){

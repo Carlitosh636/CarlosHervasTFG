@@ -1,7 +1,6 @@
 
 Cosas que hacer:
--Lo de las soluciones: Queda hacer la del Mergesort.
-Además hay que ver cómo hacer la parte visual de esto, ya que ahora mismo solo lo muestra por consola el si acierta o no.
+-Hay que ver si hay alguna opción mejor para lo de las soluciones, porque queda muy sucio ahora mismo
 
 -Ver si puedo usar patrones de diseño OOP para mejorar el código
 

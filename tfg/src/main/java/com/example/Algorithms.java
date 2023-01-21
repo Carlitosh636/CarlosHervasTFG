@@ -3,7 +3,7 @@ package com.example;
 import java.util.ArrayList;
 
 public class Algorithms {
-    public static double recursiveExponentOption1(int base, int exp, int baseCaseValue){
+    public static double recursiveExponentOption1(double base, double exp, int baseCaseValue){
         if(exp==baseCaseValue){
             if(baseCaseValue==0){
                 return 1;
@@ -14,7 +14,7 @@ public class Algorithms {
         }
         return recursiveExponentOption1(base,exp-1,baseCaseValue) * base;
     }
-    public static double recursiveExponentOption2(int base, int exp, int baseCaseValue){
+    public static double recursiveExponentOption2(double base, double exp, int baseCaseValue){
         if(exp==baseCaseValue){
             if(baseCaseValue==0){
                 return 1;
@@ -28,7 +28,7 @@ public class Algorithms {
         }
         return base * Math.pow(recursiveExponentOption2(base,(exp-1)/2,baseCaseValue),2);
     }
-    public static double slowAdditionOption1(int a,int b, int baseCaseValue){
+    public static double slowAdditionOption1(double a,double b, int baseCaseValue){
         if(a==baseCaseValue){
             return b;
         }
@@ -40,7 +40,7 @@ public class Algorithms {
         }
     }
 
-    public static double slowAdditionOption2(int a, int b, int baseCaseValue) {
+    public static double slowAdditionOption2(double a, double b, int baseCaseValue) {
         if(a==baseCaseValue){
             return b;
         }
@@ -55,7 +55,7 @@ public class Algorithms {
         }
     }
 
-    public static double slowAdditionOption3(int a, int b, int baseCaseValue) {
+    public static double slowAdditionOption3(double a, double b, int baseCaseValue) {
         if(a==baseCaseValue){
             return b;
         }
