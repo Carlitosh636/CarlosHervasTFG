@@ -31,7 +31,7 @@ public abstract class Diagram {
     protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
     protected int algorithmIndex;
     protected SimpleStringProperty parametersFormat;
-    protected Double[] trueValues = new Double[2];
+    protected ArrayList<String> trueValues = new ArrayList<>();
     public SimpleStringProperty parametersFormatProperty() {
         return parametersFormat;
     }
@@ -130,7 +130,7 @@ public abstract class Diagram {
 
     public boolean checkSolutionsEqual(String ourSol){
         System.out.println("Calculated sol: "+ourSol);
-        System.out.println("Real sol: "+trueValues[0].toString());
-        return ourSol.equals(trueValues[0].toString());
+        System.out.println("Real sol: "+trueValues.get(0));
+        return ourSol.equals(trueValues.get(0));
     }
 }

@@ -59,20 +59,25 @@ public class SlowAdditionDiagram extends Diagram {
         this.parametersFormat.set("Formato: a,b");
         this.partialData.add(new SimpleStringProperty());
         this.partialSol.add(new SimpleStringProperty());
-        algorithmsMap.put(0, new Callable<Double[]>() {
+        algorithmsMap.put(0, new Callable<ArrayList<String>>() {
             @Override
-            public Double[] call() {
+            public ArrayList<String> call() {
+                ArrayList<String> parsedReturnVal = new ArrayList<>();
                 Double[] returnVal = new Double[2];
                 returnVal[0] = Algorithms.slowAdditionOption1(Integer.parseInt(problemData.get(0)), Integer.parseInt(problemData.get(1)), Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
                 returnVal[1] = Algorithms.slowAdditionOption1(Integer.parseInt(problemData.get(0))-1, Integer.parseInt(problemData.get(1)), Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
                 reducedOperation = Integer.parseInt(problemData.get(0)) - 1 + operation + problemData.get(1);
                 currentReductionSolutions.set(0);
-                return returnVal;
+                for(Double v : returnVal){
+                    parsedReturnVal.add(String.valueOf(v));
+                }
+                return parsedReturnVal;
             }
         });
-        algorithmsMap.put(1, new Callable<Double[]>() {
+        algorithmsMap.put(1, new Callable<ArrayList<String>>() {
             @Override
-            public Double[] call() {
+            public ArrayList<String> call() {
+                ArrayList<String> parsedReturnVal = new ArrayList<>();
                 Double[] returnVal = new Double[2];
                 int a = Integer.parseInt(problemData.get(0));
                 int b = Integer.parseInt(problemData.get(1));
@@ -88,18 +93,25 @@ public class SlowAdditionDiagram extends Diagram {
                 }
                 reducedOperation = String.valueOf(Math.min(Integer.parseInt(problemData.get(0)), Integer.parseInt(problemData.get(1)))-1);
                 currentReductionSolutions.set(1);
-                return returnVal;
+                for(Double v : returnVal){
+                    parsedReturnVal.add(String.valueOf(v));
+                }
+                return parsedReturnVal;
             }
         });
-        algorithmsMap.put(2, new Callable<Double[]>() {
+        algorithmsMap.put(2, new Callable<ArrayList<String>>() {
             @Override
-            public Double[] call() {
+            public ArrayList<String> call() {
+                ArrayList<String> parsedReturnVal = new ArrayList<>();
                 Double[] returnVal = new Double[2];
                 returnVal[0] = Algorithms.slowAdditionOption3(Integer.parseInt(problemData.get(0)), Integer.parseInt(problemData.get(1)), Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
                 returnVal[1] = Algorithms.slowAdditionOption3(Integer.parseInt(problemData.get(0))-1, Integer.parseInt(problemData.get(1))-1, Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
                 reducedOperation = String.format("(%d - 1 , %d - 1)", Integer.parseInt(problemData.get(0)), Integer.parseInt(problemData.get(1)));
                 currentReductionSolutions.set(2);
-                return returnVal;
+                for(Double v : returnVal){
+                    parsedReturnVal.add(String.valueOf(v));
+                }
+                return parsedReturnVal;
             }
         });
 
@@ -113,7 +125,7 @@ public class SlowAdditionDiagram extends Diagram {
             if (checkNotBaseCase(currentProblemSize.get()+currentBaseCase.get())) {
                 throw new BaseCaseException("Cannot introduce a base case in parameters");
             }
-            trueValues = (Double[]) algorithmsMap.get(algorithmIndex).call();
+            trueValues = (ArrayList<String>) algorithmsMap.get(algorithmIndex).call();
             originalData.set(this.rawData);
             originalSol.set(this.problemData.get(0) + " + " + this.problemData.get(1));
             partialData.get(0).set(reducedOperation);
@@ -136,9 +148,8 @@ public class SlowAdditionDiagram extends Diagram {
 
     @Override
     public String calculate(int index) {
-        System.out.println("Partial sol: "+trueValues[1]);
         return String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).operateWithTwoIntegerParams(
-                trueValues[1],
+                Double.parseDouble(trueValues.get(1)),
                 Integer.parseInt(problemData.get(0)),
                 Integer.parseInt(problemData.get(1))));
     }
