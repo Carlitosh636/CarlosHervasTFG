@@ -129,15 +129,18 @@ public abstract class Diagram {
 
     public String calculate(int index) throws Exception{
         //aplicamos la expresión de la solución escogida a la solución parcial
+        String calcSol;
         if(this.type == DiagramType.COMPLEX){
-            return Arrays.toString((int[]) solutionOperations.get(currentReductionSolutions.get()).get(index).call());
+            calcSol = Arrays.toString((int[]) solutionOperations.get(currentReductionSolutions.get()).get(index).call());
         }
-        return String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).call());
+        else{
+            calcSol = String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).call());
+        }
+        calculatedSol.set(calcSol);
+        return calcSol;
     };
 
     public boolean checkSolutionsEqual(String ourSol){
-        System.out.println("Calculated sol: "+ourSol);
-        System.out.println("Real sol: "+ storedSolutions.get(0));
         return ourSol.equals(storedSolutions.get(0));
     }
 }

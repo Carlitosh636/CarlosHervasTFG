@@ -19,7 +19,7 @@
                      <Insets right="10.0" />
                   </padding>
                </Label>
-               <ComboBox fx:id="problemSizeSelect" onAction="#onChangeProblemSize" prefHeight="30.0" prefWidth="125.0" promptText="Problem size" style="-fx-background-color: #8FFF; -fx-border-color: #7AD0D2;" />
+               <ComboBox fx:id="problemSizeSelect" onAction="#onChangeProblemSize" prefHeight="30.0" prefWidth="150.0" promptText="Problem size" style="-fx-background-color: #8FFF; -fx-border-color: #7AD0D2;" />
             </children>
          </HBox>
          <HBox prefHeight="30.0" prefWidth="200.0">
@@ -77,7 +77,7 @@
                      <Insets right="10.0" />
                   </padding>
                </Label>
-               <ComboBox fx:id="reductionSelect" onAction="#onChangeReduction" prefHeight="30.0" prefWidth="125.0" promptText="Reduction" style="-fx-background-color: #FFD58C; -fx-border-color: #DFBA7B;" />
+               <ComboBox fx:id="reductionSelect" prefHeight="30.0" prefWidth="150.0" promptText="Reduction" style="-fx-background-color: #FFD58C; -fx-border-color: #DFBA7B;" />
             </children>
          </HBox>
          <Button fx:id="confirmDataButton" onAction="#handleInput" text="Confirm Data">
@@ -100,6 +100,7 @@
          <ColumnConstraints />
          <ColumnConstraints />
          <ColumnConstraints />
+         <ColumnConstraints />
       </columnConstraints>
       <rowConstraints>
          <RowConstraints />
@@ -108,39 +109,43 @@
          <RowConstraints />
       </rowConstraints>
       <children>
-         <Label fx:id="originalData" alignment="CENTER" contentDisplay="CENTER" layoutX="339.0" layoutY="340.0">
+         <Label fx:id="originalData" alignment="CENTER" contentDisplay="CENTER" layoutX="339.0" layoutY="340.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <font>
                <Font size="15.0" />
             </font>
          </Label>
-         <Label fx:id="originalDataSolutionArrow" text="=====================&gt;" GridPane.columnIndex="2" GridPane.rowIndex="0">
+         <Label fx:id="originalDataSolutionArrow" text="=====================&gt;" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <font>
                <Font size="15.0" />
             </font></Label>
-         <Label fx:id="originalSolution" contentDisplay="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="0">
+         <Label fx:id="isCorrect" contentDisplay="CENTER" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="0">
             <font>
                <Font size="15.0" />
             </font></Label>
-         <Label fx:id="calculatedSolution" contentDisplay="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="0" layoutX="339.0" layoutY="340.0" textFill="RED">
+         <Label fx:id="originalSolution" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <font>
+               <Font size="15.0" />
+            </font></Label>
+         <Label fx:id="calculatedSolution" contentDisplay="CENTER" layoutX="339.0" layoutY="340.0" textFill="RED" GridPane.columnIndex="3" GridPane.rowIndex="2">
             <font>
                <Font size="15.0" />
             </font>
          </Label>
-         <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-         <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-         <Label fx:id="subParameters" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+         <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+         <Label fx:id="subParameters" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
             <font>
                <Font size="15.0" />
             </font></Label>
-         <Label fx:id="partialDataSolutionArrow" contentDisplay="CENTER" text="=====================&gt;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <Label fx:id="partialDataSolutionArrow" contentDisplay="CENTER" text="=====================&gt;" GridPane.columnIndex="2" GridPane.rowIndex="5">
             <font>
                <Font size="15.0" />
             </font></Label>
-         <Label fx:id="partialSolution" contentDisplay="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3">
+         <Label fx:id="partialSolution" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="5">
             <font>
                <Font size="15.0" />
             </font></Label>
-         <ComboBox fx:id="solutionSelect" onAction="#onSolutionChange" prefHeight="30.0" prefWidth="125.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+         <ComboBox fx:id="solutionSelect" onAction="#onSolutionChange" prefHeight="30.0" prefWidth="125.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
       </children>
       <padding>
          <Insets bottom="20.0" left="20.0" right="20.0" top="40.0" />

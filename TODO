@@ -1,6 +1,9 @@
 
 Cosas que hacer:
--Hay que ver si hay alguna opción mejor para lo de las soluciones, porque queda muy sucio ahora mismo
+-El mergesort debe comprobar que el array que se le pasa no esté ordenado de base (caso base)
+-Lo de las soluciones debe verse en la pantalla, con el color verde si lo has hecho bien o rojo si mal
+
+-Botón de volver al menú para hacer otro diagrama
 
 -Ver si puedo usar patrones de diseño OOP para mejorar el código
 
@@ -9,13 +12,12 @@ Cosas que hacer:
 -Generador de pseudocódigo o código python. El petate del diagrama iría en la izquierda y en la derecha, un campo de texto donde se va poniendo el
 pseudocódigo. Depende de que se seleccione en los pasos anteriores pone un código u otro
 
--Los datos para construir cada diagrama podrían sacarse de archivos JSON en resources en vez de ponerlos a mano en su implementación, ya sea en
-resources o en una BBDD probablemente MongoDB
-
 -Refactorizar diagramas
-
--Hay muchas variables que mantienen el estsado del diagrama (currentProblemSize, currentReduction, algorithmIndex...), hay que buscar una manera
-de simplificar eso
+    -Los datos para construir cada diagrama podrían sacarse de archivos JSON en resources en vez de ponerlos a mano en su implementación, ya sea en
+    resources o en una BBDD probablemente MongoDB
+    -Hay muchas variables que mantienen el estsado del diagrama (currentProblemSize, currentReduction, algorithmIndex...), hay que buscar una manera
+    de simplificar eso
+    -Hay que ver si hay alguna opción mejor para lo de las soluciones, porque queda muy sucio ahora mismo
 
 Problemas:
 

@@ -84,7 +84,7 @@ public class MergesortDiagram extends Diagram{
 
     @Override
     public boolean checkNotBaseCase(int index) {
-        return problemData.size() == 1;
+        return problemData.size() == 1; //OR QUE NO ESTÉ ORDENADO EL ARRAY
     }
 
 }

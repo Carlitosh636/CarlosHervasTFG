@@ -69,7 +69,7 @@ public class SlowAdditionDiagram extends Diagram {
                 Double[] returnVal = new Double[2];
                 returnVal[0] = Algorithms.slowAdditionOption1(a, b, Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
                 returnVal[1] = Algorithms.slowAdditionOption1(a-1, b, Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
-                reducedOperation = a - 1 + operation + b;
+                reducedOperation = a - 1 +" " +operation+" " + b;
                 currentReductionSolutions.set(0);
                 partialSol.get(0).set(a + " - 1 + " + b);
                 for(Double v : returnVal){

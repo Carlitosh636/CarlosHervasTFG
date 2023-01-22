@@ -39,7 +39,9 @@ public abstract class DiagramPresenter implements Initializable {
     @FXML
     Label originalData;
     @FXML
-    public Label parametersFormat;
+    Label parametersFormat;
+    @FXML
+    Label isCorrect;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -92,16 +94,15 @@ public abstract class DiagramPresenter implements Initializable {
         try{
             String calcSol = model.calculate(solutionSelect.getSelectionModel().getSelectedIndex());
             if(model.checkSolutionsEqual(calcSol)){
-                //Muestra en pantalla CORRECTO, y pon el calculatedSol en VERDE
-                System.out.println("Correcto!");
+                calculatedSolution.setStyle("-fx-text-fill: green;");
+                isCorrect.setText("Correcto!");
             }
             else{
-                //Muestra en pantalla INCORRECTO, y pon el calculatedSol en ROJO
-                System.out.println("Incorrecto! Vuelve a intentarlo");
+                calculatedSolution.setStyle("-fx-text-fill: red;");
+                isCorrect.setText("Incorrecto! Vuelve a intentarlo");
             }
         }
         catch (Exception e){
-            System.out.println("Algo malo ocurrió al calcular la solución :(");
             System.out.println(e);
         }
 
