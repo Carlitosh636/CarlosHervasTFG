@@ -9,8 +9,8 @@
         <module name="tfg" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="11">
-      <module name="tfg" target="1.8" />
+    <bytecodeTargetLevel target="17">
+      <module name="tfg" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
