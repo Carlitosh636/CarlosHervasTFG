@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,13 +44,17 @@ public abstract class DiagramPresenter implements Initializable {
     Label parametersFormat;
     @FXML
     Label isCorrect;
-
+    @FXML
+    WebView htmlViewer;
+    WebEngine webEngine;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
         reductionSelect.setVisible(false);
         baseCaseSelect.setVisible(false);
         diagramGrid.setVisible(false);
+        webEngine = htmlViewer.getEngine();
+        loadPage("/html/index.html");
         bindModelData();
     }
     public DiagramPresenter(Diagram model) {
@@ -117,7 +123,7 @@ public abstract class DiagramPresenter implements Initializable {
         }
         if(e instanceof BaseCaseException){
             inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
-            inputErrorAlert.setContentText("Revisa el contenido, no puedes introducir un caso base como parámetro");
+            inputErrorAlert.setContentText("Revisa el contenido, no puedes introducir un caso base o una solución como parámetro");
         }
         //si no se que es el error, poner el básico "introducelo de nuevo"
         else{
@@ -125,5 +131,9 @@ public abstract class DiagramPresenter implements Initializable {
             inputErrorAlert.setContentText("Ha ocurrido un error desconocido");
         }
         inputErrorAlert.showAndWait();
+    }
+    public void loadPage(String path){
+        URL url = this.getClass().getResource(path);
+        webEngine.load(url.toString());
     }
 }

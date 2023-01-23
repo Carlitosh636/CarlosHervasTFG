@@ -66,7 +66,6 @@ public class MergesortDiagram extends Diagram{
             if(checkNotBaseCase(currentProblemSize.get()+currentBaseCase.get())){
                 throw new BaseCaseException("Cannot introduce a base case in parameters");
             }
-            data = Algorithms.stringToArrayInt(inputs.get());
             mid = data.length / 2;
             l = new int[mid];
             r = new int[data.length - mid];
@@ -84,7 +83,13 @@ public class MergesortDiagram extends Diagram{
 
     @Override
     public boolean checkNotBaseCase(int index) {
-        return problemData.size() == 1; //OR QUE NO ESTÉ ORDENADO EL ARRAY
+        if(problemData.size()>1){
+            //COMPROBAR QUE NO ESTÉ ORDENADO
+            data = Algorithms.stringToArrayInt(inputs.get());
+            int[] temp = Algorithms.mergeSort(data.clone());
+            return Arrays.equals(data,temp);
+        }
+        else return true;
     }
 
 }

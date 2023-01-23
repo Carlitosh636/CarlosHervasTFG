@@ -20,7 +20,7 @@ public class App extends Application {
     private static Scene main;
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DiagramSelector.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DiagramSelector.fxml"));
         Parent root = (Parent) loader.load();
         main = new Scene(root);
         stage.setScene(main);
@@ -34,17 +34,17 @@ public class App extends Application {
     @FXML
     public void handleMainMenuButton(javafx.event.ActionEvent actionEvent) throws IOException {
         Diagram model = new RecursivePotencyDiagram("^");
-        loadScene(model,"/SimpleDiagramView.fxml",1);
+        loadScene(model,"/fxml/SimpleDiagramView.fxml",1);
     }
     @FXML
     public void handleMainMenuButton2(ActionEvent actionEvent) throws IOException{
         Diagram model = new SlowAdditionDiagram(",");
-        loadScene(model,"/SimpleDiagramView.fxml",1);
+        loadScene(model,"/fxml/SimpleDiagramView.fxml",1);
     }
     @FXML
     public void handleMainMenuButton3(ActionEvent actionEvent) throws IOException {
         Diagram model = new MergesortDiagram(null);
-        loadScene(model,"/ComplexDiagramView.fxml",2);
+        loadScene(model,"/fxml/ComplexDiagramView.fxml",2);
     }
     private void loadScene(Diagram model, String viewName, int choiceDiagram) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(viewName));

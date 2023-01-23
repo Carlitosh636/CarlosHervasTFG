@@ -1,7 +1,5 @@
 
 Cosas que hacer:
--El mergesort debe comprobar que el array que se le pasa no esté ordenado de base (caso base)
--Lo de las soluciones debe verse en la pantalla, con el color verde si lo has hecho bien o rojo si mal
 
 -Botón de volver al menú para hacer otro diagrama
 
@@ -9,10 +7,11 @@ Cosas que hacer:
 
 -Hacerlo más bonito
 
--Generador de pseudocódigo o código python. El petate del diagrama iría en la izquierda y en la derecha, un campo de texto donde se va poniendo el
+-Generador de pseudocódigo o código python (mediante HTML con WebViewer). El petate del diagrama iría en la izquierda y en la derecha, un campo de texto donde se va poniendo el
 pseudocódigo. Depende de que se seleccione en los pasos anteriores pone un código u otro
 
 -Refactorizar diagramas
+    -PUEDE QUE LA CLAVE PARA LA REFACTORIZACIÓN ESTÉ EN EL WEBVIEWER, CARGANDO LOS DIAGRAMAS COMO HTML
     -Los datos para construir cada diagrama podrían sacarse de archivos JSON en resources en vez de ponerlos a mano en su implementación, ya sea en
     resources o en una BBDD probablemente MongoDB
     -Hay muchas variables que mantienen el estsado del diagrama (currentProblemSize, currentReduction, algorithmIndex...), hay que buscar una manera
