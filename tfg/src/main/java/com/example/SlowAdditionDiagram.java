@@ -108,8 +108,8 @@ public class SlowAdditionDiagram extends Diagram {
                 Double[] returnVal = new Double[2];
                 returnVal[0] = Algorithms.slowAdditionOption3(a, b, Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
                 returnVal[1] = Algorithms.slowAdditionOption3(a-1, b-1, Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
-                reducedOperation = String.format("(%d - 1 , %d - 1)", a, b);
-                partialSol.get(0).set(a+ " - 1 + " + b+ " - 1 + ");
+                reducedOperation = String.format("(%.0f - 1 , %.0f - 1)", a, b);
+                partialSol.get(0).set(a+ " - 1 + " + b+ " - 1");
                 currentReductionSolutions.set(2);
                 for(Double v : returnVal){
                     parsedReturnVal.add(String.valueOf(v));

@@ -2,13 +2,16 @@ package com.example;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -82,6 +85,12 @@ public abstract class DiagramPresenter implements Initializable {
         } catch (Exception e) {
             showErrorInputAlert(e);
         }
+    }
+    @FXML
+    public void returnToMenu(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DiagramSelector.fxml"));
+        Pane pane = loader.load();
+        parameters.getScene().setRoot(pane);
     }
     public void onChangeProblemSize(ActionEvent actionEvent) {
         baseCaseSelect.setVisible(true);
