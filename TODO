@@ -1,8 +1,6 @@
 
 Cosas que hacer:
 
--Botón de volver al menú para hacer otro diagrama
-
 -Hay casos donde depende de los parámetros, una solución incorrecta puede dar el resultado. Meter algo para controlar eso.
 
 -Ver si puedo usar patrones de diseño OOP para mejorar el código

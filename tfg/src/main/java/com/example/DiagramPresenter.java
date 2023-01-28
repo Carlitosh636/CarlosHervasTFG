@@ -1,5 +1,6 @@
 package com.example;
 
+import com.github.mustachejava.Mustache;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +11,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-
+import com.github.mustachejava.DefaultMustacheFactory;
+import com.github.mustachejava.MustacheFactory;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public abstract class DiagramPresenter implements Initializable {
@@ -57,7 +61,11 @@ public abstract class DiagramPresenter implements Initializable {
         baseCaseSelect.setVisible(false);
         diagramGrid.setVisible(false);
         webEngine = htmlViewer.getEngine();
-        loadPage("/html/index.html");
+        try {
+            loadPage("index.mustache");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         bindModelData();
     }
     public DiagramPresenter(Diagram model) {
@@ -78,6 +86,8 @@ public abstract class DiagramPresenter implements Initializable {
     protected void handleInput() {
         try {
             model.processInputs();
+            //ver si se puede sustituir por una función reload
+            loadPage("index.mustache");
             diagramGrid.setVisible(true);
             solutionSelect.getItems().clear();
             //aquí probablemente debería haber un control con semáforos
@@ -141,8 +151,12 @@ public abstract class DiagramPresenter implements Initializable {
         }
         inputErrorAlert.showAndWait();
     }
-    public void loadPage(String path){
-        URL url = this.getClass().getResource(path);
-        webEngine.load(url.toString());
+    public void loadPage(String path) throws IOException {
+        MustacheFactory mf = new DefaultMustacheFactory();
+        Mustache m = mf.compile(path);
+        StringWriter writer = new StringWriter();
+        m.execute(writer,new Todo("Ejemplo 1",parameters.getText(),true,null,null)).flush();
+        //debe ser un loadContent ya que estamos cargando un String, no una URL
+        webEngine.loadContent(writer.toString());
     }
 }
