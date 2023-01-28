@@ -83,22 +83,29 @@
                      <ComboBox fx:id="reductionSelect" prefHeight="30.0" prefWidth="150.0" promptText="Reduction" style="-fx-background-color: #FFD58C; -fx-border-color: #DFBA7B;" />
                   </children>
                </HBox>
-               <Button fx:id="confirmDataButton" onAction="#handleInput" text="Confirm Data">
-                  <opaqueInsets>
-                     <Insets />
-                  </opaqueInsets>
-                  <font>
-                     <Font size="15.0" />
-                  </font>
-               </Button>
-               <Button fx:id="returnMenuButton" layoutX="15.0" layoutY="204.0" onAction="#returnToMenu" text="Return to menu">
-                  <opaqueInsets>
-                     <Insets />
-                  </opaqueInsets>
-                  <font>
-                     <Font size="15.0" />
-                  </font>
-               </Button>
+               <HBox prefHeight="100.0" prefWidth="200.0" spacing="200.0">
+                  <children>
+                     <Button fx:id="confirmDataButton" onAction="#handleInput" text="Confirm Data">
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets>
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Button>
+                     <Button fx:id="returnMenuButton" onAction="#returnToMenu" text="Return to menu">
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets>
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Button>
+                  </children>
+                  <padding>
+                     <Insets top="10.0" />
+                  </padding>
+               </HBox>
             </children>
             <padding>
                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
