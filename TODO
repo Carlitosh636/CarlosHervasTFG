@@ -1,14 +1,12 @@
 
 Cosas que hacer:
-
--Hay casos donde depende de los parámetros, una solución incorrecta puede dar el resultado. Meter algo para controlar eso.
+-Generador de pseudocódigo o código python (mediante HTML y Mustache con WebViewer).
+ Como todos los diagramas tienen la misma estructura casi (casos base, casos recursivos), es posible que se pueda generar el código parseando una serie de
+ variables
 
 -Ver si puedo usar patrones de diseño OOP para mejorar el código
 
 -Hacerlo más bonito
-
--Generador de pseudocódigo o código python (mediante HTML y Mustache con WebViewer). El petate del diagrama iría en la izquierda y en la derecha, un campo de texto donde se va poniendo el
-pseudocódigo. Depende de que se seleccione en los pasos anteriores pone un código u otro
 
 -Refactorizar diagramas
     -PUEDE QUE LA CLAVE PARA LA REFACTORIZACIÓN ESTÉ EN EL WEBVIEWER, CARGANDO LOS DIAGRAMAS COMO HTML

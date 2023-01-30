@@ -34,6 +34,7 @@ public abstract class Diagram {
     protected int algorithmIndex;
     protected SimpleStringProperty parametersFormat;
     protected ArrayList<String> storedSolutions = new ArrayList<>();
+    protected String baseCaseReturnValue;
     public SimpleStringProperty parametersFormatProperty() {
         return parametersFormat;
     }
@@ -146,5 +147,15 @@ public abstract class Diagram {
 
     public boolean checkSolutionsEqual(String ourSol){
         return ourSol.equals(storedSolutions.get(0));
+    }
+    public Map<String,String> parseValuesForViewer(){
+        Map<String,String> values = new HashMap<>();
+        values.put("diagramTitle",this.getClass().getSimpleName());
+        values.put("parameters","PARAMETROS");
+        values.put("baseCase",this.baseCaseChoices.get(currentProblemSize.get()).get(currentBaseCaseIndex));
+        values.put("returnValue",this.baseCaseReturnValue);
+        values.put("recursiveCase","RECURSIVE CASE (depende de la reducción elegida, por lo que va a ser complejo calcular esto)");
+
+        return values;
     }
 }

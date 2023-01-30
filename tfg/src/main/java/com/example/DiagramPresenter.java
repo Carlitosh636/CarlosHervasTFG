@@ -16,7 +16,7 @@ import com.github.mustachejava.MustacheFactory;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.net.URL;
-import java.util.Date;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public abstract class DiagramPresenter implements Initializable {
@@ -165,7 +165,14 @@ public abstract class DiagramPresenter implements Initializable {
         MustacheFactory mf = new DefaultMustacheFactory();
         Mustache m = mf.compile(path);
         StringWriter writer = new StringWriter();
-        m.execute(writer,new Todo("Ejemplo 1",parameters.getText(),true,null,null)).flush();
+        Map<String,String> viewValues = model.parseValuesForViewer();
+        m.execute(writer,new DiagramWebViewer(
+                viewValues.get("diagramTitle"),
+                viewValues.get("parameters"),
+                viewValues.get("baseCase"),
+                viewValues.get("returnValue"),
+                viewValues.get("recursiveCase")
+        )).flush();
         //debe ser un loadContent ya que estamos cargando un String, no una URL
         webEngine.loadContent(writer.toString());
     }

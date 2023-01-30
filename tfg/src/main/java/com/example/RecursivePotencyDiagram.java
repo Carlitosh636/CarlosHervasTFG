@@ -17,10 +17,9 @@ public class RecursivePotencyDiagram extends Diagram{
         this.type = DiagramType.SIMPLE;
         this.problemSizeChoices.add("b");
 
-        List<String> bCases1 = Arrays.asList("b<1");
+        List<String> bCases1 = Arrays.asList("b == 0");
         this.baseCaseChoices.add(bCases1);
         List<String> bc1 = Arrays.asList("0");
-
         this.baseCaseParameters.add(bc1);
 
         List<String> reds1 = Arrays.asList("b - 1","b / 2");
@@ -107,6 +106,11 @@ public class RecursivePotencyDiagram extends Diagram{
             a = Integer.parseInt(problemData.get(0));
             b = Integer.parseInt(problemData.get(1));
             storedSolutions = (ArrayList<String>) algorithmsMap.get(algorithmIndex).call();
+            baseCaseReturnValue = String.valueOf(Algorithms.recursiveExponentOption1(
+                    a,
+                    Double.parseDouble(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)),
+                    Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex))));
+
             partSol = Double.parseDouble(storedSolutions.get(1));
             originalData.set(this.rawData);
             originalSol.set(storedSolutions.get(0));

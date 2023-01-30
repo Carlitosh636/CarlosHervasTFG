@@ -19,11 +19,11 @@ public class MergesortDiagram extends Diagram{
     public MergesortDiagram(String operation) {
         super(operation);
         this.type = DiagramType.COMPLEX;
-        this.problemSizeChoices.add("N");
-        List<String> bCases1 = Arrays.asList("1");
+        this.problemSizeChoices.add("array.size");
+        List<String> bCases1 = Arrays.asList("array.size == 1");
         this.baseCaseChoices.add(bCases1);
 
-        List<String> reds1 = Arrays.asList("a / 2");
+        List<String> reds1 = Arrays.asList("array / 2");
         this.reductionChoices.add(reds1);
 
         List<Callable> s1 = new ArrayList<>();
@@ -32,8 +32,8 @@ public class MergesortDiagram extends Diagram{
         this.solutionOperations = Arrays.asList(s1);
 
         List<String> sols1 = new ArrayList<>();
-        sols1.add("concatenate c and c");
-        sols1.add("merge b and c");
+        sols1.add("concatenate left and right arrays");
+        sols1.add("merge left and right arrays");
         this.solutionsChoices=Arrays.asList(sols1);
         this.correctSolutions = Arrays.asList(1);
 
@@ -72,6 +72,7 @@ public class MergesortDiagram extends Diagram{
             l = new int[mid];
             r = new int[data.length - mid];
             int[][] values = (int[][]) algorithmsMap.get(algorithmIndex).call();
+            baseCaseReturnValue = "array";
             storedSolutions.add(Arrays.toString(values[0]));
             originalData.set(this.problemData.toString());
             originalSol.set(Arrays.toString(values[0]));
