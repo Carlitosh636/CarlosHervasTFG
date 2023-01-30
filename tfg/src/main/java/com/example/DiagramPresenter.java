@@ -60,6 +60,7 @@ public abstract class DiagramPresenter implements Initializable {
         reductionSelect.setVisible(false);
         baseCaseSelect.setVisible(false);
         diagramGrid.setVisible(false);
+        parameters.setVisible(false);
         webEngine = htmlViewer.getEngine();
         try {
             loadPage("index.mustache");
@@ -111,6 +112,7 @@ public abstract class DiagramPresenter implements Initializable {
     public void onChangeBaseCase(ActionEvent actionEvent) {
         model.setCurrentBaseCaseIndex(baseCaseSelect.getSelectionModel().getSelectedIndex());
         reductionSelect.setVisible(true);
+        parameters.setVisible(true);
         reductionSelect.getItems().clear();
         reductionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
     }
@@ -119,8 +121,16 @@ public abstract class DiagramPresenter implements Initializable {
         try{
             String calcSol = model.calculate(solutionSelect.getSelectionModel().getSelectedIndex());
             if(model.checkSolutionsEqual(calcSol)){
-                calculatedSolution.setStyle("-fx-text-fill: green;");
-                isCorrect.setText("Correcto!");
+                //if solutions are equal BUT it is not the correct solution
+                if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(model.getCurrentReductionSolutions())){
+                    calculatedSolution.setStyle("-fx-text-fill: red;");
+                    isCorrect.setText("Incorrecto! La operación da esta solución pero no para todos los casos");
+                }
+                else{
+                    calculatedSolution.setStyle("-fx-text-fill: green;");
+                    isCorrect.setText("Correcto!");
+                }
+
             }
             else{
                 calculatedSolution.setStyle("-fx-text-fill: red;");

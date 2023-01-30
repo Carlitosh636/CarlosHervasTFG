@@ -7,7 +7,7 @@ Cosas que hacer:
 
 -Hacerlo más bonito
 
--Generador de pseudocódigo o código python (mediante HTML con WebViewer). El petate del diagrama iría en la izquierda y en la derecha, un campo de texto donde se va poniendo el
+-Generador de pseudocódigo o código python (mediante HTML y Mustache con WebViewer). El petate del diagrama iría en la izquierda y en la derecha, un campo de texto donde se va poniendo el
 pseudocódigo. Depende de que se seleccione en los pasos anteriores pone un código u otro
 
 -Refactorizar diagramas

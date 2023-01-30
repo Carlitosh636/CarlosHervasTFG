@@ -29,6 +29,7 @@ public abstract class Diagram {
     protected List<List<String>> reductionChoices;
     protected List<List<Callable>> solutionOperations;
     protected List<List<String>> solutionsChoices;
+    protected List<Integer> correctSolutions;
     protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
     protected int algorithmIndex;
     protected SimpleStringProperty parametersFormat;
@@ -94,7 +95,9 @@ public abstract class Diagram {
     public SimpleIntegerProperty currentReductionSolutionsProperty() {
         return currentReductionSolutions;
     }
-
+    public List<Integer> getCorrectSolutions() {
+        return correctSolutions;
+    }
     public Diagram(String operation) {
         this.operation=operation;
         this.inputs = new SimpleStringProperty();
@@ -114,6 +117,7 @@ public abstract class Diagram {
         this.currentReduction = new SimpleIntegerProperty();
         this.partialData=new ArrayList<>();
         this.partialSol=new ArrayList<>();
+        this.correctSolutions = new ArrayList<>();
     }
     public void processInputs() throws Exception{
         try{

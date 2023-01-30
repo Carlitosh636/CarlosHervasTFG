@@ -35,6 +35,8 @@ public class MergesortDiagram extends Diagram{
         sols1.add("concatenate c and c");
         sols1.add("merge b and c");
         this.solutionsChoices=Arrays.asList(sols1);
+        this.correctSolutions = Arrays.asList(1);
+
         this.partialData.add(new SimpleStringProperty());
         this.partialSol.add(new SimpleStringProperty());
         this.partialData.add(new SimpleStringProperty());
