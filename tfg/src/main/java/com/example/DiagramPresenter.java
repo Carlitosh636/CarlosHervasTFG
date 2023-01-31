@@ -1,6 +1,6 @@
 package com.example;
 
-import com.github.mustachejava.Mustache;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,14 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
-import com.github.mustachejava.DefaultMustacheFactory;
-import com.github.mustachejava.MustacheFactory;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.net.URL;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public abstract class DiagramPresenter implements Initializable {
@@ -52,8 +46,11 @@ public abstract class DiagramPresenter implements Initializable {
     @FXML
     Label isCorrect;
     @FXML
-    WebView htmlViewer;
-    WebEngine webEngine;
+    private Label diagramTitle;
+    @FXML
+    private Label baseCase;
+    @FXML
+    private Label recursiveCase;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
@@ -61,12 +58,6 @@ public abstract class DiagramPresenter implements Initializable {
         baseCaseSelect.setVisible(false);
         diagramGrid.setVisible(false);
         parameters.setVisible(false);
-        webEngine = htmlViewer.getEngine();
-        try {
-            loadPage("index.mustache");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         bindModelData();
     }
     public DiagramPresenter(Diagram model) {
@@ -81,6 +72,10 @@ public abstract class DiagramPresenter implements Initializable {
         model.currentProblemSize.bind(problemSizeSelect.getSelectionModel().selectedIndexProperty());
         model.currentBaseCase.bind(baseCaseSelect.getSelectionModel().selectedIndexProperty());
         model.currentReduction.bind(reductionSelect.getSelectionModel().selectedIndexProperty());
+        model.selectedSolution.bind(solutionSelect.getSelectionModel().selectedIndexProperty());
+        diagramTitle.textProperty().bind(model.viewerValues.get("diagramTitle"));
+        baseCase.textProperty().bind(model.viewerValues.get("baseCase"));
+        recursiveCase.textProperty().bind(model.viewerValues.get("recursiveCase"));
 
     }
     @FXML
@@ -88,7 +83,6 @@ public abstract class DiagramPresenter implements Initializable {
         try {
             model.processInputs();
             //ver si se puede sustituir por una función reload
-            loadPage("index.mustache");
             diagramGrid.setVisible(true);
             solutionSelect.getItems().clear();
             //aquí probablemente debería haber un control con semáforos
@@ -154,26 +148,10 @@ public abstract class DiagramPresenter implements Initializable {
             inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
             inputErrorAlert.setContentText("Revisa el contenido, no puedes introducir un caso base o una solución como parámetro");
         }
-        //si no se que es el error, poner el básico "introducelo de nuevo"
         else{
             inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
             inputErrorAlert.setContentText("Ha ocurrido un error desconocido");
         }
         inputErrorAlert.showAndWait();
-    }
-    public void loadPage(String path) throws IOException {
-        MustacheFactory mf = new DefaultMustacheFactory();
-        Mustache m = mf.compile(path);
-        StringWriter writer = new StringWriter();
-        Map<String,String> viewValues = model.parseValuesForViewer();
-        m.execute(writer,new DiagramWebViewer(
-                viewValues.get("diagramTitle"),
-                viewValues.get("parameters"),
-                viewValues.get("baseCase"),
-                viewValues.get("returnValue"),
-                viewValues.get("recursiveCase")
-        )).flush();
-        //debe ser un loadContent ya que estamos cargando un String, no una URL
-        webEngine.loadContent(writer.toString());
     }
 }

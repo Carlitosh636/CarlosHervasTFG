@@ -29,12 +29,26 @@ public abstract class Diagram {
     protected List<List<String>> reductionChoices;
     protected List<List<Callable>> solutionOperations;
     protected List<List<String>> solutionsChoices;
+
+    public int getSelectedSolution() {
+        return selectedSolution.get();
+    }
+
+    public SimpleIntegerProperty selectedSolutionProperty() {
+        return selectedSolution;
+    }
+
+    public void setSelectedSolution(int selectedSolution) {
+        this.selectedSolution.set(selectedSolution);
+    }
+
+    protected SimpleIntegerProperty selectedSolution;
     protected List<Integer> correctSolutions;
     protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
     protected int algorithmIndex;
     protected SimpleStringProperty parametersFormat;
     protected ArrayList<String> storedSolutions = new ArrayList<>();
-    protected String baseCaseReturnValue;
+    protected Map<String,SimpleStringProperty> viewerValues = new HashMap<>();
     public SimpleStringProperty parametersFormatProperty() {
         return parametersFormat;
     }
@@ -59,6 +73,11 @@ public abstract class Diagram {
     public SimpleStringProperty getInputsProperty() {
         return inputs;
     }
+
+    public int getCurrentBaseCaseIndex() {
+        return currentBaseCaseIndex;
+    }
+
     public void setCurrentBaseCaseIndex(int currentBaseCaseIndex) {
         this.currentBaseCaseIndex = currentBaseCaseIndex;
     }
@@ -99,6 +118,15 @@ public abstract class Diagram {
     public List<Integer> getCorrectSolutions() {
         return correctSolutions;
     }
+
+    public Map<String, SimpleStringProperty> getViewerValues() {
+        return viewerValues;
+    }
+
+    public void setViewerValues(Map<String, SimpleStringProperty> viewerValues) {
+        this.viewerValues = viewerValues;
+    }
+
     public Diagram(String operation) {
         this.operation=operation;
         this.inputs = new SimpleStringProperty();
@@ -116,14 +144,19 @@ public abstract class Diagram {
         this.currentBaseCase = new SimpleIntegerProperty();
         this.currentReductionSolutions = new SimpleIntegerProperty();
         this.currentReduction = new SimpleIntegerProperty();
+        this.selectedSolution = new SimpleIntegerProperty();
         this.partialData=new ArrayList<>();
         this.partialSol=new ArrayList<>();
         this.correctSolutions = new ArrayList<>();
+        this.viewerValues.put("diagramTitle",new SimpleStringProperty());
+        this.viewerValues.put("baseCase",new SimpleStringProperty());
+        this.viewerValues.put("recursiveCase",new SimpleStringProperty());
     }
     public void processInputs() throws Exception{
         try{
             problemData = Arrays.asList(this.inputs.get().split(","));
             rawData =problemData.get(0)+operation+problemData.get(1);
+            viewerValues.get("diagramTitle").set(String.format("def %s(%s)",this.getClass().getSimpleName(),"PARAMETROS"));
         }
         catch (Exception e){
             System.out.println(e);
@@ -142,20 +175,11 @@ public abstract class Diagram {
             calcSol = String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).call());
         }
         calculatedSol.set(calcSol);
+        viewerValues.put("recursiveCase",new SimpleStringProperty("CASO RECURSIVOOOO"));
         return calcSol;
     };
 
     public boolean checkSolutionsEqual(String ourSol){
         return ourSol.equals(storedSolutions.get(0));
-    }
-    public Map<String,String> parseValuesForViewer(){
-        Map<String,String> values = new HashMap<>();
-        values.put("diagramTitle",this.getClass().getSimpleName());
-        values.put("parameters","PARAMETROS");
-        values.put("baseCase",this.baseCaseChoices.get(currentProblemSize.get()).get(currentBaseCaseIndex));
-        values.put("returnValue",this.baseCaseReturnValue);
-        values.put("recursiveCase","RECURSIVE CASE (depende de la reducción elegida, por lo que va a ser complejo calcular esto)");
-
-        return values;
     }
 }

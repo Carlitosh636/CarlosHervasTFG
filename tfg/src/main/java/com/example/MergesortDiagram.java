@@ -72,7 +72,10 @@ public class MergesortDiagram extends Diagram{
             l = new int[mid];
             r = new int[data.length - mid];
             int[][] values = (int[][]) algorithmsMap.get(algorithmIndex).call();
-            baseCaseReturnValue = "array";
+            String baseCaseReturnValue = "array";
+            //viewerValues.get("baseCase").set(String.format("if %s:\n return %s",
+            //                    this.baseCaseChoices.get(this.getCurrentProblemSize()).get(this.currentBaseCaseIndex),
+            //                    baseCaseReturnValue));
             storedSolutions.add(Arrays.toString(values[0]));
             originalData.set(this.problemData.toString());
             originalSol.set(Arrays.toString(values[0]));

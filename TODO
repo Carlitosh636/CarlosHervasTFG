@@ -1,8 +1,9 @@
 
 Cosas que hacer:
--Generador de pseudocódigo o código python (mediante HTML y Mustache con WebViewer).
- Como todos los diagramas tienen la misma estructura casi (casos base, casos recursivos), es posible que se pueda generar el código parseando una serie de
- variables
+-Generador de pseudocódigo o código python.
+ Ahora mismo se tiene como una serie de labels que se actualizan con cada elección.
+ Hay que setear los PARAMETROS, los CASOS BASE y los CASOS RECURSIVOS. Ahora mismo setea bien el titulo de la función recursiva
+ Ademas hay que poner la nueva UI para el generador de codigo en ComplexDiagram
 
 -Ver si puedo usar patrones de diseño OOP para mejorar el código
 

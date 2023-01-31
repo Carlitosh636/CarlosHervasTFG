@@ -39,16 +39,16 @@ public class RecursivePotencyDiagram extends Diagram{
         this.solutionOperations = Arrays.asList(sols1, sols2, sols3);
 
         List<String> solsChoices1 = new ArrayList<>();
-        solsChoices1.add("multiplicar por 'b'");
-        solsChoices1.add("multiplicar por 'a'");
-        solsChoices1.add("elevar a 'a'");
+        solsChoices1.add("* b");
+        solsChoices1.add("* a");
+        solsChoices1.add("** a");
         List<String> solsChoices2 = new ArrayList<>();
-        solsChoices2.add("elevar al cuadrado");
-        solsChoices2.add("multiplicar por 'b'");
+        solsChoices2.add("** 2");
+        solsChoices2.add("* b");
         List<String> solsChoices3 = new ArrayList<>();
-        solsChoices3.add("elevar al cuadrado");
-        solsChoices3.add("multiplicar por 'b'");
-        solsChoices3.add("a*((a^(b-1/2)))²))");
+        solsChoices3.add("** 2");
+        solsChoices3.add("* b");
+        solsChoices3.add("a * ((a^(b-1/2)))²))");
         this.solutionsChoices=Arrays.asList(solsChoices1,solsChoices2,solsChoices3);
         this.correctSolutions = Arrays.asList(1,0,2);
 
@@ -106,10 +106,13 @@ public class RecursivePotencyDiagram extends Diagram{
             a = Integer.parseInt(problemData.get(0));
             b = Integer.parseInt(problemData.get(1));
             storedSolutions = (ArrayList<String>) algorithmsMap.get(algorithmIndex).call();
-            baseCaseReturnValue = String.valueOf(Algorithms.recursiveExponentOption1(
+            String baseCaseReturnValue = String.valueOf(Algorithms.recursiveExponentOption1(
                     a,
                     Double.parseDouble(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)),
                     Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex))));
+            viewerValues.get("baseCase").set(String.format("if %s:\n return %s",
+                    this.baseCaseChoices.get(this.getCurrentProblemSize()).get(this.currentBaseCaseIndex),
+                    baseCaseReturnValue));
 
             partSol = Double.parseDouble(storedSolutions.get(1));
             originalData.set(this.rawData);
