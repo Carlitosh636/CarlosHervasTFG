@@ -1,6 +1,5 @@
 package com.example;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +14,7 @@ import java.util.ResourceBundle;
 
 public abstract class DiagramPresenter implements Initializable {
     protected Diagram model;
+    private DiagramToCodeMapper mapper = new DiagramToCodeMapper();
     @FXML
     TextField parameters;
     @FXML
@@ -58,6 +58,9 @@ public abstract class DiagramPresenter implements Initializable {
         baseCaseSelect.setVisible(false);
         diagramGrid.setVisible(false);
         parameters.setVisible(false);
+
+        mapper.setCurrentDiagram(model);
+        model.setViewerData1();
         bindModelData();
     }
     public DiagramPresenter(Diagram model) {
@@ -82,7 +85,6 @@ public abstract class DiagramPresenter implements Initializable {
     protected void handleInput() {
         try {
             model.processInputs();
-            //ver si se puede sustituir por una función reload
             diagramGrid.setVisible(true);
             solutionSelect.getItems().clear();
             //aquí probablemente debería haber un control con semáforos
@@ -109,6 +111,12 @@ public abstract class DiagramPresenter implements Initializable {
         parameters.setVisible(true);
         reductionSelect.getItems().clear();
         reductionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
+        try{
+            model.viewerValues.get("baseCase").set(DiagramToCodeMapper.mapBaseCases());
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     public void onSolutionChange(ActionEvent actionEvent) throws Exception {

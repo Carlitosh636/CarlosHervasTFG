@@ -1,9 +1,10 @@
 
 Cosas que hacer:
 -Generador de pseudocódigo o código python.
- Ahora mismo se tiene como una serie de labels que se actualizan con cada elección.
- Hay que setear los PARAMETROS, los CASOS BASE y los CASOS RECURSIVOS. Ahora mismo setea bien el titulo de la función recursiva
- Ademas hay que poner la nueva UI para el generador de codigo en ComplexDiagram
+ Ahora mismo es un mapper el que convierte el diagrama a codigo por strings y luego lo pone en un map bindeado a labels.
+ Por hacer de esto:
+ -Que tome varios casos base/recursivos (centrarse en los base primero)
+ -Mapear el caso recursivo (solo cuando esté lo de mapear varios casos recursivos)
 
 -Ver si puedo usar patrones de diseño OOP para mejorar el código
 

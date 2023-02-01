@@ -29,6 +29,7 @@ public abstract class Diagram {
     protected List<List<String>> reductionChoices;
     protected List<List<Callable>> solutionOperations;
     protected List<List<String>> solutionsChoices;
+    protected String recursiveCallParameters;
 
     public int getSelectedSolution() {
         return selectedSolution.get();
@@ -49,6 +50,7 @@ public abstract class Diagram {
     protected SimpleStringProperty parametersFormat;
     protected ArrayList<String> storedSolutions = new ArrayList<>();
     protected Map<String,SimpleStringProperty> viewerValues = new HashMap<>();
+    protected String parametersView;
     public SimpleStringProperty parametersFormatProperty() {
         return parametersFormat;
     }
@@ -148,7 +150,6 @@ public abstract class Diagram {
         this.partialData=new ArrayList<>();
         this.partialSol=new ArrayList<>();
         this.correctSolutions = new ArrayList<>();
-        this.viewerValues.put("diagramTitle",new SimpleStringProperty());
         this.viewerValues.put("baseCase",new SimpleStringProperty());
         this.viewerValues.put("recursiveCase",new SimpleStringProperty());
     }
@@ -156,7 +157,6 @@ public abstract class Diagram {
         try{
             problemData = Arrays.asList(this.inputs.get().split(","));
             rawData =problemData.get(0)+operation+problemData.get(1);
-            viewerValues.get("diagramTitle").set(String.format("def %s(%s)",this.getClass().getSimpleName(),"PARAMETROS"));
         }
         catch (Exception e){
             System.out.println(e);
@@ -175,11 +175,22 @@ public abstract class Diagram {
             calcSol = String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).call());
         }
         calculatedSol.set(calcSol);
-        viewerValues.put("recursiveCase",new SimpleStringProperty("CASO RECURSIVOOOO"));
+        viewerValues.get("recursiveCase").set(String.format(
+                "return %s(%s) %s",
+                this.getClass().getSimpleName(),
+                this.recursiveCallParameters,
+                this.solutionsChoices.get(this.currentReductionSolutions.get()).get(this.getSelectedSolution())
+        ));
         return calcSol;
     };
 
     public boolean checkSolutionsEqual(String ourSol){
         return ourSol.equals(storedSolutions.get(0));
+    }
+    protected void setViewerData1(){
+        this.viewerValues.put("diagramTitle",new SimpleStringProperty(String.format("def %s(%s)",
+                DiagramToCodeMapper.mapDiagramName(),
+                DiagramToCodeMapper.mapParameters()
+        )));
     }
 }

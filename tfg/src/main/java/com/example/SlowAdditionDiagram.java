@@ -64,6 +64,17 @@ public class SlowAdditionDiagram extends Diagram {
         this.parametersFormat.set("Formato: a,b");
         this.partialData.add(new SimpleStringProperty());
         this.partialSol.add(new SimpleStringProperty());
+        this.parametersView = "a,b";
+
+        algorithmsMap.put(-1, new Callable<String>() {
+            @Override
+            public String call() {
+                return String.valueOf(Algorithms.slowAdditionOption1(
+                        a,
+                        Double.parseDouble(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)),
+                        Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex))));
+            }
+        });
         algorithmsMap.put(0, new Callable<ArrayList<String>>() {
             @Override
             public ArrayList<String> call() {
@@ -133,13 +144,6 @@ public class SlowAdditionDiagram extends Diagram {
             a = Integer.parseInt(problemData.get(0));
             b = Integer.parseInt(problemData.get(1));
             storedSolutions = (ArrayList<String>) algorithmsMap.get(algorithmIndex).call();
-            String baseCaseReturnValue = String.valueOf(Algorithms.slowAdditionOption1(
-                    a,
-                    Double.parseDouble(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)),
-                    Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex))));
-            viewerValues.get("baseCase").set(String.format("if %s:\n return %s",
-                    this.baseCaseChoices.get(this.getCurrentProblemSize()).get(this.currentBaseCaseIndex),
-                    baseCaseReturnValue));
             partSol = Double.parseDouble(storedSolutions.get(1));
             originalData.set(this.rawData);
             originalSol.set(this.problemData.get(0) + " + " + this.problemData.get(1));

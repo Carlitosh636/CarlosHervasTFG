@@ -2,14 +2,11 @@ package com.example;
 
 import javafx.beans.property.SimpleStringProperty;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class MergesortDiagram extends Diagram{
     int[] data;
@@ -20,7 +17,7 @@ public class MergesortDiagram extends Diagram{
         super(operation);
         this.type = DiagramType.COMPLEX;
         this.problemSizeChoices.add("array.size");
-        List<String> bCases1 = Arrays.asList("array.size == 1");
+        List<String> bCases1 = Arrays.asList("array.size <= 1");
         this.baseCaseChoices.add(bCases1);
 
         List<String> reds1 = Arrays.asList("array / 2");
@@ -42,6 +39,14 @@ public class MergesortDiagram extends Diagram{
         this.partialData.add(new SimpleStringProperty());
         this.partialSol.add(new SimpleStringProperty());
         this.parametersFormat.set("Formato: a,b,c,d,e...z");
+        this.parametersView = "array";
+
+        algorithmsMap.put(-1, new Callable<String>() {
+            @Override
+            public String call() {
+                return "array";
+            }
+        });
         algorithmsMap.put(0, new Callable<int[][]>() {
             @Override
             public int[][] call() {
@@ -72,10 +77,6 @@ public class MergesortDiagram extends Diagram{
             l = new int[mid];
             r = new int[data.length - mid];
             int[][] values = (int[][]) algorithmsMap.get(algorithmIndex).call();
-            String baseCaseReturnValue = "array";
-            //viewerValues.get("baseCase").set(String.format("if %s:\n return %s",
-            //                    this.baseCaseChoices.get(this.getCurrentProblemSize()).get(this.currentBaseCaseIndex),
-            //                    baseCaseReturnValue));
             storedSolutions.add(Arrays.toString(values[0]));
             originalData.set(this.problemData.toString());
             originalSol.set(Arrays.toString(values[0]));
