@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 
 public class RecursivePotencyDiagram extends Diagram{
     private double partSol;
@@ -25,17 +26,20 @@ public class RecursivePotencyDiagram extends Diagram{
         List<String> reds1 = Arrays.asList("b - 1","b / 2");
         this.reductionChoices.add(reds1);
 
-        List<Callable> sols1 = new ArrayList<>();
-        sols1.add((Callable<Double>) () -> partSol*b);
-        sols1.add((Callable<Double>) () -> partSol*a);
-        sols1.add((Callable<Double>) () -> Math.pow(partSol,a));
-        List<Callable> sols2 = new ArrayList<>();
-        sols2.add((Callable<Double>) () -> Math.pow(partSol,2));
-        sols2.add((Callable<Double>) () -> partSol*b);
-        List<Callable> sols3 = new ArrayList<>();
-        sols3.add((Callable<Double>) () -> Math.pow(partSol,2));
-        sols3.add((Callable<Double>) () -> partSol*b);
-        sols3.add((Callable<Double>) () -> a * (Math.pow(partSol,2)));
+        this.params.put("a",new SimpleStringProperty());
+        this.params.put("b",new SimpleStringProperty());
+
+        List<Supplier> sols1 = new ArrayList<>();
+        sols1.add((Supplier<Double>) () -> partSol*b);
+        sols1.add((Supplier<Double>) () -> partSol*a);
+        sols1.add((Supplier<Double>) () -> Math.pow(partSol,a));
+        List<Supplier> sols2 = new ArrayList<>();
+        sols2.add((Supplier<Double>) () -> Math.pow(partSol,2));
+        sols2.add((Supplier<Double>) () -> partSol*b);
+        List<Supplier> sols3 = new ArrayList<>();
+        sols3.add((Supplier<Double>) () -> Math.pow(partSol,2));
+        sols3.add((Supplier<Double>) () -> partSol*b);
+        sols3.add((Supplier<Double>) () -> a * (Math.pow(partSol,2)));
         this.solutionOperations = Arrays.asList(sols1, sols2, sols3);
 
         List<String> solsChoices1 = new ArrayList<>();
@@ -52,8 +56,8 @@ public class RecursivePotencyDiagram extends Diagram{
         this.solutionsChoices=Arrays.asList(solsChoices1,solsChoices2,solsChoices3);
         this.correctSolutions = Arrays.asList(1,0,2);
 
-        this.parametersView = "a,b";
-        this.parametersFormat.set("Formato: a,b");
+        //this.parametersView = "a,b";
+
         this.partialData.add(new SimpleStringProperty());
         this.partialSol.add(new SimpleStringProperty());
 
@@ -91,7 +95,7 @@ public class RecursivePotencyDiagram extends Diagram{
                 returnVal[0] = Algorithms.recursiveExponentOption2(a,b,Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
                 returnVal[1] = Algorithms.recursiveExponentOption2(a,Math.floor(b/2),Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
 
-                if(Integer.parseInt(problemData.get(1))%2==0){
+                if(Integer.parseInt(params.get("b").get())%2==0){
                     reducedOperation=a+operation+(b/2);
                     recursiveCallParameters = "a,"+reductionChoices.get(currentProblemSize.get()).get(currentReduction.get());
                     currentReductionSolutions.set(1);
@@ -117,12 +121,11 @@ public class RecursivePotencyDiagram extends Diagram{
             if(checkNotBaseCase(currentProblemSize.get()+currentBaseCase.get())){
                 throw new BaseCaseException("Cannot introduce a base case in parameters");
             }
-            a = Integer.parseInt(problemData.get(0));
-            b = Integer.parseInt(problemData.get(1));
+            a = Integer.parseInt(params.get("a").get());
+            b = Integer.parseInt(params.get("b").get());
             storedSolutions = (ArrayList<String>) algorithmsMap.get(algorithmIndex).call();
 
             partSol = Double.parseDouble(storedSolutions.get(1));
-            originalData.set(this.rawData);
             originalSol.set(storedSolutions.get(0));
             partialData.get(0).set(reducedOperation);
             partialSol.get(0).set(storedSolutions.get(1));
@@ -136,7 +139,7 @@ public class RecursivePotencyDiagram extends Diagram{
     @Override
     public boolean checkNotBaseCase(int index){
         for (String baseCase : baseCaseParameters.get(index)) {
-            if(Objects.equals(problemData.get(1), baseCase)){
+            if(Objects.equals(params.get(1), baseCase)){
                 return true;
             }
         }

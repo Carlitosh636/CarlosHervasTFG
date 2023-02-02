@@ -2,15 +2,16 @@ package com.example;
 
 import java.util.*;
 import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringPropertyBase;
 
 public abstract class Diagram {
     protected DiagramType type;
     protected SimpleStringProperty inputs;
-    protected String rawData;
-    protected List<String> problemData;
+    protected Map<String,SimpleStringProperty> params;
     protected SimpleStringProperty originalData;
     protected SimpleStringProperty originalSol;
     protected List<SimpleStringProperty> partialData;
@@ -27,7 +28,7 @@ public abstract class Diagram {
     protected List<List<String>> baseCaseChoices;
     protected List<List<String>> baseCaseParameters;
     protected List<List<String>> reductionChoices;
-    protected List<List<Callable>> solutionOperations;
+    protected List<List<Supplier>> solutionOperations;
     protected List<List<String>> solutionsChoices;
     protected String recursiveCallParameters;
 
@@ -43,17 +44,17 @@ public abstract class Diagram {
         this.selectedSolution.set(selectedSolution);
     }
 
+    public Map<String,SimpleStringProperty> getParams() {
+        return params;
+    }
+
     protected SimpleIntegerProperty selectedSolution;
     protected List<Integer> correctSolutions;
     protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
     protected int algorithmIndex;
-    protected SimpleStringProperty parametersFormat;
     protected ArrayList<String> storedSolutions = new ArrayList<>();
     protected Map<String,SimpleStringProperty> viewerValues = new HashMap<>();
     protected String parametersView;
-    public SimpleStringProperty parametersFormatProperty() {
-        return parametersFormat;
-    }
     public List<List<String>> getReductionChoices() {
         return reductionChoices;
     }
@@ -132,15 +133,13 @@ public abstract class Diagram {
     public Diagram(String operation) {
         this.operation=operation;
         this.inputs = new SimpleStringProperty();
-        this.rawData = "";
-        this.problemData=new ArrayList<>();
+        this.params =new HashMap<>();
         this.reductionChoices=new ArrayList<>();
         this.problemSizeChoices=new ArrayList<>();
         this.baseCaseChoices=new ArrayList<>();
         this.baseCaseParameters=new ArrayList<>();
         this.originalData=new SimpleStringProperty();
         this.originalSol=new SimpleStringProperty();
-        this.parametersFormat = new SimpleStringProperty();
         this.calculatedSol = new SimpleStringProperty();
         this.currentProblemSize = new SimpleIntegerProperty();
         this.currentBaseCase = new SimpleIntegerProperty();
@@ -155,8 +154,13 @@ public abstract class Diagram {
     }
     public void processInputs() throws Exception{
         try{
-            problemData = Arrays.asList(this.inputs.get().split(","));
-            rawData =problemData.get(0)+operation+problemData.get(1);
+            /*params = Arrays.asList(this.inputs.get().split(","));
+            rawData = params.get(0)+operation+ params.get(1);*/
+            String formattedValues = "";
+            for(SimpleStringProperty simpleStringProperty : params.values()){
+                formattedValues+=simpleStringProperty.get()+", ";
+            }
+            originalData.set(formattedValues);
         }
         catch (Exception e){
             System.out.println(e);
@@ -169,10 +173,10 @@ public abstract class Diagram {
         //aplicamos la expresión de la solución escogida a la solución parcial
         String calcSol;
         if(this.type == DiagramType.COMPLEX){
-            calcSol = Arrays.toString((int[]) solutionOperations.get(currentReductionSolutions.get()).get(index).call());
+            calcSol = Arrays.toString((int[]) solutionOperations.get(currentReductionSolutions.get()).get(index).get());
         }
         else{
-            calcSol = String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).call());
+            calcSol = String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).get());
         }
         calculatedSol.set(calcSol);
         viewerValues.get("recursiveCase").set(String.format(

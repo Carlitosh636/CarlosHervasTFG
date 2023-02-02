@@ -1,7 +1,5 @@
 package com.example;
 
-import java.util.ArrayList;
-
 public class Algorithms {
     public static double recursiveExponentOption1(double base, double exp, int baseCaseValue){
         if(exp==baseCaseValue){
@@ -106,16 +104,5 @@ public class Algorithms {
             a[k++] = r[j++];
         }
         return a;
-    }
-    static int[] stringToArrayInt(String str)
-    {
-
-        String[] splitArray = str.split(",");
-        int[] array = new int[splitArray.length];
-
-        for (int i = 0; i < splitArray.length; i++) {
-            array[i] = Integer.parseInt(splitArray[i]);
-        }
-        return array;
     }
 }

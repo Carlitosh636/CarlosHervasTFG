@@ -19,7 +19,7 @@ public class DiagramToCodeMapper {
     }
     public static String mapBaseCases() throws Exception {
         List<String> baseCases = new ArrayList<>();
-
+        
         return String.format("if %s:\n return %s",
                 currentDiagram.getBaseCaseChoices().get(currentDiagram.getCurrentProblemSize()).get(currentDiagram.getCurrentBaseCaseIndex()),
                 mapReturnVal());

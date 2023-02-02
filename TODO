@@ -1,22 +1,23 @@
 
 Cosas que hacer:
--Generador de pseudocódigo o código python.
- Ahora mismo es un mapper el que convierte el diagrama a codigo por strings y luego lo pone en un map bindeado a labels.
- Por hacer de esto:
- -Que tome varios casos base/recursivos (centrarse en los base primero)
- -Mapear el caso recursivo (solo cuando esté lo de mapear varios casos recursivos)
+
+-Eliminar el Simple y Complex DiagramPresenters ya que solo debería haber uno, teniendo una lista de subparametros y subsoluciones
+
+-Cambiar el View para que solo haya uno, y que dependa de DiagramPresenter
+
+-Ahora que los parámetros han sido refactorizados, ver si se puede mejorar lo de calcular la solución y no tener que usar variables propias en cada diagrama
+ (puede que para lo del partialSol se pueda sustituir por una lista de partialSols, comun a todos los diagramas)
 
 -Ver si puedo usar patrones de diseño OOP para mejorar el código
 
 -Hacerlo más bonito
 
 -Refactorizar diagramas
-    -PUEDE QUE LA CLAVE PARA LA REFACTORIZACIÓN ESTÉ EN EL WEBVIEWER, CARGANDO LOS DIAGRAMAS COMO HTML
     -Los datos para construir cada diagrama podrían sacarse de archivos JSON en resources en vez de ponerlos a mano en su implementación, ya sea en
     resources o en una BBDD probablemente MongoDB
     -Hay muchas variables que mantienen el estsado del diagrama (currentProblemSize, currentReduction, algorithmIndex...), hay que buscar una manera
     de simplificar eso
-    -Hay que ver si hay alguna opción mejor para lo de las soluciones, porque queda muy sucio ahora mismo
+    -Las funciones pueden traducirse como funciones lambda usando Function y Supplier
 
 Problemas:
 

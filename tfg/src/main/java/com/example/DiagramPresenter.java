@@ -14,9 +14,9 @@ import java.util.ResourceBundle;
 
 public abstract class DiagramPresenter implements Initializable {
     protected Diagram model;
-    private DiagramToCodeMapper mapper = new DiagramToCodeMapper();
+    //private DiagramToCodeMapper mapper = new DiagramToCodeMapper();
     @FXML
-    TextField parameters;
+    Label originalData;
     @FXML
     Label originalDataSolutionArrow;
     @FXML
@@ -40,45 +40,41 @@ public abstract class DiagramPresenter implements Initializable {
     @FXML
     GridPane diagramGrid;
     @FXML
-    Label originalData;
-    @FXML
-    Label parametersFormat;
-    @FXML
     Label isCorrect;
     @FXML
+    VBox parametersList;
+    /*@FXML
     private Label diagramTitle;
     @FXML
     private Label baseCase;
     @FXML
-    private Label recursiveCase;
+    private Label recursiveCase;*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
         reductionSelect.setVisible(false);
         baseCaseSelect.setVisible(false);
         diagramGrid.setVisible(false);
-        parameters.setVisible(false);
 
-        mapper.setCurrentDiagram(model);
-        model.setViewerData1();
+        //mapper.setCurrentDiagram(model);
+        //model.setViewerData1();
         bindModelData();
     }
     public DiagramPresenter(Diagram model) {
         this.model = model;
     }
     protected void bindModelData() {
-        parameters.textProperty().bindBidirectional(model.getInputsProperty());
         originalSolution.textProperty().bind(model.originalSolProperty());
         originalData.textProperty().bind(model.originalDataProperty());
-        parametersFormat.textProperty().bind(model.parametersFormatProperty());
         calculatedSolution.textProperty().bind(model.calculatedSolProperty());
         model.currentProblemSize.bind(problemSizeSelect.getSelectionModel().selectedIndexProperty());
         model.currentBaseCase.bind(baseCaseSelect.getSelectionModel().selectedIndexProperty());
         model.currentReduction.bind(reductionSelect.getSelectionModel().selectedIndexProperty());
         model.selectedSolution.bind(solutionSelect.getSelectionModel().selectedIndexProperty());
-        diagramTitle.textProperty().bind(model.viewerValues.get("diagramTitle"));
-        baseCase.textProperty().bind(model.viewerValues.get("baseCase"));
-        recursiveCase.textProperty().bind(model.viewerValues.get("recursiveCase"));
+
+        //diagramTitle.textProperty().bind(model.viewerValues.get("diagramTitle"));
+        //baseCase.textProperty().bind(model.viewerValues.get("baseCase"));
+        //recursiveCase.textProperty().bind(model.viewerValues.get("recursiveCase"));
 
     }
     @FXML
@@ -97,7 +93,7 @@ public abstract class DiagramPresenter implements Initializable {
     public void returnToMenu(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DiagramSelector.fxml"));
         Pane pane = loader.load();
-        parameters.getScene().setRoot(pane);
+        diagramGrid.getScene().setRoot(pane);
     }
     public void onChangeProblemSize(ActionEvent actionEvent) {
         baseCaseSelect.setVisible(true);
@@ -108,15 +104,23 @@ public abstract class DiagramPresenter implements Initializable {
     public void onChangeBaseCase(ActionEvent actionEvent) {
         model.setCurrentBaseCaseIndex(baseCaseSelect.getSelectionModel().getSelectedIndex());
         reductionSelect.setVisible(true);
-        parameters.setVisible(true);
+        for(String s : model.getParams().keySet()){
+            TextField tf = new TextField();
+            tf.setPromptText(s);
+            tf.setMaxWidth(300);
+            tf.setMaxHeight(20);
+            parametersList.getChildren().add(tf);
+            //une cada parámetro con cada textfield
+            model.getParams().get(s).bind(tf.textProperty());
+        }
         reductionSelect.getItems().clear();
         reductionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
-        try{
+        /*try{
             model.viewerValues.get("baseCase").set(DiagramToCodeMapper.mapBaseCases());
         }
         catch (Exception e){
             System.out.println(e);
-        }
+        }*/
     }
 
     public void onSolutionChange(ActionEvent actionEvent) throws Exception {

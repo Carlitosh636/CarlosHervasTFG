@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 
 public class SlowAdditionDiagram extends Diagram {
     private double partSol;
@@ -32,18 +33,21 @@ public class SlowAdditionDiagram extends Diagram {
         this.reductionChoices.add(reds1);
         this.reductionChoices.add(reds2);
 
-        List<Callable> s1 = new ArrayList<>();
-        s1.add((Callable<Double>) () -> partSol + 1);
-        s1.add((Callable<Double>) () -> partSol - 1);
-        s1.add((Callable<Double>) () -> partSol + a);
-        List<Callable> s2 = new ArrayList<>();
-        s2.add((Callable<Double>) () -> partSol + 1);
-        s2.add((Callable<Double>) () -> partSol - 1);
-        s2.add((Callable<Double>) () -> partSol + Math.min(a,b));
-        List<Callable> s3 = new ArrayList<>();
-        s3.add((Callable<Double>) () -> partSol + 1);
-        s3.add((Callable<Double>) () -> partSol);
-        s3.add((Callable<Double>) () -> partSol + 2);
+        this.params.put("a",new SimpleStringProperty());
+        this.params.put("b",new SimpleStringProperty());
+
+        List<Supplier> s1 = new ArrayList<>();
+        s1.add((Supplier<Double>) () -> partSol + 1);
+        s1.add((Supplier<Double>) () -> partSol - 1);
+        s1.add((Supplier<Double>) () -> partSol + a);
+        List<Supplier> s2 = new ArrayList<>();
+        s2.add((Supplier<Double>) () -> partSol + 1);
+        s2.add((Supplier<Double>) () -> partSol - 1);
+        s2.add((Supplier<Double>) () -> partSol + Math.min(a,b));
+        List<Supplier> s3 = new ArrayList<>();
+        s3.add((Supplier<Double>) () -> partSol + 1);
+        s3.add((Supplier<Double>) () -> partSol);
+        s3.add((Supplier<Double>) () -> partSol + 2);
         this.solutionOperations = Arrays.asList(s1, s2, s3);
 
         List<String> sols1 = new ArrayList<>();
@@ -61,7 +65,6 @@ public class SlowAdditionDiagram extends Diagram {
         this.solutionsChoices = Arrays.asList(sols1, sols2, sols3);
         this.correctSolutions = Arrays.asList(0,0,2);
 
-        this.parametersFormat.set("Formato: a,b");
         this.partialData.add(new SimpleStringProperty());
         this.partialSol.add(new SimpleStringProperty());
         this.parametersView = "a,b";
@@ -105,7 +108,7 @@ public class SlowAdditionDiagram extends Diagram {
                 else{
                     returnVal[1] = Algorithms.slowAdditionOption2(a, b-1, Integer.parseInt(baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex)));
                 }
-                reducedOperation = String.valueOf(Math.min(Integer.parseInt(problemData.get(0)), Integer.parseInt(problemData.get(1)))-1);
+                reducedOperation = String.valueOf(Math.min(Integer.parseInt(params.get("a").get()), Integer.parseInt(params.get("b").get()))-1);
                 partialSol.get(0).set(Math.min(a,b)+ " - 1 + " + Math.max(a,b));
                 currentReductionSolutions.set(1);
                 for(Double v : returnVal){
@@ -141,12 +144,11 @@ public class SlowAdditionDiagram extends Diagram {
             if (checkNotBaseCase(currentProblemSize.get()+currentBaseCase.get())) {
                 throw new BaseCaseException("Cannot introduce a base case in parameters");
             }
-            a = Integer.parseInt(problemData.get(0));
-            b = Integer.parseInt(problemData.get(1));
+            a = Integer.parseInt(params.get("a").get());
+            b = Integer.parseInt(params.get("b").get());
             storedSolutions = (ArrayList<String>) algorithmsMap.get(algorithmIndex).call();
             partSol = Double.parseDouble(storedSolutions.get(1));
-            originalData.set(this.rawData);
-            originalSol.set(this.problemData.get(0) + " + " + this.problemData.get(1));
+            originalSol.set(this.params.get("a") + " + " + this.params.get("b"));
             partialData.get(0).set(reducedOperation);
 
         } catch (RuntimeException e) {
@@ -158,7 +160,7 @@ public class SlowAdditionDiagram extends Diagram {
     @Override
     public boolean checkNotBaseCase(int index) {
         for (String baseCase : baseCaseParameters.get(index)) {
-            if ((Objects.equals(problemData.get(1), baseCase)) || (Objects.equals(problemData.get(0), baseCase))) {
+            if ((Objects.equals(params.get(1), baseCase)) || (Objects.equals(params.get(0), baseCase))) {
                 return true;
             }
         }

@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class MergesortDiagram extends Diagram{
     int[] data;
@@ -23,9 +25,11 @@ public class MergesortDiagram extends Diagram{
         List<String> reds1 = Arrays.asList("array / 2");
         this.reductionChoices.add(reds1);
 
-        List<Callable> s1 = new ArrayList<>();
-        s1.add((Callable<int[]>) () -> IntStream.concat(Arrays.stream(l),Arrays.stream(r)).toArray());
-        s1.add((Callable<int[]>) () -> Algorithms.merge(data,l,r,mid,data.length-mid));
+        this.params.put("array",new SimpleStringProperty());
+
+        List<Supplier> s1 = new ArrayList<>();
+        s1.add((Supplier<int[]>) () -> IntStream.concat(Arrays.stream(l),Arrays.stream(r)).toArray());
+        s1.add((Supplier<int[]>) () -> Algorithms.merge(data,l,r,mid,data.length-mid));
         this.solutionOperations = Arrays.asList(s1);
 
         List<String> sols1 = new ArrayList<>();
@@ -38,7 +42,6 @@ public class MergesortDiagram extends Diagram{
         this.partialSol.add(new SimpleStringProperty());
         this.partialData.add(new SimpleStringProperty());
         this.partialSol.add(new SimpleStringProperty());
-        this.parametersFormat.set("Formato: a,b,c,d,e...z");
         this.parametersView = "array";
 
         algorithmsMap.put(-1, new Callable<String>() {
@@ -78,7 +81,7 @@ public class MergesortDiagram extends Diagram{
             r = new int[data.length - mid];
             int[][] values = (int[][]) algorithmsMap.get(algorithmIndex).call();
             storedSolutions.add(Arrays.toString(values[0]));
-            originalData.set(this.problemData.toString());
+            originalData.set(this.params.toString());
             originalSol.set(Arrays.toString(values[0]));
             partialSol.get(0).set(Arrays.toString(values[1]));
             partialSol.get(1).set(Arrays.toString(values[2]));
@@ -90,10 +93,11 @@ public class MergesortDiagram extends Diagram{
 
     @Override
     public boolean checkNotBaseCase(int index) {
-        if(problemData.size()>1){
+        int[] input = Arrays.stream(params.get("array").get().split(",")).mapToInt(Integer::parseInt).toArray();
+        if(input.length>1){
             //COMPROBAR QUE NO ESTÉ ORDENADO
-            data = Algorithms.stringToArrayInt(inputs.get());
-            int[] temp = Algorithms.mergeSort(data.clone());
+            data = input.clone();
+            int[] temp = Algorithms.mergeSort(input);
             return Arrays.equals(data,temp);
         }
         else return true;
