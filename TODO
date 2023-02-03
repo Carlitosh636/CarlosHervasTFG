@@ -1,16 +1,19 @@
 
 Cosas que hacer:
+-Integrar los parámetros y la reducción en el propio diagrama. En vez del originalData, tener los TextField de los parámetros en ese hueco, y la
+selección de reducción igual que antes, a la izquierda de la flecha. Cambiar las flechas de =====> por elementos gráficos de Javafx (líneas).
+En vez de un botón de confirmar y que ponga todo el diagrama, que sea dinámico:
+ -Primero pone la primera fila del diagrama, con los TextField de los parámetros y la línea apuntando al resultado que dan (se calcula automáticamente
+ luego de poner los params)
+ -Segundo se pone el selector de la reducción/descomposición. Una vez seleccionado muestra la segunda fila, y el selector de solución, y el resto ya igual
 
--Eliminar el Simple y Complex DiagramPresenters ya que solo debería haber uno, teniendo una lista de subparametros y subsoluciones
+-Hacerlo más bonito
 
--Cambiar el View para que solo haya uno, y que dependa de DiagramPresenter
+-Ver si puedo usar patrones de diseño OOP para mejorar el código
 
 -Ahora que los parámetros han sido refactorizados, ver si se puede mejorar lo de calcular la solución y no tener que usar variables propias en cada diagrama
  (puede que para lo del partialSol se pueda sustituir por una lista de partialSols, comun a todos los diagramas)
 
--Ver si puedo usar patrones de diseño OOP para mejorar el código
-
--Hacerlo más bonito
 
 -Refactorizar diagramas
     -Los datos para construir cada diagrama podrían sacarse de archivos JSON en resources en vez de ponerlos a mano en su implementación, ya sea en
@@ -18,6 +21,8 @@ Cosas que hacer:
     -Hay muchas variables que mantienen el estsado del diagrama (currentProblemSize, currentReduction, algorithmIndex...), hay que buscar una manera
     de simplificar eso
     -Las funciones pueden traducirse como funciones lambda usando Function y Supplier
+
+-Generador de código
 
 Problemas:
 
