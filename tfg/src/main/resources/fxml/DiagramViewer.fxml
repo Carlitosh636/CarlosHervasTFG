@@ -6,8 +6,8 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.SimpleDiagramPresenter">
-   <HBox prefHeight="800.0" prefWidth="1200.0">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DiagramPresenter">
+   <HBox prefHeight="1200.0" prefWidth="1600.0">
       <children>
          <VBox fx:id="SizeAndBaseCaseBox" prefHeight="300.0" prefWidth="500.0" spacing="10.0">
             <children>
@@ -130,21 +130,29 @@
                </Label>
                <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-               <Label fx:id="subParameters" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <VBox fx:id="subParameters" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <children>
+                     <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </VBox>
+               <Label fx:id="partialDataSolutionArrow" alignment="TOP_LEFT" contentDisplay="TOP" text="=====================&gt;" GridPane.columnIndex="2" GridPane.rowIndex="5">
                   <font>
                      <Font size="15.0" />
                   </font>
                </Label>
-               <Label fx:id="partialDataSolutionArrow" contentDisplay="CENTER" text="=====================&gt;" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                  <font>
-                     <Font size="15.0" />
-                  </font>
-               </Label>
-               <Label fx:id="partialSolution" alignment="CENTER" contentDisplay="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="5">
-                  <font>
-                     <Font size="15.0" />
-                  </font>
-               </Label>
+               <VBox fx:id="partialSolutions" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                  <children>
+                     <Label alignment="CENTER" contentDisplay="CENTER">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </VBox>
                <ComboBox fx:id="solutionSelect" onAction="#onSolutionChange" prefHeight="30.0" prefWidth="125.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
             </children>
             <HBox.margin>

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class MergesortDiagram extends Diagram{
     int[] data;
@@ -38,10 +37,10 @@ public class MergesortDiagram extends Diagram{
         this.solutionsChoices=Arrays.asList(sols1);
         this.correctSolutions = Arrays.asList(1);
 
-        this.partialData.add(new SimpleStringProperty());
-        this.partialSol.add(new SimpleStringProperty());
-        this.partialData.add(new SimpleStringProperty());
-        this.partialSol.add(new SimpleStringProperty());
+        this.subParameters.add(new SimpleStringProperty());
+        this.subSolutions.add(new SimpleStringProperty());
+        this.subParameters.add(new SimpleStringProperty());
+        this.subSolutions.add(new SimpleStringProperty());
         this.parametersView = "array";
 
         algorithmsMap.put(-1, new Callable<String>() {
@@ -58,8 +57,8 @@ public class MergesortDiagram extends Diagram{
                 System.arraycopy(data, 0, l, 0, mid);
                 if (data.length - mid >= 0) System.arraycopy(data, mid, r, mid - mid, data.length - mid);
 
-                partialData.get(0).set(Arrays.toString(l));
-                partialData.get(1).set(Arrays.toString(r));
+                subParameters.get(0).set(Arrays.toString(l));
+                subParameters.get(1).set(Arrays.toString(r));
                 solutions[0] = Algorithms.mergeSort(data);
                 solutions[1] = Algorithms.mergeSort(l);
                 solutions[2] = Algorithms.mergeSort(r);
@@ -81,10 +80,10 @@ public class MergesortDiagram extends Diagram{
             r = new int[data.length - mid];
             int[][] values = (int[][]) algorithmsMap.get(algorithmIndex).call();
             storedSolutions.add(Arrays.toString(values[0]));
-            originalData.set(this.params.toString());
+            originalData.set(this.params.get("array").get());
             originalSol.set(Arrays.toString(values[0]));
-            partialSol.get(0).set(Arrays.toString(values[1]));
-            partialSol.get(1).set(Arrays.toString(values[2]));
+            subSolutions.get(0).set(Arrays.toString(values[1]));
+            subSolutions.get(1).set(Arrays.toString(values[2]));
         }
         catch (RuntimeException e){
             throw new RuntimeException();

@@ -1,5 +1,6 @@
 package com.example;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public abstract class DiagramPresenter implements Initializable {
+public class DiagramPresenter implements Initializable {
     protected Diagram model;
     //private DiagramToCodeMapper mapper = new DiagramToCodeMapper();
     @FXML
@@ -43,6 +44,14 @@ public abstract class DiagramPresenter implements Initializable {
     Label isCorrect;
     @FXML
     VBox parametersList;
+    @FXML
+    VBox subParameters;
+    @FXML
+    VBox partialSolutions;
+
+    /*subParameters.textProperty().bind(model.partialDataPropertyByIndex(0));
+        partialSolution.textProperty().bind(model.partialSolPropertyByIndex(0));*/
+
     /*@FXML
     private Label diagramTitle;
     @FXML
@@ -82,6 +91,20 @@ public abstract class DiagramPresenter implements Initializable {
         try {
             model.processInputs();
             diagramGrid.setVisible(true);
+            for(SimpleStringProperty ele : model.getSubParameters()){
+                Label lb = new Label();
+                lb.setStyle(originalData.getStyle());
+                lb.setFont(originalData.getFont());
+                lb.setText(ele.get());
+                subParameters.getChildren().add(lb);
+            }
+            for(SimpleStringProperty ele : model.getSubSolutions()){
+                Label lb = new Label();
+                lb.setStyle(originalSolution.getStyle());
+                lb.setFont(originalData.getFont());
+                lb.setText(ele.get());
+                partialSolutions.getChildren().add(lb);
+            }
             solutionSelect.getItems().clear();
             //aquí probablemente debería haber un control con semáforos
             solutionSelect.getItems().setAll(model.solutionsChoices.get(model.getCurrentReductionSolutions()));

@@ -27,7 +27,7 @@ public class App extends Application {
         stage.setScene(main);
         stage.setTitle("Mi TFG");
         stage.show();
-        stage.setMaxHeight(1000);
+        stage.setMaxHeight(1200);
         stage.setMaxWidth(1600);
         stage.setMinHeight(stage.getHeight());
         stage.setMinWidth(stage.getWidth());
@@ -35,28 +35,21 @@ public class App extends Application {
     @FXML
     public void handleMainMenuButton(javafx.event.ActionEvent actionEvent) throws IOException {
         Diagram model = new RecursivePotencyDiagram("^");
-        loadScene(model,"/fxml/SimpleDiagramView.fxml",1);
+        loadScene(model,"/fxml/DiagramViewer.fxml");
     }
     @FXML
     public void handleMainMenuButton2(ActionEvent actionEvent) throws IOException{
         Diagram model = new SlowAdditionDiagram(",");
-        loadScene(model,"/fxml/SimpleDiagramView.fxml",1);
+        loadScene(model,"/fxml/DiagramViewer.fxml");
     }
     @FXML
     public void handleMainMenuButton3(ActionEvent actionEvent) throws IOException {
         Diagram model = new MergesortDiagram(null);
-        loadScene(model,"/fxml/ComplexDiagramView.fxml",2);
+        loadScene(model,"/fxml/DiagramViewer.fxml");
     }
-    private void loadScene(Diagram model, String viewName, int choiceDiagram) throws IOException {
+    private void loadScene(Diagram model, String viewName) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(viewName));
-        switch (choiceDiagram){
-            case 1:
-                loader.setControllerFactory(controller->new SimpleDiagramPresenter(model));
-                break;
-            case 2:
-                loader.setControllerFactory(controller->new ComplexDiagramPresenter(model));
-                break;
-        }
+        loader.setControllerFactory(controller-> new DiagramPresenter(model));
         Pane pane = loader.load();
         main.setRoot(pane);
     }

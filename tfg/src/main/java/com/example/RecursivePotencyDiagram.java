@@ -58,8 +58,8 @@ public class RecursivePotencyDiagram extends Diagram{
 
         //this.parametersView = "a,b";
 
-        this.partialData.add(new SimpleStringProperty());
-        this.partialSol.add(new SimpleStringProperty());
+        this.subParameters.add(new SimpleStringProperty());
+        this.subSolutions.add(new SimpleStringProperty());
 
         algorithmsMap.put(-1, new Callable<String>() {
             @Override
@@ -127,8 +127,8 @@ public class RecursivePotencyDiagram extends Diagram{
 
             partSol = Double.parseDouble(storedSolutions.get(1));
             originalSol.set(storedSolutions.get(0));
-            partialData.get(0).set(reducedOperation);
-            partialSol.get(0).set(storedSolutions.get(1));
+            subParameters.get(0).set(reducedOperation);
+            subSolutions.get(0).set(storedSolutions.get(1));
         }
         catch (RuntimeException e){
             System.out.println(e);

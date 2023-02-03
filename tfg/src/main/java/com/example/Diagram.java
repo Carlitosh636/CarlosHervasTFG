@@ -6,7 +6,6 @@ import java.util.function.Supplier;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringPropertyBase;
 
 public abstract class Diagram {
     protected DiagramType type;
@@ -14,8 +13,8 @@ public abstract class Diagram {
     protected Map<String,SimpleStringProperty> params;
     protected SimpleStringProperty originalData;
     protected SimpleStringProperty originalSol;
-    protected List<SimpleStringProperty> partialData;
-    protected List<SimpleStringProperty> partialSol;
+    protected List<SimpleStringProperty> subParameters;
+    protected List<SimpleStringProperty> subSolutions;
     protected SimpleStringProperty calculatedSol;
     protected SimpleIntegerProperty currentProblemSize;
     protected SimpleIntegerProperty currentBaseCase;
@@ -67,8 +66,6 @@ public abstract class Diagram {
     public SimpleStringProperty calculatedSolProperty() {
         return calculatedSol;
     }
-    public SimpleStringProperty partialDataPropertyByIndex(int i){return this.partialData.get(i);}
-    public SimpleStringProperty partialSolPropertyByIndex(int i){return this.partialSol.get(i);}
     public List<String> getProblemSizeChoices() {
         return problemSizeChoices;
     }
@@ -130,6 +127,13 @@ public abstract class Diagram {
         this.viewerValues = viewerValues;
     }
 
+    public List<SimpleStringProperty> getSubParameters() {
+        return subParameters;
+    }
+
+    public List<SimpleStringProperty> getSubSolutions() {
+        return subSolutions;
+    }
     public Diagram(String operation) {
         this.operation=operation;
         this.inputs = new SimpleStringProperty();
@@ -146,8 +150,8 @@ public abstract class Diagram {
         this.currentReductionSolutions = new SimpleIntegerProperty();
         this.currentReduction = new SimpleIntegerProperty();
         this.selectedSolution = new SimpleIntegerProperty();
-        this.partialData=new ArrayList<>();
-        this.partialSol=new ArrayList<>();
+        this.subParameters =new ArrayList<>();
+        this.subSolutions =new ArrayList<>();
         this.correctSolutions = new ArrayList<>();
         this.viewerValues.put("baseCase",new SimpleStringProperty());
         this.viewerValues.put("recursiveCase",new SimpleStringProperty());
