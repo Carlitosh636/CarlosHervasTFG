@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,7 +21,7 @@ public class DiagramPresenter implements Initializable {
     @FXML
     Label originalData;
     @FXML
-    Label originalDataSolutionArrow;
+    Line originalDataSolutionArrow;
     @FXML
     Label originalSolution;
     @FXML
@@ -35,7 +37,7 @@ public class DiagramPresenter implements Initializable {
     @FXML
     ComboBox baseCaseSelect;
     @FXML
-    Label partialDataSolutionArrow;
+    Line partialDataSolutionArrow;
     @FXML
     Button confirmDataButton;
     @FXML

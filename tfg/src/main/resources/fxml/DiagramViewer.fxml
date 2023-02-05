@@ -108,11 +108,7 @@
                      <Font size="15.0" />
                   </font>
                </Label>
-               <Label fx:id="originalDataSolutionArrow" text="=====================&gt;" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                  <font>
-                     <Font size="15.0" />
-                  </font>
-               </Label>
+               <Line fx:id="originalDataSolutionArrow" endX="250.0" layoutX="60.0" startX="60.0" strokeWidth="2.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                <Label fx:id="isCorrect" contentDisplay="CENTER" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="0">
                   <font>
                      <Font size="15.0" />
@@ -139,11 +135,7 @@
                      </Label>
                   </children>
                </VBox>
-               <Label fx:id="partialDataSolutionArrow" alignment="TOP_LEFT" contentDisplay="TOP" text="=====================&gt;" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                  <font>
-                     <Font size="15.0" />
-                  </font>
-               </Label>
+               <Line fx:id="partialDataSolutionArrow" endX="250.0" layoutX="60.0" startX="60.0" strokeWidth="2.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                <VBox fx:id="partialSolutions" GridPane.columnIndex="3" GridPane.rowIndex="5">
                   <children>
                      <Label alignment="CENTER" contentDisplay="CENTER">
