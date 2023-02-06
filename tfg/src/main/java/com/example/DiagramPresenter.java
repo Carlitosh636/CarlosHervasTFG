@@ -172,6 +172,7 @@ public class DiagramPresenter implements Initializable {
         }*/
     }
     public void onDescompositionChange(ActionEvent actionEvent) {
+        handleInput();
         diagramPart3.forEach(ele->ele.setVisible(true));
     }
     public void onSolutionChange(ActionEvent actionEvent) throws Exception {

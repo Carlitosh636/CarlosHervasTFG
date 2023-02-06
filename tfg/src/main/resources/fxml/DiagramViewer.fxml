@@ -65,14 +65,6 @@
                </HBox>
                <VBox prefHeight="200.0" prefWidth="100.0" spacing="50.0">
                   <children>
-                     <Button fx:id="confirmDataButton" onAction="#handleInput" text="Confirm Data">
-                        <opaqueInsets>
-                           <Insets />
-                        </opaqueInsets>
-                        <font>
-                           <Font size="15.0" />
-                        </font>
-                     </Button>
                      <Button fx:id="returnMenuButton" onAction="#returnToMenu" text="Return to menu">
                         <opaqueInsets>
                            <Insets />
