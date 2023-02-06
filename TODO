@@ -1,5 +1,7 @@
 
 Cosas que hacer:
+-poner el enunciado del problema arriba del todo
+
 -lo de poner lso parámetros dinámicamente hay que tener ojo porque se pone la tercera linea con la reducción inmediatamente cuando cambia el valor.
  Otra opción es con el setonaction (comentado) pero haciendo eso solo se ejecuta la función de comprobar si se pulsa enter en el teclado luego de poner
  el valor.
