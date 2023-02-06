@@ -2,10 +2,13 @@ package com.example;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -13,13 +16,13 @@ import javafx.scene.shape.Line;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class DiagramPresenter implements Initializable {
     protected Diagram model;
     //private DiagramToCodeMapper mapper = new DiagramToCodeMapper();
-    @FXML
-    Label originalData;
     @FXML
     Line originalDataSolutionArrow;
     @FXML
@@ -27,7 +30,7 @@ public class DiagramPresenter implements Initializable {
     @FXML
     Label calculatedSolution;
     @FXML
-    ComboBox reductionSelect;
+    ComboBox decompositionSelect;
     @FXML
     ComboBox solutionSelect;
     @FXML
@@ -45,43 +48,52 @@ public class DiagramPresenter implements Initializable {
     @FXML
     Label isCorrect;
     @FXML
-    VBox parametersList;
+    VBox originalData;
     @FXML
     VBox subParameters;
     @FXML
     VBox partialSolutions;
-
-    /*subParameters.textProperty().bind(model.partialDataPropertyByIndex(0));
-        partialSolution.textProperty().bind(model.partialSolPropertyByIndex(0));*/
-
-    /*@FXML
-    private Label diagramTitle;
     @FXML
-    private Label baseCase;
+    Line datasArrow;
     @FXML
-    private Label recursiveCase;*/
+    Line solutionsArrow;
+    List<Node> diagramPart1 = new ArrayList<>();
+    List<Node> diagramPart2 = new ArrayList<>();
+    List<Node> diagramPart3 = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
-        reductionSelect.setVisible(false);
-        baseCaseSelect.setVisible(false);
-        diagramGrid.setVisible(false);
-
         //mapper.setCurrentDiagram(model);
         //model.setViewerData1();
         bindModelData();
+        baseCaseSelect.setVisible(false);
+        diagramPart1.forEach(ele->ele.setVisible(false));
+        diagramPart2.forEach(ele->ele.setVisible(false));
+        diagramPart3.forEach(ele->ele.setVisible(false));
     }
     public DiagramPresenter(Diagram model) {
         this.model = model;
     }
     protected void bindModelData() {
         originalSolution.textProperty().bind(model.originalSolProperty());
-        originalData.textProperty().bind(model.originalDataProperty());
         calculatedSolution.textProperty().bind(model.calculatedSolProperty());
         model.currentProblemSize.bind(problemSizeSelect.getSelectionModel().selectedIndexProperty());
         model.currentBaseCase.bind(baseCaseSelect.getSelectionModel().selectedIndexProperty());
-        model.currentReduction.bind(reductionSelect.getSelectionModel().selectedIndexProperty());
+        model.currentReduction.bind(decompositionSelect.getSelectionModel().selectedIndexProperty());
         model.selectedSolution.bind(solutionSelect.getSelectionModel().selectedIndexProperty());
+
+        diagramPart1.add(originalData);
+        diagramPart1.add(originalDataSolutionArrow);
+        diagramPart1.add(originalSolution);
+
+        diagramPart2.add(datasArrow);
+        diagramPart2.add(solutionsArrow);
+        diagramPart2.add(decompositionSelect);
+
+        diagramPart3.add(partialSolutions);
+        diagramPart3.add(subParameters);
+        diagramPart3.add(partialDataSolutionArrow);
+        diagramPart3.add(solutionSelect);
 
         //diagramTitle.textProperty().bind(model.viewerValues.get("diagramTitle"));
         //baseCase.textProperty().bind(model.viewerValues.get("baseCase"));
@@ -92,18 +104,17 @@ public class DiagramPresenter implements Initializable {
     protected void handleInput() {
         try {
             model.processInputs();
-            diagramGrid.setVisible(true);
             for(SimpleStringProperty ele : model.getSubParameters()){
                 Label lb = new Label();
-                lb.setStyle(originalData.getStyle());
-                lb.setFont(originalData.getFont());
+                lb.setStyle(originalSolution.getStyle());
+                lb.setFont(originalSolution.getFont());
                 lb.setText(ele.get());
                 subParameters.getChildren().add(lb);
             }
             for(SimpleStringProperty ele : model.getSubSolutions()){
                 Label lb = new Label();
                 lb.setStyle(originalSolution.getStyle());
-                lb.setFont(originalData.getFont());
+                lb.setFont(originalSolution.getFont());
                 lb.setText(ele.get());
                 partialSolutions.getChildren().add(lb);
             }
@@ -128,18 +139,31 @@ public class DiagramPresenter implements Initializable {
 
     public void onChangeBaseCase(ActionEvent actionEvent) {
         model.setCurrentBaseCaseIndex(baseCaseSelect.getSelectionModel().getSelectedIndex());
-        reductionSelect.setVisible(true);
+        List<TextField> tfs = new ArrayList<>();
         for(String s : model.getParams().keySet()){
             TextField tf = new TextField();
             tf.setPromptText(s);
-            tf.setMaxWidth(300);
-            tf.setMaxHeight(20);
-            parametersList.getChildren().add(tf);
-            //une cada parámetro con cada textfield
+            tf.setFont(originalSolution.getFont());
+            tf.setMaxWidth(100);
+            tf.setMaxHeight(30);
+            tfs.add(tf);
             model.getParams().get(s).bind(tf.textProperty());
+            /*tf.setOnAction(actionEvent1 -> {
+
+            });*/
         }
-        reductionSelect.getItems().clear();
-        reductionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
+        tfs.forEach(v->{
+            v.textProperty().addListener(((observableValue, s, t1) -> {
+                if(tfs.stream().anyMatch(tf1 -> tf1.getText().isEmpty())){
+                    System.out.println("hay uno vacío");
+                }
+                else diagramPart2.forEach(ele->ele.setVisible(true));
+            }));
+        });
+        originalData.getChildren().addAll(tfs);
+        decompositionSelect.getItems().clear();
+        decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
+        diagramPart1.forEach(ele->ele.setVisible(true));
         /*try{
             model.viewerValues.get("baseCase").set(DiagramToCodeMapper.mapBaseCases());
         }
@@ -147,7 +171,9 @@ public class DiagramPresenter implements Initializable {
             System.out.println(e);
         }*/
     }
-
+    public void onDescompositionChange(ActionEvent actionEvent) {
+        diagramPart3.forEach(ele->ele.setVisible(true));
+    }
     public void onSolutionChange(ActionEvent actionEvent) throws Exception {
         try{
             String calcSol = model.calculate(solutionSelect.getSelectionModel().getSelectedIndex());

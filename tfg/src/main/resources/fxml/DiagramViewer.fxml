@@ -47,7 +47,7 @@
                            <Insets right="10.0" />
                         </padding>
                      </Label>
-                     <VBox fx:id="parametersList" />
+
                   </children>
                </VBox>
                <HBox prefHeight="30.0" prefWidth="200.0">
@@ -60,7 +60,7 @@
                            <Insets right="10.0" />
                         </padding>
                      </Label>
-                     <ComboBox fx:id="reductionSelect" prefHeight="30.0" prefWidth="150.0" promptText="Reduction" style="-fx-background-color: #FFD58C; -fx-border-color: #DFBA7B;" />
+                     <ComboBox fx:id="decompositionSelect" onAction="#onDescompositionChange" prefHeight="30.0" prefWidth="150.0" promptText="Reduction" style="-fx-background-color: #FFD58C; -fx-border-color: #DFBA7B;" />
                   </children>
                </HBox>
                <VBox prefHeight="200.0" prefWidth="100.0" spacing="50.0">
@@ -103,11 +103,7 @@
                <RowConstraints />
             </rowConstraints>
             <children>
-               <Label fx:id="originalData" alignment="CENTER" contentDisplay="CENTER" layoutX="339.0" layoutY="340.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                  <font>
-                     <Font size="15.0" />
-                  </font>
-               </Label>
+               <VBox fx:id="originalData" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                <Line fx:id="originalDataSolutionArrow" endX="250.0" layoutX="60.0" startX="60.0" strokeWidth="2.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                <Label fx:id="isCorrect" contentDisplay="CENTER" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="0">
                   <font>
@@ -124,8 +120,8 @@
                      <Font size="15.0" />
                   </font>
                </Label>
-               <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-               <Line endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+               <Line fx:id="datasArrow" endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+               <Line fx:id="solutionsArrow" endY="60.0" layoutX="50.0" layoutY="50.0" strokeWidth="2.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                <VBox fx:id="subParameters" GridPane.columnIndex="1" GridPane.rowIndex="5">
                   <children>
                      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT">

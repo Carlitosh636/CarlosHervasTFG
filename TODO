@@ -1,11 +1,8 @@
 
 Cosas que hacer:
--Integrar los parámetros y la reducción en el propio diagrama. En vez del originalData, tener los TextField de los parámetros en ese hueco, y la
-selección de reducción igual que antes, a la izquierda de la flecha. Cambiar las flechas de =====> por elementos gráficos de Javafx (líneas).
-En vez de un botón de confirmar y que ponga todo el diagrama, que sea dinámico:
- -Primero pone la primera fila del diagrama, con los TextField de los parámetros y la línea apuntando al resultado que dan (se calcula automáticamente
- luego de poner los params)
- -Segundo se pone el selector de la reducción/descomposición. Una vez seleccionado muestra la segunda fila, y el selector de solución, y el resto ya igual
+-lo de poner lso parámetros dinámicamente hay que tener ojo porque se pone la tercera linea con la reducción inmediatamente cuando cambia el valor.
+ Otra opción es con el setonaction (comentado) pero haciendo eso solo se ejecuta la función de comprobar si se pulsa enter en el teclado luego de poner
+ el valor.
 
 -Hacerlo más bonito
 
