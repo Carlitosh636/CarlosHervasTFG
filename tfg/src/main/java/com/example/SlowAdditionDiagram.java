@@ -148,7 +148,7 @@ public class SlowAdditionDiagram extends Diagram {
             b = Integer.parseInt(params.get("b").get());
             storedSolutions = (ArrayList<String>) algorithmsMap.get(algorithmIndex).call();
             partSol = Double.parseDouble(storedSolutions.get(1));
-            originalSol.set(this.params.get("a") + " + " + this.params.get("b"));
+            originalSol.set(this.params.get("a").get() + " + " + this.params.get("b").get());
             subParameters.get(0).set(reducedOperation);
 
         } catch (RuntimeException e) {

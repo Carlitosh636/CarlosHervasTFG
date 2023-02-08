@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.InputMethodEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -21,6 +22,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class DiagramPresenter implements Initializable {
+    @FXML
+    AnchorPane root;
     protected Diagram model;
     //private DiagramToCodeMapper mapper = new DiagramToCodeMapper();
     @FXML
@@ -65,6 +68,8 @@ public class DiagramPresenter implements Initializable {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
         //mapper.setCurrentDiagram(model);
         //model.setViewerData1();
+        AnchorPane.setLeftAnchor(SizeAndBaseCaseBox,15.0);
+        AnchorPane.setRightAnchor(diagramGrid,15.0);
         bindModelData();
         baseCaseSelect.setVisible(false);
         diagramPart1.forEach(ele->ele.setVisible(false));

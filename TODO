@@ -1,10 +1,12 @@
 
 Cosas que hacer:
 -poner el enunciado del problema arriba del todo
-
--lo de poner lso parámetros dinámicamente hay que tener ojo porque se pone la tercera linea con la reducción inmediatamente cuando cambia el valor.
- Otra opción es con el setonaction (comentado) pero haciendo eso solo se ejecuta la función de comprobar si se pulsa enter en el teclado luego de poner
- el valor.
+-Refactorizar diagramas
+    -Los datos para construir cada diagrama podrían sacarse de archivos JSON en resources en vez de ponerlos a mano en su implementación, ya sea en
+    resources o en una BBDD probablemente MongoDB
+    -Hay muchas variables que mantienen el estsado del diagrama (currentProblemSize, currentReduction, algorithmIndex...), hay que buscar una manera
+    de simplificar eso
+    -Las funciones pueden traducirse como funciones lambda usando Function y Supplier
 
 -Hacerlo más bonito
 
@@ -13,13 +15,6 @@ Cosas que hacer:
 -Ahora que los parámetros han sido refactorizados, ver si se puede mejorar lo de calcular la solución y no tener que usar variables propias en cada diagrama
  (puede que para lo del partialSol se pueda sustituir por una lista de partialSols, comun a todos los diagramas)
 
-
--Refactorizar diagramas
-    -Los datos para construir cada diagrama podrían sacarse de archivos JSON en resources en vez de ponerlos a mano en su implementación, ya sea en
-    resources o en una BBDD probablemente MongoDB
-    -Hay muchas variables que mantienen el estsado del diagrama (currentProblemSize, currentReduction, algorithmIndex...), hay que buscar una manera
-    de simplificar eso
-    -Las funciones pueden traducirse como funciones lambda usando Function y Supplier
 
 -Generador de código
 
