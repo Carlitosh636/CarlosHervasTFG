@@ -8,24 +8,15 @@ Cosas que hacer:
     de simplificar eso
     -Las funciones pueden traducirse como funciones lambda usando Function y Supplier
 
--Hacerlo más bonito, y renombrar ciertas cosas y poner explicaciones para que sea más claro
+-Hacerlo más bonito, y renombrar ciertas cosas y poner explicaciones para que sea más claro. Mejor usar archivos css propios. Nota: Puedo tener uno
+solo por ejemplo para los combobox y poner a cada uno un id en vez de cada uno un archivo.
 
 -Ver si puedo usar patrones de diseño OOP para mejorar el código
 
--Ahora que los parámetros han sido refactorizados, ver si se puede mejorar lo de calcular la solución y no tener que usar variables propias en cada diagrama
- (puede que para lo del partialSol se pueda sustituir por una lista de partialSols, comun a todos los diagramas)
-
-
 -Generador de código
-
-Problemas:
 
 Para la refactorización de los diagramas, muchas de las propiedades pueden transformarse en objetos para tenerlo mucho mejor organizado. Aunque si
 pasamos a JSON, hay que tener cuidado con eso. Mirar "java serialization with aggregation" para ver como hacerlo
 
 Para el tema de la clase de algoritmos, podría mirarse de hacer en vez de una clase estática sola, crear una librería propia que poder importar.
 Mirar cómo se puede hacer.
-
-Recordar que para un problema es: Selecciona tamaño problema -> Selecciona caso base -> Introduce datos -> Selecciona reducción -> Selecciona solución.
-Otra cosa importante es que el algoritmo seleccionado es la suma del id del tamaño problema + id de la reducción. Cuidao con eso
-Ver que hacer con el tema del caso base, al seleccionarlo qué debería ocurrir.
