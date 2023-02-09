@@ -1,14 +1,14 @@
 
 Cosas que hacer:
--poner el enunciado del problema arriba del todo
 -Refactorizar diagramas
-    -Los datos para construir cada diagrama podrían sacarse de archivos JSON en resources en vez de ponerlos a mano en su implementación, ya sea en
-    resources o en una BBDD probablemente MongoDB
+    -Posibilidad 1: intentar separar la implementación (Clase Diagram) de las propiedades (nombre, casos base y recursivos, algoritmo que usa,
+    funciones lambda, y todos los datos). Que solo haya una clase java diagrama y otra que parsea el archivo de datos (un JSON por ejemplo) a esa clase
+    diagrama. La clase de datos no tendría nada de javafx, la clase parseadora es la que cambia de primitivos a properties de javafx.
     -Hay muchas variables que mantienen el estsado del diagrama (currentProblemSize, currentReduction, algorithmIndex...), hay que buscar una manera
     de simplificar eso
     -Las funciones pueden traducirse como funciones lambda usando Function y Supplier
 
--Hacerlo más bonito
+-Hacerlo más bonito, y renombrar ciertas cosas y poner explicaciones para que sea más claro
 
 -Ver si puedo usar patrones de diseño OOP para mejorar el código
 

@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 public abstract class Diagram {
     protected DiagramType type;
+    protected SimpleStringProperty heading;
     protected SimpleStringProperty inputs;
     protected Map<String,SimpleStringProperty> params;
     protected SimpleStringProperty originalData;
