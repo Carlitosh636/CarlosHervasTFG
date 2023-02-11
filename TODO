@@ -4,6 +4,11 @@ Cosas que hacer:
     -Posibilidad 1: intentar separar la implementación (Clase Diagram) de las propiedades (nombre, casos base y recursivos, algoritmo que usa,
     funciones lambda, y todos los datos). Que solo haya una clase java diagrama y otra que parsea el archivo de datos (un JSON por ejemplo) a esa clase
     diagrama. La clase de datos no tendría nada de javafx, la clase parseadora es la que cambia de primitivos a properties de javafx.
+
+    -PROBLEMA: Las funciones lambda no se pueden serializar a JSON. Habrá que buscar cómo poner las funciones a cada diagrama.
+    -Al menos para el tema de calcular sol, ya no hay que depender de variables propias de cada diagrama, sino que DiagramData tiene
+    los params y la variable string 'partialSol'
+
     -Hay muchas variables que mantienen el estsado del diagrama (currentProblemSize, currentReduction, algorithmIndex...), hay que buscar una manera
     de simplificar eso
     -Las funciones pueden traducirse como funciones lambda usando Function y Supplier

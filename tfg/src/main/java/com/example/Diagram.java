@@ -10,7 +10,6 @@ import javafx.beans.property.SimpleStringProperty;
 public abstract class Diagram {
     protected DiagramType type;
     protected SimpleStringProperty heading;
-    protected SimpleStringProperty inputs;
     protected Map<String,SimpleStringProperty> params;
     protected SimpleStringProperty originalData;
     protected SimpleStringProperty originalSol;
@@ -69,10 +68,6 @@ public abstract class Diagram {
     }
     public List<String> getProblemSizeChoices() {
         return problemSizeChoices;
-    }
-
-    public SimpleStringProperty getInputsProperty() {
-        return inputs;
     }
 
     public int getCurrentBaseCaseIndex() {
@@ -137,7 +132,6 @@ public abstract class Diagram {
     }
     public Diagram(String operation) {
         this.operation=operation;
-        this.inputs = new SimpleStringProperty();
         this.params =new HashMap<>();
         this.reductionChoices=new ArrayList<>();
         this.problemSizeChoices=new ArrayList<>();

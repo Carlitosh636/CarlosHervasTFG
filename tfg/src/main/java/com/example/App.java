@@ -1,5 +1,6 @@
 package com.example;
 
+import com.fasterxml.jackson.databind.ObjectWriter;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,10 +10,16 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class App extends Application {
     public static void main(String[] args) {
@@ -21,6 +28,69 @@ public class App extends Application {
     private static Scene main;
     @Override
     public void start(Stage stage) throws Exception {
+        DiagramData data = new DiagramData(
+                "SIMPLE",
+                "Enunciado del recursive power",
+                new HashMap<String,String>(){{
+                    put("a","");
+                    put("b","");
+                }},
+                "",
+                "",
+                new ArrayList<>(){{
+                    add("");
+                }},
+                new ArrayList<>(){{
+                    add("");
+                }},
+                "","","","","",
+                ",",
+                "",
+                new ArrayList<>(){{
+                    add("b");
+                }},
+                0,
+                new ArrayList<>(){{
+                    add(new ArrayList<>(){{
+                        add("b == 0");
+                    }});
+                }},
+                new ArrayList<>(){{
+                    add(new ArrayList<>(){{
+                        add("0");
+                    }});
+                }},
+                new ArrayList<>(){{
+                    add(Arrays.asList("b - 1","b / 2"));
+                }},
+                new ArrayList<>(){{
+                    add(new ArrayList<>(){{
+                        add("* b");
+                        add("* a");
+                        add("** a");
+                    }});
+                    add(new ArrayList<>(){{
+                        add("** 2");
+                        add("* b");
+                    }});
+                    add(new ArrayList<>(){{
+                        add("** 2");
+                        add("* b");
+                        add("a * ((a^(b-1/2)))²))");
+                    }});
+                }},
+                "",
+                ""
+
+        );
+        ObjectMapper objMapper = new ObjectMapper();
+        ObjectWriter writer = objMapper.writerWithDefaultPrettyPrinter();
+        writer.writeValue(new File("DiagramExample.json"),data);
+
+        DiagramData obtainedData = objMapper.readValue(new File("DiagramExample.json"),DiagramData.class);
+        System.out.println(obtainedData);
+
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DiagramSelector.fxml"));
         Parent root = (Parent) loader.load();
         main = new Scene(root);
