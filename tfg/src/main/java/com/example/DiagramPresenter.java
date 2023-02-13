@@ -108,6 +108,8 @@ public class DiagramPresenter implements Initializable {
     @FXML
     protected void handleInput() {
         try {
+            subParameters.getChildren().clear();
+            partialSolutions.getChildren().clear();
             model.processInputs();
             for(SimpleStringProperty ele : model.getSubParameters()){
                 Label lb = new Label();
@@ -160,7 +162,7 @@ public class DiagramPresenter implements Initializable {
         tfs.forEach(v->{
             v.textProperty().addListener(((observableValue, s, t1) -> {
                 if(tfs.stream().anyMatch(tf1 -> tf1.getText().isEmpty())){
-                    System.out.println("hay uno vacío");
+                    diagramPart2.forEach(ele->ele.setVisible(false));
                 }
                 else diagramPart2.forEach(ele->ele.setVisible(true));
             }));

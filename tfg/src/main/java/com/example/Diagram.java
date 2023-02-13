@@ -177,6 +177,7 @@ public abstract class Diagram {
                 formattedValues+=simpleStringProperty.get()+", ";
             }
             originalData.set(formattedValues);
+
         }
         catch (Exception e){
             System.out.println(e);
