@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -86,6 +87,20 @@ public class App extends Application {
         ObjectMapper objMapper = new ObjectMapper();
         ObjectWriter writer = objMapper.writerWithDefaultPrettyPrinter();
         writer.writeValue(new File("DiagramExample.json"),data);
+
+        Supplier<Double> fn2 = (Supplier<Double> & Serializable)()
+                -> Math.random();
+        System.out.println("Run original function: "
+                + fn2.get());
+        String path2 = "./serialized-fn2";
+        Serializator.serialize((Serializable)fn2,path2);
+
+        Supplier<Double> desFn2
+                = (Supplier<Double>)Serializator.deserialize(path2);
+        System.out.println("Deserialized function from "
+                + path2);
+        System.out.println("Run deserialized function: "
+                + desFn2.get());
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DiagramSelector.fxml"));
         Parent root = (Parent) loader.load();

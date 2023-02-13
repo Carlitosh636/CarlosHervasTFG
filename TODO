@@ -6,7 +6,7 @@ Cosas que hacer:
     funciones lambda, y todos los datos). Que solo haya una clase java diagrama y otra que parsea el archivo de datos (un JSON por ejemplo) a esa clase
     diagrama. La clase de datos no tendría nada de javafx, la clase parseadora es la que cambia de primitivos a properties de javafx.
 
-    -PROBLEMA: Las funciones lambda no se pueden serializar a JSON. Habrá que buscar cómo poner las funciones a cada diagrama.
+    -LAS FUNCIONES LAMBDA DEBEN SERIALIZARSE Y DESERIALIZARSE DE FORMA DISTINTA. VER LA CLASE APP (y borrar lo que hay de testeo)
     -Al menos para el tema de calcular sol, ya no hay que depender de variables propias de cada diagrama, sino que DiagramData tiene
     los params y la variable string 'partialSol'
     -Las funciones pueden traducirse como funciones lambda usando Function y Supplier
