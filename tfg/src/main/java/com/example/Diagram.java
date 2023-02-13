@@ -19,6 +19,7 @@ public abstract class Diagram {
     protected List<SimpleStringProperty> subParameters;
     protected List<SimpleStringProperty> subSolutions;
     protected SimpleStringProperty calculatedSol;
+    protected String partSol;
     protected SimpleIntegerProperty currentProblemSize;
     protected SimpleIntegerProperty currentBaseCase;
     protected SimpleIntegerProperty currentReduction;
@@ -139,10 +140,12 @@ public abstract class Diagram {
         diagramData =objMapper.readValue(new File(diagramDataName),DiagramData.class);
         this.operation=operation;
         this.params =new HashMap<>();
+        this.heading = new SimpleStringProperty(diagramData.heading);
         this.type = DiagramType.valueOf(diagramData.type);
         diagramData.params.forEach((k,v)->{
             params.put(k,new SimpleStringProperty(v));
         });
+        this.partSol = diagramData.partSol;
         this.reductionChoices=diagramData.reductionChoices;
         this.problemSizeChoices=diagramData.problemSizeChoices;
         this.baseCaseChoices=diagramData.baseCaseChoices;

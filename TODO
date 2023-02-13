@@ -9,9 +9,6 @@ Cosas que hacer:
     -PROBLEMA: Las funciones lambda no se pueden serializar a JSON. Habrá que buscar cómo poner las funciones a cada diagrama.
     -Al menos para el tema de calcular sol, ya no hay que depender de variables propias de cada diagrama, sino que DiagramData tiene
     los params y la variable string 'partialSol'
-
-    -Hay muchas variables que mantienen el estsado del diagrama (currentProblemSize, currentReduction, algorithmIndex...), hay que buscar una manera
-    de simplificar eso
     -Las funciones pueden traducirse como funciones lambda usando Function y Supplier
 
 
