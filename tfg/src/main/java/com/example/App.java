@@ -43,7 +43,7 @@ public class App extends Application {
                 new ArrayList<>(){{
                     add("");
                 }},
-                "","","","","",
+                "",0,0,0,0,
                 ",",
                 "",
                 new ArrayList<>(){{
@@ -80,16 +80,12 @@ public class App extends Application {
                     }});
                 }},
                 "",
-                ""
-
+                "",
+                Arrays.asList(1,0,2)
         );
         ObjectMapper objMapper = new ObjectMapper();
         ObjectWriter writer = objMapper.writerWithDefaultPrettyPrinter();
         writer.writeValue(new File("DiagramExample.json"),data);
-
-        DiagramData obtainedData = objMapper.readValue(new File("DiagramExample.json"),DiagramData.class);
-        System.out.println(obtainedData);
-
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DiagramSelector.fxml"));
         Parent root = (Parent) loader.load();
@@ -104,17 +100,17 @@ public class App extends Application {
     }
     @FXML
     public void handleMainMenuButton(javafx.event.ActionEvent actionEvent) throws IOException {
-        Diagram model = new RecursivePotencyDiagram("^");
+        Diagram model = new RecursivePotencyDiagram("^","DiagramExample.json");
         loadScene(model,"/fxml/DiagramViewer.fxml");
     }
     @FXML
     public void handleMainMenuButton2(ActionEvent actionEvent) throws IOException{
-        Diagram model = new SlowAdditionDiagram(",");
+        Diagram model = new SlowAdditionDiagram(",","DiagramExample.json");
         loadScene(model,"/fxml/DiagramViewer.fxml");
     }
     @FXML
     public void handleMainMenuButton3(ActionEvent actionEvent) throws IOException {
-        Diagram model = new MergesortDiagram(null);
+        Diagram model = new MergesortDiagram(null,"DiagramExample.json");
         loadScene(model,"/fxml/DiagramViewer.fxml");
     }
     private void loadScene(Diagram model, String viewName) throws IOException {

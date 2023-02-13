@@ -10,10 +10,10 @@
   "subParameters" : [ "" ],
   "subSolutions" : [ "" ],
   "calculatedSol" : "",
-  "currentProblemSize" : "",
-  "currentBaseCase" : "",
-  "currentReduction" : "",
-  "currentReductionSolutions" : "",
+  "currentProblemSize" : 0,
+  "currentBaseCase" : 0,
+  "currentReduction" : 0,
+  "currentReductionSolutions" : 0,
   "operation" : ",",
   "reducedOperation" : "",
   "problemSizeChoices" : [ "b" ],
@@ -23,5 +23,6 @@
   "reductionChoices" : [ [ "b - 1", "b / 2" ] ],
   "solutionsChoices" : [ [ "* b", "* a", "** a" ], [ "** 2", "* b" ], [ "** 2", "* b", "a * ((a^(b-1/2)))²))" ] ],
   "partSol" : "",
-  "recursiveCallParameters" : ""
+  "recursiveCallParameters" : "",
+  "correctSolutions" : [ 1, 0, 2 ]
 }

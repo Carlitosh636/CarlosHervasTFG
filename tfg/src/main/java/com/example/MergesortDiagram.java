@@ -2,6 +2,7 @@ package com.example;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,8 +15,8 @@ public class MergesortDiagram extends Diagram{
     int mid;
     int[] l;
     int[] r;
-    public MergesortDiagram(String operation) {
-        super(operation);
+    public MergesortDiagram(String operation,String diagramDataName) throws IOException {
+        super(operation, diagramDataName);
         this.type = DiagramType.COMPLEX;
         this.problemSizeChoices.add("array.size");
         List<String> bCases1 = Arrays.asList("array.size <= 1");

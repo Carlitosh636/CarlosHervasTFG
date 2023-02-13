@@ -2,6 +2,7 @@ package com.example;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,21 +14,8 @@ public class RecursivePotencyDiagram extends Diagram{
     private double partSol;
     private double a = 1;
     private double b = 1;
-    public RecursivePotencyDiagram(String operation) {
-        super(operation);
-        this.type = DiagramType.SIMPLE;
-        this.problemSizeChoices.add("b");
-
-        List<String> bCases1 = Arrays.asList("b == 0");
-        this.baseCaseChoices.add(bCases1);
-        List<String> bc1 = Arrays.asList("0");
-        this.baseCaseParameters.add(bc1);
-
-        List<String> reds1 = Arrays.asList("b - 1","b / 2");
-        this.reductionChoices.add(reds1);
-
-        this.params.put("a",new SimpleStringProperty());
-        this.params.put("b",new SimpleStringProperty());
+    public RecursivePotencyDiagram(String operation,String diagramDataName) throws IOException {
+        super(operation,diagramDataName);
 
         List<Supplier> sols1 = new ArrayList<>();
         sols1.add((Supplier<Double>) () -> partSol*b);
@@ -41,20 +29,6 @@ public class RecursivePotencyDiagram extends Diagram{
         sols3.add((Supplier<Double>) () -> partSol*b);
         sols3.add((Supplier<Double>) () -> a * (Math.pow(partSol,2)));
         this.solutionOperations = Arrays.asList(sols1, sols2, sols3);
-
-        List<String> solsChoices1 = new ArrayList<>();
-        solsChoices1.add("* b");
-        solsChoices1.add("* a");
-        solsChoices1.add("** a");
-        List<String> solsChoices2 = new ArrayList<>();
-        solsChoices2.add("** 2");
-        solsChoices2.add("* b");
-        List<String> solsChoices3 = new ArrayList<>();
-        solsChoices3.add("** 2");
-        solsChoices3.add("* b");
-        solsChoices3.add("a * ((a^(b-1/2)))²))");
-        this.solutionsChoices=Arrays.asList(solsChoices1,solsChoices2,solsChoices3);
-        this.correctSolutions = Arrays.asList(1,0,2);
 
         //this.parametersView = "a,b";
 

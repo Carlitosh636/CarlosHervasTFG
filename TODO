@@ -1,5 +1,8 @@
 
 Cosas que hacer:
+-FEAT: Cuando corriges algún parámetro, se tiene que quitar la opción de reducción.
+-BUG: Al poner los datos no salta la excepción de mal input hasta que se selecciona la reducción. Cambiarlo para que salte al poner los params
+-BUG: al cambiar de reducción no se borran las subsoluciones anteriores. Hay que hacer atnes un clear
 -Refactorizar diagramas
     -Posibilidad 1: intentar separar la implementación (Clase Diagram) de las propiedades (nombre, casos base y recursivos, algoritmo que usa,
     funciones lambda, y todos los datos). Que solo haya una clase java diagrama y otra que parsea el archivo de datos (un JSON por ejemplo) a esa clase
@@ -12,6 +15,8 @@ Cosas que hacer:
     -Hay muchas variables que mantienen el estsado del diagrama (currentProblemSize, currentReduction, algorithmIndex...), hay que buscar una manera
     de simplificar eso
     -Las funciones pueden traducirse como funciones lambda usando Function y Supplier
+
+
 
 -Hacerlo más bonito, y renombrar ciertas cosas y poner explicaciones para que sea más claro. Mejor usar archivos css propios. Nota: Puedo tener uno
 solo por ejemplo para los combobox y poner a cada uno un id en vez de cada uno un archivo.

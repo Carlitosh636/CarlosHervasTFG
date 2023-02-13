@@ -1,9 +1,12 @@
 package com.example;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -130,24 +133,38 @@ public abstract class Diagram {
     public List<SimpleStringProperty> getSubSolutions() {
         return subSolutions;
     }
-    public Diagram(String operation) {
+    public Diagram(String operation,String diagramDataName) throws IOException {
+        DiagramData diagramData;
+        ObjectMapper objMapper = new ObjectMapper();
+        diagramData =objMapper.readValue(new File(diagramDataName),DiagramData.class);
         this.operation=operation;
         this.params =new HashMap<>();
-        this.reductionChoices=new ArrayList<>();
-        this.problemSizeChoices=new ArrayList<>();
-        this.baseCaseChoices=new ArrayList<>();
-        this.baseCaseParameters=new ArrayList<>();
-        this.originalData=new SimpleStringProperty();
-        this.originalSol=new SimpleStringProperty();
-        this.calculatedSol = new SimpleStringProperty();
-        this.currentProblemSize = new SimpleIntegerProperty();
-        this.currentBaseCase = new SimpleIntegerProperty();
-        this.currentReductionSolutions = new SimpleIntegerProperty();
-        this.currentReduction = new SimpleIntegerProperty();
+        this.type = DiagramType.valueOf(diagramData.type);
+        diagramData.params.forEach((k,v)->{
+            params.put(k,new SimpleStringProperty(v));
+        });
+        this.reductionChoices=diagramData.reductionChoices;
+        this.problemSizeChoices=diagramData.problemSizeChoices;
+        this.baseCaseChoices=diagramData.baseCaseChoices;
+        this.baseCaseParameters=diagramData.baseCaseParameters;
+        this.originalData=new SimpleStringProperty(diagramData.originalData);
+        this.originalSol=new SimpleStringProperty(diagramData.originalSol);
+        this.calculatedSol = new SimpleStringProperty(diagramData.calculatedSol);
+        this.currentProblemSize = new SimpleIntegerProperty(diagramData.currentProblemSize);
+        this.currentBaseCase = new SimpleIntegerProperty(diagramData.currentBaseCase);
+        this.currentReductionSolutions = new SimpleIntegerProperty(diagramData.currentReductionSolutions);
+        this.currentReduction = new SimpleIntegerProperty(diagramData.currentReduction);
         this.selectedSolution = new SimpleIntegerProperty();
         this.subParameters =new ArrayList<>();
+        diagramData.subParameters.forEach(ele->{
+            this.subParameters.add(new SimpleStringProperty(ele));
+        });
+        this.solutionsChoices = new ArrayList<>();
+        diagramData.solutionsChoices.forEach(ele->{
+            this.solutionsChoices.add(ele);
+        });
         this.subSolutions =new ArrayList<>();
-        this.correctSolutions = new ArrayList<>();
+        this.correctSolutions = diagramData.correctSolutions;
         this.viewerValues.put("baseCase",new SimpleStringProperty());
         this.viewerValues.put("recursiveCase",new SimpleStringProperty());
     }
@@ -178,12 +195,12 @@ public abstract class Diagram {
             calcSol = String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).get());
         }
         calculatedSol.set(calcSol);
-        viewerValues.get("recursiveCase").set(String.format(
+        /*viewerValues.get("recursiveCase").set(String.format(
                 "return %s(%s) %s",
                 this.getClass().getSimpleName(),
                 this.recursiveCallParameters,
                 this.solutionsChoices.get(this.currentReductionSolutions.get()).get(this.getSelectedSolution())
-        ));
+        ));*/
         return calcSol;
     };
 

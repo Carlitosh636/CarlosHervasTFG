@@ -2,6 +2,7 @@ package com.example;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,8 +14,8 @@ public class SlowAdditionDiagram extends Diagram {
     private double partSol;
     private double a;
     private double b;
-    public SlowAdditionDiagram(String operation) {
-        super(operation);
+    public SlowAdditionDiagram(String operation,String diagramDataName) throws IOException {
+        super(operation,diagramDataName );
         this.type = DiagramType.SIMPLE;
         this.problemSizeChoices.add("a + b");
         this.problemSizeChoices.add("min(a,b)");

@@ -13,10 +13,10 @@ public class DiagramData implements Serializable {
     public List<String> subParameters;
     public List<String> subSolutions;
     public String calculatedSol;
-    public String currentProblemSize;
-    public String currentBaseCase;
-    public String currentReduction;
-    public String currentReductionSolutions;
+    public int currentProblemSize;
+    public int currentBaseCase;
+    public int currentReduction;
+    public int currentReductionSolutions;
     public String operation;
     public String reducedOperation;
     public List<String> problemSizeChoices;
@@ -27,12 +27,12 @@ public class DiagramData implements Serializable {
     public List<List<String>> solutionsChoices;
     public String partSol;
     public String recursiveCallParameters;
-
+    public List<Integer> correctSolutions;
     public DiagramData(){
 
     }
 
-    public DiagramData(String type, String heading, Map<String, String> params, String originalData, String originalSol, List<String> subParameters, List<String> subSolutions, String calculatedSol, String currentProblemSize, String currentBaseCase, String currentReduction, String currentReductionSolutions, String operation, String reducedOperation, List<String> problemSizeChoices, int currentBaseCaseIndex, List<List<String>> baseCaseChoices, List<List<String>> baseCaseParameters, List<List<String>> reductionChoices, List<List<String>> solutionsChoices, String partSol, String recursiveCallParameters) {
+    public DiagramData(String type, String heading, Map<String, String> params, String originalData, String originalSol, List<String> subParameters, List<String> subSolutions, String calculatedSol, int currentProblemSize, int currentBaseCase, int currentReduction, int currentReductionSolutions, String operation, String reducedOperation, List<String> problemSizeChoices, int currentBaseCaseIndex, List<List<String>> baseCaseChoices, List<List<String>> baseCaseParameters, List<List<String>> reductionChoices, List<List<String>> solutionsChoices, String partSol, String recursiveCallParameters, List<Integer> correctSolutions) {
         this.type = type;
         this.heading = heading;
         this.params = params;
@@ -55,5 +55,6 @@ public class DiagramData implements Serializable {
         this.solutionsChoices = solutionsChoices;
         this.partSol = partSol;
         this.recursiveCallParameters = recursiveCallParameters;
+        this.correctSolutions = correctSolutions;
     }
 }
