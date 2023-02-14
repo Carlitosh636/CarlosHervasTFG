@@ -7,6 +7,8 @@ Cosas que hacer:
     diagrama. La clase de datos no tendría nada de javafx, la clase parseadora es la que cambia de primitivos a properties de javafx.
 
     -LAS FUNCIONES LAMBDA DEBEN SERIALIZARSE Y DESERIALIZARSE DE FORMA DISTINTA. VER LA CLASE APP (y borrar lo que hay de testeo)
+    (intentarlo primero con solutionsOperations)
+
     -Al menos para el tema de calcular sol, ya no hay que depender de variables propias de cada diagrama, sino que DiagramData tiene
     los params y la variable string 'partialSol'
     -Las funciones pueden traducirse como funciones lambda usando Function y Supplier

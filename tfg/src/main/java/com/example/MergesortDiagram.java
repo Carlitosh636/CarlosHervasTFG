@@ -15,33 +15,14 @@ public class MergesortDiagram extends Diagram{
     int mid;
     int[] l;
     int[] r;
-    public MergesortDiagram(String operation,String diagramDataName) throws IOException {
-        super(operation, diagramDataName);
-        this.type = DiagramType.COMPLEX;
-        this.problemSizeChoices.add("array.size");
-        List<String> bCases1 = Arrays.asList("array.size <= 1");
-        this.baseCaseChoices.add(bCases1);
-
-        List<String> reds1 = Arrays.asList("array / 2");
-        this.reductionChoices.add(reds1);
-
-        this.params.put("array",new SimpleStringProperty());
+    public MergesortDiagram(String diagramDataName) throws IOException {
+        super(diagramDataName);
 
         List<Supplier> s1 = new ArrayList<>();
         s1.add((Supplier<int[]>) () -> IntStream.concat(Arrays.stream(l),Arrays.stream(r)).toArray());
         s1.add((Supplier<int[]>) () -> Algorithms.merge(data,l,r,mid,data.length-mid));
         this.solutionOperations = Arrays.asList(s1);
 
-        List<String> sols1 = new ArrayList<>();
-        sols1.add("concatenate left and right arrays");
-        sols1.add("merge left and right arrays");
-        this.solutionsChoices=Arrays.asList(sols1);
-        this.correctSolutions = Arrays.asList(1);
-
-        this.subParameters.add(new SimpleStringProperty());
-        this.subSolutions.add(new SimpleStringProperty());
-        this.subParameters.add(new SimpleStringProperty());
-        this.subSolutions.add(new SimpleStringProperty());
         this.parametersView = "array";
 
         algorithmsMap.put(-1, new Callable<String>() {

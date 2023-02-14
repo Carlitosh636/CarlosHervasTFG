@@ -134,11 +134,11 @@ public abstract class Diagram {
     public List<SimpleStringProperty> getSubSolutions() {
         return subSolutions;
     }
-    public Diagram(String operation,String diagramDataName) throws IOException {
+    public Diagram(String diagramDataName) throws IOException {
         DiagramData diagramData;
         ObjectMapper objMapper = new ObjectMapper();
         diagramData =objMapper.readValue(new File(diagramDataName),DiagramData.class);
-        this.operation=operation;
+        this.operation=diagramData.operation;
         this.params =new HashMap<>();
         this.heading = new SimpleStringProperty(diagramData.heading);
         this.type = DiagramType.valueOf(diagramData.type);
@@ -162,11 +162,14 @@ public abstract class Diagram {
         diagramData.subParameters.forEach(ele->{
             this.subParameters.add(new SimpleStringProperty(ele));
         });
+        this.subSolutions =new ArrayList<>();
+        diagramData.subSolutions.forEach(ele->{
+            this.subSolutions.add(new SimpleStringProperty(ele));
+        });
         this.solutionsChoices = new ArrayList<>();
         diagramData.solutionsChoices.forEach(ele->{
             this.solutionsChoices.add(ele);
         });
-        this.subSolutions =new ArrayList<>();
         this.correctSolutions = diagramData.correctSolutions;
         this.viewerValues.put("baseCase",new SimpleStringProperty());
         this.viewerValues.put("recursiveCase",new SimpleStringProperty());

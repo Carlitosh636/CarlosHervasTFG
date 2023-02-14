@@ -1,7 +1,5 @@
 package com.example;
 
-import javafx.beans.property.SimpleStringProperty;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,64 +9,30 @@ import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 public class SlowAdditionDiagram extends Diagram {
-    private double partSol;
+    private double partialSol;
     private double a;
     private double b;
-    public SlowAdditionDiagram(String operation,String diagramDataName) throws IOException {
-        super(operation,diagramDataName );
-        this.type = DiagramType.SIMPLE;
-        this.problemSizeChoices.add("a + b");
-        this.problemSizeChoices.add("min(a,b)");
-
-        List<String> bCases1 = Arrays.asList("a=b=0");
-        List<String> bCases2 = Arrays.asList("min(a,b)=0");
-        this.baseCaseChoices.add(bCases1);
-        this.baseCaseChoices.add(bCases2);
-        List<String> bc1 = Arrays.asList("0");
-        List<String> bc2 = Arrays.asList("0");
-        this.baseCaseParameters.add(bc1);
-        this.baseCaseParameters.add(bc2);
-
-        List<String> reds1 = Arrays.asList("a - 1");
-        List<String> reds2 = Arrays.asList("min(a,b) - 1", "min(a-1,b-1)");
-        this.reductionChoices.add(reds1);
-        this.reductionChoices.add(reds2);
-
-        this.params.put("a",new SimpleStringProperty());
-        this.params.put("b",new SimpleStringProperty());
+    public SlowAdditionDiagram(String diagramDataName) throws IOException {
+        super(diagramDataName);
+        partialSol = Double.parseDouble(partSol);
+        a = Double.parseDouble(params.get("a").get());
+        b = Double.parseDouble(params.get("b").get());
 
         List<Supplier> s1 = new ArrayList<>();
-        s1.add((Supplier<Double>) () -> partSol + 1);
-        s1.add((Supplier<Double>) () -> partSol - 1);
-        s1.add((Supplier<Double>) () -> partSol + a);
+        s1.add((Supplier<Double>) () -> partialSol + 1);
+        s1.add((Supplier<Double>) () -> partialSol - 1);
+        s1.add((Supplier<Double>) () -> partialSol + a);
         List<Supplier> s2 = new ArrayList<>();
-        s2.add((Supplier<Double>) () -> partSol + 1);
-        s2.add((Supplier<Double>) () -> partSol - 1);
-        s2.add((Supplier<Double>) () -> partSol + Math.min(a,b));
+        s2.add((Supplier<Double>) () -> partialSol + 1);
+        s2.add((Supplier<Double>) () -> partialSol - 1);
+        s2.add((Supplier<Double>) () -> partialSol + Math.min(a,b));
         List<Supplier> s3 = new ArrayList<>();
-        s3.add((Supplier<Double>) () -> partSol + 1);
-        s3.add((Supplier<Double>) () -> partSol);
-        s3.add((Supplier<Double>) () -> partSol + 2);
+        s3.add((Supplier<Double>) () -> partialSol + 1);
+        s3.add((Supplier<Double>) () -> partialSol);
+        s3.add((Supplier<Double>) () -> partialSol + 2);
         this.solutionOperations = Arrays.asList(s1, s2, s3);
 
-        List<String> sols1 = new ArrayList<>();
-        sols1.add(" + 1");
-        sols1.add(" - 1");
-        sols1.add(" + a");
-        List<String> sols2 = new ArrayList<>();
-        sols2.add(" + 1");
-        sols2.add(" - 1");
-        sols2.add(" + min(a,b)");
-        List<String> sols3 = new ArrayList<>();
-        sols3.add(" + 1");
-        sols3.add(" - 1 + 1");
-        sols3.add(" + 1 + 1");
-        this.solutionsChoices = Arrays.asList(sols1, sols2, sols3);
-        this.correctSolutions = Arrays.asList(0,0,2);
-
-        this.subParameters.add(new SimpleStringProperty());
-        this.subSolutions.add(new SimpleStringProperty());
-        this.parametersView = "a,b";
+        //this.parametersView = "a,b";
 
         algorithmsMap.put(-1, new Callable<String>() {
             @Override
@@ -148,7 +112,7 @@ public class SlowAdditionDiagram extends Diagram {
             a = Integer.parseInt(params.get("a").get());
             b = Integer.parseInt(params.get("b").get());
             storedSolutions = (ArrayList<String>) algorithmsMap.get(algorithmIndex).call();
-            partSol = Double.parseDouble(storedSolutions.get(1));
+            partialSol = Double.parseDouble(storedSolutions.get(1));
             originalSol.set(this.params.get("a").get() + " + " + this.params.get("b").get());
             subParameters.get(0).set(reducedOperation);
 

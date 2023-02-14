@@ -1,0 +1,27 @@
+{
+  "type" : "COMPLEX",
+  "heading" : "Enunciado del mergesort",
+  "params" : {
+    "array" : ""
+  },
+  "originalData" : "",
+  "originalSol" : "",
+  "subParameters" : [ "","" ],
+  "subSolutions" : [ "","" ],
+  "calculatedSol" : "",
+  "currentProblemSize" : 0,
+  "currentBaseCase" : 0,
+  "currentReduction" : 0,
+  "currentReductionSolutions" : 0,
+  "operation" : "",
+  "reducedOperation" : "",
+  "problemSizeChoices" : [ "array.size" ],
+  "currentBaseCaseIndex" : 0,
+  "baseCaseChoices" : [ [ "array.size <= 1" ] ],
+  "baseCaseParameters" : [ [ "0" ] ],
+  "reductionChoices" : [ [ "array / 2" ] ],
+  "solutionsChoices" : [ ["Concatenate left and right arrays","Merge left and right arrays"] ],
+  "partSol" : "",
+  "recursiveCallParameters" : "",
+  "correctSolutions" : [ 1 ]
+}

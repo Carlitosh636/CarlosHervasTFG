@@ -11,8 +11,8 @@ import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 public class RecursivePotencyDiagram extends Diagram{
-    public RecursivePotencyDiagram(String operation,String diagramDataName) throws IOException {
-        super(operation,diagramDataName);
+    public RecursivePotencyDiagram(String diagramDataName) throws IOException {
+        super(diagramDataName);
 
         List<Supplier> sols1 = new ArrayList<>();
         sols1.add((Supplier<Double>) () -> Double.parseDouble(partSol)*Double.parseDouble(params.get("a").get()));
@@ -29,8 +29,8 @@ public class RecursivePotencyDiagram extends Diagram{
 
         //this.parametersView = "a,b";
 
-        this.subParameters.add(new SimpleStringProperty());
-        this.subSolutions.add(new SimpleStringProperty());
+        //this.subParameters.add(new SimpleStringProperty());
+        //this.subSolutions.add(new SimpleStringProperty());
 
         algorithmsMap.put(-1, new Callable<String>() {
             @Override

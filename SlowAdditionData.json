@@ -1,0 +1,28 @@
+{
+  "type" : "SIMPLE",
+  "heading" : "Enunciado del Slow Addition",
+  "params" : {
+    "a" : "",
+    "b" : ""
+  },
+  "originalData" : "",
+  "originalSol" : "",
+  "subParameters" : [ "" ],
+  "subSolutions" : [ "" ],
+  "calculatedSol" : "",
+  "currentProblemSize" : 0,
+  "currentBaseCase" : 0,
+  "currentReduction" : 0,
+  "currentReductionSolutions" : 0,
+  "operation" : ",",
+  "reducedOperation" : "",
+  "problemSizeChoices" : [ "a + b","min(a,b)" ],
+  "currentBaseCaseIndex" : 0,
+  "baseCaseChoices" : [ [ "a=b=0" ],["min(a,b)=0"] ],
+  "baseCaseParameters" : [ [ "0" ],["0"] ],
+  "reductionChoices" : [ [ "a - 1" ] , ["min(a,b) - 1", "min(a-1,b-1)"] ],
+  "solutionsChoices" : [ [ " + 1", " - 1", " + a"], [ " + 1", " - 1", " + min(a,b)"], [ " + 1", " - 1 + 1", " + 1 + 1"] ],
+  "partSol" : "",
+  "recursiveCallParameters" : "",
+  "correctSolutions" : [ 0,0,2 ]
+}

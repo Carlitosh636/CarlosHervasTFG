@@ -29,7 +29,7 @@ public class App extends Application {
     private static Scene main;
     @Override
     public void start(Stage stage) throws Exception {
-        DiagramData data = new DiagramData(
+        /*DiagramData data = new DiagramData(
                 "SIMPLE",
                 "Enunciado del recursive power",
                 new HashMap<String,String>(){{
@@ -86,9 +86,9 @@ public class App extends Application {
         );
         ObjectMapper objMapper = new ObjectMapper();
         ObjectWriter writer = objMapper.writerWithDefaultPrettyPrinter();
-        writer.writeValue(new File("DiagramExample.json"),data);
+        writer.writeValue(new File("DiagramExample.json"),data);*/
 
-        Supplier<Double> fn2 = (Supplier<Double> & Serializable)()
+        /*Supplier<Double> fn2 = (Supplier<Double> & Serializable)()
                 -> Math.random();
         System.out.println("Run original function: "
                 + fn2.get());
@@ -100,7 +100,7 @@ public class App extends Application {
         System.out.println("Deserialized function from "
                 + path2);
         System.out.println("Run deserialized function: "
-                + desFn2.get());
+                + desFn2.get());*/
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DiagramSelector.fxml"));
         Parent root = (Parent) loader.load();
@@ -115,17 +115,17 @@ public class App extends Application {
     }
     @FXML
     public void handleMainMenuButton(javafx.event.ActionEvent actionEvent) throws IOException {
-        Diagram model = new RecursivePotencyDiagram("^","DiagramExample.json");
+        Diagram model = new RecursivePotencyDiagram("RecursiveDiagramData.json");
         loadScene(model,"/fxml/DiagramViewer.fxml");
     }
     @FXML
     public void handleMainMenuButton2(ActionEvent actionEvent) throws IOException{
-        Diagram model = new SlowAdditionDiagram(",","DiagramExample.json");
+        Diagram model = new SlowAdditionDiagram("SlowAdditionData.json");
         loadScene(model,"/fxml/DiagramViewer.fxml");
     }
     @FXML
     public void handleMainMenuButton3(ActionEvent actionEvent) throws IOException {
-        Diagram model = new MergesortDiagram(null,"DiagramExample.json");
+        Diagram model = new MergesortDiagram("MergeSortData.json");
         loadScene(model,"/fxml/DiagramViewer.fxml");
     }
     private void loadScene(Diagram model, String viewName) throws IOException {
