@@ -1,6 +1,6 @@
 package com.example;
 
-import com.fasterxml.jackson.databind.ObjectWriter;
+import com.example.presenter.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,17 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class App extends Application {
     public static void main(String[] args) {
@@ -29,80 +19,23 @@ public class App extends Application {
     private static Scene main;
     @Override
     public void start(Stage stage) throws Exception {
-        /*DiagramData data = new DiagramData(
-                "SIMPLE",
-                "Enunciado del recursive power",
-                new HashMap<String,String>(){{
-                    put("a","");
-                    put("b","");
-                }},
-                "",
-                "",
-                new ArrayList<>(){{
-                    add("");
-                }},
-                new ArrayList<>(){{
-                    add("");
-                }},
-                "",0,0,0,0,
-                ",",
-                "",
-                new ArrayList<>(){{
-                    add("b");
-                }},
-                0,
-                new ArrayList<>(){{
-                    add(new ArrayList<>(){{
-                        add("b == 0");
-                    }});
-                }},
-                new ArrayList<>(){{
-                    add(new ArrayList<>(){{
-                        add("0");
-                    }});
-                }},
-                new ArrayList<>(){{
-                    add(Arrays.asList("b - 1","b / 2"));
-                }},
-                new ArrayList<>(){{
-                    add(new ArrayList<>(){{
-                        add("* b");
-                        add("* a");
-                        add("** a");
-                    }});
-                    add(new ArrayList<>(){{
-                        add("** 2");
-                        add("* b");
-                    }});
-                    add(new ArrayList<>(){{
-                        add("** 2");
-                        add("* b");
-                        add("a * ((a^(b-1/2)))²))");
-                    }});
-                }},
-                "",
-                "",
-                Arrays.asList(1,0,2)
-        );
-        ObjectMapper objMapper = new ObjectMapper();
-        ObjectWriter writer = objMapper.writerWithDefaultPrettyPrinter();
-        writer.writeValue(new File("DiagramExample.json"),data);*/
-
-        /*Supplier<Double> fn2 = (Supplier<Double> & Serializable)()
+        /*Map<String,Supplier<Double>> fnMap = new HashMap<>();
+        Supplier<Double> fn1 = (Supplier<Double> & Serializable)()
+                -> 11.0;
+        Supplier<Double> fn2 = (Supplier<Double> & Serializable)()
                 -> Math.random();
         System.out.println("Run original function: "
                 + fn2.get());
-        String path2 = "./serialized-fn2";
-        Serializator.serialize((Serializable)fn2,path2);
+        fnMap.put("fn1",fn1);
+        fnMap.put("fn2",fn2);
+        String path2 = "./serialized-map";
+        Serializator.serialize((Serializable)fnMap,path2);
 
-        Supplier<Double> desFn2
-                = (Supplier<Double>)Serializator.deserialize(path2);
-        System.out.println("Deserialized function from "
-                + path2);
-        System.out.println("Run deserialized function: "
-                + desFn2.get());*/
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DiagramSelector.fxml"));
+        Map<String,Supplier<Double>> desMap =
+                (Map<String, Supplier<Double>>)Serializator.deserialize(path2);
+        System.out.println("Run f1: "+desMap.get("fn1").get());
+        System.out.println("Run f2: "+desMap.get("fn2").get());*/
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramSelector.fxml"));
         Parent root = (Parent) loader.load();
         main = new Scene(root);
         stage.setScene(main);
@@ -116,17 +49,17 @@ public class App extends Application {
     @FXML
     public void handleMainMenuButton(javafx.event.ActionEvent actionEvent) throws IOException {
         Diagram model = new RecursivePotencyDiagram("RecursiveDiagramData.json");
-        loadScene(model,"/fxml/DiagramViewer.fxml");
+        loadScene(model, "/view/DiagramViewer.fxml");
     }
     @FXML
     public void handleMainMenuButton2(ActionEvent actionEvent) throws IOException{
         Diagram model = new SlowAdditionDiagram("SlowAdditionData.json");
-        loadScene(model,"/fxml/DiagramViewer.fxml");
+        loadScene(model, "/view/DiagramViewer.fxml");
     }
     @FXML
     public void handleMainMenuButton3(ActionEvent actionEvent) throws IOException {
         Diagram model = new MergesortDiagram("MergeSortData.json");
-        loadScene(model,"/fxml/DiagramViewer.fxml");
+        loadScene(model, "/view/DiagramViewer.fxml");
     }
     private void loadScene(Diagram model, String viewName) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(viewName));

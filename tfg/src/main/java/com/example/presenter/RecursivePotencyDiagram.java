@@ -1,6 +1,7 @@
-package com.example;
+package com.example.presenter;
 
-import javafx.beans.property.SimpleStringProperty;
+import com.example.algorithms.Algorithms;
+import com.example.presenter.Diagram;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
-public class RecursivePotencyDiagram extends Diagram{
+public class RecursivePotencyDiagram extends Diagram {
     public RecursivePotencyDiagram(String diagramDataName) throws IOException {
         super(diagramDataName);
 
@@ -88,10 +89,6 @@ public class RecursivePotencyDiagram extends Diagram{
     public void processInputs() throws Exception{
         try{
             super.processInputs();
-            algorithmIndex = currentProblemSize.get()+currentReduction.get();
-            if(checkNotBaseCase(currentProblemSize.get()+currentBaseCase.get())){
-                throw new BaseCaseException("Cannot introduce a base case in parameters");
-            }
 
             storedSolutions = (ArrayList<String>) algorithmsMap.get(algorithmIndex).call();
 

@@ -1,4 +1,7 @@
-package com.example;
+package com.example.presenter;
+
+import com.example.algorithms.Algorithms;
+import com.example.presenter.Diagram;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -105,10 +108,6 @@ public class SlowAdditionDiagram extends Diagram {
     public void processInputs() throws Exception {
         try {
             super.processInputs();
-            algorithmIndex = currentProblemSize.get() + currentReduction.get();
-            if (checkNotBaseCase(currentProblemSize.get()+currentBaseCase.get())) {
-                throw new BaseCaseException("Cannot introduce a base case in parameters");
-            }
             a = Integer.parseInt(params.get("a").get());
             b = Integer.parseInt(params.get("b").get());
             storedSolutions = (ArrayList<String>) algorithmsMap.get(algorithmIndex).call();

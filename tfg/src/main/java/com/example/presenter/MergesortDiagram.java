@@ -1,6 +1,7 @@
-package com.example;
+package com.example.presenter;
 
-import javafx.beans.property.SimpleStringProperty;
+import com.example.algorithms.Algorithms;
+import com.example.presenter.Diagram;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-public class MergesortDiagram extends Diagram{
+public class MergesortDiagram extends Diagram {
     int[] data;
     int mid;
     int[] l;
@@ -53,10 +54,6 @@ public class MergesortDiagram extends Diagram{
     public void processInputs() throws Exception {
         try{
             super.processInputs();
-            algorithmIndex = currentProblemSize.get()+currentReduction.get();
-            if(checkNotBaseCase(currentProblemSize.get()+currentBaseCase.get())){
-                throw new BaseCaseException("Cannot introduce a base case in parameters");
-            }
             mid = data.length / 2;
             l = new int[mid];
             r = new int[data.length - mid];

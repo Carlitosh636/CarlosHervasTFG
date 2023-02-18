@@ -2,18 +2,8 @@
 Cosas que hacer:
 -BUG: Al poner los datos no salta la excepción de mal input hasta que se selecciona la reducción. Cambiarlo para que salte al poner los params
 -Refactorizar diagramas
-    -Posibilidad 1: intentar separar la implementación (Clase Diagram) de las propiedades (nombre, casos base y recursivos, algoritmo que usa,
-    funciones lambda, y todos los datos). Que solo haya una clase java diagrama y otra que parsea el archivo de datos (un JSON por ejemplo) a esa clase
-    diagrama. La clase de datos no tendría nada de javafx, la clase parseadora es la que cambia de primitivos a properties de javafx.
-
-    -LAS FUNCIONES LAMBDA DEBEN SERIALIZARSE Y DESERIALIZARSE DE FORMA DISTINTA. VER LA CLASE APP (y borrar lo que hay de testeo)
-    (intentarlo primero con solutionsOperations)
-
-    -Al menos para el tema de calcular sol, ya no hay que depender de variables propias de cada diagrama, sino que DiagramData tiene
-    los params y la variable string 'partialSol'
-    -Las funciones pueden traducirse como funciones lambda usando Function y Supplier
-
-
+    -SOLUCIÓN: Usar un patrón Builder, un patrón Bridge, o una combinación de ambos. Que se puedan construir distintos "tipos" de diagramas
+    dependiendo del problema. Los datos eso si siempre se leerán de un JSON.
 
 -Hacerlo más bonito, y renombrar ciertas cosas y poner explicaciones para que sea más claro. Mejor usar archivos css propios. Nota: Puedo tener uno
 solo por ejemplo para los combobox y poner a cada uno un id en vez de cada uno un archivo.

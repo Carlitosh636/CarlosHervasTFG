@@ -1,4 +1,4 @@
-package com.example;
+package com.example.presenter;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,6 +6,10 @@ import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
+import com.example.enums.DiagramType;
+import com.example.exceptions.BaseCaseException;
+import com.example.model.DiagramData;
+import com.example.utils.DiagramToCodeMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -183,7 +187,10 @@ public abstract class Diagram {
                 formattedValues+=simpleStringProperty.get()+", ";
             }
             originalData.set(formattedValues);
-
+            algorithmIndex = currentProblemSize.get() + currentReduction.get();
+            if (checkNotBaseCase(currentProblemSize.get()+currentBaseCase.get())) {
+                throw new BaseCaseException("Cannot introduce a base case in parameters");
+            }
         }
         catch (Exception e){
             System.out.println(e);

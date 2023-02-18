@@ -1,14 +1,13 @@
-package com.example;
+package com.example.presenter;
 
+import com.example.exceptions.BaseCaseException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -134,7 +133,7 @@ public class DiagramPresenter implements Initializable {
     }
     @FXML
     public void returnToMenu(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DiagramSelector.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramSelector.fxml"));
         Pane pane = loader.load();
         diagramGrid.getScene().setRoot(pane);
     }

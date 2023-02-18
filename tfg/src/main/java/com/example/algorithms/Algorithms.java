@@ -1,4 +1,4 @@
-package com.example;
+package com.example.algorithms;
 
 public class Algorithms {
     public static double recursiveExponentOption1(double base, double exp, int baseCaseValue){

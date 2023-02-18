@@ -1,4 +1,6 @@
-package com.example;
+package com.example.utils;
+
+import com.example.presenter.Diagram;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,8 @@ public class DiagramToCodeMapper {
         return currentDiagram.getClass().getSimpleName().replace("Diagram","");
     }
     public static String mapParameters(){
-        return currentDiagram.parametersView;
+        //return currentDiagram.parametersView;
+        return null;
     }
     public static String mapBaseCases() throws Exception {
         List<String> baseCases = new ArrayList<>();
@@ -26,7 +29,8 @@ public class DiagramToCodeMapper {
     }
     public static String mapReturnVal() throws Exception {
         //En todos los Diagrams, el -1 guarda la llamada al algoritmo para devolver el valor minimo
-        return (String) currentDiagram.algorithmsMap.get(-1).call();
+        //return (String) currentDiagram.algorithmsMap.get(-1).call();
+        return null;
     }
     public static String mapRecursiveCases(){
         return null;
