@@ -21,7 +21,6 @@
   "baseCaseParameters" : [ [ "0" ] ],
   "reductionChoices" : [ [ "array / 2" ] ],
   "solutionsChoices" : [ ["Concatenate left and right arrays","Merge left and right arrays"] ],
-  "partSol" : "",
   "recursiveCallParameters" : "",
   "correctSolutions" : [ 1 ]
 }

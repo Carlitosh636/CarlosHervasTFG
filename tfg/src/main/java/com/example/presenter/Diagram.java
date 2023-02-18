@@ -149,7 +149,6 @@ public abstract class Diagram {
         diagramData.params.forEach((k,v)->{
             params.put(k,new SimpleStringProperty(v));
         });
-        this.partSol = diagramData.partSol;
         this.reductionChoices=diagramData.reductionChoices;
         this.problemSizeChoices=diagramData.problemSizeChoices;
         this.baseCaseChoices=diagramData.baseCaseChoices;

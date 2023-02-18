@@ -2,8 +2,15 @@
 Cosas que hacer:
 -BUG: Al poner los datos no salta la excepción de mal input hasta que se selecciona la reducción. Cambiarlo para que salte al poner los params
 -Refactorizar diagramas
-    -SOLUCIÓN: Usar un patrón Builder, un patrón Bridge, o una combinación de ambos. Que se puedan construir distintos "tipos" de diagramas
-    dependiendo del problema. Los datos eso si siempre se leerán de un JSON.
+    -SOLUCIÓN: Usar un patrón Bridge.
+    Proceso: Está la implementación de cada diagrama disinto por un lado (clases que implementan IDiagramActions) y los "tipos" de diagrama
+    por el otro (arithmetic, ArraySort, etc). Estos builders tienen un objeto IDiagramActions que es el específico. Es decir, al crear un diagrama
+    se le pasa no solo el Data json, sino también una implementación en java. El builder en sus funciones llama a las funciones del objeto interfaz.
+    El objeto interfaz hará cosas como implementar el cálculo de las soluciones, el comprobar si es caso base, etc.
+    OJO: LA CLASE INTERFAZ NO CONOCE LAS VARIABLES, DEBEMOS PASÁRSELAS POR PARÁMETROS EN LAS FUNCIONES Y QUE HAGA SUS CÁLCULOS, Y QUE LUEGO
+    NOS DEVUELVA LO QUE QUEREMOS. Por eso podemos hacer varios "tipos" de la misma función, varios para cada tipo de diagrama.
+
+    - Borrar las clases concretas y la clase Diagram una vez se haya refactorizado todo.
 
 -Hacerlo más bonito, y renombrar ciertas cosas y poner explicaciones para que sea más claro. Mejor usar archivos css propios. Nota: Puedo tener uno
 solo por ejemplo para los combobox y poner a cada uno un id en vez de cada uno un archivo.

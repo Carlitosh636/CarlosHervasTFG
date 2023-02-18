@@ -6,8 +6,8 @@ module tfg {
 
     opens com.example to javafx.fxml;
     exports com.example;
-    exports com.example.builders;
-    opens com.example.builders to javafx.fxml;
+    exports com.example.diagrams;
+    opens com.example.diagrams to javafx.fxml;
     exports com.example.algorithms;
     opens com.example.algorithms to javafx.fxml;
     exports com.example.exceptions;

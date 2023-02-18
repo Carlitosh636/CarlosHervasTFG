@@ -25,14 +25,13 @@ public class DiagramData implements Serializable {
     public List<List<String>> baseCaseParameters;
     public List<List<String>> reductionChoices;
     public List<List<String>> solutionsChoices;
-    public String partSol;
     public String recursiveCallParameters;
     public List<Integer> correctSolutions;
     public DiagramData(){
 
     }
 
-    public DiagramData(String type, String heading, Map<String, String> params, String originalData, String originalSol, List<String> subParameters, List<String> subSolutions, String calculatedSol, int currentProblemSize, int currentBaseCase, int currentReduction, int currentReductionSolutions, String operation, String reducedOperation, List<String> problemSizeChoices, int currentBaseCaseIndex, List<List<String>> baseCaseChoices, List<List<String>> baseCaseParameters, List<List<String>> reductionChoices, List<List<String>> solutionsChoices, String partSol, String recursiveCallParameters, List<Integer> correctSolutions) {
+    public DiagramData(String type, String heading, Map<String, String> params, String originalData, String originalSol, List<String> subParameters, List<String> subSolutions, String calculatedSol, int currentProblemSize, int currentBaseCase, int currentReduction, int currentReductionSolutions, String operation, String reducedOperation, List<String> problemSizeChoices, int currentBaseCaseIndex, List<List<String>> baseCaseChoices, List<List<String>> baseCaseParameters, List<List<String>> reductionChoices, List<List<String>> solutionsChoices, String recursiveCallParameters, List<Integer> correctSolutions) {
         this.type = type;
         this.heading = heading;
         this.params = params;
@@ -53,7 +52,6 @@ public class DiagramData implements Serializable {
         this.baseCaseParameters = baseCaseParameters;
         this.reductionChoices = reductionChoices;
         this.solutionsChoices = solutionsChoices;
-        this.partSol = partSol;
         this.recursiveCallParameters = recursiveCallParameters;
         this.correctSolutions = correctSolutions;
     }

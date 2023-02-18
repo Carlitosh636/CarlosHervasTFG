@@ -22,7 +22,6 @@
   "baseCaseParameters" : [ [ "0" ] ],
   "reductionChoices" : [ [ "b - 1", "b / 2" ] ],
   "solutionsChoices" : [ [ "* b", "* a", "** a" ], [ "** 2", "* b" ], [ "** 2", "* b", "a * ((a^(b-1/2)))²))" ] ],
-  "partSol" : "",
   "recursiveCallParameters" : "",
   "correctSolutions" : [ 1, 0, 2 ]
 }
