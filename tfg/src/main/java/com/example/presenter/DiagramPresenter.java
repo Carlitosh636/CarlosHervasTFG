@@ -1,5 +1,6 @@
 package com.example.presenter;
 
+import com.example.diagrams.BaseDiagram;
 import com.example.exceptions.BaseCaseException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -23,7 +24,7 @@ import java.util.ResourceBundle;
 public class DiagramPresenter implements Initializable {
     @FXML
     AnchorPane root;
-    protected Diagram model;
+    protected BaseDiagram model;
     //private DiagramToCodeMapper mapper = new DiagramToCodeMapper();
     @FXML
     Line originalDataSolutionArrow;
@@ -75,16 +76,16 @@ public class DiagramPresenter implements Initializable {
         diagramPart2.forEach(ele->ele.setVisible(false));
         diagramPart3.forEach(ele->ele.setVisible(false));
     }
-    public DiagramPresenter(Diagram model) {
+    public DiagramPresenter(BaseDiagram model) {
         this.model = model;
     }
     protected void bindModelData() {
         originalSolution.textProperty().bind(model.originalSolProperty());
         calculatedSolution.textProperty().bind(model.calculatedSolProperty());
-        model.currentProblemSize.bind(problemSizeSelect.getSelectionModel().selectedIndexProperty());
-        model.currentBaseCase.bind(baseCaseSelect.getSelectionModel().selectedIndexProperty());
-        model.currentReduction.bind(decompositionSelect.getSelectionModel().selectedIndexProperty());
-        model.selectedSolution.bind(solutionSelect.getSelectionModel().selectedIndexProperty());
+        model.currentProblemSizeProperty().bind(problemSizeSelect.getSelectionModel().selectedIndexProperty());
+        model.currentBaseCaseProperty().bind(baseCaseSelect.getSelectionModel().selectedIndexProperty());
+        model.currentReductionProperty().bind(decompositionSelect.getSelectionModel().selectedIndexProperty());
+        model.selectedSolutionProperty().bind(solutionSelect.getSelectionModel().selectedIndexProperty());
 
         diagramPart1.add(originalData);
         diagramPart1.add(originalDataSolutionArrow);
@@ -109,7 +110,7 @@ public class DiagramPresenter implements Initializable {
         try {
             subParameters.getChildren().clear();
             partialSolutions.getChildren().clear();
-            model.processInputs();
+            model.processInputs(model.getParams());
             for(SimpleStringProperty ele : model.getSubParameters()){
                 Label lb = new Label();
                 lb.setStyle(originalSolution.getStyle());
@@ -126,7 +127,7 @@ public class DiagramPresenter implements Initializable {
             }
             solutionSelect.getItems().clear();
             //aquí probablemente debería haber un control con semáforos
-            solutionSelect.getItems().setAll(model.solutionsChoices.get(model.getCurrentReductionSolutions()));
+            solutionSelect.getItems().setAll(model.getSolutionsChoices().get(model.getCurrentReductionSolutions()));
         } catch (Exception e) {
             showErrorInputAlert(e);
         }
@@ -183,7 +184,7 @@ public class DiagramPresenter implements Initializable {
     }
     public void onSolutionChange(ActionEvent actionEvent) throws Exception {
         try{
-            String calcSol = model.calculate(solutionSelect.getSelectionModel().getSelectedIndex());
+            String calcSol = model.calculateSolution(solutionSelect.getSelectionModel().getSelectedIndex());
             if(model.checkSolutionsEqual(calcSol)){
                 //if solutions are equal BUT it is not the correct solution
                 if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(model.getCurrentReductionSolutions())){

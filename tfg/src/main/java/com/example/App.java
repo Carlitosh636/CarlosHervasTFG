@@ -1,5 +1,8 @@
 package com.example;
 
+import com.example.diagrams.ArithmeticDiagram;
+import com.example.diagrams.BaseDiagram;
+import com.example.diagrams.RecursivePowerDiagram;
 import com.example.presenter.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -48,20 +51,21 @@ public class App extends Application {
     }
     @FXML
     public void handleMainMenuButton(javafx.event.ActionEvent actionEvent) throws IOException {
-        Diagram model = new RecursivePotencyDiagram("RecursiveDiagramData.json");
+        //Diagram model = new RecursivePowerDiagram("RecursiveDiagramData.json");
+        ArithmeticDiagram model = new ArithmeticDiagram(new RecursivePowerDiagram(),"RecursiveDiagramData.json");
         loadScene(model, "/view/DiagramViewer.fxml");
     }
     @FXML
     public void handleMainMenuButton2(ActionEvent actionEvent) throws IOException{
         Diagram model = new SlowAdditionDiagram("SlowAdditionData.json");
-        loadScene(model, "/view/DiagramViewer.fxml");
+        //loadScene(model, "/view/DiagramViewer.fxml");
     }
     @FXML
     public void handleMainMenuButton3(ActionEvent actionEvent) throws IOException {
         Diagram model = new MergesortDiagram("MergeSortData.json");
-        loadScene(model, "/view/DiagramViewer.fxml");
+        //loadScene(model, "/view/DiagramViewer.fxml");
     }
-    private void loadScene(Diagram model, String viewName) throws IOException {
+    private void loadScene(BaseDiagram model, String viewName) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(viewName));
         loader.setControllerFactory(controller-> new DiagramPresenter(model));
         Pane pane = loader.load();
