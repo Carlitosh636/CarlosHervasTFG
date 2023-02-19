@@ -4,6 +4,7 @@ import com.example.exceptions.BaseCaseException;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,8 +15,6 @@ public class ArithmeticDiagram extends BaseDiagram{
 
     public ArithmeticDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
         super(builder, diagramDataName);
-        //this.a = Double.parseDouble(this.params.get("a").get());
-        //this.b = Double.parseDouble(this.params.get("b").get());
     }
 
     @Override
@@ -29,17 +28,32 @@ public class ArithmeticDiagram extends BaseDiagram{
     }
 
     @Override
-    public void processInputs(Map<String, SimpleStringProperty> params) throws BaseCaseException {
+    public void processInputs(Map<String, SimpleStringProperty> params) throws Exception {
+        this.a = Double.parseDouble(this.params.get("a").get());
+        this.b = Double.parseDouble(this.params.get("b").get());
+        this.partSol = 0;
         StringBuilder formattedValues = new StringBuilder();
         for(SimpleStringProperty value : params.values()){
+            System.out.println(value);
             formattedValues.append(value.get()).append(", ");
         }
-
-        originalData.set(formattedValues.toString());
+        subParameters.get(0).set(formattedValues.toString());
         algorithmIndex = currentProblemSize.get() + currentReduction.get();
         if (checkNotBaseCase(currentProblemSize.get()+currentBaseCase.get())) {
             throw new BaseCaseException("Cannot introduce a base case in parameters");
         }
+        //TODO: calculate the solutions. ¿How do we do it?
+        //String ogSol = calculateSolution(indice);
+        //String pSol = calculateSolution(otroIndice);
+
+        String ogSol = "PLACEHOLDER";
+        String pSol = "PLACEHOLDER";
+
+        originalSol.set(ogSol);
+        subParameters.get(0).set(reducedOperation);
+        subSolutions.get(0).set(pSol);
+        //put the solution operations now that we have params and partSol values
+        setSolutionOperations();
     }
 
     @Override
@@ -53,11 +67,12 @@ public class ArithmeticDiagram extends BaseDiagram{
 
     @Override
     public String calculateSolution(int selectedIndex) {
+        //TODO: IMPLEMENT
         return diagramActions.calculateSolution();
     }
 
     @Override
     public boolean checkSolutionsEqual(String calcSol) {
-        return diagramActions.checkSolutionsEqual(calcSol,storedSolutions.get(0));
+        return diagramActions.checkSolutionsEqual(calcSol,originalSol.get());
     }
 }

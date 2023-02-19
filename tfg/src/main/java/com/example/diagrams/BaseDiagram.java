@@ -21,7 +21,6 @@ public abstract class BaseDiagram {
     protected DiagramType type;
     protected SimpleStringProperty heading;
     protected Map<String,SimpleStringProperty> params;
-    protected SimpleStringProperty originalData;
     protected SimpleStringProperty originalSol;
     protected List<SimpleStringProperty> subParameters;
     protected List<SimpleStringProperty> subSolutions;
@@ -44,7 +43,6 @@ public abstract class BaseDiagram {
     protected List<Integer> correctSolutions;
     protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
     protected int algorithmIndex;
-    protected ArrayList<String> storedSolutions = new ArrayList<>();
     protected Map<String,SimpleStringProperty> viewerValues = new HashMap<>();
     protected String parametersView;
 
@@ -66,14 +64,6 @@ public abstract class BaseDiagram {
 
     public Map<String, SimpleStringProperty> getParams() {
         return params;
-    }
-
-    public String getOriginalData() {
-        return originalData.get();
-    }
-
-    public SimpleStringProperty originalDataProperty() {
-        return originalData;
     }
 
     public String getOriginalSol() {
@@ -192,9 +182,6 @@ public abstract class BaseDiagram {
         return algorithmIndex;
     }
 
-    public ArrayList<String> getStoredSolutions() {
-        return storedSolutions;
-    }
 
     public Map<String, SimpleStringProperty> getViewerValues() {
         return viewerValues;
@@ -223,7 +210,6 @@ public abstract class BaseDiagram {
         this.problemSizeChoices=diagramData.problemSizeChoices;
         this.baseCaseChoices=diagramData.baseCaseChoices;
         this.baseCaseParameters=diagramData.baseCaseParameters;
-        this.originalData=new SimpleStringProperty(diagramData.originalData);
         this.originalSol=new SimpleStringProperty(diagramData.originalSol);
         this.calculatedSol = new SimpleStringProperty(diagramData.calculatedSol);
         this.currentProblemSize = new SimpleIntegerProperty(diagramData.currentProblemSize);
@@ -246,7 +232,7 @@ public abstract class BaseDiagram {
         this.correctSolutions = diagramData.correctSolutions;
     }
     protected abstract void setSolutionOperations();
-    public abstract void processInputs(Map<String, SimpleStringProperty> params) throws BaseCaseException;
+    public abstract void processInputs(Map<String, SimpleStringProperty> params) throws Exception;
     protected abstract boolean checkNotBaseCase(int index);
     public abstract String calculateSolution(int selectedIndex);
     public abstract boolean checkSolutionsEqual(String calcSol);

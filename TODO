@@ -1,7 +1,7 @@
 
 -Estoy en el proceso de sustituir el recursivePower por el nuevo en el presenter. Los datos del diagrama se ponen bien. Queda:
-    -Que se lean los params introducidos por el usuario y se pongan en la variable params
     -Las funciones de cálculo de soluciones
+    -poner los sub parámetros, que no se ponen bien
 
 Cosas que hacer:
 -BUG: Al poner los datos no salta la excepción de mal input hasta que se selecciona la reducción. Cambiarlo para que salte al poner los params
