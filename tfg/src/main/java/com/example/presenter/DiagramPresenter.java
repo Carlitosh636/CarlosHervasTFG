@@ -82,7 +82,6 @@ public class DiagramPresenter implements Initializable {
     protected void bindModelData() {
         originalSolution.textProperty().bind(model.originalSolProperty());
         calculatedSolution.textProperty().bind(model.calculatedSolProperty());
-
         model.currentProblemSizeProperty().bind(problemSizeSelect.getSelectionModel().selectedIndexProperty());
         model.currentBaseCaseProperty().bind(baseCaseSelect.getSelectionModel().selectedIndexProperty());
         model.currentReductionProperty().bind(decompositionSelect.getSelectionModel().selectedIndexProperty());
@@ -111,7 +110,7 @@ public class DiagramPresenter implements Initializable {
         try {
             subParameters.getChildren().clear();
             partialSolutions.getChildren().clear();
-            model.processInputs(model.getParams());
+            model.processInputs();
             for(SimpleStringProperty ele : model.getSubParameters()){
                 Label lb = new Label();
                 lb.setStyle(originalSolution.getStyle());
@@ -131,6 +130,7 @@ public class DiagramPresenter implements Initializable {
             solutionSelect.getItems().setAll(model.getSolutionsChoices().get(model.getCurrentReductionSolutions()));
         } catch (Exception e) {
             showErrorInputAlert(e);
+            System.out.println(e);
         }
     }
     @FXML
@@ -155,7 +155,7 @@ public class DiagramPresenter implements Initializable {
             tf.setMaxWidth(100);
             tf.setMaxHeight(30);
             tfs.add(tf);
-            model.getParams().get(s).bind(tf.textProperty());
+            model.getParams().get(s).bindBidirectional(tf.textProperty());
             /*tf.setOnAction(actionEvent1 -> {
 
             });*/
@@ -185,7 +185,7 @@ public class DiagramPresenter implements Initializable {
     }
     public void onSolutionChange(ActionEvent actionEvent) throws Exception {
         try{
-            String calcSol = model.calculateSolution(solutionSelect.getSelectionModel().getSelectedIndex());
+            String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex());
             if(model.checkSolutionsEqual(calcSol)){
                 //if solutions are equal BUT it is not the correct solution
                 if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(model.getCurrentReductionSolutions())){

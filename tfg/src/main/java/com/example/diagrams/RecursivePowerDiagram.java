@@ -1,9 +1,14 @@
 package com.example.diagrams;
 
+import com.example.algorithms.Algorithms;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.*;
+import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 public class RecursivePowerDiagram implements IDiagramActions{
+    Map<Integer, Callable<Map<String,String>>> algorithmMap= new HashMap<>();
     @Override
     public List<List<Supplier>> setSolutionOperations(Map<String,String> params) {
         double a = Double.parseDouble(params.get("a"));
@@ -21,14 +26,44 @@ public class RecursivePowerDiagram implements IDiagramActions{
         sols3.add((Supplier<Double>) () -> Math.pow(partSol,2));
         sols3.add((Supplier<Double>) () -> partSol * b);
         sols3.add((Supplier<Double>) () -> a * Math.pow(partSol,2));
+
         return Arrays.asList(sols1, sols2, sols3);
     }
 
-    //aquí es donde se implementan las ACCIONES específicas de cada método.
+    @Override
+    public void setAlgorithmMap(Map<String, String> params) {
+        double a = Double.parseDouble(params.get("a"));
+        double b = Double.parseDouble(params.get("b"));
+        int baseCaseValue = Integer.parseInt(params.get("baseCaseValue"));
+
+        algorithmMap.put(0, () -> {
+            Map<String,String> returnVal = new HashMap<>();
+            returnVal.put("ogSol",String.valueOf(Algorithms.recursiveExponentOption1(a,b,baseCaseValue)));
+            returnVal.put("partSol",String.valueOf(Algorithms.recursiveExponentOption1(a,b-1,baseCaseValue)));
+            returnVal.put("reducedOperation",String.format("%d,%d",(int)a,(int)b));
+            returnVal.put("currentReductionSolutions",String.valueOf(0));
+            return returnVal;
+        });
+        algorithmMap.put(1, () -> {
+            Map<String,String> returnVal = new HashMap<>();
+            returnVal.put("ogSol",String.valueOf(Algorithms.recursiveExponentOption1(a,b,baseCaseValue)));
+            returnVal.put("partSol",String.valueOf(Algorithms.recursiveExponentOption1(a,b/2,baseCaseValue)));
+            if(b%2==0){
+                returnVal.put("reducedOperation",String.format("%d,%d",(int)a,(int)b/2));
+                returnVal.put("currentReductionSolutions",String.valueOf(1));
+            }
+            else{
+                returnVal.put("reducedOperation",String.format("%d,%d",(int)a,(int)(b-1)/2));
+                returnVal.put("currentReductionSolutions",String.valueOf(2));
+            }
+            return returnVal;
+        });
+    }
+
     @Override
     public boolean checkNotBaseCase(List<String> baseCases, Map<String, String> params) {
         for (String baseCase : baseCases) {
-            if(Objects.equals(params.get(1), baseCase)){
+            if(Objects.equals(params.get("b"), baseCase)){
                 return true;
             }
         }
@@ -37,9 +72,8 @@ public class RecursivePowerDiagram implements IDiagramActions{
     }
 
     @Override
-    public String calculateSolution() {
-        //TODO: IMPLEMENT
-        return null;
+    public Map<String,String> calculateSolution(int index, Map<String, String> params) throws Exception {
+        return algorithmMap.get(index).call();
     }
 
     @Override

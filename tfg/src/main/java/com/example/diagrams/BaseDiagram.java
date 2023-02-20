@@ -41,7 +41,6 @@ public abstract class BaseDiagram {
     protected String recursiveCallParameters;
     protected SimpleIntegerProperty selectedSolution;
     protected List<Integer> correctSolutions;
-    protected Map<Integer, Callable> algorithmsMap = new HashMap<>();
     protected int algorithmIndex;
     protected Map<String,SimpleStringProperty> viewerValues = new HashMap<>();
     protected String parametersView;
@@ -174,10 +173,6 @@ public abstract class BaseDiagram {
         return correctSolutions;
     }
 
-    public Map<Integer, Callable> getAlgorithmsMap() {
-        return algorithmsMap;
-    }
-
     public int getAlgorithmIndex() {
         return algorithmIndex;
     }
@@ -232,8 +227,9 @@ public abstract class BaseDiagram {
         this.correctSolutions = diagramData.correctSolutions;
     }
     protected abstract void setSolutionOperations();
-    public abstract void processInputs(Map<String, SimpleStringProperty> params) throws Exception;
+    public abstract void processInputs() throws Exception;
     protected abstract boolean checkNotBaseCase(int index);
-    public abstract String calculateSolution(int selectedIndex);
+    public abstract Map<String,String> calculateSolution(int selectedIndex, Map<String,SimpleStringProperty> params) throws Exception;
     public abstract boolean checkSolutionsEqual(String calcSol);
+    public abstract String calculateWithSelectedOperation(int index);
 }
