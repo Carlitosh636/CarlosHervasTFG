@@ -15,11 +15,6 @@ public class ArithmeticDiagram extends BaseDiagram{
 
     @Override
     public void processInputs() throws Exception {
-        StringBuilder formattedValues = new StringBuilder();
-        for(SimpleStringProperty value : params.values()){
-            formattedValues.append(value.get()).append(", ");
-        }
-        subParameters.get(0).set(formattedValues.toString());
         algorithmIndex = currentProblemSize.get() + currentReduction.get();
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)->{
