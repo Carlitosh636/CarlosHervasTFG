@@ -1,19 +1,16 @@
 package com.example.diagrams;
 
 import com.example.enums.DiagramType;
-import com.example.exceptions.BaseCaseException;
 import com.example.model.DiagramData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 public abstract class BaseDiagram {
@@ -221,9 +218,7 @@ public abstract class BaseDiagram {
             this.subSolutions.add(new SimpleStringProperty(ele));
         });
         this.solutionsChoices = new ArrayList<>();
-        diagramData.solutionsChoices.forEach(ele->{
-            this.solutionsChoices.add(ele);
-        });
+        this.solutionsChoices.addAll(diagramData.solutionsChoices);
         this.correctSolutions = diagramData.correctSolutions;
     }
     protected abstract void setSolutionOperations();

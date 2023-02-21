@@ -1,22 +1,13 @@
 
 Cosas que hacer:
 -BUG: Al poner los datos no salta la excepción de mal input hasta que se selecciona la reducción. Cambiarlo para que salte al poner los params
--BUG: Al poner un caso base en los params, aunque salte el aviso se pone lo de seleccionar reducción.
 -Refactorizar diagramas
-    -SOLUCIÓN: Usar un patrón Bridge.
-    Proceso: Está la implementación de cada diagrama disinto por un lado (clases que implementan IDiagramActions) y los "tipos" de diagrama
-    por el otro (arithmetic, ArraySort, etc). Estos builders tienen un objeto IDiagramActions que es el específico. Es decir, al crear un diagrama
-    se le pasa no solo el Data json, sino también una implementación en java. El builder en sus funciones llama a las funciones del objeto interfaz.
-    El objeto interfaz hará cosas como implementar el cálculo de las soluciones, el comprobar si es caso base, etc.
-    OJO: LA CLASE INTERFAZ NO CONOCE LAS VARIABLES, DEBEMOS PASÁRSELAS POR PARÁMETROS EN LAS FUNCIONES Y QUE HAGA SUS CÁLCULOS, Y QUE LUEGO
-    NOS DEVUELVA LO QUE QUEREMOS. Por eso podemos hacer varios "tipos" de la misma función, varios para cada tipo de diagrama.
+    -Crear las clases de ArraySorting y MergeSort, y luego borrar Diagram y MergesortDiagram.
 
-    - Borrar las clases concretas y la clase Diagram una vez se haya refactorizado todo.
+-Implementar más problemas, tanto del libro como de las diapositivas (temas de recursividad y DyV solo)
 
 -Hacerlo más bonito, y renombrar ciertas cosas y poner explicaciones para que sea más claro. Mejor usar archivos css propios. Nota: Puedo tener uno
 solo por ejemplo para los combobox y poner a cada uno un id en vez de cada uno un archivo.
-
--Ver si puedo usar patrones de diseño OOP para mejorar el código
 
 -Generador de código
 

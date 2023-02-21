@@ -1,9 +1,6 @@
 package com.example;
 
-import com.example.diagrams.ArithmeticDiagram;
-import com.example.diagrams.BaseDiagram;
-import com.example.diagrams.RecursivePowerDiagram;
-import com.example.diagrams.SlowAdditionDiagram;
+import com.example.diagrams.*;
 import com.example.presenter.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -46,8 +43,8 @@ public class App extends Application {
     }
     @FXML
     public void handleMainMenuButton3(ActionEvent actionEvent) throws IOException {
-        Diagram model = new MergesortDiagram("MergeSortData.json");
-        //loadScene(model, "/view/DiagramViewer.fxml");
+        ArraySortingDiagram model = new ArraySortingDiagram(new MergeSortDiagram(),"MergeSortData.json");
+        loadScene(model);
     }
     private void loadScene(BaseDiagram model) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramViewer.fxml"));
