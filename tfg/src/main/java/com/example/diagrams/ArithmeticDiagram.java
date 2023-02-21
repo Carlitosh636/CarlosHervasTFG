@@ -21,9 +21,6 @@ public class ArithmeticDiagram extends BaseDiagram{
         }
         subParameters.get(0).set(formattedValues.toString());
         algorithmIndex = currentProblemSize.get() + currentReduction.get();
-        if (checkNotBaseCase(currentProblemSize.get()+currentBaseCase.get())) {
-            throw new BaseCaseException("Cannot introduce a base case in parameters");
-        }
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)->{
             paramsParsed.put(k,v.get());
@@ -49,7 +46,7 @@ public class ArithmeticDiagram extends BaseDiagram{
         this.solutionOperations = diagramActions.setSolutionOperations(paramsParsed);
     }
     @Override
-    protected boolean checkNotBaseCase(int index) {
+    public boolean checkNotBaseCase(int index) {
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)->{
             paramsParsed.put(k,v.get());
@@ -58,7 +55,7 @@ public class ArithmeticDiagram extends BaseDiagram{
     }
 
     @Override
-    public Map<String,String>  calculateSolution(int selectedIndex, Map<String,SimpleStringProperty> params) throws Exception {
+    public Map<String,String> calculateSolution(int selectedIndex, Map<String,SimpleStringProperty> params) throws Exception {
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)->{
             paramsParsed.put(k,v.get());
@@ -68,8 +65,8 @@ public class ArithmeticDiagram extends BaseDiagram{
 
     @Override
     public String calculateWithSelectedOperation(int index) {
-        System.out.println(solutionOperations.get(currentReductionSolutions.get()).get(index).get());
-        return String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).get());
+        calculatedSol.set(String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).get()));
+        return calculatedSol.get();
     }
     @Override
     public boolean checkSolutionsEqual(String calcSol) {

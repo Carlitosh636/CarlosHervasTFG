@@ -228,7 +228,7 @@ public abstract class BaseDiagram {
     }
     protected abstract void setSolutionOperations();
     public abstract void processInputs() throws Exception;
-    protected abstract boolean checkNotBaseCase(int index);
+    public abstract boolean checkNotBaseCase(int index);
     public abstract Map<String,String> calculateSolution(int selectedIndex, Map<String,SimpleStringProperty> params) throws Exception;
     public abstract boolean checkSolutionsEqual(String calcSol);
     public abstract String calculateWithSelectedOperation(int index);

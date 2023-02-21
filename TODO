@@ -1,9 +1,4 @@
 
-
-
-TODO TODO TODO: Al hacer el calculo con la solucion seleccionada, da un valor distinto (probarlo y ver el sout de consola)
-ver porqué calcula un valor incorrecto. Luego, el numerito verde o rojo no sale en el diagrama, ver por qué
-
 Cosas que hacer:
 -BUG: Al poner los datos no salta la excepción de mal input hasta que se selecciona la reducción. Cambiarlo para que salte al poner los params
 -BUG: Al poner un caso base en los params, aunque salte el aviso se pone lo de seleccionar reducción.

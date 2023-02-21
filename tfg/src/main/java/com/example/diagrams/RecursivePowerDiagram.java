@@ -16,8 +16,8 @@ public class RecursivePowerDiagram implements IDiagramActions{
         double partSol = Double.parseDouble(params.get("partSol"));
 
         List<Supplier> sols1 = new ArrayList<>();
-        sols1.add((Supplier<Double>) () -> partSol * a);
         sols1.add((Supplier<Double>) () -> partSol * b);
+        sols1.add((Supplier<Double>) () -> partSol * a);
         sols1.add((Supplier<Double>) () -> Math.pow(partSol,a));
         List<Supplier> sols2 = new ArrayList<>();
         sols2.add((Supplier<Double>) () -> Math.pow(partSol,2));
@@ -40,19 +40,20 @@ public class RecursivePowerDiagram implements IDiagramActions{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol",String.valueOf(Algorithms.recursiveExponentOption1(a,b,baseCaseValue)));
             returnVal.put("partSol",String.valueOf(Algorithms.recursiveExponentOption1(a,b-1,baseCaseValue)));
-            returnVal.put("reducedOperation",String.format("%d,%d",(int)a,(int)b));
+            returnVal.put("reducedOperation",String.format("%d, %d",(int)a,(int)b-1));
             returnVal.put("currentReductionSolutions",String.valueOf(0));
             return returnVal;
         });
         algorithmMap.put(1, () -> {
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol",String.valueOf(Algorithms.recursiveExponentOption1(a,b,baseCaseValue)));
-            returnVal.put("partSol",String.valueOf(Algorithms.recursiveExponentOption1(a,b/2,baseCaseValue)));
             if(b%2==0){
+                returnVal.put("partSol",String.valueOf(Algorithms.recursiveExponentOption1(a,b/2,baseCaseValue)));
                 returnVal.put("reducedOperation",String.format("%d,%d",(int)a,(int)b/2));
                 returnVal.put("currentReductionSolutions",String.valueOf(1));
             }
             else{
+                returnVal.put("partSol",String.valueOf(Algorithms.recursiveExponentOption1(a,(b-1)/2,baseCaseValue)));
                 returnVal.put("reducedOperation",String.format("%d,%d",(int)a,(int)(b-1)/2));
                 returnVal.put("currentReductionSolutions",String.valueOf(2));
             }

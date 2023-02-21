@@ -45,8 +45,6 @@ public class DiagramPresenter implements Initializable {
     @FXML
     Line partialDataSolutionArrow;
     @FXML
-    Button confirmDataButton;
-    @FXML
     GridPane diagramGrid;
     @FXML
     Label isCorrect;
@@ -111,27 +109,27 @@ public class DiagramPresenter implements Initializable {
             subParameters.getChildren().clear();
             partialSolutions.getChildren().clear();
             model.processInputs();
-            for(SimpleStringProperty ele : model.getSubParameters()){
-                Label lb = new Label();
-                lb.setStyle(originalSolution.getStyle());
-                lb.setFont(originalSolution.getFont());
-                lb.setText(ele.get());
-                subParameters.getChildren().add(lb);
-            }
-            for(SimpleStringProperty ele : model.getSubSolutions()){
-                Label lb = new Label();
-                lb.setStyle(originalSolution.getStyle());
-                lb.setFont(originalSolution.getFont());
-                lb.setText(ele.get());
-                partialSolutions.getChildren().add(lb);
-            }
-            solutionSelect.getItems().clear();
-            //aquí probablemente debería haber un control con semáforos
-            solutionSelect.getItems().setAll(model.getSolutionsChoices().get(model.getCurrentReductionSolutions()));
         } catch (Exception e) {
             showErrorInputAlert(e);
             System.out.println(e);
         }
+        for(SimpleStringProperty ele : model.getSubParameters()){
+            Label lb = new Label();
+            lb.setStyle(originalSolution.getStyle());
+            lb.setFont(originalSolution.getFont());
+            lb.setText(ele.get());
+            subParameters.getChildren().add(lb);
+        }
+        for(SimpleStringProperty ele : model.getSubSolutions()){
+            Label lb = new Label();
+            lb.setStyle(originalSolution.getStyle());
+            lb.setFont(originalSolution.getFont());
+            lb.setText(ele.get());
+            partialSolutions.getChildren().add(lb);
+        }
+        solutionSelect.getItems().clear();
+        //aquí probablemente debería haber un control con semáforos
+        solutionSelect.getItems().setAll(model.getSolutionsChoices().get(model.getCurrentReductionSolutions()));
     }
     @FXML
     public void returnToMenu(ActionEvent actionEvent) throws IOException {
@@ -165,6 +163,9 @@ public class DiagramPresenter implements Initializable {
                 if(tfs.stream().anyMatch(tf1 -> tf1.getText().isEmpty())){
                     diagramPart2.forEach(ele->ele.setVisible(false));
                 }
+                else if(model.checkNotBaseCase(model.getCurrentProblemSize()+model.getCurrentBaseCaseIndex())) {
+                    showErrorInputAlert(new BaseCaseException("Cannot introduce a base case in parameters"));
+                }
                 else diagramPart2.forEach(ele->ele.setVisible(true));
             }));
         });
@@ -183,7 +184,7 @@ public class DiagramPresenter implements Initializable {
         handleInput();
         diagramPart3.forEach(ele->ele.setVisible(true));
     }
-    public void onSolutionChange(ActionEvent actionEvent) throws Exception {
+    public void onSolutionChange(ActionEvent actionEvent) {
         try{
             String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex());
             if(model.checkSolutionsEqual(calcSol)){
