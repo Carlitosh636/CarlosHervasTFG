@@ -12,6 +12,6 @@ public interface IDiagramActions {
     List<List<Supplier>> setSolutionOperations(Map<String,String> params);
     void setAlgorithmMap(Map<String,String> params);
     boolean checkNotBaseCase(List<String> baseCases,Map<String,String> params);
-    Map<String,String> calculateSolution(int index, Map<String, String> params) throws Exception;
+    Map<String,String> calculateSolution(int index) throws Exception;
     boolean checkSolutionsEqual(String calcSol, String ogSol);
 }

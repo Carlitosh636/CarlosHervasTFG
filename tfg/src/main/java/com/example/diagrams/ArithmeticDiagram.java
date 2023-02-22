@@ -1,6 +1,5 @@
 package com.example.diagrams;
 
-import com.example.exceptions.BaseCaseException;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.io.IOException;
@@ -22,7 +21,7 @@ public class ArithmeticDiagram extends BaseDiagram{
         });
         paramsParsed.put("baseCaseValue",baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
         diagramActions.setAlgorithmMap(paramsParsed);
-        Map<String,String> solutions = calculateSolution(algorithmIndex,params);
+        Map<String,String> solutions = calculateSolution(algorithmIndex);
 
         originalSol.set(solutions.get("ogSol"));
         subParameters.get(0).set(solutions.get("reducedOperation"));
@@ -50,12 +49,8 @@ public class ArithmeticDiagram extends BaseDiagram{
     }
 
     @Override
-    public Map<String,String> calculateSolution(int selectedIndex, Map<String,SimpleStringProperty> params) throws Exception {
-        Map<String,String> paramsParsed = new HashMap<>();
-        params.forEach((k,v)->{
-            paramsParsed.put(k,v.get());
-        });
-        return diagramActions.calculateSolution(selectedIndex,paramsParsed);
+    public Map<String,String> calculateSolution(int selectedIndex) throws Exception {
+        return diagramActions.calculateSolution(selectedIndex);
     }
 
     @Override

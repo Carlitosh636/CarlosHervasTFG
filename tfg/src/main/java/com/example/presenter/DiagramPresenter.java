@@ -154,12 +154,7 @@ public class DiagramPresenter implements Initializable {
             tf.setMaxHeight(30);
             tfs.add(tf);
             model.getParams().get(s).bindBidirectional(tf.textProperty());
-            /*tf.setOnAction(actionEvent1 -> {
-
-            });*/
-        }
-        tfs.forEach(v->{
-            v.textProperty().addListener(((observableValue, s, t1) -> {
+            tf.setOnAction(actionEvent1 -> {
                 if(tfs.stream().anyMatch(tf1 -> tf1.getText().isEmpty())){
                     diagramPart2.forEach(ele->ele.setVisible(false));
                 }
@@ -167,8 +162,13 @@ public class DiagramPresenter implements Initializable {
                     showErrorInputAlert(new BaseCaseException("Cannot introduce a base case in parameters"));
                 }
                 else diagramPart2.forEach(ele->ele.setVisible(true));
+            });
+        }
+        /*tfs.forEach(v->{
+            v.textProperty().addListener(((observableValue, s, t1) -> {
+
             }));
-        });
+        });*/
         originalData.getChildren().addAll(tfs);
         decompositionSelect.getItems().clear();
         decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));

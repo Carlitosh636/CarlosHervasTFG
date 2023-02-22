@@ -77,7 +77,7 @@ public class SlowAdditionDiagram implements IDiagramActions{
     }
 
     @Override
-    public Map<String, String> calculateSolution(int index, Map<String, String> params) throws Exception {
+    public Map<String, String> calculateSolution(int index) throws Exception {
         return algorithmMap.get(index).call();
     }
 
