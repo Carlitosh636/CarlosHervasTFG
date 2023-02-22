@@ -1,12 +1,10 @@
 package com.example.utils;
 
-import com.example.presenter.Diagram;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class DiagramToCodeMapper {
-    private static Diagram currentDiagram;
+    /*private static Diagram currentDiagram;
     public Diagram getCurrentDiagram() {
         return currentDiagram;
     }
@@ -34,5 +32,5 @@ public class DiagramToCodeMapper {
     }
     public static String mapRecursiveCases(){
         return null;
-    }
+    }*/
 }

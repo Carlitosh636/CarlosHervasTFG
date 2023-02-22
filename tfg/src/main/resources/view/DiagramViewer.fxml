@@ -27,7 +27,7 @@
                                  <Insets right="10.0" />
                               </padding>
                            </Label>
-                           <ComboBox fx:id="problemSizeSelect" onAction="#onChangeProblemSize" prefHeight="30.0" prefWidth="150.0" promptText="Problem size" style="-fx-background-color: #8FFF; -fx-background-radius: 15px;" />
+                           <ComboBox id="combo-box" fx:id="problemSizeSelect" onAction="#onChangeProblemSize" prefHeight="30.0" prefWidth="150.0" promptText="Problem size" style="-fx-background-color: #8FFF;" stylesheets="@../css/combobox.css" />
                         </children>
                      </HBox>
                      <HBox prefHeight="30.0" prefWidth="200.0">
@@ -40,10 +40,10 @@
                                  <Insets right="10.0" />
                               </padding>
                            </Label>
-                           <ComboBox fx:id="baseCaseSelect" onAction="#onChangeBaseCase" prefHeight="30.0" prefWidth="125.0" promptText="Base case" style="-fx-background-color: #FFFA8F; -fx-background-radius: 15px;" />
+                           <ComboBox id="combo-box" fx:id="baseCaseSelect" onAction="#onChangeBaseCase" prefHeight="30.0" prefWidth="125.0" promptText="Base case" style="-fx-background-color: #6d4d;" styleClass="combo-box" stylesheets="@../css/combobox.css" />
                         </children>
                      </HBox>
-                     <Button fx:id="returnMenuButton" onAction="#returnToMenu" style="-fx-background-color: #f5223a; -fx-background-radius: 15px;" text="Return to menu" textFill="WHITE">
+                     <Button id="button" fx:id="returnMenuButton" onAction="#returnToMenu" stylesheets="@../css/button.css" text="Return to menu" textFill="WHITE">
                         <opaqueInsets>
                            <Insets />
                         </opaqueInsets>
@@ -109,8 +109,8 @@
                            </Label>
                         </children>
                      </VBox>
-                     <ComboBox fx:id="decompositionSelect" onAction="#onDescompositionChange" prefHeight="30.0" prefWidth="150.0" promptText="Reduction" style="-fx-background-color: #FFD58C; -fx-background-radius: 15px;" GridPane.rowIndex="3" />
-                     <ComboBox fx:id="solutionSelect" onAction="#onSolutionChange" prefHeight="30.0" prefWidth="150.0" promptText="Solution" style="-fx-background-color: #a4edb7; -fx-background-radius: 15px;" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <ComboBox fx:id="decompositionSelect" onAction="#onDescompositionChange" prefHeight="30.0" prefWidth="150.0" promptText="Reduction" style="-fx-background-color: #FFD58C;" stylesheets="@../css/combobox.css" GridPane.rowIndex="3" />
+                     <ComboBox fx:id="solutionSelect" onAction="#onSolutionChange" prefHeight="30.0" prefWidth="150.0" promptText="Solution" style="-fx-background-color: #a4edb7;" stylesheets="@../css/combobox.css" GridPane.columnIndex="3" GridPane.rowIndex="3">
                         <GridPane.margin>
                            <Insets left="5.0" />
                         </GridPane.margin></ComboBox>
