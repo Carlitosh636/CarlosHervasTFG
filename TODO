@@ -1,13 +1,10 @@
 
 Cosas que hacer:
 -BUG: Al poner los datos no salta la excepción de mal input hasta que se selecciona la reducción. Cambiarlo para que salte al poner los params
--Refactorizar diagramas
-    -Crear las clases de ArraySorting y MergeSort, y luego borrar Diagram y MergesortDiagram.
+
+-Hacerlo más bonito con CSS propios: mirar el bookmark de quiz app ui para sacar ideas e inspiracion
 
 -Implementar más problemas, tanto del libro como de las diapositivas (temas de recursividad y DyV solo)
-
--Hacerlo más bonito, y renombrar ciertas cosas y poner explicaciones para que sea más claro. Mejor usar archivos css propios. Nota: Puedo tener uno
-solo por ejemplo para los combobox y poner a cada uno un id en vez de cada uno un archivo.
 
 -Generador de código
 

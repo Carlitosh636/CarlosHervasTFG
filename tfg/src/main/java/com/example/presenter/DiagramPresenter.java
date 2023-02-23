@@ -115,14 +115,14 @@ public class DiagramPresenter implements Initializable {
         }
         for(SimpleStringProperty ele : model.getSubParameters()){
             Label lb = new Label();
-            lb.setStyle(originalSolution.getStyle());
+            lb.setStyle("-fx-text-fill: white;"+originalSolution.getStyle());
             lb.setFont(originalSolution.getFont());
             lb.setText(ele.get());
             subParameters.getChildren().add(lb);
         }
         for(SimpleStringProperty ele : model.getSubSolutions()){
             Label lb = new Label();
-            lb.setStyle(originalSolution.getStyle());
+            lb.setStyle("-fx-text-fill: white;"+originalSolution.getStyle());
             lb.setFont(originalSolution.getFont());
             lb.setText(ele.get());
             partialSolutions.getChildren().add(lb);
@@ -190,17 +190,17 @@ public class DiagramPresenter implements Initializable {
             if(model.checkSolutionsEqual(calcSol)){
                 //if solutions are equal BUT it is not the correct solution
                 if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(model.getCurrentReductionSolutions())){
-                    calculatedSolution.setStyle("-fx-text-fill: red;");
+                    calculatedSolution.setStyle("-fx-text-fill: #f2433a;");
                     isCorrect.setText("Incorrecto! La operación da esta solución pero no para todos los casos");
                 }
                 else{
-                    calculatedSolution.setStyle("-fx-text-fill: green;");
+                    calculatedSolution.setStyle("-fx-text-fill: #48f542;");
                     isCorrect.setText("Correcto!");
                 }
 
             }
             else{
-                calculatedSolution.setStyle("-fx-text-fill: red;");
+                calculatedSolution.setStyle("-fx-text-fill: #f2433a;");
                 isCorrect.setText("Incorrecto! Vuelve a intentarlo");
             }
         }
