@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="root" style="-fx-background-color: #b000bd;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presenter.DiagramPresenter">
+<AnchorPane fx:id="root" style="-fx-background-color: #000833;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presenter.DiagramPresenter">
    <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
       <children>
          <TextArea fx:id="heading" editable="false" maxHeight="-Infinity" prefHeight="200.0" prefWidth="800.0" style="-fx-background-color: #e0e0e0; -fx-border-color: #bababa;" text="ENUNCIADO&#10;&#10;">
@@ -17,7 +17,7 @@
             <children>
                <VBox fx:id="SizeAndBaseCaseBox" prefHeight="300.0" prefWidth="300.0" spacing="10.0">
                   <children>
-                     <HBox prefHeight="30.0" prefWidth="200.0">
+                     <HBox id="background" prefHeight="30.0" prefWidth="200.0" stylesheets="@../css/boxes-background.css">
                         <children>
                            <Label text="1. Problem size" textFill="WHITE">
                               <font>
@@ -30,7 +30,7 @@
                            <ComboBox id="combo-box-1" fx:id="problemSizeSelect" onAction="#onChangeProblemSize" prefHeight="30.0" prefWidth="150.0" promptText="Problem size" stylesheets="@../css/combobox.css" />
                         </children>
                      </HBox>
-                     <HBox prefHeight="30.0" prefWidth="200.0">
+                     <HBox id="background" prefHeight="30.0" prefWidth="200.0" stylesheets="@../css/boxes-background.css">
                         <children>
                            <Label text="2. Base case" textFill="WHITE">
                               <font>
@@ -54,7 +54,7 @@
                   </children>
                </VBox>
       
-               <GridPane fx:id="diagramGrid" hgap="10.0" vgap="10.0">
+               <GridPane id="background" fx:id="diagramGrid" hgap="10.0" maxHeight="-Infinity" stylesheets="@../css/boxes-background.css" vgap="10.0">
                   <columnConstraints>
                      <ColumnConstraints />
                      <ColumnConstraints />
@@ -73,17 +73,12 @@
                   <children>
                      <VBox fx:id="originalData" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      <Line fx:id="originalDataSolutionArrow" endX="250.0" layoutX="60.0" startX="60.0" stroke="WHITE" strokeWidth="2.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                     <Label fx:id="isCorrect" contentDisplay="CENTER" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                     <Label fx:id="calculatedSolution" contentDisplay="CENTER" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="0">
                         <font>
                            <Font size="15.0" />
                         </font>
                      </Label>
                      <Label fx:id="originalSolution" alignment="CENTER" contentDisplay="CENTER" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                        <font>
-                           <Font size="15.0" />
-                        </font>
-                     </Label>
-                     <Label fx:id="calculatedSolution" contentDisplay="CENTER" layoutX="339.0" layoutY="340.0" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="2">
                         <font>
                            <Font size="15.0" />
                         </font>
@@ -109,10 +104,13 @@
                            </Label>
                         </children>
                      </VBox>
-                     <ComboBox id="combo-box-3" fx:id="decompositionSelect" onAction="#onDescompositionChange" prefHeight="30.0" prefWidth="150.0" promptText="Reduction" stylesheets="@../css/combobox.css" GridPane.rowIndex="3" />
+                     <ComboBox id="combo-box-3" fx:id="decompositionSelect" onAction="#onDescompositionChange" prefHeight="30.0" prefWidth="150.0" promptText="Reduction" stylesheets="@../css/combobox.css" GridPane.rowIndex="3">
+                        <GridPane.margin>
+                           <Insets right="5.0" />
+                        </GridPane.margin></ComboBox>
                      <ComboBox id="combo-box-4" fx:id="solutionSelect" onAction="#onSolutionChange" prefHeight="30.0" prefWidth="150.0" promptText="Solution" stylesheets="@../css/combobox.css" GridPane.columnIndex="3" GridPane.rowIndex="3">
                         <GridPane.margin>
-                           <Insets left="5.0" />
+                           <Insets left="20.0" />
                         </GridPane.margin></ComboBox>
                   </children>
                   <HBox.margin>

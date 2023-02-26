@@ -49,8 +49,6 @@ public class DiagramPresenter implements Initializable {
     @FXML
     GridPane diagramGrid;
     @FXML
-    Label isCorrect;
-    @FXML
     VBox originalData;
     @FXML
     VBox subParameters;
@@ -81,7 +79,6 @@ public class DiagramPresenter implements Initializable {
     }
     protected void bindModelData() {
         originalSolution.textProperty().bind(model.originalSolProperty());
-        calculatedSolution.textProperty().bind(model.calculatedSolProperty());
         model.currentProblemSizeProperty().bind(problemSizeSelect.getSelectionModel().selectedIndexProperty());
         model.currentBaseCaseProperty().bind(baseCaseSelect.getSelectionModel().selectedIndexProperty());
         model.currentReductionProperty().bind(decompositionSelect.getSelectionModel().selectedIndexProperty());
@@ -193,18 +190,18 @@ public class DiagramPresenter implements Initializable {
             if(model.checkSolutionsEqual(calcSol)){
                 //if solutions are equal BUT it is not the correct solution
                 if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(model.getCurrentReductionSolutions())){
+                    calculatedSolution.setText("Incorrecto! La operación da esta solución pero no para todos los casos\nValor calculado: "+model.getCalculatedSol());
                     calculatedSolution.setStyle("-fx-text-fill: #f2433a;");
-                    isCorrect.setText("Incorrecto! La operación da esta solución pero no para todos los casos");
                 }
                 else{
+                    calculatedSolution.setText("Correcto!\nValor calculado: "+model.getCalculatedSol());
                     calculatedSolution.setStyle("-fx-text-fill: #48f542;");
-                    isCorrect.setText("Correcto!");
                 }
 
             }
             else{
+                calculatedSolution.setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
                 calculatedSolution.setStyle("-fx-text-fill: #f2433a;");
-                isCorrect.setText("Incorrecto! Vuelve a intentarlo");
             }
         }
         catch (Exception e){
