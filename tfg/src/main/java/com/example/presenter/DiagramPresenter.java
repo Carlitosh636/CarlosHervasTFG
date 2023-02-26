@@ -27,6 +27,8 @@ public class DiagramPresenter implements Initializable {
     protected BaseDiagram model;
     //private DiagramToCodeMapper mapper = new DiagramToCodeMapper();
     @FXML
+    public TextArea heading;
+    @FXML
     Line originalDataSolutionArrow;
     @FXML
     Label originalSolution;
@@ -84,6 +86,7 @@ public class DiagramPresenter implements Initializable {
         model.currentBaseCaseProperty().bind(baseCaseSelect.getSelectionModel().selectedIndexProperty());
         model.currentReductionProperty().bind(decompositionSelect.getSelectionModel().selectedIndexProperty());
         model.selectedSolutionProperty().bind(solutionSelect.getSelectionModel().selectedIndexProperty());
+        heading.textProperty().bind(model.headingProperty());
 
         diagramPart1.add(originalData);
         diagramPart1.add(originalDataSolutionArrow);

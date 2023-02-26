@@ -18,7 +18,7 @@
     -fx-background-radius : 30px;
 }
 #combo-box-1 .list-view{
--fx-background-radius : 30px;
+-fx-background-radius : 15px;
     -fx-background-color:
         #d2de33;
 }
@@ -27,8 +27,8 @@
         #c3c4c4;
     -fx-background-radius : 30px;
 }
-#combo-box-2 .list-cell{
--fx-background-radius : 30px;
+#combo-box-2 .list-view{
+-fx-background-radius : 15px;
     -fx-background-color:
         #a9abab;
 }
@@ -37,8 +37,8 @@
         #FFD58C;
     -fx-background-radius : 30px;
 }
-#combo-box-3 .list-cell{
--fx-background-radius : 30px;
+#combo-box-3 .list-view{
+-fx-background-radius : 15px;
     -fx-background-color:
         #e6bf7c;
 }
@@ -47,8 +47,8 @@
          #a4edb7;
     -fx-background-radius : 30px;
 }
-#combo-box-4 .list-cell{
--fx-background-radius : 30px;
+#combo-box-4 .list-view{
+-fx-background-radius : 15px;
     -fx-background-color:
          #96d9a7;
 }

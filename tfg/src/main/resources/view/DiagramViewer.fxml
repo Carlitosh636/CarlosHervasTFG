@@ -6,10 +6,10 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="root" style="-fx-background-color: #48045e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presenter.DiagramPresenter">
+<AnchorPane fx:id="root" style="-fx-background-color: #b000bd;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presenter.DiagramPresenter">
    <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
       <children>
-         <TextArea editable="false" maxHeight="-Infinity" prefHeight="200.0" prefWidth="800.0" style="-fx-background-color: #e0e0e0; -fx-border-color: #bababa;" text="ENUNCIADO&#10;&#10;">
+         <TextArea fx:id="heading" editable="false" maxHeight="-Infinity" prefHeight="200.0" prefWidth="800.0" style="-fx-background-color: #e0e0e0; -fx-border-color: #bababa;" text="ENUNCIADO&#10;&#10;">
             <font>
                <Font size="16.0" />
             </font></TextArea>
