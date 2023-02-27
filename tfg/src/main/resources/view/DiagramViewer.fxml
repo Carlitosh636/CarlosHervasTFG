@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="root" style="-fx-background-color: #000833;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presenter.DiagramPresenter">
-   <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+   <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
       <children>
          <TextArea fx:id="heading" editable="false" maxHeight="-Infinity" prefHeight="200.0" prefWidth="800.0" style="-fx-background-color: #e0e0e0; -fx-border-color: #bababa;" text="ENUNCIADO&#10;&#10;">
             <font>
@@ -17,44 +17,39 @@
             <children>
                <VBox fx:id="SizeAndBaseCaseBox" prefHeight="300.0" prefWidth="300.0" spacing="10.0">
                   <children>
-                     <HBox id="background" prefHeight="30.0" prefWidth="200.0" stylesheets="@../css/boxes-background.css">
-                        <children>
-                           <Label text="1. Problem size" textFill="WHITE">
-                              <font>
-                                 <Font size="15.0" />
-                              </font>
-                              <padding>
-                                 <Insets right="10.0" />
-                              </padding>
-                           </Label>
-                           <ComboBox id="combo-box-1" fx:id="problemSizeSelect" onAction="#onChangeProblemSize" prefHeight="30.0" prefWidth="150.0" promptText="Problem size" stylesheets="@../css/combobox.css" />
-                        </children>
-                     </HBox>
-                     <HBox id="background" prefHeight="30.0" prefWidth="200.0" stylesheets="@../css/boxes-background.css">
-                        <children>
-                           <Label text="2. Base case" textFill="WHITE">
-                              <font>
-                                 <Font size="15.0" />
-                              </font>
-                              <padding>
-                                 <Insets right="10.0" />
-                              </padding>
-                           </Label>
-                           <ComboBox id="combo-box-2" fx:id="baseCaseSelect" onAction="#onChangeBaseCase" prefHeight="30.0" prefWidth="125.0" promptText="Base case" stylesheets="@../css/combobox.css" />
-                        </children>
-                     </HBox>
+                     <Label text="1. Problem size" textFill="WHITE">
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                        <padding>
+                           <Insets right="10.0" />
+                        </padding>
+                     </Label>
+                     <ComboBox id="combo-box-1" fx:id="problemSizeSelect" onAction="#onChangeProblemSize" promptText="Problem size" stylesheets="@../css/combobox.css" />
+                     <Label text="2. Base case" textFill="WHITE">
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                        <padding>
+                           <Insets right="10.0" />
+                        </padding>
+                     </Label>
+                     <ComboBox id="combo-box-2" fx:id="baseCaseSelect" onAction="#onChangeBaseCase" promptText="Base case" stylesheets="@../css/combobox.css" />
                      <Button id="button" fx:id="returnMenuButton" onAction="#returnToMenu" stylesheets="@../css/button.css" text="Return to menu" textFill="WHITE">
                         <opaqueInsets>
                            <Insets />
                         </opaqueInsets>
                         <font>
-                           <Font size="15.0" />
+                           <Font size="16.0" />
                         </font>
+                        <VBox.margin>
+                           <Insets top="100.0" />
+                        </VBox.margin>
                      </Button>
                   </children>
                </VBox>
-      
-               <GridPane id="background" fx:id="diagramGrid" hgap="10.0" maxHeight="-Infinity" stylesheets="@../css/boxes-background.css" vgap="10.0">
+
+               <GridPane fx:id="diagramGrid" hgap="10.0" maxHeight="-Infinity" vgap="10.0">
                   <columnConstraints>
                      <ColumnConstraints />
                      <ColumnConstraints />
@@ -71,21 +66,21 @@
                      <RowConstraints />
                   </rowConstraints>
                   <children>
-                     <VBox fx:id="originalData" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     <VBox id="background" fx:id="originalData" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      <Line fx:id="originalDataSolutionArrow" endX="250.0" layoutX="60.0" startX="60.0" stroke="WHITE" strokeWidth="2.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                     <Label fx:id="calculatedSolution" contentDisplay="CENTER" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                     <Label id="background" fx:id="calculatedSolution" contentDisplay="CENTER" stylesheets="@../css/boxes-background.css" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="0">
                         <font>
                            <Font size="15.0" />
                         </font>
                      </Label>
-                     <Label fx:id="originalSolution" alignment="CENTER" contentDisplay="CENTER" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <Label id="background" fx:id="originalSolution" alignment="CENTER" contentDisplay="CENTER" stylesheets="@../css/boxes-background.css" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                         <font>
                            <Font size="15.0" />
                         </font>
                      </Label>
                      <Line fx:id="datasArrow" endY="60.0" layoutX="50.0" layoutY="50.0" stroke="WHITE" strokeWidth="2.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                      <Line fx:id="solutionsArrow" endY="60.0" layoutX="50.0" layoutY="50.0" stroke="WHITE" strokeWidth="2.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                     <VBox fx:id="subParameters" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <VBox id="background" fx:id="subParameters" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
                         <children>
                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT">
                               <font>
@@ -95,7 +90,7 @@
                         </children>
                      </VBox>
                      <Line fx:id="partialDataSolutionArrow" endX="250.0" layoutX="60.0" startX="60.0" stroke="WHITE" strokeWidth="2.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                     <VBox fx:id="partialSolutions" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                     <VBox id="background" fx:id="partialSolutions" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="3" GridPane.rowIndex="5">
                         <children>
                            <Label alignment="CENTER" contentDisplay="CENTER">
                               <font>
@@ -116,6 +111,9 @@
                   <HBox.margin>
                      <Insets />
                   </HBox.margin>
+                  <padding>
+                     <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+                  </padding>
                </GridPane>
             </children>
             <padding>

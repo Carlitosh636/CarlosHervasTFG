@@ -87,16 +87,17 @@ public class DiagramPresenter implements Initializable {
 
         diagramPart1.add(originalData);
         diagramPart1.add(originalDataSolutionArrow);
-        diagramPart1.add(originalSolution);
 
         diagramPart2.add(datasArrow);
         diagramPart2.add(solutionsArrow);
         diagramPart2.add(decompositionSelect);
 
+        diagramPart3.add(originalSolution);
         diagramPart3.add(partialSolutions);
         diagramPart3.add(subParameters);
         diagramPart3.add(partialDataSolutionArrow);
         diagramPart3.add(solutionSelect);
+        diagramPart3.add(calculatedSolution);
 
         //diagramTitle.textProperty().bind(model.viewerValues.get("diagramTitle"));
         //baseCase.textProperty().bind(model.viewerValues.get("baseCase"));
