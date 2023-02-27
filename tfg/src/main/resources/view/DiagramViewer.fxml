@@ -68,7 +68,7 @@
                   <children>
                      <VBox id="background" fx:id="originalData" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      <Line fx:id="originalDataSolutionArrow" endX="250.0" layoutX="60.0" startX="60.0" stroke="WHITE" strokeWidth="2.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                     <Label id="background" fx:id="calculatedSolution" contentDisplay="CENTER" stylesheets="@../css/boxes-background.css" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                     <Label id="background" fx:id="calculatedSolution" contentDisplay="CENTER" stylesheets="@../css/boxes-background.css" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1">
                         <font>
                            <Font size="15.0" />
                         </font>
@@ -80,7 +80,7 @@
                      </Label>
                      <Line fx:id="datasArrow" endY="60.0" layoutX="50.0" layoutY="50.0" stroke="WHITE" strokeWidth="2.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                      <Line fx:id="solutionsArrow" endY="60.0" layoutX="50.0" layoutY="50.0" stroke="WHITE" strokeWidth="2.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                     <VBox id="background" fx:id="subParameters" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <VBox id="background" fx:id="subParameters" alignment="CENTER" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
                         <children>
                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT">
                               <font>
@@ -90,7 +90,7 @@
                         </children>
                      </VBox>
                      <Line fx:id="partialDataSolutionArrow" endX="250.0" layoutX="60.0" startX="60.0" stroke="WHITE" strokeWidth="2.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                     <VBox id="background" fx:id="partialSolutions" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                     <VBox id="background" fx:id="partialSolutions" alignment="CENTER" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="3" GridPane.rowIndex="5">
                         <children>
                            <Label alignment="CENTER" contentDisplay="CENTER">
                               <font>
@@ -103,7 +103,7 @@
                         <GridPane.margin>
                            <Insets right="5.0" />
                         </GridPane.margin></ComboBox>
-                     <ComboBox id="combo-box-4" fx:id="solutionSelect" onAction="#onSolutionChange" prefHeight="30.0" prefWidth="150.0" promptText="Solution" stylesheets="@../css/combobox.css" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <ComboBox id="combo-box-4" fx:id="solutionSelect" onAction="#onSolutionChange" prefHeight="30.0" prefWidth="150.0" promptText="Solution" stylesheets="@../css/combobox.css" GridPane.columnIndex="4" GridPane.rowIndex="3">
                         <GridPane.margin>
                            <Insets left="20.0" />
                         </GridPane.margin></ComboBox>

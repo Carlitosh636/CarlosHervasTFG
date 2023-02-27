@@ -30,6 +30,7 @@ public class App extends Application {
         stage.setMaxWidth(1600);
         stage.setMinHeight(stage.getHeight());
         stage.setMinWidth(stage.getWidth());
+        stage.setMaximized(true);
     }
     @FXML
     public void handleMainMenuButton(javafx.event.ActionEvent actionEvent) throws IOException {

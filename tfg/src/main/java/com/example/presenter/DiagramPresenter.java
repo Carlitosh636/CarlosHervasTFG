@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.net.URL;
@@ -73,6 +74,7 @@ public class DiagramPresenter implements Initializable {
         diagramPart1.forEach(ele->ele.setVisible(false));
         diagramPart2.forEach(ele->ele.setVisible(false));
         diagramPart3.forEach(ele->ele.setVisible(false));
+        calculatedSolution.setVisible(false);
     }
     public DiagramPresenter(BaseDiagram model) {
         this.model = model;
@@ -97,7 +99,6 @@ public class DiagramPresenter implements Initializable {
         diagramPart3.add(subParameters);
         diagramPart3.add(partialDataSolutionArrow);
         diagramPart3.add(solutionSelect);
-        diagramPart3.add(calculatedSolution);
 
         //diagramTitle.textProperty().bind(model.viewerValues.get("diagramTitle"));
         //baseCase.textProperty().bind(model.viewerValues.get("baseCase"));
@@ -116,16 +117,18 @@ public class DiagramPresenter implements Initializable {
         }
         for(SimpleStringProperty ele : model.getSubParameters()){
             Label lb = new Label();
-            lb.setStyle("-fx-text-fill: white;"+originalSolution.getStyle());
+            lb.setStyle("-fx-text-fill: white;");
             lb.setFont(originalSolution.getFont());
             lb.setText(ele.get());
+            lb.setTextAlignment(TextAlignment.CENTER);
             subParameters.getChildren().add(lb);
         }
         for(SimpleStringProperty ele : model.getSubSolutions()){
             Label lb = new Label();
-            lb.setStyle("-fx-text-fill: white;"+originalSolution.getStyle());
+            lb.setStyle("-fx-text-fill: white;");
             lb.setFont(originalSolution.getFont());
             lb.setText(ele.get());
+            lb.setTextAlignment(TextAlignment.CENTER);
             partialSolutions.getChildren().add(lb);
         }
         solutionSelect.getItems().clear();
@@ -188,6 +191,7 @@ public class DiagramPresenter implements Initializable {
     public void onSolutionChange(ActionEvent actionEvent) {
         try{
             String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex());
+            calculatedSolution.setVisible(true);
             if(model.checkSolutionsEqual(calcSol)){
                 //if solutions are equal BUT it is not the correct solution
                 if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(model.getCurrentReductionSolutions())){
