@@ -35,7 +35,7 @@
                         </padding>
                      </Label>
                      <ComboBox id="combo-box-2" fx:id="baseCaseSelect" onAction="#onChangeBaseCase" promptText="Base case" stylesheets="@../css/combobox.css" />
-                     <Button id="button" fx:id="returnMenuButton" onAction="#returnToMenu" stylesheets="@../css/button.css" text="Return to menu" textFill="WHITE">
+                     <Button id="redButton" fx:id="returnMenuButton" onAction="#returnToMenu" stylesheets="@../css/button.css" text="Return to menu" textFill="WHITE">
                         <opaqueInsets>
                            <Insets />
                         </opaqueInsets>
