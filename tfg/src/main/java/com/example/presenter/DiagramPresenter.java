@@ -75,6 +75,7 @@ public class DiagramPresenter implements Initializable {
         diagramPart2.forEach(ele->ele.setVisible(false));
         diagramPart3.forEach(ele->ele.setVisible(false));
         calculatedSolution.setVisible(false);
+        diagramGrid.setVisible(false);
     }
     public DiagramPresenter(BaseDiagram model) {
         this.model = model;
@@ -176,6 +177,7 @@ public class DiagramPresenter implements Initializable {
         originalData.getChildren().addAll(tfs);
         decompositionSelect.getItems().clear();
         decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
+        diagramGrid.setVisible(true);
         diagramPart1.forEach(ele->ele.setVisible(true));
         /*try{
             model.viewerValues.get("baseCase").set(DiagramToCodeMapper.mapBaseCases());

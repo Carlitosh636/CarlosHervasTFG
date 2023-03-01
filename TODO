@@ -6,6 +6,8 @@ Cosas que hacer:
 
 -Implementar más problemas, tanto del libro como de las diapositivas (temas de recursividad y DyV solo)
 
+-Build del proyecto: Para esto mejor mirar de hacer un Dockerfile y para ejecutar la app, se descarga el proyecto en github y se ejecuta el dockerfile.
+
 -Generador de código
 
 Para la refactorización de los diagramas, muchas de las propiedades pueden transformarse en objetos para tenerlo mucho mejor organizado. Aunque si
