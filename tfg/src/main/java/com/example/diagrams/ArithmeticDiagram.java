@@ -1,7 +1,5 @@
 package com.example.diagrams;
 
-import javafx.beans.property.SimpleStringProperty;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

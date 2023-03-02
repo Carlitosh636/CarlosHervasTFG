@@ -1,5 +1,7 @@
 package com.example.algorithms;
 
+import java.util.Objects;
+
 public class Algorithms {
     public static double recursivePower1(double base, double exp, int baseCaseValue){
         if(exp==baseCaseValue){
@@ -64,7 +66,14 @@ public class Algorithms {
             return slowAdditionOption2(a-1,b-1,baseCaseValue)+1+1;
         }
     }
-
+    public static String reverseString(String input,String baseCaseValue){
+        if(Objects.equals(input, baseCaseValue)){
+            return baseCaseValue;
+        }
+        else{
+            return reverseString(input.substring(1),baseCaseValue).concat(String.valueOf(input.charAt(0)));
+        }
+    }
     public static int[] mergeSort(int[] a){
         int n = a.length;
         if (n<=1){

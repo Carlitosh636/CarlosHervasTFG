@@ -47,6 +47,11 @@ public class App extends Application {
         ArraySortingDiagram model = new ArraySortingDiagram(new MergeSortDiagram(),"MergeSortData.json");
         loadScene(model);
     }
+    @FXML
+    public void handleMainMenuButton4(ActionEvent actionEvent) throws IOException {
+        StringDiagram model = new StringDiagram(new ReverseStringDiagram(),"ReverseStringData.json");
+        loadScene(model);
+    }
     private void loadScene(BaseDiagram model) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramViewer.fxml"));
         loader.setControllerFactory(controller-> new DiagramPresenter(model));

@@ -1,0 +1,26 @@
+{
+  "type" : "SIMPLE",
+  "heading" : "Enunciado del reverse string",
+  "params" : {
+    "input" : ""
+  },
+  "originalData" : "",
+  "originalSol" : "",
+  "subParameters" : [ "" ],
+  "subSolutions" : [ "" ],
+  "calculatedSol" : "",
+  "currentProblemSize" : 0,
+  "currentBaseCase" : 0,
+  "currentReduction" : 0,
+  "currentReductionSolutions" : 0,
+  "operation" : ",",
+  "reducedOperation" : "",
+  "problemSizeChoices" : [ "n = input.length" ],
+  "currentBaseCaseIndex" : 0,
+  "baseCaseChoices" : [ [ "input = ''" ]],
+  "baseCaseParameters" : [ [""] ],
+  "reductionChoices" : [ [ "Remove letter from head" ] ],
+  "solutionsChoices" : [ [ "Put removed letter at head","Put removed letter at tail"] ],
+  "recursiveCallParameters" : "",
+  "correctSolutions" : [ 1 ]
+}

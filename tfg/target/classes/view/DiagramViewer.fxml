@@ -9,7 +9,7 @@
 <AnchorPane fx:id="root" style="-fx-background-color: #000833;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presenter.DiagramPresenter">
    <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
       <children>
-         <TextArea id="header" fx:id="heading" editable="false" maxHeight="-Infinity" prefHeight="200.0" prefWidth="800.0" stylesheets="@../css/header.css" text="ENUNCIADO&#10;&#10;">
+         <TextArea fx:id="heading" editable="false" maxHeight="-Infinity" prefHeight="200.0" prefWidth="800.0" stylesheets="@../css/header.css" text="ENUNCIADO&#10;&#10;">
             <font>
                <Font size="18.0" />
             </font></TextArea>
