@@ -15,10 +15,12 @@ public class ArithmeticDiagram extends BaseDiagram{
         algorithmIndex = currentProblemSize.get() + currentReduction.get();
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)->{
+            System.out.println(k+": "+v);
             paramsParsed.put(k,v.get());
         });
         paramsParsed.put("baseCaseValue",baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
         diagramActions.setAlgorithmMap(paramsParsed);
+        System.out.println("calcular sols");
         Map<String,String> solutions = calculateSolution(algorithmIndex);
 
         originalSol.set(solutions.get("ogSol"));

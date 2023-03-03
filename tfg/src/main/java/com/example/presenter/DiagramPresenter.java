@@ -107,36 +107,6 @@ public class DiagramPresenter implements Initializable {
 
     }
     @FXML
-    protected void handleInput() {
-        try {
-            subParameters.getChildren().clear();
-            partialSolutions.getChildren().clear();
-            model.processInputs();
-        } catch (Exception e) {
-            showErrorInputAlert(e);
-            System.out.println(e);
-        }
-        for(SimpleStringProperty ele : model.getSubParameters()){
-            Label lb = new Label();
-            lb.setStyle("-fx-text-fill: white;");
-            lb.setFont(originalSolution.getFont());
-            lb.setText(ele.get());
-            lb.setTextAlignment(TextAlignment.CENTER);
-            subParameters.getChildren().add(lb);
-        }
-        for(SimpleStringProperty ele : model.getSubSolutions()){
-            Label lb = new Label();
-            lb.setStyle("-fx-text-fill: white;");
-            lb.setFont(originalSolution.getFont());
-            lb.setText(ele.get());
-            lb.setTextAlignment(TextAlignment.CENTER);
-            partialSolutions.getChildren().add(lb);
-        }
-        solutionSelect.getItems().clear();
-        //aquí probablemente debería haber un control con semáforos
-        solutionSelect.getItems().setAll(model.getSolutionsChoices().get(model.getCurrentReductionSolutions()));
-    }
-    @FXML
     public void returnToMenu(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramSelector.fxml"));
         Pane pane = loader.load();
@@ -166,29 +136,45 @@ public class DiagramPresenter implements Initializable {
                 else if(model.checkNotBaseCase(model.getCurrentProblemSize()+model.getCurrentBaseCaseIndex())) {
                     showErrorInputAlert(new BaseCaseException("Cannot introduce a base case in parameters"));
                 }
-                else diagramPart2.forEach(ele->ele.setVisible(true));
+                else{
+                    //TODO: CALCULAR PRIMERO LA SOL ORIGINAL
+                    //ORDEN-> CALCULO SOL ORIGINAL, SELECCIONO DESCOMP Y CALCULO SUBPARAMS
+                    diagramPart2.forEach(ele->ele.setVisible(true));
+                }
+
             });
         }
-        /*tfs.forEach(v->{
-            v.textProperty().addListener(((observableValue, s, t1) -> {
-
-            }));
-        });*/
         originalData.getChildren().addAll(tfs);
-        decompositionSelect.getItems().clear();
-        decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
-        diagramGrid.setVisible(true);
-        diagramPart1.forEach(ele->ele.setVisible(true));
-        /*try{
-            model.viewerValues.get("baseCase").set(DiagramToCodeMapper.mapBaseCases());
-        }
-        catch (Exception e){
-            System.out.println(e);
-        }*/
+        refreshDiagram();
     }
     public void onDescompositionChange(ActionEvent actionEvent) {
         handleInput();
         diagramPart3.forEach(ele->ele.setVisible(true));
+    }
+    protected void handleInput() {
+        try {
+            model.processInputs();
+        } catch (Exception e) {
+            showErrorInputAlert(e);
+            System.out.println(e);
+        }
+        for(SimpleStringProperty ele : model.getSubParameters()){
+            Label lb = new Label();
+            lb.setStyle("-fx-text-fill: white;");
+            lb.setFont(originalSolution.getFont());
+            lb.setText(ele.get());
+            lb.setTextAlignment(TextAlignment.CENTER);
+            subParameters.getChildren().add(lb);
+        }
+        for(SimpleStringProperty ele : model.getSubSolutions()){
+            Label lb = new Label();
+            lb.setStyle("-fx-text-fill: white;");
+            lb.setFont(originalSolution.getFont());
+            lb.setText(ele.get());
+            lb.setTextAlignment(TextAlignment.CENTER);
+            partialSolutions.getChildren().add(lb);
+        }
+        solutionSelect.getItems().setAll(model.getSolutionsChoices().get(model.getCurrentReductionSolutions()));
     }
     public void onSolutionChange(ActionEvent actionEvent) {
         try{
@@ -233,5 +219,18 @@ public class DiagramPresenter implements Initializable {
             inputErrorAlert.setContentText("Ha ocurrido un error desconocido");
         }
         inputErrorAlert.showAndWait();
+    }
+    private void refreshDiagram(){
+        System.out.println("refresh");
+        decompositionSelect.getItems().clear();
+        model.originalSolProperty().set("");
+        partialSolutions.getChildren().clear();
+        subParameters.getChildren().clear();
+        solutionSelect.getItems().clear();
+        calculatedSolution.setText("");
+        diagramPart3.forEach(ele->ele.setVisible(false));
+        decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
+        diagramGrid.setVisible(true);
+        diagramPart1.forEach(ele->ele.setVisible(true));
     }
 }

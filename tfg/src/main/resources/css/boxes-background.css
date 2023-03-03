@@ -2,5 +2,5 @@
     -fx-border-style: solid;
     -fx-border-width: 2;
     -fx-border-insets: 5;
-    -fx-border-color: blue transparent blue transparent;
+    -fx-border-color: blue transparent transparent transparent;
 }
