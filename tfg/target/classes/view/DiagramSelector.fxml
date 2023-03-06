@@ -7,7 +7,7 @@
 
 <GridPane hgap="10.0" style="-fx-background-color: #000833;" vgap="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.App">
    <children>
-      <Button id="greenButton" mnemonicParsing="false" onAction="#handleMainMenuButton" prefHeight="50.0" stylesheets="@../css/button.css" text="Recursive Potency" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <Button id="greenButton" mnemonicParsing="false" onAction="#handleMainMenuButton" prefHeight="50.0" stylesheets="@../css/button.css" text="Recursive Power" GridPane.columnIndex="0" GridPane.rowIndex="0">
          <font>
             <Font size="16.0" />
          </font></Button>

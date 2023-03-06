@@ -30,9 +30,7 @@ public class ArraySortingDiagram extends BaseDiagram{
     @Override
     public void processInputs() throws Exception {
         Map<String,String> paramsParsed = new HashMap<>();
-        params.forEach((k,v)->{
-            paramsParsed.put(k,v.get());
-        });
+        params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         array = Arrays.stream(params.get("array").get().split(",")).mapToInt(Integer::parseInt).toArray();
         mid = array.length / 2;
         l = new int[mid];
@@ -42,22 +40,23 @@ public class ArraySortingDiagram extends BaseDiagram{
         paramsParsed.put("mid", String.valueOf(mid));
         paramsParsed.put("l", Arrays.toString(l));
         paramsParsed.put("r", Arrays.toString(r));
-
         diagramActions.setAlgorithmMap(paramsParsed);
-        Map<String,String> solutions = calculateSolution(algorithmIndex);
-
+        Map<String,String> solutions = calculateSolution(-1);
         originalSol.set(solutions.get("ogSol"));
+    }
+    @Override
+    public void proccessSolutions() throws Exception {
+        algorithmIndex = currentProblemSize.get() + currentReduction.get();
+        Map<String,String> solutions = calculateSolution(algorithmIndex);
         subParameters.get(0).set(solutions.get("reducedOperation1"));
         subSolutions.get(0).set(solutions.get("partSol1"));
         subParameters.get(1).set(solutions.get("reducedOperation2"));
         subSolutions.get(1).set(solutions.get("partSol2"));
-
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));
         partSols[0] = solutions.get("partSol1");
         partSols[1] = solutions.get("partSol2");
         setSolutionOperations();
     }
-
     @Override
     public boolean checkNotBaseCase(int index) {
         Map<String,String> paramsParsed = new HashMap<>();

@@ -12,18 +12,17 @@ public class ArithmeticDiagram extends BaseDiagram{
 
     @Override
     public void processInputs() throws Exception {
-        algorithmIndex = currentProblemSize.get() + currentReduction.get();
         Map<String,String> paramsParsed = new HashMap<>();
-        params.forEach((k,v)->{
-            System.out.println(k+": "+v);
-            paramsParsed.put(k,v.get());
-        });
+        params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         paramsParsed.put("baseCaseValue",baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
         diagramActions.setAlgorithmMap(paramsParsed);
-        System.out.println("calcular sols");
+        Map<String,String> solution = calculateSolution(-1);
+        originalSol.set(solution.get("ogSol"));
+    }
+    @Override
+    public void proccessSolutions() throws Exception {
+        algorithmIndex = currentProblemSize.get() + currentReduction.get();
         Map<String,String> solutions = calculateSolution(algorithmIndex);
-
-        originalSol.set(solutions.get("ogSol"));
         subParameters.get(0).set(solutions.get("reducedOperation"));
         subSolutions.get(0).set(solutions.get("partSol"));
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));

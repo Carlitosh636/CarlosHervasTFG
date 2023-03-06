@@ -22,9 +22,13 @@ public class ReverseStringDiagram implements IDiagramActions{
     public void setAlgorithmMap(Map<String, String> params) {
         String input = params.get("input");
         String baseCaseValue = params.get("baseCaseValue");
-        algorithmMap.put(0,()->{
+        algorithmMap.put(-1,()->{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol",Algorithms.reverseString(input,baseCaseValue));
+            return returnVal;
+        });
+        algorithmMap.put(0,()->{
+            Map<String,String> returnVal = new HashMap<>();
             returnVal.put("partSol",Algorithms.reverseString(input.substring(1),baseCaseValue));
             returnVal.put("reducedOperation",input.substring(1));
             returnVal.put("currentReductionSolutions",String.valueOf(0));

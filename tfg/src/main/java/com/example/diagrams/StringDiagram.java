@@ -24,21 +24,22 @@ public class StringDiagram extends BaseDiagram{
     public void processInputs() throws Exception {
         algorithmIndex = currentProblemSize.get() + currentReduction.get();
         Map<String,String> paramsParsed = new HashMap<>();
-        params.forEach((k,v)->{
-            paramsParsed.put(k,v.get());
-        });
+        params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         paramsParsed.put("baseCaseValue",baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
         diagramActions.setAlgorithmMap(paramsParsed);
-        Map<String,String> solutions = calculateSolution(algorithmIndex);
-
+        Map<String,String> solutions = calculateSolution(-1);
         originalSol.set(solutions.get("ogSol"));
+    }
+    @Override
+    public void proccessSolutions() throws Exception {
+        algorithmIndex = currentProblemSize.get() + currentReduction.get();
+        Map<String,String> solutions = calculateSolution(algorithmIndex);
         subParameters.get(0).set(solutions.get("reducedOperation"));
         subSolutions.get(0).set(solutions.get("partSol"));
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));
         partSol = solutions.get("partSol");
         setSolutionOperations();
     }
-
     @Override
     public boolean checkNotBaseCase(int index) {
         Map<String,String> paramsParsed = new HashMap<>();

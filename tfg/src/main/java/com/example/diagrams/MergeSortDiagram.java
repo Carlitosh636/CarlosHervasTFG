@@ -26,9 +26,13 @@ public class MergeSortDiagram implements IDiagramActions{
         mid = Integer.parseInt(params.get("mid"));
         l = stringToArrayInt(params.get("l"));
         r = stringToArrayInt(params.get("r"));
-        algorithmMap.put(0, () -> {
+        algorithmMap.put(-1,()->{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol", Arrays.toString(Algorithms.mergeSort(array)));
+            return returnVal;
+        });
+        algorithmMap.put(0, () -> {
+            Map<String,String> returnVal = new HashMap<>();
             returnVal.put("reducedOperation1",Arrays.toString(l));
             returnVal.put("reducedOperation2",Arrays.toString(r));
             returnVal.put("partSol1",Arrays.toString(Algorithms.mergeSort(l)));
@@ -37,12 +41,10 @@ public class MergeSortDiagram implements IDiagramActions{
             return returnVal;
         });
     }
-
     @Override
     public boolean checkNotBaseCase(List<String> baseCases, Map<String, String> params) {
         int[] input = stringToArrayInt(params.get("array"));
         if(input.length>1){
-            //COMPROBAR QUE NO ESTÉ ORDENADO
             array = input.clone();
             int[] temp = Algorithms.mergeSort(input);
             return Arrays.equals(array,temp);

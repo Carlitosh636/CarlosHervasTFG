@@ -90,12 +90,12 @@ public class DiagramPresenter implements Initializable {
 
         diagramPart1.add(originalData);
         diagramPart1.add(originalDataSolutionArrow);
+        diagramPart1.add(originalSolution);
 
         diagramPart2.add(datasArrow);
         diagramPart2.add(solutionsArrow);
         diagramPart2.add(decompositionSelect);
 
-        diagramPart3.add(originalSolution);
         diagramPart3.add(partialSolutions);
         diagramPart3.add(subParameters);
         diagramPart3.add(partialDataSolutionArrow);
@@ -137,23 +137,31 @@ public class DiagramPresenter implements Initializable {
                     showErrorInputAlert(new BaseCaseException("Cannot introduce a base case in parameters"));
                 }
                 else{
-                    //TODO: CALCULAR PRIMERO LA SOL ORIGINAL
-                    //ORDEN-> CALCULO SOL ORIGINAL, SELECCIONO DESCOMP Y CALCULO SUBPARAMS
-                    diagramPart2.forEach(ele->ele.setVisible(true));
+                    try {
+                        model.processInputs();
+                    } catch (Exception e) {
+                        showErrorInputAlert(e);
+                        System.out.println(e);
+                    }
+                    refreshDiagram();
                 }
 
             });
         }
         originalData.getChildren().addAll(tfs);
-        refreshDiagram();
+        diagramGrid.setVisible(true);
+        diagramPart1.forEach(ele->ele.setVisible(true));
     }
     public void onDescompositionChange(ActionEvent actionEvent) {
-        handleInput();
+        partialSolutions.getChildren().clear();
+        subParameters.getChildren().clear();
+        solutionSelect.getItems().clear();
+        handleDecomposition();
         diagramPart3.forEach(ele->ele.setVisible(true));
     }
-    protected void handleInput() {
+    protected void handleDecomposition() {
         try {
-            model.processInputs();
+            model.proccessSolutions();
         } catch (Exception e) {
             showErrorInputAlert(e);
             System.out.println(e);
@@ -200,7 +208,6 @@ public class DiagramPresenter implements Initializable {
         catch (Exception e){
             System.out.println(e);
         }
-
     }
 
     public void showErrorInputAlert(Exception e){
@@ -214,23 +221,13 @@ public class DiagramPresenter implements Initializable {
             inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
             inputErrorAlert.setContentText("Revisa el contenido, no puedes introducir un caso base o una solución como parámetro");
         }
-        else{
-            inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
-            inputErrorAlert.setContentText("Ha ocurrido un error desconocido");
-        }
         inputErrorAlert.showAndWait();
     }
     private void refreshDiagram(){
-        System.out.println("refresh");
-        decompositionSelect.getItems().clear();
-        model.originalSolProperty().set("");
-        partialSolutions.getChildren().clear();
-        subParameters.getChildren().clear();
-        solutionSelect.getItems().clear();
-        calculatedSolution.setText("");
+        diagramPart2.forEach(ele->ele.setVisible(true));
         diagramPart3.forEach(ele->ele.setVisible(false));
+        decompositionSelect.getItems().clear();
         decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
-        diagramGrid.setVisible(true);
-        diagramPart1.forEach(ele->ele.setVisible(true));
+        calculatedSolution.setVisible(false);
     }
 }

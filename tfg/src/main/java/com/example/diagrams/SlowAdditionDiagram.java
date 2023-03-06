@@ -34,9 +34,13 @@ public class SlowAdditionDiagram implements IDiagramActions{
         double a = Double.parseDouble(params.get("a"));
         double b = Double.parseDouble(params.get("b"));
         int baseCaseValue = Integer.parseInt(params.get("baseCaseValue"));
-        algorithmMap.put(0, () -> {
+        algorithmMap.put(-1,()->{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol",String.valueOf(Algorithms.slowAdditionOption1(a,b,baseCaseValue)));
+            return returnVal;
+        });
+        algorithmMap.put(0, () -> {
+            Map<String,String> returnVal = new HashMap<>();
             returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption1(a-1,b,baseCaseValue)));
             returnVal.put("reducedOperation",String.format("%d, %d",(int)a-1,(int)b));
             returnVal.put("currentReductionSolutions",String.valueOf(0));
@@ -44,7 +48,6 @@ public class SlowAdditionDiagram implements IDiagramActions{
         });
         algorithmMap.put(1, () -> {
             Map<String,String> returnVal = new HashMap<>();
-            returnVal.put("ogSol",String.valueOf(Algorithms.slowAdditionOption2(a,b,baseCaseValue)));
             if(a<b){
                 returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption2(a-1,b,baseCaseValue)));
             }
@@ -53,12 +56,10 @@ public class SlowAdditionDiagram implements IDiagramActions{
             }
             returnVal.put("reducedOperation",String.valueOf(Math.min(a, b-1)));
             returnVal.put("currentReductionSolutions",String.valueOf(1));
-            //subSolutions.get(0).set(Math.min(a,b)+ " - 1 + " + Math.max(a,b));
             return returnVal;
         });
         algorithmMap.put(2,() -> {
             Map<String,String> returnVal = new HashMap<>();
-            returnVal.put("ogSol",String.valueOf(Algorithms.slowAdditionOption3(a,b,baseCaseValue)));
             returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption3(a-1,b-1,baseCaseValue)));
             returnVal.put("reducedOperation",String.format("(%.0f - 1 , %.0f - 1)", a, b));
             returnVal.put("currentReductionSolutions",String.valueOf(2));

@@ -34,9 +34,14 @@ public class RecursivePowerDiagram implements IDiagramActions{
         double b = Double.parseDouble(params.get("b"));
         int baseCaseValue = Integer.parseInt(params.get("baseCaseValue"));
 
-        algorithmMap.put(0, () -> {
+        algorithmMap.put(-1, () ->{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol",String.valueOf(Algorithms.recursivePower1(a,b,baseCaseValue)));
+            return returnVal;
+        });
+
+        algorithmMap.put(0, () -> {
+            Map<String,String> returnVal = new HashMap<>();
             returnVal.put("partSol",String.valueOf(Algorithms.recursivePower1(a,b-1,baseCaseValue)));
             returnVal.put("reducedOperation",String.format("%.0f, %.0f",a,b-1));
             returnVal.put("currentReductionSolutions",String.valueOf(0));
@@ -44,7 +49,6 @@ public class RecursivePowerDiagram implements IDiagramActions{
         });
         algorithmMap.put(1, () -> {
             Map<String,String> returnVal = new HashMap<>();
-            returnVal.put("ogSol",String.valueOf(Algorithms.recursivePower2(a,b,baseCaseValue)));
             if(b%2==0){
                 returnVal.put("partSol",String.valueOf(Algorithms.recursivePower2(a,b/2,baseCaseValue)));
                 returnVal.put("reducedOperation",String.format("%.0f,%.0f",a,b/2));
