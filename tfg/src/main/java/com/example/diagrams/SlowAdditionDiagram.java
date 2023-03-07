@@ -8,32 +8,35 @@ import java.util.function.Supplier;
 
 public class SlowAdditionDiagram implements IDiagramActions{
     Map<Integer, Callable<Map<String,String>>> algorithmMap= new HashMap<>();
-    @Override
-    public List<List<Supplier>> setSolutionOperations(Map<String, String> params) {
-        double a = Double.parseDouble(params.get("a"));
-        double b = Double.parseDouble(params.get("b"));
-        double partialSol = Double.parseDouble(params.get("partSol"));
+    static double a,b,partSol;
+    static int baseCaseValue;
 
+    @Override
+    public void setParams(Map<String, String> newValues) {
+        a = Double.parseDouble(newValues.get("a"));
+        b = Double.parseDouble(newValues.get("b"));
+        partSol = Double.parseDouble(newValues.get("partSol"));
+        baseCaseValue = Integer.parseInt(newValues.get("baseCaseValue"));
+    }
+    @Override
+    public List<List<Supplier>> setSolutionOperations() {
         List<Supplier> s1 = new ArrayList<>();
-        s1.add((Supplier<Double>) () -> partialSol + 1);
-        s1.add((Supplier<Double>) () -> partialSol - 1);
-        s1.add((Supplier<Double>) () -> partialSol + a);
+        s1.add((Supplier<Double>) () -> partSol + 1);
+        s1.add((Supplier<Double>) () -> partSol - 1);
+        s1.add((Supplier<Double>) () -> partSol + a);
         List<Supplier> s2 = new ArrayList<>();
-        s2.add((Supplier<Double>) () -> partialSol + 1);
-        s2.add((Supplier<Double>) () -> partialSol - 1);
-        s2.add((Supplier<Double>) () -> partialSol + Math.min(a,b));
+        s2.add((Supplier<Double>) () -> partSol + 1);
+        s2.add((Supplier<Double>) () -> partSol - 1);
+        s2.add((Supplier<Double>) () -> partSol + Math.min(a,b));
         List<Supplier> s3 = new ArrayList<>();
-        s3.add((Supplier<Double>) () -> partialSol + 1);
-        s3.add((Supplier<Double>) () -> partialSol);
-        s3.add((Supplier<Double>) () -> partialSol + 2);
+        s3.add((Supplier<Double>) () -> partSol + 1);
+        s3.add((Supplier<Double>) () -> partSol);
+        s3.add((Supplier<Double>) () -> partSol + 2);
         return Arrays.asList(s1, s2, s3);
     }
 
     @Override
-    public void setAlgorithmMap(Map<String, String> params) {
-        double a = Double.parseDouble(params.get("a"));
-        double b = Double.parseDouble(params.get("b"));
-        int baseCaseValue = Integer.parseInt(params.get("baseCaseValue"));
+    public void setAlgorithmMap() {
         algorithmMap.put(-1,()->{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol",String.valueOf(Algorithms.slowAdditionOption1(a,b,baseCaseValue)));
@@ -66,22 +69,19 @@ public class SlowAdditionDiagram implements IDiagramActions{
             return returnVal;
         });
     }
-
     @Override
-    public boolean checkNotBaseCase(List<String> baseCases, Map<String, String> params) {
+    public boolean checkNotBaseCase(List<String> baseCases,List<String> inputs) {
         for (String baseCase : baseCases) {
-            if ((Objects.equals(params.get("a"), baseCase)) || (Objects.equals(params.get("b"), baseCase))) {
+            if ((Objects.equals(inputs.get(0), baseCase)) || (Objects.equals(inputs.get(1), baseCase))) {
                 return true;
             }
         }
         return false;
     }
-
     @Override
     public Map<String, String> calculateSolution(int index) throws Exception {
         return algorithmMap.get(index).call();
     }
-
     @Override
     public boolean checkSolutionsEqual(String calcSol, String ogSol) {
         return calcSol.equals(ogSol);

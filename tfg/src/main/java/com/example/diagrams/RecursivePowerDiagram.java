@@ -7,12 +7,18 @@ import java.util.function.Supplier;
 
 public class RecursivePowerDiagram implements IDiagramActions{
     Map<Integer, Callable<Map<String,String>>> algorithmMap= new HashMap<>();
+    static double a,b,partSol;
+    static int baseCaseValue;
     @Override
-    public List<List<Supplier>> setSolutionOperations(Map<String,String> params) {
-        double a = Double.parseDouble(params.get("a"));
-        double b = Double.parseDouble(params.get("b"));
-        double partSol = Double.parseDouble(params.get("partSol"));
+    public void setParams(Map<String, String> newValues) {
+        a = Double.parseDouble(newValues.get("a"));
+        b = Double.parseDouble(newValues.get("b"));
+        partSol = Double.parseDouble(newValues.get("partSol"));
+        baseCaseValue = Integer.parseInt(newValues.get("baseCaseValue"));
+    }
 
+    @Override
+    public List<List<Supplier>> setSolutionOperations() {
         List<Supplier> sols1 = new ArrayList<>();
         sols1.add((Supplier<Double>) () -> partSol * b);
         sols1.add((Supplier<Double>) () -> partSol * a);
@@ -29,11 +35,7 @@ public class RecursivePowerDiagram implements IDiagramActions{
     }
 
     @Override
-    public void setAlgorithmMap(Map<String, String> params) {
-        double a = Double.parseDouble(params.get("a"));
-        double b = Double.parseDouble(params.get("b"));
-        int baseCaseValue = Integer.parseInt(params.get("baseCaseValue"));
-
+    public void setAlgorithmMap() {
         algorithmMap.put(-1, () ->{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol",String.valueOf(Algorithms.recursivePower1(a,b,baseCaseValue)));
@@ -64,9 +66,9 @@ public class RecursivePowerDiagram implements IDiagramActions{
     }
 
     @Override
-    public boolean checkNotBaseCase(List<String> baseCases, Map<String, String> params) {
+    public boolean checkNotBaseCase(List<String> baseCases,List<String> inputs) {
         for (String baseCase : baseCases) {
-            if(Objects.equals(params.get("b"), baseCase)){
+            if(Objects.equals(inputs.get(1), baseCase)){
                 return true;
             }
         }

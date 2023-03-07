@@ -8,20 +8,24 @@ import java.util.function.Supplier;
 
 public class ReverseStringDiagram implements IDiagramActions{
     Map<Integer, Callable<Map<String,String>>> algorithmMap= new HashMap<>();
+    static String input,partSol;
+    static String baseCaseValue;
     @Override
-    public List<List<Supplier>> setSolutionOperations(Map<String, String> params) {
-        String partSol = params.get("partSol");
-        char a = params.get("input").charAt(0);
+    public void setParams(Map<String, String> newValues) {
+        input = newValues.get("input");
+        partSol = newValues.get("partSol");
+        baseCaseValue = newValues.get("baseCaseValue");
+    }
+    @Override
+    public List<List<Supplier>> setSolutionOperations() {
         List<Supplier> s1 = new ArrayList<>();
-        s1.add((Supplier<String>) () -> a + partSol);
-        s1.add((Supplier<String>) () -> partSol + a);
+        s1.add((Supplier<String>) () -> input.charAt(0) + partSol);
+        s1.add((Supplier<String>) () -> partSol + input.charAt(0));
         return List.of(s1);
     }
 
     @Override
-    public void setAlgorithmMap(Map<String, String> params) {
-        String input = params.get("input");
-        String baseCaseValue = params.get("baseCaseValue");
+    public void setAlgorithmMap() {
         algorithmMap.put(-1,()->{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol",Algorithms.reverseString(input,baseCaseValue));
@@ -37,14 +41,15 @@ public class ReverseStringDiagram implements IDiagramActions{
     }
 
     @Override
-    public boolean checkNotBaseCase(List<String> baseCases, Map<String, String> params) {
+    public boolean checkNotBaseCase(List<String> baseCases,List<String> inputs) {
         for (String baseCase : baseCases) {
-            if(Objects.equals(params.get("input"), baseCase)){
+            if(Objects.equals(inputs.get(0), baseCase)){
                 return true;
             }
         }
         return false;
     }
+
 
     @Override
     public Map<String, String> calculateSolution(int index) throws Exception {

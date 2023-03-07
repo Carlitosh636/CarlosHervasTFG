@@ -3,6 +3,7 @@ package com.example.diagrams;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ArraySortingDiagram extends BaseDiagram{
@@ -13,20 +14,9 @@ public class ArraySortingDiagram extends BaseDiagram{
     String[] partSols = {"",""};
     public ArraySortingDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
         super(builder, diagramDataName);
+        diagramActions.setAlgorithmMap();
+        setSolutionOperations();
     }
-
-    @Override
-    protected void setSolutionOperations() {
-        Map<String,String> paramsParsed = new HashMap<>();
-        params.forEach((k,v)->{
-            paramsParsed.put(k,v.get());
-        });
-        paramsParsed.put("mid", String.valueOf(mid));
-        paramsParsed.put("l", Arrays.toString(l));
-        paramsParsed.put("r", Arrays.toString(r));
-        this.solutionOperations = diagramActions.setSolutionOperations(paramsParsed);
-    }
-
     @Override
     public void processInputs() throws Exception {
         Map<String,String> paramsParsed = new HashMap<>();
@@ -40,7 +30,7 @@ public class ArraySortingDiagram extends BaseDiagram{
         paramsParsed.put("mid", String.valueOf(mid));
         paramsParsed.put("l", Arrays.toString(l));
         paramsParsed.put("r", Arrays.toString(r));
-        diagramActions.setAlgorithmMap(paramsParsed);
+        diagramActions.setParams(paramsParsed);
         Map<String,String> solutions = calculateSolution(-1);
         originalSol.set(solutions.get("ogSol"));
     }
@@ -55,23 +45,24 @@ public class ArraySortingDiagram extends BaseDiagram{
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));
         partSols[0] = solutions.get("partSol1");
         partSols[1] = solutions.get("partSol2");
-        setSolutionOperations();
+        Map<String,String> paramsParsed = new HashMap<>();
+        params.forEach((k,v)-> paramsParsed.put(k,v.get()));
+        paramsParsed.put("mid", String.valueOf(mid));
+        paramsParsed.put("l", Arrays.toString(l));
+        paramsParsed.put("r", Arrays.toString(r));
+        diagramActions.setParams(paramsParsed);
     }
     @Override
-    public boolean checkNotBaseCase(int index) {
-        Map<String,String> paramsParsed = new HashMap<>();
-        params.forEach((k,v)->{
-            paramsParsed.put(k,v.get());
-        });
-        return diagramActions.checkNotBaseCase(baseCaseParameters.get(index),paramsParsed);
+    protected void setSolutionOperations() {
+        this.solutionOperations = diagramActions.setSolutionOperations();
+    }
+    @Override
+    public boolean checkNotBaseCase(int index, List<String> inputs) {
+        return diagramActions.checkNotBaseCase(baseCaseParameters.get(index),inputs);
     }
 
     @Override
     public Map<String, String> calculateSolution(int selectedIndex) throws Exception {
-        Map<String,String> paramsParsed = new HashMap<>();
-        params.forEach((k,v)->{
-            paramsParsed.put(k,v.get());
-        });
         return diagramActions.calculateSolution(selectedIndex);
     }
 

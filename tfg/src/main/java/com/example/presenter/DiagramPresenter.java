@@ -21,6 +21,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class DiagramPresenter implements Initializable {
     @FXML
@@ -36,15 +37,15 @@ public class DiagramPresenter implements Initializable {
     @FXML
     Label calculatedSolution;
     @FXML
-    ComboBox decompositionSelect;
+    ComboBox<String> decompositionSelect;
     @FXML
-    ComboBox solutionSelect;
+    ComboBox<String> solutionSelect;
     @FXML
     VBox SizeAndBaseCaseBox;
     @FXML
-    ComboBox problemSizeSelect;
+    ComboBox<String> problemSizeSelect;
     @FXML
-    ComboBox baseCaseSelect;
+    ComboBox<String> baseCaseSelect;
     @FXML
     Line partialDataSolutionArrow;
     @FXML
@@ -75,7 +76,6 @@ public class DiagramPresenter implements Initializable {
         diagramPart2.forEach(ele->ele.setVisible(false));
         diagramPart3.forEach(ele->ele.setVisible(false));
         calculatedSolution.setVisible(false);
-        diagramGrid.setVisible(false);
     }
     public DiagramPresenter(BaseDiagram model) {
         this.model = model;
@@ -106,50 +106,52 @@ public class DiagramPresenter implements Initializable {
         //recursiveCase.textProperty().bind(model.viewerValues.get("recursiveCase"));
 
     }
-    @FXML
-    public void returnToMenu(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramSelector.fxml"));
-        Pane pane = loader.load();
-        diagramGrid.getScene().setRoot(pane);
-    }
     public void onChangeProblemSize(ActionEvent actionEvent) {
         baseCaseSelect.setVisible(true);
         baseCaseSelect.getItems().clear();
-        baseCaseSelect.getItems().setAll(model.getBaseCaseChoices().get(model.getCurrentProblemSize()));
+        if(!problemSizeSelect.getSelectionModel().isEmpty()){
+            baseCaseSelect.getItems().setAll(model.getBaseCaseChoices().get(model.getCurrentProblemSize()));
+        }
     }
 
     public void onChangeBaseCase(ActionEvent actionEvent) {
         model.setCurrentBaseCaseIndex(baseCaseSelect.getSelectionModel().getSelectedIndex());
-        List<TextField> tfs = new ArrayList<>();
-        for(String s : model.getParams().keySet()){
-            TextField tf = new TextField();
-            tf.setPromptText(s);
-            tf.setFont(originalSolution.getFont());
-            tf.setMaxWidth(100);
-            tf.setMaxHeight(30);
-            tfs.add(tf);
-            model.getParams().get(s).bindBidirectional(tf.textProperty());
-            tf.setOnAction(actionEvent1 -> {
-                if(tfs.stream().anyMatch(tf1 -> tf1.getText().isEmpty())){
-                    diagramPart2.forEach(ele->ele.setVisible(false));
-                }
-                else if(model.checkNotBaseCase(model.getCurrentProblemSize()+model.getCurrentBaseCaseIndex())) {
-                    showErrorInputAlert(new BaseCaseException("Cannot introduce a base case in parameters"));
-                }
-                else{
-                    try {
-                        model.processInputs();
-                    } catch (Exception e) {
-                        showErrorInputAlert(e);
-                        System.out.println(e);
+        if(originalData.getChildren().isEmpty()){
+            List<TextField> tfs = new ArrayList<>();
+            for(String s : model.getParams().keySet()){
+                TextField tf = new TextField();
+                tf.setPromptText(s);
+                tf.setFont(originalSolution.getFont());
+                tf.setMaxWidth(100);
+                tf.setMaxHeight(30);
+                tfs.add(tf);
+                model.getParams().get(s).bindBidirectional(tf.textProperty());
+                tf.setOnAction(actionEvent1 -> {
+                    if(tfs.stream().anyMatch(tf1 -> tf1.getText().isEmpty())){
+                        diagramPart2.forEach(ele->ele.setVisible(false));
                     }
-                    refreshDiagram();
-                }
+                    else{
+                        List<String> inputs = tfs.stream().map(ele -> ele.textProperty().get()).toList();
+                        if(model.checkNotBaseCase(model.getCurrentProblemSize()+model.getCurrentBaseCaseIndex(),inputs)) {
+                            showErrorInputAlert(new BaseCaseException("Cannot introduce a base case in parameters"));
+                        }
+                        else{
+                            try {
+                                model.processInputs();
+                            } catch (Exception e) {
+                                showErrorInputAlert(e);
+                                System.out.println(e);
+                            }
+                            refreshDiagram();
+                        }
+                    }
 
-            });
+
+                });
+            }
+            originalData.getChildren().addAll(tfs);
         }
-        originalData.getChildren().addAll(tfs);
-        diagramGrid.setVisible(true);
+
         diagramPart1.forEach(ele->ele.setVisible(true));
     }
     public void onDescompositionChange(ActionEvent actionEvent) {
@@ -226,8 +228,29 @@ public class DiagramPresenter implements Initializable {
     private void refreshDiagram(){
         diagramPart2.forEach(ele->ele.setVisible(true));
         diagramPart3.forEach(ele->ele.setVisible(false));
+        calculatedSolution.setVisible(false);
         decompositionSelect.getItems().clear();
         decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
+
+    }
+    @FXML
+    public void returnToMenu(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramSelector.fxml"));
+        Pane pane = loader.load();
+        diagramGrid.getScene().setRoot(pane);
+    }
+    @FXML
+    public void resetDiagram(ActionEvent actionEvent) {
+        problemSizeSelect.getSelectionModel().clearSelection();
+        baseCaseSelect.getSelectionModel().clearSelection();
+        partialSolutions.getChildren().clear();
+        subParameters.getChildren().clear();
+        solutionSelect.getItems().clear();
+        originalData.getChildren().clear();
         calculatedSolution.setVisible(false);
+        model.originalSolProperty().set("");
+        diagramPart1.forEach(ele->ele.setVisible(false));
+        diagramPart2.forEach(ele->ele.setVisible(false));
+        diagramPart3.forEach(ele->ele.setVisible(false));
     }
 }

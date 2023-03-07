@@ -9,12 +9,21 @@ import java.util.stream.IntStream;
 
 public class MergeSortDiagram implements IDiagramActions{
     Map<Integer, Callable<Map<String,String>>> algorithmMap= new HashMap<>();
-    int[] array;
-    int mid;
-    int[] l;
-    int[] r;
+    static int[] array;
+    static int mid;
+    static int[] l;
+    static int[] r;
+
     @Override
-    public List<List<Supplier>> setSolutionOperations(Map<String, String> params) {
+    public void setParams(Map<String, String> newValues) {
+        array = stringToArrayInt(newValues.get("array"));
+        mid = Integer.parseInt(newValues.get("mid"));
+        l = stringToArrayInt(newValues.get("l"));
+        r = stringToArrayInt(newValues.get("r"));
+    }
+
+    @Override
+    public List<List<Supplier>> setSolutionOperations() {
         List<Supplier> s1 = new ArrayList<>();
         s1.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(Arrays.stream(l), Arrays.stream(r)).toArray()));
         s1.add((Supplier<String>) () -> Arrays.toString(Algorithms.merge(array, l, r, mid, array.length - mid)));
@@ -22,10 +31,7 @@ public class MergeSortDiagram implements IDiagramActions{
     }
 
     @Override
-    public void setAlgorithmMap(Map<String, String> params) {
-        mid = Integer.parseInt(params.get("mid"));
-        l = stringToArrayInt(params.get("l"));
-        r = stringToArrayInt(params.get("r"));
+    public void setAlgorithmMap() {
         algorithmMap.put(-1,()->{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol", Arrays.toString(Algorithms.mergeSort(array)));
@@ -42,8 +48,8 @@ public class MergeSortDiagram implements IDiagramActions{
         });
     }
     @Override
-    public boolean checkNotBaseCase(List<String> baseCases, Map<String, String> params) {
-        int[] input = stringToArrayInt(params.get("array"));
+    public boolean checkNotBaseCase(List<String> baseCases,List<String> inputs) {
+        int[] input = stringToArrayInt(inputs.get(0));
         if(input.length>1){
             array = input.clone();
             int[] temp = Algorithms.mergeSort(input);
