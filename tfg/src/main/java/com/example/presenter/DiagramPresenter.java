@@ -3,6 +3,7 @@ package com.example.presenter;
 import com.example.diagrams.BaseDiagram;
 import com.example.exceptions.BaseCaseException;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -60,6 +62,8 @@ public class DiagramPresenter implements Initializable {
     Line datasArrow;
     @FXML
     Line solutionsArrow;
+    @FXML
+    VBox diagramGridHolder;
     List<Node> diagramPart1 = new ArrayList<>();
     List<Node> diagramPart2 = new ArrayList<>();
     List<Node> diagramPart3 = new ArrayList<>();
@@ -222,6 +226,8 @@ public class DiagramPresenter implements Initializable {
         if(e instanceof BaseCaseException){
             inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
             inputErrorAlert.setContentText("Revisa el contenido, no puedes introducir un caso base o una solución como parámetro");
+            diagramPart2.forEach(ele->ele.setVisible(false));
+            diagramPart3.forEach(ele->ele.setVisible(false));
         }
         inputErrorAlert.showAndWait();
     }
