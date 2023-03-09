@@ -1,6 +1,6 @@
 {
   "type" : "COMPLEX",
-  "heading" : "Enunciado del mergesort",
+  "heading" : "Dado un array desordenado con tamaño N, ordenarlo mediante el método mergesort\nEjemplo: f(7, 3, 4, 8, 4, 6, 4, 6) -> 3, 4, 4, 4, 6, 6, 7, 8",
   "params" : {
     "array" : ""
   },
@@ -15,12 +15,12 @@
   "currentReductionSolutions" : 0,
   "operation" : "",
   "reducedOperation" : "",
-  "problemSizeChoices" : [ "array.size" ],
+  "problemSizeChoices" : [ "N = array.size" ],
   "currentBaseCaseIndex" : 0,
-  "baseCaseChoices" : [ [ "array.size <= 1" ] ],
+  "baseCaseChoices" : [ [ "N <= 1" ] ],
   "baseCaseParameters" : [ [ "0" ] ],
-  "reductionChoices" : [ [ "array / 2" ] ],
-  "solutionsChoices" : [ ["Concatenate left and right arrays","Merge left and right arrays"] ],
+  "reductionChoices" : [ [ "Dividir array en 2 mitades" ] ],
+  "solutionsChoices" : [ ["Concatenar arrays izqdo y dcho","Mezclar arrays izqdo y dcho"] ],
   "recursiveCallParameters" : "",
   "correctSolutions" : [ 1 ]
 }

@@ -1,6 +1,6 @@
 {
   "type" : "SIMPLE",
-  "heading" : "Enunciado del recursive power",
+  "heading" : "Dados un número a y su exponente b, ambos enteros no negativos, calcular aᵇ de forma recursiva\nEjemplo: Si f(2,5) = 2⁵ = 32",
   "params" : {
     "a" : "",
     "b" : ""
@@ -20,8 +20,8 @@
   "currentBaseCaseIndex" : 0,
   "baseCaseChoices" : [ [ "b == 0" ] ],
   "baseCaseParameters" : [ [ "0" ] ],
-  "reductionChoices" : [ [ "b - 1", "b / 2" ] ],
-  "solutionsChoices" : [ [ "* b", "* a", "** a" ], [ "** 2", "* b" ], [ "** 2", "* b", "a * ((a^(b-1/2)))²))" ] ],
+  "reductionChoices" : [ [ "f(a,b - 1)", "f(a,b / 2)" ] ],
+  "solutionsChoices" : [ [ "* b", "* a", "** a" ], [ "** 2", "* b" ], [ "** 2", "* b", "a * (aᵇᐟᐟ²)²" ] ],
   "recursiveCallParameters" : "",
   "correctSolutions" : [ 1, 0, 2 ]
 }

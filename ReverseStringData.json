@@ -1,6 +1,6 @@
 {
   "type" : "SIMPLE",
-  "heading" : "Enunciado del reverse string",
+  "heading" : "Dada una cadena de N caracteres, escribir dicha cadena al revés.\nEjemplo: f('carlos') -> solrac",
   "params" : {
     "input" : ""
   },
@@ -15,12 +15,12 @@
   "currentReductionSolutions" : 0,
   "operation" : ",",
   "reducedOperation" : "",
-  "problemSizeChoices" : [ "n = input.length" ],
+  "problemSizeChoices" : [ "N = input.length" ],
   "currentBaseCaseIndex" : 0,
   "baseCaseChoices" : [ [ "input = ''" ]],
   "baseCaseParameters" : [ [""] ],
-  "reductionChoices" : [ [ "Remove letter from head" ] ],
-  "solutionsChoices" : [ [ "Put removed letter at head","Put removed letter at tail"] ],
+  "reductionChoices" : [ [ "Quitar primera letra" ] ],
+  "solutionsChoices" : [ [ "Poner letra quitada en la cabeza","Poner letra quitada en la cola"] ],
   "recursiveCallParameters" : "",
   "correctSolutions" : [ 1 ]
 }
