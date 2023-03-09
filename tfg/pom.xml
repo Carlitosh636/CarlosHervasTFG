@@ -49,6 +49,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.0.0</version>
                 <configuration>
                     <mainClass>com.example.Start</mainClass>
                     <layout>JAR</layout>
@@ -75,7 +76,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>com.example.Start</mainClass>
+                    <mainClass>org.openjfx/com.example.Start</mainClass>
                 </configuration>
             </plugin>
         </plugins>
