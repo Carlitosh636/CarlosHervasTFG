@@ -15,11 +15,17 @@ public class MergeSortDiagram implements IDiagramActions{
     static int[] r;
 
     @Override
-    public void setParams(Map<String, String> newValues) {
-        array = stringToArrayInt(newValues.get("array"));
-        mid = Integer.parseInt(newValues.get("mid"));
-        l = stringToArrayInt(newValues.get("l"));
-        r = stringToArrayInt(newValues.get("r"));
+    public void setParams(Map<String, String> newValues) throws Exception {
+        try{
+            array = stringToArrayInt(newValues.get("array"));
+            mid = Integer.parseInt(newValues.get("mid"));
+            l = stringToArrayInt(newValues.get("l"));
+            r = stringToArrayInt(newValues.get("r"));
+        }
+        catch (Exception e){
+            throw e;
+        }
+
     }
 
     @Override
@@ -48,7 +54,7 @@ public class MergeSortDiagram implements IDiagramActions{
         });
     }
     @Override
-    public boolean checkNotBaseCase(List<String> baseCases,List<String> inputs) {
+    public boolean checkNotBaseCase(List<String> baseCases,List<String> inputs) throws Exception {
         int[] input = stringToArrayInt(inputs.get(0));
         if(input.length>1){
             array = input.clone();
@@ -67,8 +73,13 @@ public class MergeSortDiagram implements IDiagramActions{
     public boolean checkSolutionsEqual(String calcSol, String ogSol) {
         return calcSol.equals(ogSol);
     }
-    private int[] stringToArrayInt(String data){
+    private int[] stringToArrayInt(String data) throws Exception{
         data = data.replaceAll("[\\[\\]()\s{}]","");
-        return Arrays.stream(data.split(",")).mapToInt(Integer::parseInt).toArray();
+        try{
+            return Arrays.stream(data.split(",")).mapToInt(Integer::parseInt).toArray();
+        }
+        catch (NumberFormatException e){
+            throw e;
+        }
     }
 }

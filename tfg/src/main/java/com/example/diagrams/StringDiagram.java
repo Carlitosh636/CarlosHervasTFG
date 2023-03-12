@@ -41,7 +41,7 @@ public class StringDiagram extends BaseDiagram{
         this.solutionOperations = diagramActions.setSolutionOperations();
     }
     @Override
-    public boolean checkNotBaseCase(int index, List<String> inputs) {
+    public boolean checkNotBaseCase(int index, List<String> inputs) throws Exception {
         return diagramActions.checkNotBaseCase(baseCaseParameters.get(index),inputs);
     }
 

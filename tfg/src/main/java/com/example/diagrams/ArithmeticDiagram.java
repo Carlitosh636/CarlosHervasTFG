@@ -42,7 +42,7 @@ public class ArithmeticDiagram extends BaseDiagram{
         this.solutionOperations = diagramActions.setSolutionOperations();
     }
     @Override
-    public boolean checkNotBaseCase(int index, List<String> input) {
+    public boolean checkNotBaseCase(int index, List<String> input) throws Exception {
         return diagramActions.checkNotBaseCase(baseCaseParameters.get(index),input);
     }
 

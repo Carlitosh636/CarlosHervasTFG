@@ -79,7 +79,7 @@ public abstract class BaseDiagram {
     protected abstract void setSolutionOperations();
     public abstract void processInputs() throws Exception;
     public abstract void processSolutions() throws Exception;
-    public abstract boolean checkNotBaseCase(int index,List<String>input);
+    public abstract boolean checkNotBaseCase(int index,List<String>input) throws Exception;
     public abstract Map<String,String> calculateSolution(int selectedIndex) throws Exception;
     public abstract boolean checkSolutionsEqual(String calcSol);
     public abstract String calculateWithSelectedOperation(int index);

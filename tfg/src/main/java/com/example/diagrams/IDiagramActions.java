@@ -10,9 +10,9 @@ public interface IDiagramActions {
     //aquí estarán también las funciones para calcular los valores, en el builder (ej: Arithmetic map) simplemente se llama a la función
     //de la interfaz para hacer el cálculo
     List<List<Supplier>> setSolutionOperations();
-    void setParams(Map<String,String> newValues);
+    void setParams(Map<String,String> newValues) throws Exception;
     void setAlgorithmMap();
-    boolean checkNotBaseCase(List<String> baseCases,List<String> inputs);
+    boolean checkNotBaseCase(List<String> baseCases,List<String> inputs) throws Exception;
     Map<String,String> calculateSolution(int index) throws Exception;
     boolean checkSolutionsEqual(String calcSol, String ogSol);
 }

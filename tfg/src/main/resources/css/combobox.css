@@ -18,6 +18,11 @@
         #f0ff35;
     -fx-background-radius : 30px;
 }
+#combo-box-1:hover{
+    -fx-background-color:
+        #b9c429;
+    -fx-background-radius : 30px;
+}
 #combo-box-1 .list-view{
 -fx-background-radius : 15px;
     -fx-background-color:
@@ -30,6 +35,11 @@
 #combo-box-2{
     -fx-background-color:
         #c3c4c4;
+    -fx-background-radius : 30px;
+}
+#combo-box-2:hover{
+    -fx-background-color:
+        #a3a3a3;
     -fx-background-radius : 30px;
 }
 #combo-box-2 .list-view{
@@ -46,6 +56,11 @@
         #FFD58C;
     -fx-background-radius : 30px;
 }
+#combo-box-3:hover{
+    -fx-background-color:
+        #bf9f67;
+    -fx-background-radius : 30px;
+}
 #combo-box-3 .list-view{
 -fx-background-radius : 15px;
     -fx-background-color:
@@ -58,6 +73,11 @@
 #combo-box-4{
     -fx-background-color:
          #a4edb7;
+    -fx-background-radius : 30px;
+}
+#combo-box-4:hover{
+    -fx-background-color:
+         #7bb58a;
     -fx-background-radius : 30px;
 }
 #combo-box-4 .list-view{

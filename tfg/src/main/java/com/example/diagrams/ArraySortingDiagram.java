@@ -48,8 +48,8 @@ public class ArraySortingDiagram extends BaseDiagram{
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         paramsParsed.put("mid", String.valueOf(mid));
-        paramsParsed.put("l", Arrays.toString(l));
-        paramsParsed.put("r", Arrays.toString(r));
+        paramsParsed.put("l", partSols[0]);
+        paramsParsed.put("r", partSols[1]);
         diagramActions.setParams(paramsParsed);
     }
     @Override
@@ -57,7 +57,7 @@ public class ArraySortingDiagram extends BaseDiagram{
         this.solutionOperations = diagramActions.setSolutionOperations();
     }
     @Override
-    public boolean checkNotBaseCase(int index, List<String> inputs) {
+    public boolean checkNotBaseCase(int index, List<String> inputs) throws Exception {
         return diagramActions.checkNotBaseCase(baseCaseParameters.get(index),inputs);
     }
 
