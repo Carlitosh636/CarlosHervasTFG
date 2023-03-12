@@ -34,22 +34,22 @@ public class App extends Application {
     }
     @FXML
     public void handleMainMenuButton(javafx.event.ActionEvent actionEvent) throws IOException {
-        ArithmeticDiagram model = new ArithmeticDiagram(new RecursivePowerDiagram(),"RecursiveDiagramData.json");
+        ArithmeticDiagram model = new ArithmeticDiagram(new RecursivePowerDiagram(),"diagramData/RecursiveDiagramData.json");
         loadScene(model);
     }
     @FXML
     public void handleMainMenuButton2(ActionEvent actionEvent) throws IOException{
-        ArithmeticDiagram model = new ArithmeticDiagram(new SlowAdditionDiagram(),"SlowAdditionData.json");
+        ArithmeticDiagram model = new ArithmeticDiagram(new SlowAdditionDiagram(),"diagramData/SlowAdditionData.json");
         loadScene(model);
     }
     @FXML
     public void handleMainMenuButton3(ActionEvent actionEvent) throws IOException {
-        ArraySortingDiagram model = new ArraySortingDiagram(new MergeSortDiagram(),"MergeSortData.json");
+        ArraySortingDiagram model = new ArraySortingDiagram(new MergeSortDiagram(),"diagramData/MergeSortData.json");
         loadScene(model);
     }
     @FXML
     public void handleMainMenuButton4(ActionEvent actionEvent) throws IOException {
-        StringDiagram model = new StringDiagram(new ReverseStringDiagram(),"ReverseStringData.json");
+        StringDiagram model = new StringDiagram(new ReverseStringDiagram(),"diagramData/ReverseStringData.json");
         loadScene(model);
     }
     private void loadScene(BaseDiagram model) throws IOException {
