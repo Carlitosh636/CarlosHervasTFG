@@ -41,7 +41,50 @@ public abstract class BaseDiagram {
     protected int algorithmIndex;
     protected Map<String,SimpleStringProperty> viewerValues = new HashMap<>();
     protected String parametersView;
+    protected BaseDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
+        this.diagramActions =builder;
+        DiagramData diagramData;
+        ObjectMapper objMapper = new ObjectMapper();
+        diagramData =objMapper.readValue(new File(diagramDataName),DiagramData.class);
+        this.operation=diagramData.operation;
+        this.params =new HashMap<>();
+        this.heading = new SimpleStringProperty(diagramData.heading);
+        this.type = DiagramType.valueOf(diagramData.type);
+        diagramData.params.forEach((k,v)->{
+            params.put(k,new SimpleStringProperty(v));
+        });
+        this.reductionChoices=diagramData.reductionChoices;
+        this.problemSizeChoices=diagramData.problemSizeChoices;
+        this.baseCaseChoices=diagramData.baseCaseChoices;
+        this.baseCaseParameters=diagramData.baseCaseParameters;
+        this.originalSol=new SimpleStringProperty(diagramData.originalSol);
+        this.calculatedSol = new SimpleStringProperty(diagramData.calculatedSol);
+        this.currentProblemSize = new SimpleIntegerProperty(diagramData.currentProblemSize);
+        this.currentBaseCase = new SimpleIntegerProperty(diagramData.currentBaseCase);
+        this.currentReductionSolutions = new SimpleIntegerProperty(diagramData.currentReductionSolutions);
+        this.currentReduction = new SimpleIntegerProperty(diagramData.currentReduction);
+        this.selectedSolution = new SimpleIntegerProperty();
+        this.subParameters =new ArrayList<>();
+        diagramData.subParameters.forEach(ele->{
+            this.subParameters.add(new SimpleStringProperty(ele));
+        });
+        this.subSolutions =new ArrayList<>();
+        diagramData.subSolutions.forEach(ele->{
+            this.subSolutions.add(new SimpleStringProperty(ele));
+        });
+        this.solutionsChoices = new ArrayList<>();
+        this.solutionsChoices.addAll(diagramData.solutionsChoices);
+        this.correctSolutions = diagramData.correctSolutions;
+    }
+    protected abstract void setSolutionOperations();
+    public abstract void processInputs() throws Exception;
+    public abstract void processSolutions() throws Exception;
+    public abstract boolean checkNotBaseCase(int index,List<String>input);
+    public abstract Map<String,String> calculateSolution(int selectedIndex) throws Exception;
+    public abstract boolean checkSolutionsEqual(String calcSol);
+    public abstract String calculateWithSelectedOperation(int index);
 
+    //GETTER SETTERS
     public IDiagramActions getDiagramActions() {
         return diagramActions;
     }
@@ -185,47 +228,4 @@ public abstract class BaseDiagram {
     public void setCurrentBaseCaseIndex(int currentBaseCaseIndex) {
         this.currentBaseCaseIndex = currentBaseCaseIndex;
     }
-
-    protected BaseDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
-        this.diagramActions =builder;
-        DiagramData diagramData;
-        ObjectMapper objMapper = new ObjectMapper();
-        diagramData =objMapper.readValue(new File(diagramDataName),DiagramData.class);
-        this.operation=diagramData.operation;
-        this.params =new HashMap<>();
-        this.heading = new SimpleStringProperty(diagramData.heading);
-        this.type = DiagramType.valueOf(diagramData.type);
-        diagramData.params.forEach((k,v)->{
-            params.put(k,new SimpleStringProperty(v));
-        });
-        this.reductionChoices=diagramData.reductionChoices;
-        this.problemSizeChoices=diagramData.problemSizeChoices;
-        this.baseCaseChoices=diagramData.baseCaseChoices;
-        this.baseCaseParameters=diagramData.baseCaseParameters;
-        this.originalSol=new SimpleStringProperty(diagramData.originalSol);
-        this.calculatedSol = new SimpleStringProperty(diagramData.calculatedSol);
-        this.currentProblemSize = new SimpleIntegerProperty(diagramData.currentProblemSize);
-        this.currentBaseCase = new SimpleIntegerProperty(diagramData.currentBaseCase);
-        this.currentReductionSolutions = new SimpleIntegerProperty(diagramData.currentReductionSolutions);
-        this.currentReduction = new SimpleIntegerProperty(diagramData.currentReduction);
-        this.selectedSolution = new SimpleIntegerProperty();
-        this.subParameters =new ArrayList<>();
-        diagramData.subParameters.forEach(ele->{
-            this.subParameters.add(new SimpleStringProperty(ele));
-        });
-        this.subSolutions =new ArrayList<>();
-        diagramData.subSolutions.forEach(ele->{
-            this.subSolutions.add(new SimpleStringProperty(ele));
-        });
-        this.solutionsChoices = new ArrayList<>();
-        this.solutionsChoices.addAll(diagramData.solutionsChoices);
-        this.correctSolutions = diagramData.correctSolutions;
-    }
-    protected abstract void setSolutionOperations();
-    public abstract void processInputs() throws Exception;
-    public abstract void proccessSolutions() throws Exception;
-    public abstract boolean checkNotBaseCase(int index,List<String>input);
-    public abstract Map<String,String> calculateSolution(int selectedIndex) throws Exception;
-    public abstract boolean checkSolutionsEqual(String calcSol);
-    public abstract String calculateWithSelectedOperation(int index);
 }

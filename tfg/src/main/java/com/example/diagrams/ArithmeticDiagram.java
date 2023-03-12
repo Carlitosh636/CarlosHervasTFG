@@ -24,7 +24,7 @@ public class ArithmeticDiagram extends BaseDiagram{
         originalSol.set(solution.get("ogSol"));
     }
     @Override
-    public void proccessSolutions() throws Exception {
+    public void processSolutions() throws Exception {
         algorithmIndex = currentProblemSize.get() + currentReduction.get();
         Map<String,String> solutions = calculateSolution(algorithmIndex);
         subParameters.get(0).set(solutions.get("reducedOperation"));

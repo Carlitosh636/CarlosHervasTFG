@@ -3,7 +3,6 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="root" style="-fx-background-color: #000833;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presenter.DiagramPresenter">
@@ -79,7 +78,7 @@
                         </rowConstraints>
                         <children>
                            <VBox fx:id="originalData" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                           <Line fx:id="originalDataSolutionArrow" endX="250.0" layoutX="60.0" startX="60.0" stroke="WHITE" strokeWidth="2.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                           <StackPane fx:id="originalDataSolutionArrow" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                            <Label fx:id="calculatedSolution" contentDisplay="CENTER" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1">
                               <font>
                                  <Font size="15.0" />
@@ -90,8 +89,8 @@
                                  <Font size="15.0" />
                               </font>
                            </Label>
-                           <Line fx:id="datasArrow" endY="60.0" layoutX="50.0" layoutY="50.0" stroke="WHITE" strokeWidth="2.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                           <Line fx:id="solutionsArrow" endY="60.0" layoutX="50.0" layoutY="50.0" stroke="WHITE" strokeWidth="2.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                           <StackPane fx:id="datasArrow" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                           <StackPane fx:id="solutionsArrow" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                            <VBox fx:id="subParameters" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
                               <children>
                                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT">
@@ -101,7 +100,7 @@
                                  </Label>
                               </children>
                            </VBox>
-                           <Line fx:id="partialDataSolutionArrow" endX="250.0" layoutX="60.0" startX="60.0" stroke="WHITE" strokeWidth="2.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                           <StackPane fx:id="partialDataSolutionArrow" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                            <VBox fx:id="partialSolutions" alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="5">
                               <children>
                                  <Label alignment="CENTER" contentDisplay="CENTER">

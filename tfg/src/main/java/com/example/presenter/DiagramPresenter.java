@@ -2,28 +2,22 @@ package com.example.presenter;
 
 import com.example.diagrams.BaseDiagram;
 import com.example.exceptions.BaseCaseException;
+import com.example.model.Arrow;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Line;
+import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class DiagramPresenter implements Initializable {
     @FXML
@@ -33,7 +27,13 @@ public class DiagramPresenter implements Initializable {
     @FXML
     public TextArea heading;
     @FXML
-    Line originalDataSolutionArrow;
+    StackPane originalDataSolutionArrow;
+    @FXML
+    StackPane partialDataSolutionArrow;
+    @FXML
+    StackPane datasArrow;
+    @FXML
+    StackPane solutionsArrow;
     @FXML
     Label originalSolution;
     @FXML
@@ -49,8 +49,6 @@ public class DiagramPresenter implements Initializable {
     @FXML
     ComboBox<String> baseCaseSelect;
     @FXML
-    Line partialDataSolutionArrow;
-    @FXML
     GridPane diagramGrid;
     @FXML
     VBox originalData;
@@ -58,10 +56,6 @@ public class DiagramPresenter implements Initializable {
     VBox subParameters;
     @FXML
     VBox partialSolutions;
-    @FXML
-    Line datasArrow;
-    @FXML
-    Line solutionsArrow;
     @FXML
     VBox diagramGridHolder;
     List<Node> diagramPart1 = new ArrayList<>();
@@ -75,12 +69,14 @@ public class DiagramPresenter implements Initializable {
         AnchorPane.setLeftAnchor(SizeAndBaseCaseBox,15.0);
         AnchorPane.setRightAnchor(diagramGrid,15.0);
         bindModelData();
+        setArrows();
         baseCaseSelect.setVisible(false);
         diagramPart1.forEach(ele->ele.setVisible(false));
         diagramPart2.forEach(ele->ele.setVisible(false));
         diagramPart3.forEach(ele->ele.setVisible(false));
         calculatedSolution.setVisible(false);
     }
+
     public DiagramPresenter(BaseDiagram model) {
         this.model = model;
     }
@@ -167,7 +163,7 @@ public class DiagramPresenter implements Initializable {
     }
     protected void handleDecomposition() {
         try {
-            model.proccessSolutions();
+            model.processSolutions();
         } catch (Exception e) {
             showErrorInputAlert(e);
             System.out.println(e);
@@ -258,5 +254,19 @@ public class DiagramPresenter implements Initializable {
         diagramPart1.forEach(ele->ele.setVisible(false));
         diagramPart2.forEach(ele->ele.setVisible(false));
         diagramPart3.forEach(ele->ele.setVisible(false));
+    }
+    private void setArrows() {
+        originalDataSolutionArrow.getChildren().add(returnArrow(60,0,250,0));
+        partialDataSolutionArrow.getChildren().add(returnArrow(60,0,250,0));
+        datasArrow.getChildren().add(returnArrow(0,0,0,60));
+        solutionsArrow.getChildren().add(returnArrow(0,60,0,0));
+    }
+    private Arrow returnArrow(double startX, double startY, double endX, double endY){
+        Arrow arrow = new Arrow();
+        arrow.setStartX(startX);
+        arrow.setStartY(startY);
+        arrow.setEndX(endX);
+        arrow.setEndY(endY);
+        return arrow;
     }
 }
