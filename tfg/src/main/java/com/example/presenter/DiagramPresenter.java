@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DiagramPresenter implements Initializable {
@@ -242,23 +243,42 @@ public class DiagramPresenter implements Initializable {
     }
     @FXML
     public void returnToMenu(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramSelector.fxml"));
-        Pane pane = loader.load();
-        diagramGrid.getScene().setRoot(pane);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación");
+        alert.setContentText("¿Estas seguro de que quieres volver al menú?");
+        Optional<ButtonType> action = alert.showAndWait();
+        if(action.get()==ButtonType.OK){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramSelector.fxml"));
+            Pane pane = loader.load();
+            diagramGrid.getScene().setRoot(pane);
+        }
+        else{
+            alert.close();
+        }
     }
     @FXML
     public void resetDiagram(ActionEvent actionEvent) {
-        problemSizeSelect.getSelectionModel().clearSelection();
-        baseCaseSelect.getSelectionModel().clearSelection();
-        partialSolutions.getChildren().clear();
-        subParameters.getChildren().clear();
-        solutionSelect.getItems().clear();
-        originalData.getChildren().clear();
-        calculatedSolution.setVisible(false);
-        model.originalSolProperty().set("");
-        diagramPart1.forEach(ele->ele.setVisible(false));
-        diagramPart2.forEach(ele->ele.setVisible(false));
-        diagramPart3.forEach(ele->ele.setVisible(false));
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación");
+        alert.setContentText("¿Estas seguro de que quieres borrar todos los valores introducidos?");
+        Optional<ButtonType> action = alert.showAndWait();
+        if(action.get()==ButtonType.OK){
+            problemSizeSelect.getSelectionModel().clearSelection();
+            baseCaseSelect.getSelectionModel().clearSelection();
+            partialSolutions.getChildren().clear();
+            subParameters.getChildren().clear();
+            solutionSelect.getItems().clear();
+            originalData.getChildren().clear();
+            calculatedSolution.setVisible(false);
+            model.originalSolProperty().set("");
+            diagramPart1.forEach(ele->ele.setVisible(false));
+            diagramPart2.forEach(ele->ele.setVisible(false));
+            diagramPart3.forEach(ele->ele.setVisible(false));
+        }
+        else{
+            alert.close();
+        }
+
     }
     private void setArrows() {
         originalDataSolutionArrow.getChildren().add(returnArrow(60,0,250,0));
