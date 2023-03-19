@@ -1,6 +1,6 @@
 {
   "type" : "COMPLEX",
-  "heading" : "Dado un array desordenado con tamaño N, ordenarlo mediante el método mergesort\nEjemplo: f(7, 3, 4, 8, 4, 6, 4, 6) -> 3, 4, 4, 4, 6, 6, 7, 8",
+  "heading" : "Dado una lista con tamaño n, ordenarla de forma recursiva\nEjemplo: f(7, 3, 4, 8, 4, 6, 4, 6) -> 3, 4, 4, 4, 6, 6, 7, 8",
   "params" : {
     "array" : ""
   },
@@ -15,7 +15,7 @@
   "currentReductionSolutions" : 0,
   "operation" : "",
   "reducedOperation" : "",
-  "problemSizeChoices" : [ "N = array.size" ],
+  "problemSizeChoices" : [ "n = array.size" ],
   "currentBaseCaseIndex" : 0,
   "baseCaseChoices" : [ [ "N <= 1" ] ],
   "baseCaseParameters" : [ [ "0" ] ],

@@ -11,14 +11,6 @@
         <start-class>com.example.Start</start-class>
     </properties>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx</artifactId>
-            <version>19</version>
-            <type>pom</type>
-        </dependency>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>

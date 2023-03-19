@@ -1,6 +1,6 @@
 {
   "type" : "SIMPLE",
-  "heading" : "Dada una cadena de N caracteres, escribir dicha cadena al revés.\nEjemplo: f('carlos') -> solrac",
+  "heading" : "Dada una cadena de n caracteres, escribir dicha cadena al revés.\nEjemplo: f('carlos') -> 'solrac'",
   "params" : {
     "input" : ""
   },
