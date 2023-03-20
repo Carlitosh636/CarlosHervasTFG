@@ -51,7 +51,7 @@
                </VBox>
                <VBox fx:id="diagramGridHolder">
                   <children>
-                     <GridPane id="background" fx:id="diagramGrid" hgap="10.0" maxHeight="-Infinity" stylesheets="@../css/boxes-background.css" vgap="10.0">
+                     <GridPane id="background" fx:id="diagramGrid" hgap="10.0" maxHeight="-Infinity" stylesheets="@../css/boxes-background.css" vgap="5.0">
                         <columnConstraints>
                            <ColumnConstraints />
                            <ColumnConstraints />
@@ -68,21 +68,21 @@
                            <RowConstraints />
                         </rowConstraints>
                         <children>
-                           <VBox fx:id="originalData" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           <VBox fx:id="originalData" minHeight="-Infinity" minWidth="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            <StackPane fx:id="originalDataSolutionArrow" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                           <Label fx:id="calculatedSolution" contentDisplay="CENTER" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <Label fx:id="calculatedSolution" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1">
                               <font>
                                  <Font size="15.0" />
                               </font>
                            </Label>
-                           <Label fx:id="originalSolution" alignment="CENTER" contentDisplay="CENTER" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <Label id="diagramDataHolders" fx:id="originalSolution" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" stylesheets="@../css/boxes-background.css" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                               <font>
                                  <Font size="15.0" />
                               </font>
                            </Label>
                            <StackPane fx:id="datasArrow" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                            <StackPane fx:id="solutionsArrow" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                           <VBox fx:id="subParameters" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <VBox id="diagramDataHolders" fx:id="subParameters" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
                               <children>
                                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT">
                                     <font>
@@ -92,7 +92,7 @@
                               </children>
                            </VBox>
                            <StackPane fx:id="partialDataSolutionArrow" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                           <VBox fx:id="partialSolutions" alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                           <VBox id="diagramDataHolders" fx:id="partialSolutions" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="3" GridPane.rowIndex="5">
                               <children>
                                  <Label alignment="CENTER" contentDisplay="CENTER">
                                     <font>
@@ -119,7 +119,7 @@
                                  <Insets right="10.0" />
                               </padding>
                            </Label>
-                           <Label layoutX="27.0" layoutY="66.0" text="4: Regla recursiva" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                           <Label layoutX="27.0" layoutY="66.0" minHeight="-Infinity" minWidth="-Infinity" text="4: Regla recursiva" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="2">
                               <font>
                                  <Font size="18.0" />
                               </font>

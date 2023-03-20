@@ -21,14 +21,14 @@ public class ArithmeticDiagram extends BaseDiagram{
         paramsParsed.put("partSol","0");
         diagramActions.setParams(paramsParsed);
         Map<String,String> solution = calculateSolution(-1);
-        originalSol.set(solution.get("ogSol"));
+        originalSol.set(String.format("%.0f", Double.parseDouble(solution.get("ogSol"))));
     }
     @Override
     public void processSolutions() throws Exception {
         algorithmIndex = currentProblemSize.get() + currentReduction.get();
         Map<String,String> solutions = calculateSolution(algorithmIndex);
         subParameters.get(0).set(solutions.get("reducedOperation"));
-        subSolutions.get(0).set(solutions.get("partSol"));
+        subSolutions.get(0).set(String.format("%.0f", Double.parseDouble(solutions.get("partSol"))));
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));
         partSol = Double.parseDouble(solutions.get("partSol"));
         Map<String,String> paramsParsed = new HashMap<>();
@@ -53,7 +53,10 @@ public class ArithmeticDiagram extends BaseDiagram{
 
     @Override
     public String calculateWithSelectedOperation(int index) {
-        calculatedSol.set(String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).get()));
+        calculatedSol.set(String.format(
+                "%.0f",
+                (double) solutionOperations.get(currentReductionSolutions.get()).get(index).get())
+        );
         return calculatedSol.get();
     }
     @Override

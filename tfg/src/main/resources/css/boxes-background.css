@@ -4,3 +4,8 @@
     -fx-border-insets: 5;
     -fx-border-color: blue transparent transparent transparent;
 }
+#diagramDataHolders{
+    -fx-background-color: #05235e;
+    -fx-background-radius: 15;
+
+}

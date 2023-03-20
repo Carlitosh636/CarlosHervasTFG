@@ -4,10 +4,12 @@ import com.example.diagrams.BaseDiagram;
 import com.example.exceptions.BaseCaseException;
 import com.example.model.Arrow;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -57,11 +59,6 @@ public class DiagramPresenter implements Initializable {
     VBox subParameters;
     @FXML
     VBox partialSolutions;
-    @FXML
-    VBox diagramGridHolder;
-    List<Node> diagramPart1 = new ArrayList<>();
-    List<Node> diagramPart2 = new ArrayList<>();
-    List<Node> diagramPart3 = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
@@ -72,10 +69,10 @@ public class DiagramPresenter implements Initializable {
         bindModelData();
         setArrows();
         baseCaseSelect.setVisible(false);
-        diagramPart1.forEach(ele->ele.setVisible(false));
-        diagramPart2.forEach(ele->ele.setVisible(false));
-        diagramPart3.forEach(ele->ele.setVisible(false));
+        diagramGrid.setVisible(false);
         calculatedSolution.setVisible(false);
+        decompositionSelect.setVisible(false);
+        solutionSelect.setVisible(false);
     }
 
     public DiagramPresenter(BaseDiagram model) {
@@ -88,19 +85,6 @@ public class DiagramPresenter implements Initializable {
         model.currentReductionProperty().bind(decompositionSelect.getSelectionModel().selectedIndexProperty());
         model.selectedSolutionProperty().bind(solutionSelect.getSelectionModel().selectedIndexProperty());
         heading.textProperty().bind(model.headingProperty());
-
-        diagramPart1.add(originalData);
-        diagramPart1.add(originalDataSolutionArrow);
-        diagramPart1.add(originalSolution);
-
-        diagramPart2.add(datasArrow);
-        diagramPart2.add(solutionsArrow);
-        diagramPart2.add(decompositionSelect);
-
-        diagramPart3.add(partialSolutions);
-        diagramPart3.add(subParameters);
-        diagramPart3.add(partialDataSolutionArrow);
-        diagramPart3.add(solutionSelect);
 
         //diagramTitle.textProperty().bind(model.viewerValues.get("diagramTitle"));
         //baseCase.textProperty().bind(model.viewerValues.get("baseCase"));
@@ -128,10 +112,7 @@ public class DiagramPresenter implements Initializable {
                 tfs.add(tf);
                 model.getParams().get(s).bindBidirectional(tf.textProperty());
                 tf.setOnAction(actionEvent1 -> {
-                    if(tfs.stream().anyMatch(tf1 -> tf1.getText().isEmpty())){
-                        diagramPart2.forEach(ele->ele.setVisible(false));
-                    }
-                    else{
+                    if(tfs.stream().noneMatch(tf1 -> tf1.getText().isEmpty())){
                         List<String> inputs = tfs.stream().map(ele -> ele.textProperty().get()).toList();
                         try {
                             if(model.checkNotBaseCase(model.getCurrentProblemSize()+model.getCurrentBaseCaseIndex(),inputs)) {
@@ -140,6 +121,7 @@ public class DiagramPresenter implements Initializable {
                             else{
                                 try {
                                     model.processInputs();
+                                    decompositionSelect.setVisible(true);
                                 } catch (Exception e) {
                                     showErrorInputAlert(e);
                                     System.out.println(e);
@@ -151,21 +133,17 @@ public class DiagramPresenter implements Initializable {
                             System.out.println(e);
                         }
                     }
-
-
                 });
             }
             originalData.getChildren().addAll(tfs);
         }
-
-        diagramPart1.forEach(ele->ele.setVisible(true));
+        diagramGrid.setVisible(true);
     }
     public void onDescompositionChange(ActionEvent actionEvent) {
         partialSolutions.getChildren().clear();
         subParameters.getChildren().clear();
         solutionSelect.getItems().clear();
         handleDecomposition();
-        diagramPart3.forEach(ele->ele.setVisible(true));
     }
     protected void handleDecomposition() {
         try {
@@ -191,6 +169,7 @@ public class DiagramPresenter implements Initializable {
             partialSolutions.getChildren().add(lb);
         }
         solutionSelect.getItems().setAll(model.getSolutionsChoices().get(model.getCurrentReductionSolutions()));
+        solutionSelect.setVisible(true);
     }
     public void onSolutionChange(ActionEvent actionEvent) {
         try{
@@ -228,14 +207,11 @@ public class DiagramPresenter implements Initializable {
         if(e instanceof BaseCaseException){
             inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
             inputErrorAlert.setContentText("Revisa el contenido, no puedes introducir un caso base o una solución como parámetro");
-            diagramPart2.forEach(ele->ele.setVisible(false));
-            diagramPart3.forEach(ele->ele.setVisible(false));
         }
         inputErrorAlert.showAndWait();
     }
     private void refreshDiagram(){
-        diagramPart2.forEach(ele->ele.setVisible(true));
-        diagramPart3.forEach(ele->ele.setVisible(false));
+        solutionSelect.setVisible(false);
         calculatedSolution.setVisible(false);
         decompositionSelect.getItems().clear();
         decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
@@ -271,9 +247,9 @@ public class DiagramPresenter implements Initializable {
             originalData.getChildren().clear();
             calculatedSolution.setVisible(false);
             model.originalSolProperty().set("");
-            diagramPart1.forEach(ele->ele.setVisible(false));
-            diagramPart2.forEach(ele->ele.setVisible(false));
-            diagramPart3.forEach(ele->ele.setVisible(false));
+            diagramGrid.setVisible(false);
+            decompositionSelect.setVisible(false);
+            solutionSelect.setVisible(false);
         }
         else{
             alert.close();
