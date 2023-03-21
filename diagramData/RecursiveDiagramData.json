@@ -23,5 +23,6 @@
   "reductionChoices" : [ [ "f(a,b - 1)", "f(a,b // 2)" ] ],
   "solutionsChoices" : [ [ "f' * b", "f' * a", "f' ** a" ], [ "f' ** 2", "f' * b" ], [ "f' ** 2", "f' * b", "a * f' ** 2" ] ],
   "recursiveCallParameters" : "",
-  "correctSolutions" : [ 1, 0, 2 ]
+  "correctSolutions" : [ 1, 0, 2 ],
+  "inputFormatting" : "Un número entero en cada cuadro de input (ej: 3 y 5)"
 }

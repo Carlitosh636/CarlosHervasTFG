@@ -1,6 +1,6 @@
 {
   "type" : "COMPLEX",
-  "heading" : "Dado una lista con tamaño n llamada list, ordenarla de forma recursiva\nEjemplo: f([7, 3, 4, 8, 4, 6, 4, 6]) -> [3, 4, 4, 4, 6, 6, 7, 8]",
+  "heading" : "Dado una lista con tamaño n llamada list, ordenarla de forma recursiva\nEjemplo: f([7,3,4,8,4,6,4,6]) -> [3,4,4,4,6,6,7,8]",
   "params" : {
     "array" : ""
   },
@@ -22,5 +22,6 @@
   "reductionChoices" : [ [ "f(a[:mid], a[mid:],mid)\nmid=n//2" ] ],
   "solutionsChoices" : [ ["a[:mid] + a[mid:]","merge(a[:mid], a[mid:],mid)"] ],
   "recursiveCallParameters" : "",
-  "correctSolutions" : [ 1 ]
+  "correctSolutions" : [ 1 ],
+  "inputFormatting" : "Una lista de números enteros, sin corchetes y separados por comas (Ej: 6,5,4,3,2)"
 }

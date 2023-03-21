@@ -202,7 +202,7 @@ public class DiagramPresenter implements Initializable {
         inputErrorAlert.setTitle("Error");
         if(e instanceof RuntimeException){
             inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
-            inputErrorAlert.setContentText("Revisa el contenido y que concuerde con el formato");
+            inputErrorAlert.setContentText("Revisa el contenido y que concuerde con el formato: "+model.getInputFormatting());
         }
         if(e instanceof BaseCaseException){
             inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");

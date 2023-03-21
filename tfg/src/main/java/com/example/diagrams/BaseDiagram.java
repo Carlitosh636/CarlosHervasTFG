@@ -41,6 +41,7 @@ public abstract class BaseDiagram {
     protected int algorithmIndex;
     protected Map<String,SimpleStringProperty> viewerValues = new HashMap<>();
     protected String parametersView;
+    protected String inputFormatting;
     protected BaseDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
         this.diagramActions =builder;
         DiagramData diagramData;
@@ -75,6 +76,7 @@ public abstract class BaseDiagram {
         this.solutionsChoices = new ArrayList<>();
         this.solutionsChoices.addAll(diagramData.solutionsChoices);
         this.correctSolutions = diagramData.correctSolutions;
+        this.inputFormatting = diagramData.inputFormatting;
     }
     protected abstract void setSolutionOperations();
     public abstract void processInputs() throws Exception;
@@ -227,5 +229,8 @@ public abstract class BaseDiagram {
     }
     public void setCurrentBaseCaseIndex(int currentBaseCaseIndex) {
         this.currentBaseCaseIndex = currentBaseCaseIndex;
+    }
+    public String getInputFormatting() {
+        return inputFormatting;
     }
 }
