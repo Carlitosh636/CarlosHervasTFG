@@ -18,10 +18,10 @@
   "reducedOperation" : "",
   "problemSizeChoices" : [ "b" ],
   "currentBaseCaseIndex" : 0,
-  "baseCaseChoices" : [ [ "b == 0" ] ],
-  "baseCaseParameters" : [ [ "0" ] ],
+  "baseCaseChoices" : [ [ "b == 0","b == 1" ] ],
+  "baseCaseParameters" : [ [ "0","1" ] ],
   "reductionChoices" : [ [ "f(a,b - 1)", "f(a,b // 2)" ] ],
-  "solutionsChoices" : [ [ "f(a,b - 1) * b", "f(a,b - 1) * a", "f(a,b - 1) ** a" ], [ "f(a,b // 2) ** 2", "f(a,b // 2) * b" ], [ "f(a,b // 2) ** 2", "f(a,b // 2) * b", "a * f(a,b//2) ** 2" ] ],
+  "solutionsChoices" : [ [ "f' * b", "f' * a", "f' ** a" ], [ "f' ** 2", "f' * b" ], [ "f' ** 2", "f' * b", "a * f' ** 2" ] ],
   "recursiveCallParameters" : "",
   "correctSolutions" : [ 1, 0, 2 ]
 }

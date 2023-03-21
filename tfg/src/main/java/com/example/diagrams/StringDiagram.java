@@ -20,14 +20,14 @@ public class StringDiagram extends BaseDiagram{
         paramsParsed.put("baseCaseValue",baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
         diagramActions.setParams(paramsParsed);
         Map<String,String> solutions = calculateSolution(-1);
-        originalSol.set(solutions.get("ogSol"));
+        originalSol.set("f = "+solutions.get("ogSol"));
     }
     @Override
     public void processSolutions() throws Exception {
         algorithmIndex = currentProblemSize.get() + currentReduction.get();
         Map<String,String> solutions = calculateSolution(algorithmIndex);
         subParameters.get(0).set(solutions.get("reducedOperation"));
-        subSolutions.get(0).set(solutions.get("partSol"));
+        subSolutions.get(0).set("f' = "+solutions.get("partSol"));
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));
         partSol = solutions.get("partSol");
         Map<String,String> paramsParsed = new HashMap<>();
@@ -52,7 +52,7 @@ public class StringDiagram extends BaseDiagram{
 
     @Override
     public boolean checkSolutionsEqual(String calcSol) {
-        return diagramActions.checkSolutionsEqual(calcSol,originalSol.get());
+        return diagramActions.checkSolutionsEqual(calcSol,originalSol.get().replace("f = ",""));
     }
     @Override
     public String calculateWithSelectedOperation(int index) {

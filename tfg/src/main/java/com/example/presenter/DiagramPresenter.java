@@ -115,7 +115,7 @@ public class DiagramPresenter implements Initializable {
                     if(tfs.stream().noneMatch(tf1 -> tf1.getText().isEmpty())){
                         List<String> inputs = tfs.stream().map(ele -> ele.textProperty().get()).toList();
                         try {
-                            if(model.checkNotBaseCase(model.getCurrentProblemSize()+model.getCurrentBaseCaseIndex(),inputs)) {
+                            if(model.checkNotBaseCase(model.getCurrentProblemSize(),inputs)) {
                                 showErrorInputAlert(new BaseCaseException("Cannot introduce a base case in parameters"));
                             }
                             else{

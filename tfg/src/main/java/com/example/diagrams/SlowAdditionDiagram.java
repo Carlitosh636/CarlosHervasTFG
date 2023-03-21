@@ -26,13 +26,23 @@ public class SlowAdditionDiagram implements IDiagramActions{
         s1.add((Supplier<Double>) () -> partSol + a);
         List<Supplier> s2 = new ArrayList<>();
         s2.add((Supplier<Double>) () -> partSol + 1);
-        s2.add((Supplier<Double>) () -> partSol - 1);
-        s2.add((Supplier<Double>) () -> partSol + Math.min(a,b));
+        s2.add((Supplier<Double>) () -> partSol);
         List<Supplier> s3 = new ArrayList<>();
         s3.add((Supplier<Double>) () -> partSol + 1);
-        s3.add((Supplier<Double>) () -> partSol);
-        s3.add((Supplier<Double>) () -> partSol + 2);
-        return Arrays.asList(s1, s2, s3);
+        s3.add((Supplier<Double>) () -> partSol - 1);
+        s3.add((Supplier<Double>) () -> partSol + b);
+        List<Supplier> s4 = new ArrayList<>();
+        s4.add((Supplier<Double>) () -> partSol + 1);
+        s4.add((Supplier<Double>) () -> partSol);
+        List<Supplier> s5 = new ArrayList<>();
+        s5.add((Supplier<Double>) () -> partSol + 1);
+        s5.add((Supplier<Double>) () -> partSol - 1);
+        s5.add((Supplier<Double>) () -> partSol + Math.min(a,b));
+        List<Supplier> s6 = new ArrayList<>();
+        s6.add((Supplier<Double>) () -> partSol + 1);
+        s6.add((Supplier<Double>) () -> partSol);
+        s6.add((Supplier<Double>) () -> partSol + 2);
+        return Arrays.asList(s1, s2, s3, s4, s5, s6);
     }
 
     @Override
@@ -49,7 +59,28 @@ public class SlowAdditionDiagram implements IDiagramActions{
             returnVal.put("currentReductionSolutions",String.valueOf(0));
             return returnVal;
         });
-        algorithmMap.put(1, () -> {
+        algorithmMap.put(1,()->{
+            Map<String,String> returnVal = new HashMap<>();
+            returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption1(a,b,baseCaseValue)));
+            returnVal.put("reducedOperation",String.format("%d, %d",(int)a-1,(int)b+1));
+            returnVal.put("currentReductionSolutions",String.valueOf(1));
+            return returnVal;
+        });
+        algorithmMap.put(2, () -> {
+            Map<String,String> returnVal = new HashMap<>();
+            returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption1(a,b-1,baseCaseValue)));
+            returnVal.put("reducedOperation",String.format("%d, %d",(int)a,(int)b-1));
+            returnVal.put("currentReductionSolutions",String.valueOf(2));
+            return returnVal;
+        });
+        algorithmMap.put(3,()->{
+            Map<String,String> returnVal = new HashMap<>();
+            returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption1(a,b,baseCaseValue)));
+            returnVal.put("reducedOperation",String.format("%d, %d",(int)a+1,(int)b-1));
+            returnVal.put("currentReductionSolutions",String.valueOf(3));
+            return returnVal;
+        });
+        algorithmMap.put(4, () -> {
             Map<String,String> returnVal = new HashMap<>();
             if(a<b){
                 returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption2(a-1,b,baseCaseValue)));
@@ -58,14 +89,14 @@ public class SlowAdditionDiagram implements IDiagramActions{
                 returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption2(a,b-1,baseCaseValue)));
             }
             returnVal.put("reducedOperation",String.valueOf(Math.min(a, b-1)));
-            returnVal.put("currentReductionSolutions",String.valueOf(1));
+            returnVal.put("currentReductionSolutions",String.valueOf(4));
             return returnVal;
         });
-        algorithmMap.put(2,() -> {
+        algorithmMap.put(5,() -> {
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption3(a-1,b-1,baseCaseValue)));
             returnVal.put("reducedOperation",String.format("(%.0f - 1 , %.0f - 1)", a, b));
-            returnVal.put("currentReductionSolutions",String.valueOf(2));
+            returnVal.put("currentReductionSolutions",String.valueOf(5));
             return returnVal;
         });
     }

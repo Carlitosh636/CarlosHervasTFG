@@ -20,7 +20,7 @@
   "baseCaseChoices" : [ [ "string = ''" ]],
   "baseCaseParameters" : [ [""] ],
   "reductionChoices" : [ [ "f(string[1:])\nchar=string[1:]" ] ],
-  "solutionsChoices" : [ [ "char + f(string[1:])","f(string[1:] + char"] ],
+  "solutionsChoices" : [ [ "char + f'","f' + char"] ],
   "recursiveCallParameters" : "",
   "correctSolutions" : [ 1 ]
 }
