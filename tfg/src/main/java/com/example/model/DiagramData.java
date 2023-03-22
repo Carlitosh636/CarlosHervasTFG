@@ -10,8 +10,6 @@ public class DiagramData implements Serializable {
     public Map<String,String> params;
     public String originalData;
     public String originalSol;
-    public List<String> subParameters;
-    public List<String> subSolutions;
     public String calculatedSol;
     public int currentProblemSize;
     public int currentBaseCase;

@@ -7,13 +7,14 @@ import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-public class MergeSortDiagram implements IDiagramActions{
+public class ArraySortDiagram implements IDiagramActions{
     Map<Integer, Callable<Map<String,String>>> algorithmMap= new HashMap<>();
     static int[] array;
     static int mid;
     static int[] l;
     static int[] r;
-
+    static int[] reducedArray;
+    static int ele;
     @Override
     public void setParams(Map<String, String> newValues) throws Exception {
         try{
@@ -33,7 +34,17 @@ public class MergeSortDiagram implements IDiagramActions{
         List<Supplier> s1 = new ArrayList<>();
         s1.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(Arrays.stream(l), Arrays.stream(r)).toArray()));
         s1.add((Supplier<String>) () -> Arrays.toString(Algorithms.merge(array, l, r, mid, array.length - mid)));
-        return List.of(s1);
+        List<Supplier> s2 = new ArrayList<>();
+        s2.add((Supplier<String>) () -> Arrays.toString(Algorithms.insertSort(array)));
+        s2.add((Supplier<String>) () -> {
+            int[] nA = new int[array.length];
+            nA[0] = ele;
+            for(int i =0;i< reducedArray.length;i++){
+                nA[i+1] = reducedArray[i];
+            }
+            return Arrays.toString(nA);
+        });
+        return List.of(s1,s2);
     }
 
     @Override
@@ -50,6 +61,16 @@ public class MergeSortDiagram implements IDiagramActions{
             returnVal.put("partSol1",Arrays.toString(Algorithms.mergeSort(l)));
             returnVal.put("partSol2",Arrays.toString(Algorithms.mergeSort(r)));
             returnVal.put("currentReductionSolutions", String.valueOf(0));
+            return returnVal;
+        });
+        algorithmMap.put(1,()->{
+            Map<String,String> returnVal = new HashMap<>();
+            ele = array[array.length-1];
+            reducedArray = Arrays.stream(array).filter(e->e==ele).toArray();
+            returnVal.put("reducedOperation",Arrays.toString(reducedArray));
+            returnVal.put("partSol1",Arrays.toString(Algorithms.insertSort(reducedArray)));
+            returnVal.put("partSol2",Arrays.toString(Algorithms.insertSort(reducedArray)));
+            returnVal.put("currentReductionSolutions",String.valueOf(1));
             return returnVal;
         });
     }

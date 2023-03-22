@@ -44,7 +44,7 @@ public class App extends Application {
     }
     @FXML
     public void handleMainMenuButton3(ActionEvent actionEvent) throws IOException {
-        ArraySortingDiagram model = new ArraySortingDiagram(new MergeSortDiagram(),"diagramData/MergeSortData.json");
+        ArraySortingDiagram model = new ArraySortingDiagram(new ArraySortDiagram(),"diagramData/SortListData.json");
         loadScene(model);
     }
     @FXML

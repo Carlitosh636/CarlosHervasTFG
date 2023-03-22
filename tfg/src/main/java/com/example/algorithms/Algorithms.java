@@ -1,5 +1,6 @@
 package com.example.algorithms;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Algorithms {
@@ -73,6 +74,25 @@ public class Algorithms {
         else{
             return reverseString(input.substring(1),baseCaseValue).concat(String.valueOf(input.charAt(0)));
         }
+    }
+    public static int[] insertSort(int[] a){
+        if(a.length <=1){
+            return a;
+        }
+        else{
+            int tail = a[a.length-1];
+            int[] reducedArray = Arrays.stream(a).filter(ele->ele==tail).toArray();
+            return insertInOrderedArray(insertSort(reducedArray),tail);
+        }
+    }
+    private static int[] insertInOrderedArray(int[] a,int ele){
+       int[] nA = new int[a.length + 1];
+       for(int i = 0; i<a.length;i++){
+           nA[i] = a[i];
+       }
+       nA[a.length - 1] = ele;
+       Arrays.sort(nA);
+       return nA;
     }
     public static int[] mergeSort(int[] a){
         int n = a.length;

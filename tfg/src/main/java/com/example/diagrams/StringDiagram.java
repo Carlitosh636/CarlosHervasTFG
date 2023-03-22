@@ -1,5 +1,7 @@
 package com.example.diagrams;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -26,8 +28,7 @@ public class StringDiagram extends BaseDiagram{
     public void processSolutions() throws Exception {
         algorithmIndex = currentProblemSize.get() + currentReduction.get();
         Map<String,String> solutions = calculateSolution(algorithmIndex);
-        subParameters.get(0).set(solutions.get("reducedOperation"));
-        subSolutions.get(0).set("f' = "+solutions.get("partSol"));
+        setSubData(solutions);
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));
         partSol = solutions.get("partSol");
         Map<String,String> paramsParsed = new HashMap<>();
@@ -58,5 +59,17 @@ public class StringDiagram extends BaseDiagram{
     public String calculateWithSelectedOperation(int index) {
         calculatedSol.set(String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).get()));
         return calculatedSol.get();
+    }
+
+    @Override
+    protected void setSubData(Map<String, String> data) {
+        data.forEach((k,v)->{
+            if(k.contains("reducedOperation")){
+                subParameters.add(new SimpleStringProperty(v));
+            }
+            if(k.contains("partSol")){
+                subSolutions.add(new SimpleStringProperty("f' = "+v));
+            }
+        });
     }
 }

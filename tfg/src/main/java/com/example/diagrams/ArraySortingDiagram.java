@@ -1,5 +1,7 @@
 package com.example.diagrams;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,6 +11,7 @@ import java.util.Map;
 public class ArraySortingDiagram extends BaseDiagram{
     int[] array;
     int mid;
+    int ele;
     int[] l;
     int[] r;
     String[] partSols = {"",""};
@@ -32,16 +35,13 @@ public class ArraySortingDiagram extends BaseDiagram{
         paramsParsed.put("r", Arrays.toString(r));
         diagramActions.setParams(paramsParsed);
         Map<String,String> solutions = calculateSolution(-1);
-        originalSol.set(solutions.get("ogSol"));
+        originalSol.set("f = "+solutions.get("ogSol"));
     }
     @Override
     public void processSolutions() throws Exception {
         algorithmIndex = currentProblemSize.get() + currentReduction.get();
         Map<String,String> solutions = calculateSolution(algorithmIndex);
-        subParameters.get(0).set(solutions.get("reducedOperation1"));
-        subSolutions.get(0).set(solutions.get("partSol1"));
-        subParameters.get(1).set(solutions.get("reducedOperation2"));
-        subSolutions.get(1).set(solutions.get("partSol2"));
+        setSubData(solutions);
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));
         partSols[0] = solutions.get("partSol1");
         partSols[1] = solutions.get("partSol2");
@@ -76,4 +76,17 @@ public class ArraySortingDiagram extends BaseDiagram{
         calculatedSol.set(String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).get()));
         return calculatedSol.get();
     }
+
+    @Override
+    protected void setSubData(Map<String, String> data) {
+        data.forEach((k,v)->{
+            if(k.contains("reducedOperation")){
+                subParameters.add(new SimpleStringProperty(v));
+            }
+            if(k.contains("partSol")){
+                subSolutions.add(new SimpleStringProperty(v));
+            }
+        });
+    }
+
 }

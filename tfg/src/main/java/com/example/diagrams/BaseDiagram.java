@@ -66,13 +66,7 @@ public abstract class BaseDiagram {
         this.currentReduction = new SimpleIntegerProperty(diagramData.currentReduction);
         this.selectedSolution = new SimpleIntegerProperty();
         this.subParameters =new ArrayList<>();
-        diagramData.subParameters.forEach(ele->{
-            this.subParameters.add(new SimpleStringProperty(ele));
-        });
         this.subSolutions =new ArrayList<>();
-        diagramData.subSolutions.forEach(ele->{
-            this.subSolutions.add(new SimpleStringProperty(ele));
-        });
         this.solutionsChoices = new ArrayList<>();
         this.solutionsChoices.addAll(diagramData.solutionsChoices);
         this.correctSolutions = diagramData.correctSolutions;
@@ -85,6 +79,7 @@ public abstract class BaseDiagram {
     public abstract Map<String,String> calculateSolution(int selectedIndex) throws Exception;
     public abstract boolean checkSolutionsEqual(String calcSol);
     public abstract String calculateWithSelectedOperation(int index);
+    protected abstract void setSubData(Map<String,String> data);
 
     //GETTER SETTERS
     public IDiagramActions getDiagramActions() {
