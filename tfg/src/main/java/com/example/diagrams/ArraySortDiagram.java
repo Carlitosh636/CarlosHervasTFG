@@ -13,8 +13,9 @@ public class ArraySortDiagram implements IDiagramActions{
     static int mid;
     static int[] l;
     static int[] r;
-    static int[] reducedArray;
-    static int ele;
+    int[] copyArray;
+    int[] reducedArray;
+    int ele;
     @Override
     public void setParams(Map<String, String> newValues) throws Exception {
         try{
@@ -22,6 +23,9 @@ public class ArraySortDiagram implements IDiagramActions{
             mid = Integer.parseInt(newValues.get("mid"));
             l = stringToArrayInt(newValues.get("l"));
             r = stringToArrayInt(newValues.get("r"));
+            if(copyArray==null){
+                copyArray = array.clone();
+            }
         }
         catch (Exception e){
             throw e;
@@ -38,10 +42,8 @@ public class ArraySortDiagram implements IDiagramActions{
         s2.add((Supplier<String>) () -> Arrays.toString(Algorithms.insertSort(array)));
         s2.add((Supplier<String>) () -> {
             int[] nA = new int[array.length];
+            System.arraycopy(Algorithms.insertSort(reducedArray), 0, nA, 1, reducedArray.length);
             nA[0] = ele;
-            for(int i =0;i< reducedArray.length;i++){
-                nA[i+1] = reducedArray[i];
-            }
             return Arrays.toString(nA);
         });
         return List.of(s1,s2);
@@ -65,11 +67,11 @@ public class ArraySortDiagram implements IDiagramActions{
         });
         algorithmMap.put(1,()->{
             Map<String,String> returnVal = new HashMap<>();
-            ele = array[array.length-1];
-            reducedArray = Arrays.stream(array).filter(e->e==ele).toArray();
+            ele = copyArray[copyArray.length-1];
+            reducedArray = Arrays.stream(copyArray).filter(e->e!=ele).toArray();
             returnVal.put("reducedOperation",Arrays.toString(reducedArray));
             returnVal.put("partSol1",Arrays.toString(Algorithms.insertSort(reducedArray)));
-            returnVal.put("partSol2",Arrays.toString(Algorithms.insertSort(reducedArray)));
+            returnVal.put("partSol2",Arrays.toString(reducedArray));
             returnVal.put("currentReductionSolutions",String.valueOf(1));
             return returnVal;
         });

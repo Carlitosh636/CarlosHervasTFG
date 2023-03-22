@@ -81,16 +81,14 @@ public class Algorithms {
         }
         else{
             int tail = a[a.length-1];
-            int[] reducedArray = Arrays.stream(a).filter(ele->ele==tail).toArray();
+            int[] reducedArray = Arrays.stream(a).filter(ele->ele!=tail).toArray();
             return insertInOrderedArray(insertSort(reducedArray),tail);
         }
     }
     private static int[] insertInOrderedArray(int[] a,int ele){
        int[] nA = new int[a.length + 1];
-       for(int i = 0; i<a.length;i++){
-           nA[i] = a[i];
-       }
-       nA[a.length - 1] = ele;
+       System.arraycopy(a, 0, nA, 1, a.length);
+       nA[0] = ele;
        Arrays.sort(nA);
        return nA;
     }

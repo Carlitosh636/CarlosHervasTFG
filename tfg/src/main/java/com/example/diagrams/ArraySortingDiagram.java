@@ -35,7 +35,7 @@ public class ArraySortingDiagram extends BaseDiagram{
         paramsParsed.put("r", Arrays.toString(r));
         diagramActions.setParams(paramsParsed);
         Map<String,String> solutions = calculateSolution(-1);
-        originalSol.set("f = "+solutions.get("ogSol"));
+        originalSol.set("f="+solutions.get("ogSol"));
     }
     @Override
     public void processSolutions() throws Exception {
@@ -68,7 +68,7 @@ public class ArraySortingDiagram extends BaseDiagram{
 
     @Override
     public boolean checkSolutionsEqual(String calcSol) {
-        return diagramActions.checkSolutionsEqual(calcSol,originalSol.get());
+        return diagramActions.checkSolutionsEqual(calcSol,originalSol.get().replace("f=",""));
     }
 
     @Override

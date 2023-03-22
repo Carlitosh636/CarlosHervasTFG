@@ -75,14 +75,14 @@
                                  <Font size="15.0" />
                               </font>
                            </Label>
-                           <Label id="diagramDataHolders" fx:id="originalSolution" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" stylesheets="@../css/boxes-background.css" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <Label id="diagramDataHolders" fx:id="originalSolution" alignment="CENTER" contentDisplay="CENTER" prefWidth="150.0" stylesheets="@../css/boxes-background.css" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                               <font>
                                  <Font size="15.0" />
                               </font>
                            </Label>
                            <StackPane fx:id="datasArrow" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                            <StackPane fx:id="solutionsArrow" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                           <VBox id="diagramDataHolders" fx:id="subParameters" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <VBox id="diagramDataHolders" fx:id="subParameters" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
                               <children>
                                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT">
                                     <font>
