@@ -123,6 +123,9 @@ public class DiagramPresenter implements Initializable {
                                     model.processInputs();
                                     decompositionSelect.setVisible(true);
                                 } catch (Exception e) {
+                                    partialSolutions.getChildren().clear();
+                                    subParameters.getChildren().clear();
+                                    solutionSelect.getItems().clear();
                                     showErrorInputAlert(e);
                                     System.out.println(e);
                                 }

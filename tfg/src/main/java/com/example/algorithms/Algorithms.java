@@ -2,6 +2,7 @@ package com.example.algorithms;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class Algorithms {
     public static double recursivePower1(double base, double exp, int baseCaseValue){
@@ -75,6 +76,17 @@ public class Algorithms {
             return reverseString(input.substring(1),baseCaseValue).concat(String.valueOf(input.charAt(0)));
         }
     }
+    public static int[] selectSort(int[] a){
+        if(a.length <= 1){
+            return a;
+        }
+        else{
+            int e = getSmallest(a);
+            int[] reducedArray = Arrays.stream(a).filter(ele->ele!=e).toArray();
+            int[] f = {e};
+            return IntStream.concat(Arrays.stream(f),Arrays.stream(selectSort(reducedArray))).toArray();
+        }
+    }
     public static int[] insertSort(int[] a){
         if(a.length <=1){
             return a;
@@ -131,5 +143,10 @@ public class Algorithms {
             a[k++] = r[j++];
         }
         return a;
+    }
+    public static int getSmallest(int[] a){
+        int[] b = a.clone();
+        Arrays.sort(b);
+        return b[0];
     }
 }

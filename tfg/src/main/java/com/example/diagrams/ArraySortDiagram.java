@@ -23,9 +23,6 @@ public class ArraySortDiagram implements IDiagramActions{
             mid = Integer.parseInt(newValues.get("mid"));
             l = stringToArrayInt(newValues.get("l"));
             r = stringToArrayInt(newValues.get("r"));
-            if(copyArray==null){
-                copyArray = array.clone();
-            }
         }
         catch (Exception e){
             throw e;
@@ -46,7 +43,20 @@ public class ArraySortDiagram implements IDiagramActions{
             nA[0] = ele;
             return Arrays.toString(nA);
         });
-        return List.of(s1,s2);
+        List<Supplier> s3 = new ArrayList<>();
+        s3.add((Supplier<String>) () -> {
+            int[] nA = new int[array.length];
+            System.arraycopy(reducedArray, 0, nA, 0, reducedArray.length);
+            nA[array.length - 1] = ele;
+            return Arrays.toString(nA);
+        });
+        s3.add((Supplier<String>) () -> {
+            int[] nA = new int[array.length];
+            System.arraycopy(Algorithms.insertSort(copyArray), 0, nA, 1, copyArray.length);
+            nA[0] = ele;
+            return Arrays.toString(nA);
+        });
+        return List.of(s1,s2,s3);
     }
 
     @Override
@@ -75,10 +85,21 @@ public class ArraySortDiagram implements IDiagramActions{
             returnVal.put("currentReductionSolutions",String.valueOf(1));
             return returnVal;
         });
+        algorithmMap.put(2,()->{
+            Map<String,String> returnVal = new HashMap<>();
+            ele = Algorithms.getSmallest(copyArray);
+            reducedArray = Arrays.stream(copyArray).filter(e->e!=ele).toArray();
+            returnVal.put("reducedOperation",Arrays.toString(reducedArray));
+            returnVal.put("partSol1",Arrays.toString(Algorithms.selectSort(reducedArray)));
+            returnVal.put("partSol2",Arrays.toString(reducedArray));
+            returnVal.put("currentReductionSolutions",String.valueOf(2));
+            return returnVal;
+        });
     }
     @Override
     public boolean checkNotBaseCase(List<String> baseCases,List<String> inputs) throws Exception {
         int[] input = stringToArrayInt(inputs.get(0));
+        copyArray = input.clone();
         if(input.length>1){
             array = input.clone();
             int[] temp = Algorithms.mergeSort(input);
