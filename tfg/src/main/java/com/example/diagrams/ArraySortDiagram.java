@@ -56,7 +56,12 @@ public class ArraySortDiagram implements IDiagramActions{
             nA[0] = ele;
             return Arrays.toString(nA);
         });
-        return List.of(s1,s2,s3);
+        List<Supplier> s4 = new ArrayList<>();
+        s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(Arrays.stream(new int[]{mid}),IntStream.concat(Arrays.stream(l), Arrays.stream(r))).toArray()));
+        s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(IntStream.concat(Arrays.stream(l), Arrays.stream(r)),Arrays.stream(new int[]{mid})).toArray()));
+        //TODO: ESTA FUNCIÓN DE F' + MID + G'
+        //s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(IntStream.concat(Arrays.stream(l), Arrays.stream(new int[]{mid})),Arrays.stream(r))).toArray()));
+        return List.of(s1,s2,s3,s4);
     }
 
     @Override
@@ -93,6 +98,18 @@ public class ArraySortDiagram implements IDiagramActions{
             returnVal.put("partSol1",Arrays.toString(Algorithms.selectSort(reducedArray)));
             returnVal.put("partSol2",Arrays.toString(reducedArray));
             returnVal.put("currentReductionSolutions",String.valueOf(2));
+            return returnVal;
+        });
+        algorithmMap.put(3,()->{
+            Map<String,String> returnVal = new HashMap<>();
+            int[] sortedL = Algorithms.quicksort(Arrays.copyOf(l,l.length));
+            int[] sortedR = Algorithms.quicksort(Arrays.copyOf(r,r.length));
+            //MID es el pivote
+            returnVal.put("reducedOperation1",Arrays.toString(l));
+            returnVal.put("reducedOperation2",Arrays.toString(r));
+            returnVal.put("partSol1", Arrays.toString(sortedL));
+            returnVal.put("partSol2", Arrays.toString(sortedR));
+            returnVal.put("currentReductionSolutions", String.valueOf(0));
             return returnVal;
         });
     }

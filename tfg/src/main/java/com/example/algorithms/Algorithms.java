@@ -104,6 +104,9 @@ public class Algorithms {
        Arrays.sort(nA);
        return nA;
     }
+    public static int[] quicksort(int[] a){
+        return null;
+    }
     public static int[] mergeSort(int[] a){
         int n = a.length;
         if (n<=1){
