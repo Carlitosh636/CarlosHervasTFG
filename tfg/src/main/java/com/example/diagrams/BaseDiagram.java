@@ -16,6 +16,7 @@ import java.util.function.Supplier;
 public abstract class BaseDiagram {
     protected IDiagramActions diagramActions;
     protected DiagramType type;
+    private DiagramData diagramData;
     protected SimpleStringProperty heading;
     protected Map<String,SimpleStringProperty> params;
     protected SimpleStringProperty originalSol;
@@ -44,16 +45,13 @@ public abstract class BaseDiagram {
     protected String inputFormatting;
     protected BaseDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
         this.diagramActions =builder;
-        DiagramData diagramData;
         ObjectMapper objMapper = new ObjectMapper();
         diagramData =objMapper.readValue(new File(diagramDataName),DiagramData.class);
         this.operation=diagramData.operation;
         this.params =new HashMap<>();
         this.heading = new SimpleStringProperty(diagramData.heading);
         this.type = DiagramType.valueOf(diagramData.type);
-        diagramData.params.forEach((k,v)->{
-            params.put(k,new SimpleStringProperty(v));
-        });
+        diagramData.params.forEach((k,v)-> params.put(k,new SimpleStringProperty(v)));
         this.reductionChoices=diagramData.reductionChoices;
         this.problemSizeChoices=diagramData.problemSizeChoices;
         this.baseCaseChoices=diagramData.baseCaseChoices;
@@ -80,6 +78,12 @@ public abstract class BaseDiagram {
     public abstract boolean checkSolutionsEqual(String calcSol);
     public abstract String calculateWithSelectedOperation(int index);
     protected abstract void setSubData(Map<String,String> data);
+    public void resetSubValues(){
+        this.subParameters.clear();
+        this.subSolutions.clear();
+        this.params.clear();
+        diagramData.params.forEach((k,v)-> params.put(k,new SimpleStringProperty(v)));
+    }
 
     //GETTER SETTERS
     public IDiagramActions getDiagramActions() {

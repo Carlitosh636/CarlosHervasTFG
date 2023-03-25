@@ -75,14 +75,14 @@
                                  <Font size="15.0" />
                               </font>
                            </Label>
-                           <Label id="diagramDataHolders" fx:id="originalSolution" alignment="CENTER" contentDisplay="CENTER" prefWidth="150.0" stylesheets="@../css/boxes-background.css" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <Label id="diagramDataHolders" fx:id="originalSolution" alignment="CENTER" contentDisplay="CENTER" stylesheets="@../css/boxes-background.css" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                               <font>
                                  <Font size="15.0" />
                               </font>
                            </Label>
                            <StackPane fx:id="datasArrow" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                            <StackPane fx:id="solutionsArrow" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                           <VBox id="diagramDataHolders" fx:id="subParameters" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <VBox id="diagramDataHolders" fx:id="subParameters" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
                               <children>
                                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT">
                                     <font>
@@ -92,7 +92,7 @@
                               </children>
                            </VBox>
                            <StackPane fx:id="partialDataSolutionArrow" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                           <VBox id="diagramDataHolders" fx:id="partialSolutions" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                           <VBox id="diagramDataHolders" fx:id="subSolutions" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="3" GridPane.rowIndex="5">
                               <children>
                                  <Label alignment="CENTER" contentDisplay="CENTER">
                                     <font>
@@ -101,12 +101,12 @@
                                  </Label>
                               </children>
                            </VBox>
-                           <ComboBox id="combo-box-3" fx:id="decompositionSelect" minWidth="150.0" onAction="#onDescompositionChange" stylesheets="@../css/combobox.css" GridPane.rowIndex="3">
+                           <ComboBox id="combo-box-3" fx:id="decompositionSelect" minWidth="150.0" onAction="#onDescompositionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.rowIndex="3">
                               <GridPane.margin>
                                  <Insets right="5.0" />
                               </GridPane.margin>
                            </ComboBox>
-                           <ComboBox id="combo-box-4" fx:id="solutionSelect" onAction="#onSolutionChange" prefHeight="25.0" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                           <ComboBox id="combo-box-4" fx:id="solutionSelect" onAction="#onSolutionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.columnIndex="4" GridPane.rowIndex="3">
                               <GridPane.margin>
                                  <Insets />
                               </GridPane.margin>

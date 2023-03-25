@@ -104,9 +104,19 @@ public class Algorithms {
        Arrays.sort(nA);
        return nA;
     }
-    public static int[] quicksort(int[] a){
-        return null;
+    public static int[] quicksort(int[] a,int mid){
+        int n = a.length;
+        if(n<=1){
+            return a;
+        }
+        else {
+            int pivot = a[mid];
+            int[] smallerElements = getSmaller(a,pivot);
+            int[] greaterElements = getGreater(a,pivot);
+            return IntStream.concat(IntStream.concat(Arrays.stream(smallerElements), Arrays.stream(new int[]{pivot})),Arrays.stream(greaterElements)).toArray();
+        }
     }
+
     public static int[] mergeSort(int[] a){
         int n = a.length;
         if (n<=1){
@@ -151,5 +161,12 @@ public class Algorithms {
         int[] b = a.clone();
         Arrays.sort(b);
         return b[0];
+    }
+    private static int[] getGreater(int[] a, int pivot) {
+        return Arrays.stream(a).filter(ele->ele>pivot).toArray();
+    }
+
+    private static int[] getSmaller(int[] a, int pivot) {
+        return Arrays.stream(a).filter(ele->ele<pivot).toArray();
     }
 }

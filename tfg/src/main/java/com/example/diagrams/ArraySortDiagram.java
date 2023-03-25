@@ -25,6 +25,7 @@ public class ArraySortDiagram implements IDiagramActions{
             r = stringToArrayInt(newValues.get("r"));
         }
         catch (Exception e){
+            e.printStackTrace();
             throw e;
         }
 
@@ -57,10 +58,9 @@ public class ArraySortDiagram implements IDiagramActions{
             return Arrays.toString(nA);
         });
         List<Supplier> s4 = new ArrayList<>();
-        s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(Arrays.stream(new int[]{mid}),IntStream.concat(Arrays.stream(l), Arrays.stream(r))).toArray()));
-        s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(IntStream.concat(Arrays.stream(l), Arrays.stream(r)),Arrays.stream(new int[]{mid})).toArray()));
-        //TODO: ESTA FUNCIÓN DE F' + MID + G'
-        //s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(IntStream.concat(Arrays.stream(l), Arrays.stream(new int[]{mid})),Arrays.stream(r))).toArray()));
+        s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(Arrays.stream(new int[]{copyArray[mid]}),IntStream.concat(Arrays.stream(l), Arrays.stream(r))).toArray()));
+        s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(IntStream.concat(Arrays.stream(l), Arrays.stream(r)),Arrays.stream(new int[]{copyArray[mid]})).toArray()));
+        s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(IntStream.concat(Arrays.stream(l), Arrays.stream(new int[]{copyArray[mid]})),Arrays.stream(r)).toArray()));
         return List.of(s1,s2,s3,s4);
     }
 
@@ -102,14 +102,13 @@ public class ArraySortDiagram implements IDiagramActions{
         });
         algorithmMap.put(3,()->{
             Map<String,String> returnVal = new HashMap<>();
-            int[] sortedL = Algorithms.quicksort(Arrays.copyOf(l,l.length));
-            int[] sortedR = Algorithms.quicksort(Arrays.copyOf(r,r.length));
-            //MID es el pivote
+            int[] sortedL = Algorithms.quicksort(Arrays.copyOf(l,l.length),mid);
+            int[] sortedR = Algorithms.quicksort(Arrays.copyOf(r,r.length),mid);
             returnVal.put("reducedOperation1",Arrays.toString(l));
             returnVal.put("reducedOperation2",Arrays.toString(r));
             returnVal.put("partSol1", Arrays.toString(sortedL));
             returnVal.put("partSol2", Arrays.toString(sortedR));
-            returnVal.put("currentReductionSolutions", String.valueOf(0));
+            returnVal.put("currentReductionSolutions", String.valueOf(3));
             return returnVal;
         });
     }
@@ -140,6 +139,7 @@ public class ArraySortDiagram implements IDiagramActions{
             return Arrays.stream(data.split(",")).mapToInt(Integer::parseInt).toArray();
         }
         catch (NumberFormatException e){
+            e.printStackTrace();
             throw e;
         }
     }

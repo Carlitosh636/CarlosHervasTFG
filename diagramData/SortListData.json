@@ -17,7 +17,7 @@
   "currentBaseCaseIndex" : 0,
   "baseCaseChoices" : [ [ "n <= 1" ] ],
   "baseCaseParameters" : [ [ "0" ] ],
-  "reductionChoices" : [ [ "f(a[:mid], a[mid:],mid)\nmid = n//2", "f(a[:-1],tail)\ntail = a[-1]", "f(a,m)\nm = a.remove(min(a))","Seleccionar pivote" ] ],
+  "reductionChoices" : [ [ "f(a[:mid], a[mid:],mid)\nmid = n//2", "f(a[:-1],tail)\ntail = a[-1]", "f(a,m)\nm = a.remove(min(a))","Seleccionar pivote\npivot = a[n//2]" ] ],
   "solutionsChoices" : [ ["a[:mid] + a[mid:]","merge(a[:mid], a[mid:],mid)"],["insert_in_ordered_list(f',tail))","[tail] + f'"],["f' + [m]","[m] + f'"],
     ["[pivot] + f' + g'","f' + g' + [pivot]","f'+ [pivot] + g'"] ],
   "recursiveCallParameters" : "",

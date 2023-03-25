@@ -4,13 +4,10 @@ import com.example.diagrams.BaseDiagram;
 import com.example.exceptions.BaseCaseException;
 import com.example.model.Arrow;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
@@ -58,7 +55,7 @@ public class DiagramPresenter implements Initializable {
     @FXML
     VBox subParameters;
     @FXML
-    VBox partialSolutions;
+    VBox subSolutions;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
@@ -85,13 +82,15 @@ public class DiagramPresenter implements Initializable {
         model.currentReductionProperty().bind(decompositionSelect.getSelectionModel().selectedIndexProperty());
         model.selectedSolutionProperty().bind(solutionSelect.getSelectionModel().selectedIndexProperty());
         heading.textProperty().bind(model.headingProperty());
-
         //diagramTitle.textProperty().bind(model.viewerValues.get("diagramTitle"));
         //baseCase.textProperty().bind(model.viewerValues.get("baseCase"));
         //recursiveCase.textProperty().bind(model.viewerValues.get("recursiveCase"));
 
     }
     public void onChangeProblemSize(ActionEvent actionEvent) {
+        if(problemSizeSelect.getSelectionModel().getSelectedIndex()<0){
+            return;
+        }
         baseCaseSelect.setVisible(true);
         baseCaseSelect.getItems().clear();
         if(!problemSizeSelect.getSelectionModel().isEmpty()){
@@ -100,6 +99,9 @@ public class DiagramPresenter implements Initializable {
     }
 
     public void onChangeBaseCase(ActionEvent actionEvent) {
+        if(baseCaseSelect.getSelectionModel().getSelectedIndex()<0){
+            return;
+        }
         model.setCurrentBaseCaseIndex(baseCaseSelect.getSelectionModel().getSelectedIndex());
         if(originalData.getChildren().isEmpty()){
             List<TextField> tfs = new ArrayList<>();
@@ -123,17 +125,14 @@ public class DiagramPresenter implements Initializable {
                                     model.processInputs();
                                     decompositionSelect.setVisible(true);
                                 } catch (Exception e) {
-                                    partialSolutions.getChildren().clear();
-                                    subParameters.getChildren().clear();
-                                    solutionSelect.getItems().clear();
                                     showErrorInputAlert(e);
-                                    System.out.println(e);
+                                    e.printStackTrace();
                                 }
                                 refreshDiagram();
                             }
                         } catch (Exception e) {
                             showErrorInputAlert(e);
-                            System.out.println(e);
+                            e.printStackTrace();
                         }
                     }
                 });
@@ -143,9 +142,13 @@ public class DiagramPresenter implements Initializable {
         diagramGrid.setVisible(true);
     }
     public void onDescompositionChange(ActionEvent actionEvent) {
-        partialSolutions.getChildren().clear();
+        if(decompositionSelect.getSelectionModel().getSelectedIndex()<0){
+            return;
+        }
+        subSolutions.getChildren().clear();
         subParameters.getChildren().clear();
         solutionSelect.getItems().clear();
+        //model.resetSubValues();
         handleDecomposition();
     }
     protected void handleDecomposition() {
@@ -153,7 +156,7 @@ public class DiagramPresenter implements Initializable {
             model.processSolutions();
         } catch (Exception e) {
             showErrorInputAlert(e);
-            System.out.println(e);
+            e.printStackTrace();
         }
         for(SimpleStringProperty ele : model.getSubParameters()){
             Label lb = new Label();
@@ -169,13 +172,17 @@ public class DiagramPresenter implements Initializable {
             lb.setFont(originalSolution.getFont());
             lb.setText(ele.get());
             lb.setTextAlignment(TextAlignment.CENTER);
-            partialSolutions.getChildren().add(lb);
+            subSolutions.getChildren().add(lb);
         }
         solutionSelect.getItems().setAll(model.getSolutionsChoices().get(model.getCurrentReductionSolutions()));
         solutionSelect.setVisible(true);
     }
+
     public void onSolutionChange(ActionEvent actionEvent) {
         try{
+            if(solutionSelect.getSelectionModel().getSelectedIndex()<0){
+                return;
+            }
             String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex());
             calculatedSolution.setVisible(true);
             if(model.checkSolutionsEqual(calcSol)){
@@ -188,7 +195,6 @@ public class DiagramPresenter implements Initializable {
                     calculatedSolution.setText("Correcto!\nValor calculado: "+model.getCalculatedSol());
                     calculatedSolution.setStyle("-fx-text-fill: #48f542;");
                 }
-
             }
             else{
                 calculatedSolution.setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
@@ -196,7 +202,7 @@ public class DiagramPresenter implements Initializable {
             }
         }
         catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -244,10 +250,11 @@ public class DiagramPresenter implements Initializable {
         if(action.get()==ButtonType.OK){
             problemSizeSelect.getSelectionModel().clearSelection();
             baseCaseSelect.getSelectionModel().clearSelection();
-            partialSolutions.getChildren().clear();
+            subSolutions.getChildren().clear();
             subParameters.getChildren().clear();
             solutionSelect.getItems().clear();
             originalData.getChildren().clear();
+            model.resetSubValues();
             calculatedSolution.setVisible(false);
             model.originalSolProperty().set("");
             diagramGrid.setVisible(false);

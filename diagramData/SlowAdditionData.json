@@ -22,5 +22,5 @@
   "solutionsChoices" : [ [ "f' + 1", "f' - 1", "f' + a"],["f' + 1","No hacer nada"],["f' + 1", "f' - 1", "f' + b"],["f' + 1","No hacer nada"], [ "f' + 1", "f' - 1", "f' + min(a,b)"], [ "f' + 1", "f' - 1 + 1", "f' + 1 + 1"] ],
   "recursiveCallParameters" : "",
   "correctSolutions" : [ 0,1,0,1,0,2 ],
-  "inputFormatting" : "Dos"
+  "inputFormatting" : "Un número entero en cada cuadro de input (ej: 3 y 5)"
 }
