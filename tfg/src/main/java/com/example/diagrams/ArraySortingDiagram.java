@@ -3,10 +3,7 @@ package com.example.diagrams;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ArraySortingDiagram extends BaseDiagram{
     int[] array;
@@ -14,7 +11,7 @@ public class ArraySortingDiagram extends BaseDiagram{
     int ele;
     int[] l;
     int[] r;
-    String[] partSols = {"",""};
+    ArrayList<String> partSols = new ArrayList<>();
     public ArraySortingDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
         super(builder, diagramDataName);
         diagramActions.setAlgorithmMap();
@@ -43,13 +40,17 @@ public class ArraySortingDiagram extends BaseDiagram{
         Map<String,String> solutions = calculateSolution(algorithmIndex);
         setSubData(solutions);
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));
-        partSols[0] = solutions.get("partSol1");
-        partSols[1] = solutions.get("partSol2");
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         paramsParsed.put("mid", String.valueOf(mid));
-        paramsParsed.put("l", partSols[0]);
-        paramsParsed.put("r", partSols[1]);
+        if(partSols.size()>1){
+            paramsParsed.put("l", partSols.get(0));
+            paramsParsed.put("r", partSols.get(1));
+        }
+        else{
+            paramsParsed.put("l", Arrays.toString(l));
+            paramsParsed.put("r", Arrays.toString(r));
+        }
         diagramActions.setParams(paramsParsed);
     }
     @Override
@@ -76,15 +77,18 @@ public class ArraySortingDiagram extends BaseDiagram{
         calculatedSol.set(String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).get()));
         return calculatedSol.get();
     }
-
     @Override
     protected void setSubData(Map<String, String> data) {
+        if(!partSols.isEmpty()){
+            partSols.clear();
+        }
         data.forEach((k,v)->{
             if(k.contains("reducedOperation")){
                 subParameters.add(new SimpleStringProperty(v));
             }
             if(k.contains("partSol")){
                 subSolutions.add(new SimpleStringProperty(v));
+                partSols.add(v);
             }
         });
     }

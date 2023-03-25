@@ -60,7 +60,7 @@ public class ArraySortDiagram implements IDiagramActions{
         List<Supplier> s4 = new ArrayList<>();
         s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(Arrays.stream(new int[]{copyArray[mid]}),IntStream.concat(Arrays.stream(l), Arrays.stream(r))).toArray()));
         s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(IntStream.concat(Arrays.stream(l), Arrays.stream(r)),Arrays.stream(new int[]{copyArray[mid]})).toArray()));
-        s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(IntStream.concat(Arrays.stream(l), Arrays.stream(new int[]{copyArray[mid]})),Arrays.stream(r)).toArray()));
+        s4.add((Supplier<String>) () -> Arrays.toString(Algorithms.quicksort(array,mid)));
         return List.of(s1,s2,s3,s4);
     }
 
@@ -85,8 +85,7 @@ public class ArraySortDiagram implements IDiagramActions{
             ele = copyArray[copyArray.length-1];
             reducedArray = Arrays.stream(copyArray).filter(e->e!=ele).toArray();
             returnVal.put("reducedOperation",Arrays.toString(reducedArray));
-            returnVal.put("partSol1",Arrays.toString(Algorithms.insertSort(reducedArray)));
-            returnVal.put("partSol2",Arrays.toString(reducedArray));
+            returnVal.put("partSol",Arrays.toString(Algorithms.insertSort(reducedArray)));
             returnVal.put("currentReductionSolutions",String.valueOf(1));
             return returnVal;
         });
@@ -95,19 +94,19 @@ public class ArraySortDiagram implements IDiagramActions{
             ele = Algorithms.getSmallest(copyArray);
             reducedArray = Arrays.stream(copyArray).filter(e->e!=ele).toArray();
             returnVal.put("reducedOperation",Arrays.toString(reducedArray));
-            returnVal.put("partSol1",Arrays.toString(Algorithms.selectSort(reducedArray)));
-            returnVal.put("partSol2",Arrays.toString(reducedArray));
+            returnVal.put("partSol",Arrays.toString(Algorithms.selectSort(reducedArray)));
             returnVal.put("currentReductionSolutions",String.valueOf(2));
             return returnVal;
         });
         algorithmMap.put(3,()->{
             Map<String,String> returnVal = new HashMap<>();
-            int[] sortedL = Algorithms.quicksort(Arrays.copyOf(l,l.length),mid);
-            int[] sortedR = Algorithms.quicksort(Arrays.copyOf(r,r.length),mid);
-            returnVal.put("reducedOperation1",Arrays.toString(l));
-            returnVal.put("reducedOperation2",Arrays.toString(r));
-            returnVal.put("partSol1", Arrays.toString(sortedL));
-            returnVal.put("partSol2", Arrays.toString(sortedR));
+            int pivot = copyArray[mid-1];
+            int[] smallerElements = Algorithms.getSmaller(copyArray,pivot);
+            int[] greaterElements = Algorithms.getGreater(copyArray,pivot);
+            returnVal.put("reducedOperation1",Arrays.toString(smallerElements));
+            returnVal.put("reducedOperation2",Arrays.toString(greaterElements));
+            returnVal.put("partSol1", Arrays.toString(Algorithms.quicksort(smallerElements,smallerElements.length / 2)));
+            returnVal.put("partSol2", Arrays.toString(Algorithms.quicksort(greaterElements,greaterElements.length / 2)));
             returnVal.put("currentReductionSolutions", String.valueOf(3));
             return returnVal;
         });

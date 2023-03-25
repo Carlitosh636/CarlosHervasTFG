@@ -110,10 +110,10 @@ public class Algorithms {
             return a;
         }
         else {
-            int pivot = a[mid];
+            int pivot = a[mid-1];
             int[] smallerElements = getSmaller(a,pivot);
             int[] greaterElements = getGreater(a,pivot);
-            return IntStream.concat(IntStream.concat(Arrays.stream(smallerElements), Arrays.stream(new int[]{pivot})),Arrays.stream(greaterElements)).toArray();
+            return IntStream.concat(IntStream.concat(Arrays.stream(quicksort(smallerElements,smallerElements.length-1)), Arrays.stream(new int[]{pivot})),Arrays.stream(quicksort(greaterElements,greaterElements.length-1))).toArray();
         }
     }
 
@@ -162,11 +162,11 @@ public class Algorithms {
         Arrays.sort(b);
         return b[0];
     }
-    private static int[] getGreater(int[] a, int pivot) {
+    public static int[] getGreater(int[] a, int pivot) {
         return Arrays.stream(a).filter(ele->ele>pivot).toArray();
     }
 
-    private static int[] getSmaller(int[] a, int pivot) {
+    public static int[] getSmaller(int[] a, int pivot) {
         return Arrays.stream(a).filter(ele->ele<pivot).toArray();
     }
 }
