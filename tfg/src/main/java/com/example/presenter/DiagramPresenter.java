@@ -171,7 +171,10 @@ public class DiagramPresenter implements Initializable {
         } catch (Exception e) {
             showErrorInputAlert(new RuntimeException("Error al introducir los datos de entrada"));
             e.printStackTrace();
+            return;
         }
+        subSolutions.getChildren().clear();
+        subParameters.getChildren().clear();
         for(SimpleStringProperty ele : model.getSubParameters()){
             Label lb = new Label();
             lb.setStyle("-fx-text-fill: white;");
