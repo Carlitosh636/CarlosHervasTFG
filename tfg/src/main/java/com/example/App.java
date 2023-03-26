@@ -37,26 +37,32 @@ public class App extends Application {
     @FXML
     public void handleMainMenuButton(javafx.event.ActionEvent actionEvent) throws IOException {
         ArithmeticDiagram model = new ArithmeticDiagram(new RecursivePowerDiagram(),"diagramData/RecursiveDiagramData.json");
-        loadScene(model);
+        loadScene(model,"generatedData/RecursivePotencyGeneration.json");
     }
     @FXML
     public void handleMainMenuButton2(ActionEvent actionEvent) throws IOException{
         ArithmeticDiagram model = new ArithmeticDiagram(new SlowAdditionDiagram(),"diagramData/SlowAdditionData.json");
-        loadScene(model);
+        loadScene(model,"generatedData/RecursivePotencyGeneration.json");
     }
     @FXML
     public void handleMainMenuButton3(ActionEvent actionEvent) throws IOException {
         ArraySortingDiagram model = new ArraySortingDiagram(new ArraySortDiagram(),"diagramData/SortListData.json");
-        loadScene(model);
+        loadScene(model,"generatedData/RecursivePotencyGeneration.json");
     }
     @FXML
     public void handleMainMenuButton4(ActionEvent actionEvent) throws IOException {
         StringDiagram model = new StringDiagram(new ReverseStringDiagram(),"diagramData/ReverseStringData.json");
-        loadScene(model);
+        loadScene(model,"generatedData/RecursivePotencyGeneration.json");
     }
-    private void loadScene(BaseDiagram model) throws IOException {
+    private void loadScene(BaseDiagram model,String genFilePath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramViewer.fxml"));
-        loader.setControllerFactory(controller-> new DiagramPresenter(model));
+        loader.setControllerFactory(controller-> {
+            try {
+                return new DiagramPresenter(model,genFilePath);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         Pane pane = loader.load();
         main.setRoot(pane);
     }

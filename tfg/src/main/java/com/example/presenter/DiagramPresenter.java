@@ -4,6 +4,9 @@ import com.example.diagrams.BaseDiagram;
 import com.example.exceptions.BaseCaseException;
 import com.example.exceptions.IncorrectSelectionException;
 import com.example.model.Arrow;
+import com.example.model.DiagramData;
+import com.example.model.GeneratorData;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -24,6 +28,8 @@ public class DiagramPresenter implements Initializable {
     //private DiagramToCodeMapper mapper = new DiagramToCodeMapper();
     @FXML
     public TextArea heading;
+    @FXML
+    public TextArea generatedCode;
     @FXML
     StackPane originalDataSolutionArrow;
     @FXML
@@ -54,12 +60,12 @@ public class DiagramPresenter implements Initializable {
     VBox subParameters;
     @FXML
     VBox subSolutions;
-    private HashMap<String,String> errorMessageMap = new HashMap<>();
+    private final HashMap<String,String> errorMessageMap = new HashMap<>();
+    private final GeneratorData generatorData;
+    private Map<String,String> generatedCodeText = new HashMap<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
-        //mapper.setCurrentDiagram(model);
-        //model.setViewerData1();
         AnchorPane.setLeftAnchor(SizeAndBaseCaseBox,15.0);
         AnchorPane.setRightAnchor(diagramGrid,15.0);
         bindModelData();
@@ -70,6 +76,9 @@ public class DiagramPresenter implements Initializable {
         calculatedSolution.setVisible(false);
         decompositionSelect.setVisible(false);
         solutionSelect.setVisible(false);
+        generatedCodeText.put("functionName","");
+        generatedCodeText.put("baseCases","");
+        generatedCodeText.put("recursiveCases","");
     }
 
     private void setMessageMap() {
@@ -78,8 +87,10 @@ public class DiagramPresenter implements Initializable {
         errorMessageMap.put("IncorrectSelectionException","Esta opción es incorrecta, elige otra");
     }
 
-    public DiagramPresenter(BaseDiagram model) {
+    public DiagramPresenter(BaseDiagram model,String generatorFileSource) throws IOException {
         this.model = model;
+        ObjectMapper objMapper = new ObjectMapper();
+        generatorData =objMapper.readValue(new File(generatorFileSource), GeneratorData.class);
     }
     protected void bindModelData() {
         originalSolution.textProperty().bind(model.originalSolProperty());
@@ -88,10 +99,6 @@ public class DiagramPresenter implements Initializable {
         model.currentReductionProperty().bind(decompositionSelect.getSelectionModel().selectedIndexProperty());
         model.selectedSolutionProperty().bind(solutionSelect.getSelectionModel().selectedIndexProperty());
         heading.textProperty().bind(model.headingProperty());
-        //diagramTitle.textProperty().bind(model.viewerValues.get("diagramTitle"));
-        //baseCase.textProperty().bind(model.viewerValues.get("baseCase"));
-        //recursiveCase.textProperty().bind(model.viewerValues.get("recursiveCase"));
-
     }
     public void onChangeProblemSize(ActionEvent actionEvent) {
         if(problemSizeSelect.getSelectionModel().getSelectedIndex()<0){
@@ -106,8 +113,9 @@ public class DiagramPresenter implements Initializable {
         if(!problemSizeSelect.getSelectionModel().isEmpty()){
             baseCaseSelect.getItems().setAll(model.getBaseCaseChoices().get(model.getCurrentProblemSize()));
         }
+        generatedCodeText.put("functionName",generatorData.functionName.get(0));
+        generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
     }
-
     public void onChangeBaseCase(ActionEvent actionEvent) {
         if(baseCaseSelect.getSelectionModel().getSelectedIndex()<0){
             return;
@@ -154,6 +162,8 @@ public class DiagramPresenter implements Initializable {
             originalData.getChildren().addAll(tfs);
         }
         diagramGrid.setVisible(true);
+        generatedCodeText.put("baseCases",generatorData.baseCases.get(model.currentBaseCaseProperty().get()));
+        generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
     }
     public void onDescompositionChange(ActionEvent actionEvent) {
         if(decompositionSelect.getSelectionModel().getSelectedIndex()<0){
@@ -217,6 +227,8 @@ public class DiagramPresenter implements Initializable {
                 calculatedSolution.setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
                 calculatedSolution.setStyle("-fx-text-fill: #f2433a;");
             }
+            generatedCodeText.put("recursiveCases",generatorData.recursiveCases.get(model.getCurrentReductionSolutions()));
+            generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -259,6 +271,10 @@ public class DiagramPresenter implements Initializable {
         alert.setContentText("¿Estas seguro de que quieres borrar todos los valores introducidos?");
         Optional<ButtonType> action = alert.showAndWait();
         if(action.get()==ButtonType.OK){
+            generatedCode.textProperty().set("");
+            generatedCodeText.forEach((k,v)->{
+                generatedCodeText.put(k,"");
+            });
             problemSizeSelect.getSelectionModel().clearSelection();
             baseCaseSelect.getSelectionModel().clearSelection();
             subSolutions.getChildren().clear();
@@ -275,7 +291,6 @@ public class DiagramPresenter implements Initializable {
         else{
             alert.close();
         }
-
     }
     private void setArrows() {
         originalDataSolutionArrow.getChildren().add(returnArrow(60,0,250,0));
