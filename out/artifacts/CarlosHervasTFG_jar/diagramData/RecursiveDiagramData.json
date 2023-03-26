@@ -1,0 +1,27 @@
+{
+  "type" : "SIMPLE",
+  "heading" : "Dados un número a y su exponente b, ambos enteros no negativos, calcular aᵇ de forma recursiva\nEjemplo: Si f(2,5) = 2⁵ = 32",
+  "params" : {
+    "a" : "",
+    "b" : ""
+  },
+  "originalData" : "",
+  "originalSol" : "",
+  "subParameters" : [ "" ],
+  "subSolutions" : [ "" ],
+  "calculatedSol" : "",
+  "currentProblemSize" : 0,
+  "currentBaseCase" : 0,
+  "currentReduction" : 0,
+  "currentReductionSolutions" : 0,
+  "operation" : ",",
+  "reducedOperation" : "",
+  "problemSizeChoices" : [ "b" ],
+  "currentBaseCaseIndex" : 0,
+  "baseCaseChoices" : [ [ "b == 0" ] ],
+  "baseCaseParameters" : [ [ "0" ] ],
+  "reductionChoices" : [ [ "f(a,b - 1)", "f(a,b / 2)" ] ],
+  "solutionsChoices" : [ [ "* b", "* a", "** a" ], [ "** 2", "* b" ], [ "** 2", "* b", "a * (aᵇᐟᐟ²)²" ] ],
+  "recursiveCallParameters" : "",
+  "correctSolutions" : [ 1, 0, 2 ]
+}

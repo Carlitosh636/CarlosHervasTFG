@@ -1,0 +1,27 @@
+{
+  "type" : "SIMPLE",
+  "heading" : "Dados a, b ∈ N, hallar su suma. Solo se puede sumar o restar una unidad\na los números.\nEjemplo: s(s,b) = a + b. Para a = 3 y b = 5, s(3,5) = 8",
+  "params" : {
+    "a" : "",
+    "b" : ""
+  },
+  "originalData" : "",
+  "originalSol" : "",
+  "subParameters" : [ "" ],
+  "subSolutions" : [ "" ],
+  "calculatedSol" : "",
+  "currentProblemSize" : 0,
+  "currentBaseCase" : 0,
+  "currentReduction" : 0,
+  "currentReductionSolutions" : 0,
+  "operation" : ",",
+  "reducedOperation" : "",
+  "problemSizeChoices" : [ "a","min(a,b)" ],
+  "currentBaseCaseIndex" : 0,
+  "baseCaseChoices" : [ [ "a = 0" ],["min(a,b)=0"] ],
+  "baseCaseParameters" : [ [ "0" ],["0"] ],
+  "reductionChoices" : [ [ "s(a - 1,b)" ] , ["min(a,b) - 1", "s(a-1,b-1)"] ],
+  "solutionsChoices" : [ [ " + 1", " - 1", " + a"], [ " + 1", " - 1", " + min(a,b)"], [ " + 1", " - 1 + 1", " + 1 + 1"] ],
+  "recursiveCallParameters" : "",
+  "correctSolutions" : [ 0,0,2 ]
+}
