@@ -38,6 +38,8 @@ public abstract class BaseDiagram {
     protected List<List<String>> solutionsChoices;
     protected String recursiveCallParameters;
     protected SimpleIntegerProperty selectedSolution;
+    protected List<Integer> correctSizeChoices;
+    protected List<List<Integer>> correctBaseCases;
     protected List<Integer> correctSolutions;
     protected int algorithmIndex;
     protected Map<String,SimpleStringProperty> viewerValues = new HashMap<>();
@@ -67,6 +69,8 @@ public abstract class BaseDiagram {
         this.subSolutions =new ArrayList<>();
         this.solutionsChoices = new ArrayList<>();
         this.solutionsChoices.addAll(diagramData.solutionsChoices);
+        this.correctSizeChoices = diagramData.correctSizeChoices;
+        this.correctBaseCases = diagramData.correctBaseCases;
         this.correctSolutions = diagramData.correctSolutions;
         this.inputFormatting = diagramData.inputFormatting;
     }
@@ -217,8 +221,13 @@ public abstract class BaseDiagram {
     public int getAlgorithmIndex() {
         return algorithmIndex;
     }
+    public List<Integer> getCorrectSizeChoices() {
+        return correctSizeChoices;
+    }
 
-
+    public List<List<Integer>> getCorrectBaseCases() {
+        return correctBaseCases;
+    }
     public Map<String, SimpleStringProperty> getViewerValues() {
         return viewerValues;
     }

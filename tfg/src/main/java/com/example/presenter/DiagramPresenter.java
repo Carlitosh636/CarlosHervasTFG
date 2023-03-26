@@ -2,6 +2,7 @@ package com.example.presenter;
 
 import com.example.diagrams.BaseDiagram;
 import com.example.exceptions.BaseCaseException;
+import com.example.exceptions.IncorrectSelectionException;
 import com.example.model.Arrow;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -14,10 +15,7 @@ import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class DiagramPresenter implements Initializable {
     @FXML
@@ -56,6 +54,7 @@ public class DiagramPresenter implements Initializable {
     VBox subParameters;
     @FXML
     VBox subSolutions;
+    private HashMap<String,String> errorMessageMap = new HashMap<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
@@ -65,11 +64,18 @@ public class DiagramPresenter implements Initializable {
         AnchorPane.setRightAnchor(diagramGrid,15.0);
         bindModelData();
         setArrows();
+        setMessageMap();
         baseCaseSelect.setVisible(false);
         diagramGrid.setVisible(false);
         calculatedSolution.setVisible(false);
         decompositionSelect.setVisible(false);
         solutionSelect.setVisible(false);
+    }
+
+    private void setMessageMap() {
+        errorMessageMap.put("RuntimeException","Revisa el contenido y que concuerde con el formato: "+model.getInputFormatting());
+        errorMessageMap.put("BaseCaseException","Revisa el contenido, no puedes introducir un caso base o una solución como parámetro");
+        errorMessageMap.put("IncorrectSelectionException","Esta opción es incorrecta, elige otra");
     }
 
     public DiagramPresenter(BaseDiagram model) {
@@ -91,6 +97,10 @@ public class DiagramPresenter implements Initializable {
         if(problemSizeSelect.getSelectionModel().getSelectedIndex()<0){
             return;
         }
+        if(!model.getCorrectSizeChoices().contains(problemSizeSelect.getSelectionModel().getSelectedIndex())){
+            showErrorInputAlert(new IncorrectSelectionException("Opción incorrecta"));
+            return;
+        }
         baseCaseSelect.setVisible(true);
         baseCaseSelect.getItems().clear();
         if(!problemSizeSelect.getSelectionModel().isEmpty()){
@@ -100,6 +110,10 @@ public class DiagramPresenter implements Initializable {
 
     public void onChangeBaseCase(ActionEvent actionEvent) {
         if(baseCaseSelect.getSelectionModel().getSelectedIndex()<0){
+            return;
+        }
+        if(!model.getCorrectBaseCases().get(model.getCurrentProblemSize()).contains(baseCaseSelect.getSelectionModel().getSelectedIndex())){
+            showErrorInputAlert(new IncorrectSelectionException("Opción incorrecta"));
             return;
         }
         model.setCurrentBaseCaseIndex(baseCaseSelect.getSelectionModel().getSelectedIndex());
@@ -118,20 +132,20 @@ public class DiagramPresenter implements Initializable {
                         List<String> inputs = tfs.stream().map(ele -> ele.textProperty().get()).toList();
                         try {
                             if(model.checkNotBaseCase(model.getCurrentProblemSize(),inputs)) {
-                                showErrorInputAlert(new BaseCaseException("Cannot introduce a base case in parameters"));
+                                showErrorInputAlert(new BaseCaseException("No se puede introducir un caso base en el input"));
                             }
                             else{
                                 try {
                                     model.processInputs();
                                     decompositionSelect.setVisible(true);
                                 } catch (Exception e) {
-                                    showErrorInputAlert(e);
+                                    showErrorInputAlert(new RuntimeException("Error al introducir los datos de entrada"));
                                     e.printStackTrace();
                                 }
                                 refreshDiagram();
                             }
                         } catch (Exception e) {
-                            showErrorInputAlert(e);
+                            showErrorInputAlert(new RuntimeException("Error al introducir los datos de entrada"));
                             e.printStackTrace();
                         }
                     }
@@ -155,7 +169,7 @@ public class DiagramPresenter implements Initializable {
         try {
             model.processSolutions();
         } catch (Exception e) {
-            showErrorInputAlert(e);
+            showErrorInputAlert(new RuntimeException("Error al introducir los datos de entrada"));
             e.printStackTrace();
         }
         for(SimpleStringProperty ele : model.getSubParameters()){
@@ -209,14 +223,8 @@ public class DiagramPresenter implements Initializable {
     public void showErrorInputAlert(Exception e){
         Alert inputErrorAlert = new Alert(Alert.AlertType.ERROR);
         inputErrorAlert.setTitle("Error");
-        if(e instanceof RuntimeException){
-            inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
-            inputErrorAlert.setContentText("Revisa el contenido y que concuerde con el formato: "+model.getInputFormatting());
-        }
-        if(e instanceof BaseCaseException){
-            inputErrorAlert.setHeaderText("Error al introducir los datos de entrada");
-            inputErrorAlert.setContentText("Revisa el contenido, no puedes introducir un caso base o una solución como parámetro");
-        }
+        inputErrorAlert.setHeaderText(e.getMessage());
+        inputErrorAlert.setContentText(errorMessageMap.get(e.getClass().getSimpleName()));
         inputErrorAlert.showAndWait();
     }
     private void refreshDiagram(){

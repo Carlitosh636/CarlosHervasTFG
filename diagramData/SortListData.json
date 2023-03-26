@@ -21,6 +21,8 @@
   "solutionsChoices" : [ ["a[:mid] + a[mid:]","merge(a[:mid], a[mid:],mid)"],["insert_in_ordered_list(f',tail))","[tail] + f'"],["f' + [m]","[m] + f'"],
     ["[pivot] + f' + g'","f' + g' + [pivot]","f'+ [pivot] + g'"] ],
   "recursiveCallParameters" : "",
+  "correctSizeChoices": [0],
+  "correctBaseCases": [0],
   "correctSolutions" : [ 1,0,1,2 ],
   "inputFormatting" : "Una lista de números enteros, sin corchetes y separados por comas (Ej: 6,5,4,3,2)"
 }

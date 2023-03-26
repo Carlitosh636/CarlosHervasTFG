@@ -14,13 +14,15 @@
   "currentReductionSolutions" : 0,
   "operation" : ",",
   "reducedOperation" : "",
-  "problemSizeChoices" : [ "b" ],
+  "problemSizeChoices" : [ "b","a" ],
   "currentBaseCaseIndex" : 0,
-  "baseCaseChoices" : [ [ "b == 0","b == 1" ] ],
+  "baseCaseChoices" : [ [ "b == 0","b == 1","b == a" ] ],
   "baseCaseParameters" : [ [ "0","1" ] ],
   "reductionChoices" : [ [ "f(a,b - 1)", "f(a,b // 2)" ] ],
   "solutionsChoices" : [ [ "f' * b", "f' * a", "f' ** a" ], [ "f' ** 2", "f' * b" ], [ "f' ** 2", "f' * b", "a * f' ** 2" ] ],
   "recursiveCallParameters" : "",
+  "correctSizeChoices": [0],
+  "correctBaseCases": [[0,1]],
   "correctSolutions" : [ 1, 0, 2 ],
   "inputFormatting" : "Un número entero en cada cuadro de input (ej: 3 y 5)"
 }

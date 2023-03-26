@@ -13,13 +13,15 @@
   "currentReductionSolutions" : 0,
   "operation" : ",",
   "reducedOperation" : "",
-  "problemSizeChoices" : [ "N = len(string)" ],
+  "problemSizeChoices" : [ "n = len(string)" ],
   "currentBaseCaseIndex" : 0,
   "baseCaseChoices" : [ [ "string = ''" ]],
   "baseCaseParameters" : [ [""] ],
   "reductionChoices" : [ [ "f(string[1:])\nchar=string[1:]" ] ],
-  "solutionsChoices" : [ [ "char + f'","f' + char"] ],
+  "solutionsChoices" : [ [ "[char] + f'","f' + [char]"] ],
   "recursiveCallParameters" : "",
+  "correctSizeChoices": [0],
+  "correctBaseCases": [[0]],
   "correctSolutions" : [ 1 ],
   "inputFormatting" : "Un string cualquiera sin apóstrofes. (Ej: carlos)"
 }

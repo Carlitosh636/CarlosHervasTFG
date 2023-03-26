@@ -24,6 +24,8 @@ public class DiagramData implements Serializable {
     public List<List<String>> reductionChoices;
     public List<List<String>> solutionsChoices;
     public String recursiveCallParameters;
+    public List<Integer> correctSizeChoices;
+    public List<List<Integer>> correctBaseCases;
     public List<Integer> correctSolutions;
     public String inputFormatting;
     public DiagramData(){
