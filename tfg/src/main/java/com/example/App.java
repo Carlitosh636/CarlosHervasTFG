@@ -47,12 +47,12 @@ public class App extends Application {
     @FXML
     public void handleMainMenuButton3(ActionEvent actionEvent) throws IOException {
         ArraySortingDiagram model = new ArraySortingDiagram(new ArraySortDiagram(),"diagramData/SortListData.json");
-        loadScene(model,"generatedData/RecursivePotencyGeneration.json");
+        loadScene(model,"generatedData/SortListGeneration.json");
     }
     @FXML
     public void handleMainMenuButton4(ActionEvent actionEvent) throws IOException {
         StringDiagram model = new StringDiagram(new ReverseStringDiagram(),"diagramData/ReverseStringData.json");
-        loadScene(model,"generatedData/RecursivePotencyGeneration.json");
+        loadScene(model,"generatedData/ReverseStringGeneration.json");
     }
     private void loadScene(BaseDiagram model,String genFilePath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramViewer.fxml"));

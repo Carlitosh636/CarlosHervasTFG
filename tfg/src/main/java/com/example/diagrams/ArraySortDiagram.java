@@ -51,12 +51,7 @@ public class ArraySortDiagram implements IDiagramActions{
             nA[array.length - 1] = ele;
             return Arrays.toString(nA);
         });
-        s3.add((Supplier<String>) () -> {
-            int[] nA = new int[array.length];
-            System.arraycopy(Algorithms.insertSort(copyArray), 0, nA, 1, copyArray.length);
-            nA[0] = ele;
-            return Arrays.toString(nA);
-        });
+        s3.add((Supplier<String>) () -> Arrays.toString(Algorithms.selectSort(array)));
         List<Supplier> s4 = new ArrayList<>();
         s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(Arrays.stream(new int[]{copyArray[mid]}),IntStream.concat(Arrays.stream(l), Arrays.stream(r))).toArray()));
         s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(IntStream.concat(Arrays.stream(l), Arrays.stream(r)),Arrays.stream(new int[]{copyArray[mid]})).toArray()));

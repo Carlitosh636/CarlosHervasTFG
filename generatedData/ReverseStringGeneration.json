@@ -1,0 +1,13 @@
+{
+  "functionName": ["def reverse_string(s):\n"],
+  "baseCases": [
+    [
+      "\tif s == '':\n\t\treturn ''"
+    ]
+  ],
+  "recursiveCases": [[
+    "\n\telse:\n\t\treturn s[0] + reverse_string(s[1:])",
+    "\n\telse:\n\t\treturn reverse_string(s[1:]) + s[0]"
+  ]],
+  "auxFunctions": []
+}

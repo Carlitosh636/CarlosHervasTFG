@@ -1,6 +1,6 @@
 {
   "type" : "COMPLEX",
-  "heading" : "Dado una lista con tamaño n llamada list, ordenarla de forma recursiva\nEjemplo: f([7,3,4,8,1,6,2,5]) -> [1,2,3,4,5,6,7,8]",
+  "heading" : "Dado una lista con tamaño n llamada list, ordenarla de forma recursiva\nEjemplo: f([7,3,8,2,4,6,1,5]) -> [1,2,3,4,5,6,7,8]",
   "params" : {
     "array" : ""
   },
@@ -17,7 +17,7 @@
   "currentBaseCaseIndex" : 0,
   "baseCaseChoices" : [ [ "n <= 1" ] ],
   "baseCaseParameters" : [ [ "0" ] ],
-  "reductionChoices" : [ [ "f(a[:mid], a[mid:],mid)\nmid = n//2", "f(a[:-1],tail)\ntail = a[-1]", "f(a,m)\nm = a.remove(min(a))","Seleccionar pivote\npivot = a[n//2]" ] ],
+  "reductionChoices" : [ [ "f(a[:mid], a[mid:],mid)\nmid = n//2", "f(a[:-1],tail)\ntail = a[-1]", "f(a,m)\nm = a.remove(min(a))","f(v1,v2,pivot)\nv1=smaller_than(a,pivot)\nv2=greater_than(a,pivot)\npivot = a[n//2]" ] ],
   "solutionsChoices" : [ ["a[:mid] + a[mid:]","merge(a[:mid], a[mid:],mid)"],["insert_in_ordered_list(f',tail))","[tail] + f'"],["f' + [m]","[m] + f'"],["[pivot] + f' + g'","f' + g' + [pivot]","f'+ [pivot] + g'"]],
   "recursiveCallParameters" : "",
   "correctSizeChoices": [0],

@@ -1,6 +1,7 @@
 package com.example.presenter;
 
 import com.example.diagrams.BaseDiagram;
+import com.example.enums.DiagramType;
 import com.example.exceptions.BaseCaseException;
 import com.example.exceptions.IncorrectSelectionException;
 import com.example.model.Arrow;
@@ -76,9 +77,9 @@ public class DiagramPresenter implements Initializable {
         calculatedSolution.setVisible(false);
         decompositionSelect.setVisible(false);
         solutionSelect.setVisible(false);
-        generatedCodeText.put("functionName","");
-        generatedCodeText.put("baseCases","");
-        generatedCodeText.put("recursiveCases","");
+        generatedCodeText.put("functionName","FUNCIÓN\n");
+        generatedCodeText.put("baseCases","\nCASO(S) BASE");
+        generatedCodeText.put("recursiveCases","\nCASO(S) RECURSIVOS");
     }
 
     private void setMessageMap() {
@@ -169,10 +170,12 @@ public class DiagramPresenter implements Initializable {
         if(decompositionSelect.getSelectionModel().getSelectedIndex()<0){
             return;
         }
+        if(model.getType() == DiagramType.valueOf("COMPLEX")){
+            generatedCodeText.put("functionName",generatorData.functionName.get(decompositionSelect.getSelectionModel().getSelectedIndex()+1));
+        }
         subSolutions.getChildren().clear();
         subParameters.getChildren().clear();
         solutionSelect.getItems().clear();
-        //model.resetSubValues();
         handleDecomposition();
     }
     protected void handleDecomposition() {
@@ -227,8 +230,14 @@ public class DiagramPresenter implements Initializable {
                 calculatedSolution.setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
                 calculatedSolution.setStyle("-fx-text-fill: #f2433a;");
             }
-            generatedCodeText.put("recursiveCases",generatorData.recursiveCases.get(model.getAlgorithmIndex()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-            generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
+            if(model.getType() == DiagramType.valueOf("COMPLEX")){
+                generatedCodeText.put("auxFunctions",generatorData.auxFunctions.get(decompositionSelect.getSelectionModel().getSelectedIndex()));
+            }
+            else{
+                generatedCodeText.put("auxFunctions","");
+            }
+            generatedCodeText.put("recursiveCases",generatorData.recursiveCases.get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
+            generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases")+"\n"+generatedCodeText.get("auxFunctions"));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -271,10 +280,10 @@ public class DiagramPresenter implements Initializable {
         alert.setContentText("¿Estas seguro de que quieres borrar todos los valores introducidos?");
         Optional<ButtonType> action = alert.showAndWait();
         if(action.get()==ButtonType.OK){
-            generatedCode.textProperty().set("");
-            generatedCodeText.forEach((k,v)->{
-                generatedCodeText.put(k,"");
-            });
+            generatedCodeText.put("functionName","FUNCIÓN\n");
+            generatedCodeText.put("baseCases","\nCASO(S) BASE");
+            generatedCodeText.put("recursiveCases","\nCASO(S) RECURSIVOS");
+            generatedCodeText.put("auxFunctions","");
             problemSizeSelect.getSelectionModel().clearSelection();
             baseCaseSelect.getSelectionModel().clearSelection();
             subSolutions.getChildren().clear();
