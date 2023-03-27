@@ -227,7 +227,7 @@ public class DiagramPresenter implements Initializable {
                 calculatedSolution.setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
                 calculatedSolution.setStyle("-fx-text-fill: #f2433a;");
             }
-            generatedCodeText.put("recursiveCases",generatorData.recursiveCases.get(model.currentBaseCaseProperty().get()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
+            generatedCodeText.put("recursiveCases",generatorData.recursiveCases.get(model.getAlgorithmIndex()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
             generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
         }
         catch (Exception e){

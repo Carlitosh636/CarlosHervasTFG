@@ -31,7 +31,7 @@ public class App extends Application {
         stage.setMaxHeight(1080);
         stage.setMaxWidth(1920);
         stage.setMinHeight(700);
-        stage.setMinWidth(1200);
+        stage.setMinWidth(1400);
         stage.setMaximized(true);
     }
     @FXML
