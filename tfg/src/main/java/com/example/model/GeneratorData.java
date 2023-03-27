@@ -4,7 +4,8 @@ import java.util.List;
 
 public class GeneratorData {
     public List<String> functionName;
-    public List<String> baseCases;
-    public List<String> recursiveCases;
+    public List<List<String>> baseCases;
+    public List<List<String>> recursiveCases;
+    public List<String> auxFunctions;
     public GeneratorData(){}
 }

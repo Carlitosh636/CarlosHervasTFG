@@ -162,7 +162,7 @@ public class DiagramPresenter implements Initializable {
             originalData.getChildren().addAll(tfs);
         }
         diagramGrid.setVisible(true);
-        generatedCodeText.put("baseCases",generatorData.baseCases.get(model.currentBaseCaseProperty().get()));
+        generatedCodeText.put("baseCases",generatorData.baseCases.get(model.currentProblemSizeProperty().get()).get(baseCaseSelect.getSelectionModel().getSelectedIndex()));
         generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
     }
     public void onDescompositionChange(ActionEvent actionEvent) {
@@ -227,7 +227,7 @@ public class DiagramPresenter implements Initializable {
                 calculatedSolution.setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
                 calculatedSolution.setStyle("-fx-text-fill: #f2433a;");
             }
-            generatedCodeText.put("recursiveCases",generatorData.recursiveCases.get(model.getCurrentReductionSolutions()));
+            generatedCodeText.put("recursiveCases",generatorData.recursiveCases.get(model.currentBaseCaseProperty().get()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
             generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
         }
         catch (Exception e){

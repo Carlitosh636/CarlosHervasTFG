@@ -28,10 +28,10 @@ public class App extends Application {
         stage.setScene(main);
         stage.setTitle("Mi TFG");
         stage.show();
-        stage.setMaxHeight(1200);
-        stage.setMaxWidth(1600);
-        stage.setMinHeight(stage.getHeight());
-        stage.setMinWidth(stage.getWidth());
+        stage.setMaxHeight(1080);
+        stage.setMaxWidth(1920);
+        stage.setMinHeight(700);
+        stage.setMinWidth(1200);
         stage.setMaximized(true);
     }
     @FXML
@@ -42,7 +42,7 @@ public class App extends Application {
     @FXML
     public void handleMainMenuButton2(ActionEvent actionEvent) throws IOException{
         ArithmeticDiagram model = new ArithmeticDiagram(new SlowAdditionDiagram(),"diagramData/SlowAdditionData.json");
-        loadScene(model,"generatedData/RecursivePotencyGeneration.json");
+        loadScene(model,"generatedData/SlowAdditionGeneration.json");
     }
     @FXML
     public void handleMainMenuButton3(ActionEvent actionEvent) throws IOException {

@@ -28,7 +28,8 @@ public class ArithmeticDiagram extends BaseDiagram{
     }
     @Override
     public void processSolutions() throws Exception {
-        algorithmIndex = currentProblemSize.get() + currentReduction.get();
+        algorithmIndex = currentProblemSize.get() * 2 + currentReduction.get();
+        System.out.println(algorithmIndex);
         Map<String,String> solutions = calculateSolution(algorithmIndex);
         setSubData(solutions);
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));

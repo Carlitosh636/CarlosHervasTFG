@@ -15,7 +15,7 @@
                      <Font size="24.0" />
                   </font>
                </TextArea>
-               <TextArea fx:id="heading1" editable="false" maxWidth="700.0" style="text-area-background: grey; -fx-text-fill: black;" stylesheets="@../css/header.css" text="AQUÍ EL GENERADOR DE CÓDIGO&#10;&#10;&#10;">
+               <TextArea fx:id="generatedCode" editable="false" maxWidth="700.0" style="text-area-background: grey; -fx-text-fill: black;" stylesheets="@../css/header.css">
                   <font>
                      <Font size="24.0" />
                   </font>

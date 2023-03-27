@@ -16,7 +16,8 @@ public class StringDiagram extends BaseDiagram{
     }
     @Override
     public void processInputs() throws Exception {
-        algorithmIndex = currentProblemSize.get() + currentReduction.get();
+        algorithmIndex = currentProblemSize.get() + currentBaseCaseIndex + currentReduction.get();
+        System.out.println(algorithmIndex);
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         paramsParsed.put("baseCaseValue",baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
@@ -26,7 +27,8 @@ public class StringDiagram extends BaseDiagram{
     }
     @Override
     public void processSolutions() throws Exception {
-        algorithmIndex = currentProblemSize.get() + currentReduction.get();
+        algorithmIndex = currentProblemSize.get() + currentBaseCaseIndex + currentReduction.get();
+        System.out.println(algorithmIndex);
         Map<String,String> solutions = calculateSolution(algorithmIndex);
         setSubData(solutions);
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));

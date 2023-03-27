@@ -1,8 +1,24 @@
 {
   "functionName": ["def power(a, b):\n"],
-  "baseCases": ["\tif b == 0:\n\t\treturn 1","\tif b == 1:\n\t\treturn a"],
-  "recursiveCases": [
+  "baseCases": [
+    [
+      "\tif b == 0:\n\t\treturn 1",
+      "\tif b == 1:\n\t\treturn a"
+    ]
+  ],
+  "recursiveCases": [[
+    "\n\telse:\n\t\treturn b * power(a, b - 1)",
     "\n\telse:\n\t\treturn a * power(a, b - 1)",
-    "\n\telif n % 2 == 0:\n\t\treturn power(a, b // 2)**2\nelse:\n\t\treturn a * (power(a, (b - 1) // 2)**2)"
-  ]
+    "\n\telse:\n\t\treturn power(a, b - 1) ** a"
+    ],
+    [
+      "\n\telse:\n\t\treturn 2 * power(a, b - 1)",
+      "\n\telse:\n\t\treturn b * power(a, b - 1)"
+    ],
+    [
+      "\n\telse:\n\t\treturn 2 * power(a, b - 1)",
+      "\n\telse:\n\t\treturn b * power(a, b - 1)",
+      "\n\telif n % 2 == 0:\n\t\treturn power(a, b // 2)**2\nelse:\n\t\treturn a * (power(a, (b - 1) // 2)**2)"
+  ]],
+  "auxFunctions": []
 }

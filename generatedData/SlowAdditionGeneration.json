@@ -1,0 +1,35 @@
+{
+  "functionName": ["def slow_addition(a, b):\n"],
+  "baseCases": [["\tif a == 0\n\t\treturn b "],["\tif b == 0\n\t\treturn a "],["\tif a == 0\n\t\treturn b\n\tif b == 0\n\t\treturn a "]],
+  "recursiveCases": [
+    [
+      "\n\telse:\n\t\treturn slow_addition(a-1,b) + 1",
+      "\n\telse:\n\t\treturn slow_addition(a-1,b) - 1",
+      "\n\telse:\n\t\treturn slow_addition(a-1,b) + a"
+    ],
+    [
+      "\n\telse:\n\t\treturn slow_addition(a-1,b+1) + 1",
+      "\n\telse:\n\t\treturn slow_addition(a-1,b+1)"
+    ],
+    [
+      "\n\telse:\n\t\treturn slow_addition(a,b-1) + 1",
+      "\n\telse:\n\t\treturn slow_addition(a,b-1) - 1",
+      "\n\telse:\n\t\treturn slow_addition(a,b-1) + a"
+    ],
+    [
+      "\n\telse:\n\t\treturn slow_addition(a+1,b-1) + 1",
+      "\n\telse:\n\t\treturn slow_addition(a+1,b-1)"
+    ],
+    [
+      "\n\telif a < b:\n\t\treturn slow_addition(a-1,b) + 1\n\telse\n\t\treturn slow_addition(a,b-1) + 1",
+      "\n\telif a < b:\n\t\treturn slow_addition(a-1,b) - 1\n\telse\n\t\treturn slow_addition(a,b-1) - 1",
+      "\n\telif a < b:\n\t\treturn slow_addition(a-1,b) + min(a,b)\n\telse\n\t\treturn slow_addition(a,b-1) + min(a,b)"
+    ],
+    [
+      "\n\telse:\n\t\treturn slow_addition(a-1,b-1) + 1",
+      "\n\telse:\n\t\treturn slow_addition(a-1,b-1) - 1",
+      "\n\telse:\n\t\treturn slow_addition(a-1,b-1) + 1 + 1"
+    ]
+  ],
+  "auxFunctions": []
+}
