@@ -101,7 +101,7 @@
                                  </Label>
                               </children>
                            </VBox>
-                           <ComboBox id="combo-box-3" fx:id="decompositionSelect" minWidth="150.0" onAction="#onDescompositionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.rowIndex="3">
+                           <ComboBox id="combo-box-3" fx:id="decompositionSelect" minWidth="150.0" onAction="#onDecompositionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.rowIndex="3">
                               <GridPane.margin>
                                  <Insets right="5.0" />
                               </GridPane.margin>

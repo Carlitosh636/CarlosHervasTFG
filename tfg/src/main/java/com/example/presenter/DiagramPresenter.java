@@ -5,7 +5,6 @@ import com.example.enums.DiagramType;
 import com.example.exceptions.BaseCaseException;
 import com.example.exceptions.IncorrectSelectionException;
 import com.example.model.Arrow;
-import com.example.model.DiagramData;
 import com.example.model.GeneratorData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleStringProperty;
@@ -166,7 +165,7 @@ public class DiagramPresenter implements Initializable {
         generatedCodeText.put("baseCases",generatorData.baseCases.get(model.currentProblemSizeProperty().get()).get(baseCaseSelect.getSelectionModel().getSelectedIndex()));
         generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
     }
-    public void onDescompositionChange(ActionEvent actionEvent) {
+    public void onDecompositionChange(ActionEvent actionEvent) {
         if(decompositionSelect.getSelectionModel().getSelectedIndex()<0){
             return;
         }
