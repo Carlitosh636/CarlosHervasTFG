@@ -53,8 +53,8 @@ public class ArraySortDiagram implements IDiagramActions{
         });
         s3.add((Supplier<String>) () -> Arrays.toString(Algorithms.selectSort(array)));
         List<Supplier> s4 = new ArrayList<>();
-        s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(Arrays.stream(new int[]{copyArray[mid]}),IntStream.concat(Arrays.stream(l), Arrays.stream(r))).toArray()));
-        s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(IntStream.concat(Arrays.stream(l), Arrays.stream(r)),Arrays.stream(new int[]{copyArray[mid]})).toArray()));
+        s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(Arrays.stream(new int[]{copyArray[mid-1]}),IntStream.concat(Arrays.stream(l), Arrays.stream(r))).toArray()));
+        s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(IntStream.concat(Arrays.stream(l), Arrays.stream(r)),Arrays.stream(new int[]{copyArray[mid-1]})).toArray()));
         s4.add((Supplier<String>) () -> Arrays.toString(Algorithms.quicksort(array,mid)));
         return List.of(s1,s2,s3,s4);
     }
@@ -96,6 +96,7 @@ public class ArraySortDiagram implements IDiagramActions{
         algorithmMap.put(3,()->{
             Map<String,String> returnVal = new HashMap<>();
             int pivot = copyArray[mid-1];
+            System.out.println(pivot);
             int[] smallerElements = Algorithms.getSmaller(copyArray,pivot);
             int[] greaterElements = Algorithms.getGreater(copyArray,pivot);
             returnVal.put("reducedOperation1",Arrays.toString(smallerElements));
