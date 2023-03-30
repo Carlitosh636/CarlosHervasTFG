@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 public abstract class BaseDiagram {
     protected IDiagramActions diagramActions;
     protected DiagramType type;
-    private DiagramData diagramData;
+    private final DiagramData diagramData;
     protected SimpleStringProperty heading;
     protected Map<String,SimpleStringProperty> params;
     protected SimpleStringProperty originalSol;
@@ -28,7 +28,6 @@ public abstract class BaseDiagram {
     protected SimpleIntegerProperty currentReduction;
     protected SimpleIntegerProperty currentReductionSolutions;
     protected String operation;
-    protected String reducedOperation;
     protected List<String> problemSizeChoices;
     protected int currentBaseCaseIndex;
     protected List<List<String>> baseCaseChoices;
@@ -36,14 +35,11 @@ public abstract class BaseDiagram {
     protected List<List<String>> reductionChoices;
     protected List<List<Supplier>> solutionOperations;
     protected List<List<String>> solutionsChoices;
-    protected String recursiveCallParameters;
     protected SimpleIntegerProperty selectedSolution;
     protected List<Integer> correctSizeChoices;
     protected List<List<Integer>> correctBaseCases;
     protected List<Integer> correctSolutions;
     protected int algorithmIndex;
-    protected Map<String,SimpleStringProperty> viewerValues = new HashMap<>();
-    protected String parametersView;
     protected String inputFormatting;
     protected BaseDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
         this.diagramActions =builder;
@@ -74,14 +70,14 @@ public abstract class BaseDiagram {
         this.correctSolutions = diagramData.correctSolutions;
         this.inputFormatting = diagramData.inputFormatting;
     }
-    protected abstract void setSolutionOperations();
+
     public abstract void processInputs() throws Exception;
     public abstract void processSolutions() throws Exception;
     public abstract boolean checkNotBaseCase(int index,List<String>input) throws Exception;
-    public abstract Map<String,String> calculateSolution(int selectedIndex) throws Exception;
+
     public abstract boolean checkSolutionsEqual(String calcSol);
     public abstract String calculateWithSelectedOperation(int index);
-    protected abstract void setSubData(Map<String,String> data);
+
     public void resetSubValues(){
         this.subParameters.clear();
         this.subSolutions.clear();
@@ -89,17 +85,8 @@ public abstract class BaseDiagram {
         diagramData.params.forEach((k,v)-> params.put(k,new SimpleStringProperty(v)));
     }
 
-    //GETTER SETTERS
-    public IDiagramActions getDiagramActions() {
-        return diagramActions;
-    }
-
     public DiagramType getType() {
         return type;
-    }
-
-    public String getHeading() {
-        return heading.get();
     }
 
     public SimpleStringProperty headingProperty() {
@@ -108,10 +95,6 @@ public abstract class BaseDiagram {
 
     public Map<String, SimpleStringProperty> getParams() {
         return params;
-    }
-
-    public String getOriginalSol() {
-        return originalSol.get();
     }
 
     public SimpleStringProperty originalSolProperty() {
@@ -130,10 +113,6 @@ public abstract class BaseDiagram {
         return calculatedSol.get();
     }
 
-    public SimpleStringProperty calculatedSolProperty() {
-        return calculatedSol;
-    }
-
     public int getCurrentProblemSize() {
         return currentProblemSize.get();
     }
@@ -142,16 +121,8 @@ public abstract class BaseDiagram {
         return currentProblemSize;
     }
 
-    public int getCurrentBaseCase() {
-        return currentBaseCase.get();
-    }
-
     public SimpleIntegerProperty currentBaseCaseProperty() {
         return currentBaseCase;
-    }
-
-    public int getCurrentReduction() {
-        return currentReduction.get();
     }
 
     public SimpleIntegerProperty currentReductionProperty() {
@@ -162,52 +133,20 @@ public abstract class BaseDiagram {
         return currentReductionSolutions.get();
     }
 
-    public SimpleIntegerProperty currentReductionSolutionsProperty() {
-        return currentReductionSolutions;
-    }
-
-    public String getOperation() {
-        return operation;
-    }
-
-    public String getReducedOperation() {
-        return reducedOperation;
-    }
-
     public List<String> getProblemSizeChoices() {
         return problemSizeChoices;
-    }
-
-    public int getCurrentBaseCaseIndex() {
-        return currentBaseCaseIndex;
     }
 
     public List<List<String>> getBaseCaseChoices() {
         return baseCaseChoices;
     }
 
-    public List<List<String>> getBaseCaseParameters() {
-        return baseCaseParameters;
-    }
-
     public List<List<String>> getReductionChoices() {
         return reductionChoices;
     }
 
-    public List<List<Supplier>> getSolutionOperations() {
-        return solutionOperations;
-    }
-
     public List<List<String>> getSolutionsChoices() {
         return solutionsChoices;
-    }
-
-    public String getRecursiveCallParameters() {
-        return recursiveCallParameters;
-    }
-
-    public int getSelectedSolution() {
-        return selectedSolution.get();
     }
 
     public SimpleIntegerProperty selectedSolutionProperty() {
@@ -218,9 +157,6 @@ public abstract class BaseDiagram {
         return correctSolutions;
     }
 
-    public int getAlgorithmIndex() {
-        return algorithmIndex;
-    }
     public List<Integer> getCorrectSizeChoices() {
         return correctSizeChoices;
     }
@@ -228,13 +164,7 @@ public abstract class BaseDiagram {
     public List<List<Integer>> getCorrectBaseCases() {
         return correctBaseCases;
     }
-    public Map<String, SimpleStringProperty> getViewerValues() {
-        return viewerValues;
-    }
 
-    public String getParametersView() {
-        return parametersView;
-    }
     public void setCurrentBaseCaseIndex(int currentBaseCaseIndex) {
         this.currentBaseCaseIndex = currentBaseCaseIndex;
     }

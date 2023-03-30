@@ -62,7 +62,7 @@ public class DiagramPresenter implements Initializable {
     VBox subSolutions;
     private final HashMap<String,String> errorMessageMap = new HashMap<>();
     private final GeneratorData generatorData;
-    private Map<String,String> generatedCodeText = new HashMap<>();
+    private final Map<String,String> generatedCodeText = new HashMap<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
@@ -100,7 +100,7 @@ public class DiagramPresenter implements Initializable {
         model.selectedSolutionProperty().bind(solutionSelect.getSelectionModel().selectedIndexProperty());
         heading.textProperty().bind(model.headingProperty());
     }
-    public void onChangeProblemSize(ActionEvent actionEvent) {
+    public void onChangeProblemSize() {
         if(problemSizeSelect.getSelectionModel().getSelectedIndex()<0){
             return;
         }
@@ -116,7 +116,7 @@ public class DiagramPresenter implements Initializable {
         generatedCodeText.put("functionName",generatorData.functionName.get(0));
         generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
     }
-    public void onChangeBaseCase(ActionEvent actionEvent) {
+    public void onChangeBaseCase() {
         if(baseCaseSelect.getSelectionModel().getSelectedIndex()<0){
             return;
         }
@@ -165,7 +165,7 @@ public class DiagramPresenter implements Initializable {
         generatedCodeText.put("baseCases",generatorData.baseCases.get(model.currentProblemSizeProperty().get()).get(baseCaseSelect.getSelectionModel().getSelectedIndex()));
         generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
     }
-    public void onDecompositionChange(ActionEvent actionEvent) {
+    public void onDecompositionChange() {
         if(decompositionSelect.getSelectionModel().getSelectedIndex()<0){
             return;
         }
@@ -207,7 +207,7 @@ public class DiagramPresenter implements Initializable {
         solutionSelect.setVisible(true);
     }
 
-    public void onSolutionChange(ActionEvent actionEvent) {
+    public void onSolutionChange() {
         try{
             if(solutionSelect.getSelectionModel().getSelectedIndex()<0){
                 return;
@@ -258,7 +258,7 @@ public class DiagramPresenter implements Initializable {
 
     }
     @FXML
-    public void returnToMenu(ActionEvent actionEvent) throws IOException {
+    public void returnToMenu() throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmación");
         alert.setContentText("¿Estas seguro de que quieres volver al menú?");
@@ -273,7 +273,7 @@ public class DiagramPresenter implements Initializable {
         }
     }
     @FXML
-    public void resetDiagram(ActionEvent actionEvent) {
+    public void resetDiagram() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmación");
         alert.setContentText("¿Estas seguro de que quieres borrar todos los valores introducidos?");

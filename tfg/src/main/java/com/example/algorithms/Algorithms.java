@@ -126,12 +126,8 @@ public class Algorithms {
             int mid = n / 2;
             int[] l = new int[mid];
             int[] r = new int[n - mid];
-            for (int i = 0; i < mid; i++) {
-                l[i] = a[i];
-            }
-            for (int i = mid; i < n; i++) {
-                r[i - mid] = a[i];
-            }
+            System.arraycopy(a, 0, l, 0, mid);
+            if (n - mid >= 0) System.arraycopy(a, mid, r, mid - mid, n - mid);
             l = mergeSort(l);
             r = mergeSort(r);
             return merge(a,l,r,mid,n-mid);

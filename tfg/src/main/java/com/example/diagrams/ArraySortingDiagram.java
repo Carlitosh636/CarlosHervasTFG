@@ -8,7 +8,6 @@ import java.util.*;
 public class ArraySortingDiagram extends BaseDiagram{
     int[] array;
     int mid;
-    int ele;
     int[] l;
     int[] r;
     ArrayList<String> partSols = new ArrayList<>();
@@ -53,8 +52,7 @@ public class ArraySortingDiagram extends BaseDiagram{
         }
         diagramActions.setParams(paramsParsed);
     }
-    @Override
-    protected void setSolutionOperations() {
+    private void setSolutionOperations() {
         this.solutionOperations = diagramActions.setSolutionOperations();
     }
     @Override
@@ -62,8 +60,7 @@ public class ArraySortingDiagram extends BaseDiagram{
         return diagramActions.checkNotBaseCase(baseCaseParameters.get(index),inputs);
     }
 
-    @Override
-    public Map<String, String> calculateSolution(int selectedIndex) throws Exception {
+    private Map<String, String> calculateSolution(int selectedIndex) throws Exception {
         return diagramActions.calculateSolution(selectedIndex);
     }
 
@@ -77,8 +74,7 @@ public class ArraySortingDiagram extends BaseDiagram{
         calculatedSol.set(String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).get()));
         return calculatedSol.get();
     }
-    @Override
-    protected void setSubData(Map<String, String> data) {
+    private void setSubData(Map<String, String> data) {
         if(!partSols.isEmpty()){
             partSols.clear();
         }

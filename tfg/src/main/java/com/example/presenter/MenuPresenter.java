@@ -1,7 +1,6 @@
 package com.example.presenter;
 
 import com.example.diagrams.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -44,16 +43,14 @@ public class MenuPresenter {
         buttonsPaths.put(b2,new ButtonRelatedData(new ArithmeticDiagram(new SlowAdditionDiagram(),"diagramData/SlowAdditionData.json"),"generatedData/SlowAdditionGeneration.json"));
         buttonsPaths.put(b3,new ButtonRelatedData(new ArraySortingDiagram(new ArraySortDiagram(),"diagramData/SortListData.json"),"generatedData/SortListGeneration.json"));
         buttonsPaths.put(b4,new ButtonRelatedData(new StringDiagram(new ReverseStringDiagram(),"diagramData/ReverseStringData.json"),"generatedData/ReverseStringGeneration.json"));
-        buttonsPaths.forEach((k,v)->{
-            k.setOnAction(actionEvent -> {
-                model = v.getBaseDiagram();
-                try {
-                    loadScene(model,v.getGenFilePath());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-        });
+        buttonsPaths.forEach((k,v)-> k.setOnAction(actionEvent -> {
+            model = v.getBaseDiagram();
+            try {
+                loadScene(model,v.getGenFilePath());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }));
     }
     private void loadScene(BaseDiagram model,String genFilePath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramViewer.fxml"));

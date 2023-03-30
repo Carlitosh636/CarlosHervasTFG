@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class StringDiagram extends BaseDiagram{
-    String partSol;
     public StringDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
         super(builder, diagramDataName);
         diagramActions.setAlgorithmMap();
@@ -31,15 +30,13 @@ public class StringDiagram extends BaseDiagram{
         Map<String,String> solutions = calculateSolution(algorithmIndex);
         setSubData(solutions);
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));
-        partSol = solutions.get("partSol");
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         paramsParsed.put("baseCaseValue",baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
         paramsParsed.put("partSol",solutions.get("partSol"));
         diagramActions.setParams(paramsParsed);
     }
-    @Override
-    protected void setSolutionOperations() {
+    private void setSolutionOperations() {
         this.solutionOperations = diagramActions.setSolutionOperations();
     }
     @Override
@@ -47,8 +44,7 @@ public class StringDiagram extends BaseDiagram{
         return diagramActions.checkNotBaseCase(baseCaseParameters.get(index),inputs);
     }
 
-    @Override
-    public Map<String, String> calculateSolution(int selectedIndex) throws Exception {
+    private Map<String, String> calculateSolution(int selectedIndex) throws Exception {
         return diagramActions.calculateSolution(selectedIndex);
     }
 
@@ -62,8 +58,7 @@ public class StringDiagram extends BaseDiagram{
         return calculatedSol.get();
     }
 
-    @Override
-    protected void setSubData(Map<String, String> data) {
+    private void setSubData(Map<String, String> data) {
         data.forEach((k,v)->{
             if(k.contains("reducedOperation")){
                 subParameters.add(new SimpleStringProperty(v));
