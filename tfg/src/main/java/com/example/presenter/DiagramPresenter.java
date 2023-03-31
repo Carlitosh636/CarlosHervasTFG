@@ -76,6 +76,8 @@ public class DiagramPresenter implements Initializable {
         calculatedSolution.setVisible(false);
         decompositionSelect.setVisible(false);
         solutionSelect.setVisible(false);
+        subParameters.setVisible(false);
+        subSolutions.setVisible(false);
         generatedCodeText.put("functionName","FUNCIÓN\n");
         generatedCodeText.put("baseCases","\nCASO(S) BASE");
         generatedCodeText.put("recursiveCases","\nCASO(S) RECURSIVOS");
@@ -175,6 +177,8 @@ public class DiagramPresenter implements Initializable {
         subSolutions.getChildren().clear();
         subParameters.getChildren().clear();
         solutionSelect.getItems().clear();
+        subParameters.setVisible(true);
+        subSolutions.setVisible(true);
         handleDecomposition();
     }
     protected void handleDecomposition() {
@@ -295,6 +299,8 @@ public class DiagramPresenter implements Initializable {
             diagramGrid.setVisible(false);
             decompositionSelect.setVisible(false);
             solutionSelect.setVisible(false);
+            subParameters.setVisible(false);
+            subSolutions.setVisible(false);
         }
         else{
             alert.close();
