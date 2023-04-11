@@ -18,7 +18,7 @@
   "currentBaseCaseIndex" : 0,
   "baseCaseChoices" : [ [ "b == 0","b == 1","b == a" ] ],
   "baseCaseParameters" : [ [ "0","1" ] ],
-  "reductionChoices" : [ [ "f(a,b - 1)", "f(a,b // 2)" ] ],
+  "reductionChoices" : [ [ "a,b - 1", "a,b // 2" ] ],
   "solutionsChoices" : [ [ "f' * b", "f' * a", "f' ** a" ], [ "f' ** 2", "f' * b" ], [ "f' ** 2", "f' * b", "a * f' ** 2" ] ],
   "recursiveCallParameters" : "",
   "correctSizeChoices": [0],

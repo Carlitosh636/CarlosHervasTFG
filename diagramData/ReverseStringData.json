@@ -17,7 +17,7 @@
   "currentBaseCaseIndex" : 0,
   "baseCaseChoices" : [ [ "s = ''" ]],
   "baseCaseParameters" : [ [""] ],
-  "reductionChoices" : [ [ "f(s[1:])\nchar=s[0]" ] ],
+  "reductionChoices" : [ [ "s[1:]\nchar=s[0]" ] ],
   "solutionsChoices" : [ [ "[char] + f'","f' + [char]"] ],
   "recursiveCallParameters" : "",
   "correctSizeChoices": [0],
