@@ -1,7 +1,6 @@
 package com.example.presenter;
 
 import com.example.diagrams.BaseDiagram;
-import com.example.enums.DiagramType;
 import com.example.exceptions.BaseCaseException;
 import com.example.exceptions.IncorrectSelectionException;
 import com.example.model.Arrow;
@@ -85,7 +84,7 @@ public class DiagramPresenter implements Initializable {
 
         generatedCodeWebEngine = generatedCodeTemplate.getEngine();
         MustacheFactory mf = new DefaultMustacheFactory();
-        Mustache m = mf.compile("example.mustache");
+        Mustache m = mf.compile("generatedCodeTemplate.mustache");
         ObjectMapper objMapper = new ObjectMapper();
         GeneratorData data;
         try {
