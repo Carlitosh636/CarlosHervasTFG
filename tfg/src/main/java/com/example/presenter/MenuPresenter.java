@@ -17,13 +17,8 @@ class ButtonRelatedData{
         this.baseDiagram = baseDiagram;
         this.genFilePath = genFilePath;
     }
-
     public BaseDiagram getBaseDiagram() {
         return baseDiagram;
-    }
-
-    public String getGenFilePath() {
-        return genFilePath;
     }
 }
 public class MenuPresenter {
@@ -46,17 +41,17 @@ public class MenuPresenter {
         buttonsPaths.forEach((k,v)-> k.setOnAction(actionEvent -> {
             model = v.getBaseDiagram();
             try {
-                loadScene(model,v.getGenFilePath());
+                loadScene(model);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }));
     }
-    private void loadScene(BaseDiagram model,String genFilePath) throws IOException {
+    private void loadScene(BaseDiagram model) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramViewer.fxml"));
         loader.setControllerFactory(controller-> {
             try {
-                return new DiagramPresenter(model,genFilePath);
+                return new DiagramPresenter(model);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

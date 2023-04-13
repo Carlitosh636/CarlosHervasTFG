@@ -7,29 +7,34 @@ import com.example.exceptions.IncorrectSelectionException;
 import com.example.model.Arrow;
 import com.example.model.GeneratorData;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.mustachejava.DefaultMustacheFactory;
+import com.github.mustachejava.Mustache;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.event.ActionEvent;
+import com.github.mustachejava.MustacheFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.net.URL;
 import java.util.*;
 
 public class DiagramPresenter implements Initializable {
     @FXML
+    WebView generatedCodeTemplate;
+    WebEngine generatedCodeWebEngine;
+    @FXML
     AnchorPane root;
     protected BaseDiagram model;
-    //private DiagramToCodeMapper mapper = new DiagramToCodeMapper();
     @FXML
     public TextArea heading;
-    @FXML
-    public TextArea generatedCode;
     @FXML
     StackPane originalDataSolutionArrow;
     @FXML
@@ -61,7 +66,6 @@ public class DiagramPresenter implements Initializable {
     @FXML
     VBox subSolutions;
     private final HashMap<String,String> errorMessageMap = new HashMap<>();
-    private final GeneratorData generatorData;
     private final Map<String,String> generatedCodeText = new HashMap<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -78,9 +82,26 @@ public class DiagramPresenter implements Initializable {
         solutionSelect.setVisible(false);
         subParameters.setVisible(false);
         subSolutions.setVisible(false);
-        generatedCodeText.put("functionName","FUNCIÓN\n");
-        generatedCodeText.put("baseCases","\nCASO(S) BASE");
-        generatedCodeText.put("recursiveCases","\nCASO(S) RECURSIVOS");
+
+        generatedCodeWebEngine = generatedCodeTemplate.getEngine();
+        MustacheFactory mf = new DefaultMustacheFactory();
+        Mustache m = mf.compile("example.mustache");
+        ObjectMapper objMapper = new ObjectMapper();
+        GeneratorData data;
+        try {
+            data = objMapper.readValue(new File("generatedData/RecursivePotencyGeneration.json"),GeneratorData.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        StringWriter wr = new StringWriter();
+        String html;
+        try {
+            m.execute(wr,data).flush();
+            html = wr.toString();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        generatedCodeWebEngine.loadContent(html);
     }
 
     private void setMessageMap() {
@@ -89,10 +110,8 @@ public class DiagramPresenter implements Initializable {
         errorMessageMap.put("IncorrectSelectionException","Esta opción es incorrecta, elige otra");
     }
 
-    public DiagramPresenter(BaseDiagram model,String generatorFileSource) throws IOException {
+    public DiagramPresenter(BaseDiagram model) throws IOException {
         this.model = model;
-        ObjectMapper objMapper = new ObjectMapper();
-        generatorData =objMapper.readValue(new File(generatorFileSource), GeneratorData.class);
     }
     protected void bindModelData() {
         originalSolution.textProperty().bind(model.originalSolProperty());
@@ -115,8 +134,8 @@ public class DiagramPresenter implements Initializable {
         if(!problemSizeSelect.getSelectionModel().isEmpty()){
             baseCaseSelect.getItems().setAll(model.getBaseCaseChoices().get(model.getCurrentProblemSize()));
         }
-        generatedCodeText.put("functionName",generatorData.functionName.get(0));
-        generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
+        //generatedCodeText.put("functionName",generatorData.functionName.get(0));
+        //generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
     }
     public void onChangeBaseCase() {
         if(baseCaseSelect.getSelectionModel().getSelectedIndex()<0){
@@ -164,16 +183,16 @@ public class DiagramPresenter implements Initializable {
             originalData.getChildren().addAll(tfs);
         }
         diagramGrid.setVisible(true);
-        generatedCodeText.put("baseCases",generatorData.baseCases.get(model.currentProblemSizeProperty().get()).get(baseCaseSelect.getSelectionModel().getSelectedIndex()));
-        generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
+        //generatedCodeText.put("baseCases",generatorData.baseCases.get(model.currentProblemSizeProperty().get()).get(baseCaseSelect.getSelectionModel().getSelectedIndex()));
+        //generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
     }
     public void onDecompositionChange() {
         if(decompositionSelect.getSelectionModel().getSelectedIndex()<0){
             return;
         }
-        if(model.getType() == DiagramType.valueOf("COMPLEX")){
+        /*if(model.getType() == DiagramType.valueOf("COMPLEX")){
             generatedCodeText.put("functionName",generatorData.functionName.get(decompositionSelect.getSelectionModel().getSelectedIndex()+1));
-        }
+        }*/
         subSolutions.getChildren().clear();
         subParameters.getChildren().clear();
         solutionSelect.getItems().clear();
@@ -233,7 +252,7 @@ public class DiagramPresenter implements Initializable {
                 calculatedSolution.setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
                 calculatedSolution.setStyle("-fx-text-fill: #f2433a;");
             }
-            if(model.getType() == DiagramType.valueOf("COMPLEX")){
+            /*if(model.getType() == DiagramType.valueOf("COMPLEX")){
                 generatedCodeText.put("auxFunctions",generatorData.auxFunctions.get(decompositionSelect.getSelectionModel().getSelectedIndex()));
             }
             else{
@@ -241,7 +260,9 @@ public class DiagramPresenter implements Initializable {
             }
             generatedCodeText.put("recursiveCases",generatorData.recursiveCases.get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
             generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases")+"\n"+generatedCodeText.get("auxFunctions"));
+            */
         }
+
         catch (Exception e){
             e.printStackTrace();
         }

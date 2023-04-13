@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
 
 <AnchorPane fx:id="root" style="-fx-background-color: #000833;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presenter.DiagramPresenter">
    <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
@@ -13,11 +14,7 @@
                <Font size="24.0" />
             </font>
          </TextArea>
-         <TextArea fx:id="generatedCode" editable="false" maxWidth="700.0" style="text-area-background: grey; -fx-text-fill: black;" stylesheets="@../css/header.css">
-            <font>
-               <Font size="24.0" />
-            </font>
-         </TextArea>
+         <WebView fx:id="generatedCodeTemplate" minHeight="250.0" minWidth="700.0" prefHeight="-1.0" prefWidth="-1.0" />
       </HBox>
       <HBox>
          <padding>
