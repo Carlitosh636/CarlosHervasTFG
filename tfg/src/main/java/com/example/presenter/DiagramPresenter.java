@@ -66,6 +66,9 @@ public class DiagramPresenter implements Initializable {
     VBox subSolutions;
     private final HashMap<String,String> errorMessageMap = new HashMap<>();
     private final Map<String,String> generatedCodeText = new HashMap<>();
+    private GeneratorData generatorData;
+    MustacheFactory mf;
+    Mustache m;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
@@ -83,26 +86,32 @@ public class DiagramPresenter implements Initializable {
         subSolutions.setVisible(false);
 
         generatedCodeWebEngine = generatedCodeTemplate.getEngine();
-        MustacheFactory mf = new DefaultMustacheFactory();
-        Mustache m = mf.compile("generatedCodeTemplate.mustache");
+        mf = new DefaultMustacheFactory();
+        m = mf.compile("generatedCodeTemplate.mustache");
         ObjectMapper objMapper = new ObjectMapper();
-        GeneratorData data;
         try {
-            data = objMapper.readValue(new File("generatedData/RecursivePotencyGeneration.json"),GeneratorData.class);
+            generatorData = objMapper.readValue(new File("generatedData/RecursivePotencyGeneration.json"),GeneratorData.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        generatedCodeText.put("functionName","FUNCIÓN\n");
+        generatedCodeText.put("baseCase","\nCASO(S) BASE");
+        generatedCodeText.put("returnValue","\nCASO(S) BASE");
+        generatedCodeText.put("recursiveCases","\nCASO(S) RECURSIVOS");
+        generatedCodeText.put("auxFunctions","");
+        updateMustacheTemplate();
+    }
+    private void updateMustacheTemplate(){
         StringWriter wr = new StringWriter();
         String html;
         try {
-            m.execute(wr,data).flush();
+            m.execute(wr,generatedCodeText).flush();
             html = wr.toString();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         generatedCodeWebEngine.loadContent(html);
     }
-
     private void setMessageMap() {
         errorMessageMap.put("RuntimeException","Revisa el contenido y que concuerde con el formato: "+model.getInputFormatting());
         errorMessageMap.put("BaseCaseException","Revisa el contenido, no puedes introducir un caso base o una solución como parámetro");
@@ -133,8 +142,9 @@ public class DiagramPresenter implements Initializable {
         if(!problemSizeSelect.getSelectionModel().isEmpty()){
             baseCaseSelect.getItems().setAll(model.getBaseCaseChoices().get(model.getCurrentProblemSize()));
         }
-        //generatedCodeText.put("functionName",generatorData.functionName.get(0));
-        //generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
+        //TODO: determinar índice
+        generatedCodeText.put("functionName", generatorData.functionName.get(0));
+        updateMustacheTemplate();
     }
     public void onChangeBaseCase() {
         if(baseCaseSelect.getSelectionModel().getSelectedIndex()<0){
@@ -182,8 +192,9 @@ public class DiagramPresenter implements Initializable {
             originalData.getChildren().addAll(tfs);
         }
         diagramGrid.setVisible(true);
-        //generatedCodeText.put("baseCases",generatorData.baseCases.get(model.currentProblemSizeProperty().get()).get(baseCaseSelect.getSelectionModel().getSelectedIndex()));
-        //generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases"));
+        generatedCodeText.put("baseCase", (String) generatorData.baseCases.keySet().toArray()[baseCaseSelect.getSelectionModel().getSelectedIndex()]);
+        generatedCodeText.put("returnValue",(String) generatorData.baseCases.values().toArray()[baseCaseSelect.getSelectionModel().getSelectedIndex()]);
+        updateMustacheTemplate();
     }
     public void onDecompositionChange() {
         if(decompositionSelect.getSelectionModel().getSelectedIndex()<0){
@@ -256,10 +267,9 @@ public class DiagramPresenter implements Initializable {
             }
             else{
                 generatedCodeText.put("auxFunctions","");
-            }
+            }*/
             generatedCodeText.put("recursiveCases",generatorData.recursiveCases.get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-            generatedCode.textProperty().set(generatedCodeText.get("functionName")+generatedCodeText.get("baseCases")+generatedCodeText.get("recursiveCases")+"\n"+generatedCodeText.get("auxFunctions"));
-            */
+            updateMustacheTemplate();
         }
 
         catch (Exception e){
@@ -307,6 +317,7 @@ public class DiagramPresenter implements Initializable {
             generatedCodeText.put("baseCases","\nCASO(S) BASE");
             generatedCodeText.put("recursiveCases","\nCASO(S) RECURSIVOS");
             generatedCodeText.put("auxFunctions","");
+            updateMustacheTemplate();
             problemSizeSelect.getSelectionModel().clearSelection();
             baseCaseSelect.getSelectionModel().clearSelection();
             subSolutions.getChildren().clear();

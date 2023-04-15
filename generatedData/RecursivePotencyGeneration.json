@@ -1,11 +1,9 @@
 {
-  "functionName": ["def power(a, b):\n"],
-  "baseCases": [
-    [
-      "\tif b == 0:\n\t\treturn 1",
-      "\tif b == 1:\n\t\treturn a"
-    ]
-  ],
+  "functionName": ["def power(a, b):"],
+  "baseCases":{
+    "b == 0": "1",
+    "b == 1": "a"
+  },
   "recursiveCases": [[
     "\n\telse:\n\t\treturn b * power(a, b - 1)",
     "\n\telse:\n\t\treturn a * power(a, b - 1)",
