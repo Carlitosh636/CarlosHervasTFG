@@ -82,6 +82,7 @@ public class DiagramPresenter implements Initializable {
         calculatedSolution.setVisible(false);
         decompositionSelect.setVisible(false);
         solutionSelect.setVisible(false);
+        originalSolution.setVisible(false);
         subParameters.setVisible(false);
         subSolutions.setVisible(false);
 
@@ -177,6 +178,7 @@ public class DiagramPresenter implements Initializable {
                                 try {
                                     model.processInputs();
                                     decompositionSelect.setVisible(true);
+                                    originalSolution.setVisible(true);
                                 } catch (Exception e) {
                                     showErrorInputAlert(new RuntimeException("Error al introducir los datos de entrada"));
                                     e.printStackTrace();
@@ -209,6 +211,7 @@ public class DiagramPresenter implements Initializable {
         solutionSelect.getItems().clear();
         subParameters.setVisible(true);
         subSolutions.setVisible(true);
+
         handleDecomposition();
     }
     protected void handleDecomposition() {
@@ -333,6 +336,7 @@ public class DiagramPresenter implements Initializable {
             solutionSelect.setVisible(false);
             subParameters.setVisible(false);
             subSolutions.setVisible(false);
+            originalSolution.setVisible(false);
         }
         else{
             alert.close();
