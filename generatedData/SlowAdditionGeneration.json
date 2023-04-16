@@ -1,6 +1,10 @@
 {
   "functionName": ["def slow_addition(a, b):\n"],
-  "baseCases": [["\tif a == 0\n\t\treturn b "],["\tif b == 0\n\t\treturn a "],["\tif a == 0\n\t\treturn b\n\tif b == 0\n\t\treturn a "]],
+  "baseCases": {
+    "a == 0": "b",
+    "b == 0": "a",
+    "a == 0 or b == 0": "min(a,b)"
+  },
   "recursiveCases": [
     [
       "\n\telse:\n\t\treturn slow_addition(a-1,b) + 1",

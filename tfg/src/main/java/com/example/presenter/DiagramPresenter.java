@@ -88,12 +88,7 @@ public class DiagramPresenter implements Initializable {
         generatedCodeWebEngine = generatedCodeTemplate.getEngine();
         mf = new DefaultMustacheFactory();
         m = mf.compile("generatedCodeTemplate.mustache");
-        ObjectMapper objMapper = new ObjectMapper();
-        try {
-            generatorData = objMapper.readValue(new File("generatedData/RecursivePotencyGeneration.json"),GeneratorData.class);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
         generatedCodeText.put("functionName","FUNCIÓN\n");
         generatedCodeText.put("baseCase","\nCASO(S) BASE");
         generatedCodeText.put("returnValue","\nCASO(S) BASE");
@@ -118,8 +113,14 @@ public class DiagramPresenter implements Initializable {
         errorMessageMap.put("IncorrectSelectionException","Esta opción es incorrecta, elige otra");
     }
 
-    public DiagramPresenter(BaseDiagram model) throws IOException {
+    public DiagramPresenter(BaseDiagram model,String pathName) throws IOException {
         this.model = model;
+        ObjectMapper objMapper = new ObjectMapper();
+        try {
+            generatorData = objMapper.readValue(new File(pathName),GeneratorData.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     protected void bindModelData() {
         originalSolution.textProperty().bind(model.originalSolProperty());

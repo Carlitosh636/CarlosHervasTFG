@@ -1,6 +1,8 @@
 {
-  "functionName": ["def sort_list(a):\n","def merge_sort(a)\n","def insert_sort(a)\n","def select_sort(a)\n","def quick_sort(a,low,high)"],
-  "baseCases": [["\tn = len(a)\n\tif n <= 1\n\t\treturn a "]],
+  "functionName": ["def sort_list(a):\n\tn = len(a)","def merge_sort(a)\n\tn = len(a)","def insert_sort(a)\n\tn = len(a)","def select_sort(a)\n\tn = len(a)","def quick_sort(a,low,high)"],
+  "baseCases": {
+    "n <= 1": "a"
+  },
   "recursiveCases": [
     [
       "\n\telse:\n\t\tmid = n // 2\n\t\ta1 = merge_sort(a[:mid])\n\t\ta2 = merge_sort(a[mid:])\n\t\treturn a1 + a2",
