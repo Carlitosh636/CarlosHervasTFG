@@ -230,7 +230,6 @@ public class DiagramPresenter implements Initializable {
 
         subSolutions.getChildren().clear();
         subParameters.getChildren().clear();
-
         for(SimpleStringProperty ele : model.getSubParameters()){
             Label lb = new Label();
             lb.setStyle("-fx-text-fill: white;");
@@ -247,6 +246,8 @@ public class DiagramPresenter implements Initializable {
             lb.setTextAlignment(TextAlignment.CENTER);
             subSolutions.getChildren().add(lb);
         }
+        model.getSubParameters().clear();
+        model.getSubSolutions().clear();
         solutionSelect.getItems().setAll(model.getSolutionsChoices().get(model.getCurrentReductionSolutions()));
         solutionSelect.setVisible(true);
     }
