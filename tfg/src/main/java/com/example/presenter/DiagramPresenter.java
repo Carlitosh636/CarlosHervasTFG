@@ -1,6 +1,7 @@
 package com.example.presenter;
 
 import com.example.diagrams.BaseDiagram;
+import com.example.enums.DiagramType;
 import com.example.exceptions.BaseCaseException;
 import com.example.exceptions.IncorrectSelectionException;
 import com.example.model.Arrow;
@@ -67,8 +68,9 @@ public class DiagramPresenter implements Initializable {
     private final HashMap<String,String> errorMessageMap = new HashMap<>();
     private final Map<String,String> generatedCodeText = new HashMap<>();
     private GeneratorData generatorData;
-    MustacheFactory mf;
-    Mustache m;
+    private MustacheFactory mf;
+    private Mustache m;
+    private PresenterButtonHandler buttonHandler;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
@@ -85,6 +87,8 @@ public class DiagramPresenter implements Initializable {
         originalSolution.setVisible(false);
         subParameters.setVisible(false);
         subSolutions.setVisible(false);
+
+        buttonHandler = new PresenterButtonHandler();
 
         generatedCodeWebEngine = generatedCodeTemplate.getEngine();
         mf = new DefaultMustacheFactory();
@@ -203,9 +207,9 @@ public class DiagramPresenter implements Initializable {
         if(decompositionSelect.getSelectionModel().getSelectedIndex()<0){
             return;
         }
-        /*if(model.getType() == DiagramType.valueOf("COMPLEX")){
+        if(model.getType() == DiagramType.valueOf("COMPLEX")){
             generatedCodeText.put("functionName",generatorData.functionName.get(decompositionSelect.getSelectionModel().getSelectedIndex()+1));
-        }*/
+        }
         subSolutions.getChildren().clear();
         subParameters.getChildren().clear();
         solutionSelect.getItems().clear();
@@ -266,12 +270,12 @@ public class DiagramPresenter implements Initializable {
                 calculatedSolution.setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
                 calculatedSolution.setStyle("-fx-text-fill: #f2433a;");
             }
-            /*if(model.getType() == DiagramType.valueOf("COMPLEX")){
+            if(model.getType() == DiagramType.valueOf("COMPLEX")){
                 generatedCodeText.put("auxFunctions",generatorData.auxFunctions.get(decompositionSelect.getSelectionModel().getSelectedIndex()));
             }
             else{
                 generatedCodeText.put("auxFunctions","");
-            }*/
+            }
             generatedCodeText.put("recursiveCases",generatorData.recursiveCases.get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
             updateMustacheTemplate();
         }
@@ -293,26 +297,14 @@ public class DiagramPresenter implements Initializable {
         calculatedSolution.setVisible(false);
         decompositionSelect.getItems().clear();
         decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
-
     }
     @FXML
     public void returnToMenu() throws IOException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmación");
-        alert.setContentText("¿Estas seguro de que quieres volver al menú?");
-        Optional<ButtonType> action = alert.showAndWait();
-        if(action.get()==ButtonType.OK){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramSelector.fxml"));
-            Pane pane = loader.load();
-            diagramGrid.getScene().setRoot(pane);
-        }
-        else{
-            alert.close();
-        }
+        buttonHandler.returnToMenu(new Alert(Alert.AlertType.CONFIRMATION),"Confirmación","¿Estas seguro de que quieres volver al menú?",diagramGrid);
     }
     @FXML
     public void resetDiagram() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        /*Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmación");
         alert.setContentText("¿Estas seguro de que quieres borrar todos los valores introducidos?");
         Optional<ButtonType> action = alert.showAndWait();
@@ -321,7 +313,7 @@ public class DiagramPresenter implements Initializable {
             generatedCodeText.put("baseCases","\nCASO(S) BASE");
             generatedCodeText.put("recursiveCases","\nCASO(S) RECURSIVOS");
             generatedCodeText.put("auxFunctions","");
-            updateMustacheTemplate();
+
             problemSizeSelect.getSelectionModel().clearSelection();
             baseCaseSelect.getSelectionModel().clearSelection();
             subSolutions.getChildren().clear();
@@ -340,7 +332,9 @@ public class DiagramPresenter implements Initializable {
         }
         else{
             alert.close();
-        }
+        }*/
+        buttonHandler.resetDiagram(new Alert(Alert.AlertType.CONFIRMATION),"Confirmación","¿Estas seguro de que quieres borrar todos los valores introducidos?");
+        updateMustacheTemplate();
     }
     private void setArrows() {
         originalDataSolutionArrow.getChildren().add(returnArrow(60,0,250,0));
