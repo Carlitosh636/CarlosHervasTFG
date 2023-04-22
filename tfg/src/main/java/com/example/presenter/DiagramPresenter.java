@@ -2,6 +2,7 @@ package com.example.presenter;
 
 import com.example.diagrams.BaseDiagram;
 import com.example.enums.DiagramType;
+import com.example.exceptions.AlertTypeIndexOutOfBounds;
 import com.example.exceptions.BaseCaseException;
 import com.example.exceptions.IncorrectSelectionException;
 import com.example.model.Arrow;
@@ -12,10 +13,15 @@ import com.github.mustachejava.Mustache;
 import javafx.beans.property.SimpleStringProperty;
 import com.github.mustachejava.MustacheFactory;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -24,7 +30,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class DiagramPresenter implements Initializable {
     @FXML
@@ -65,8 +74,7 @@ public class DiagramPresenter implements Initializable {
     VBox subParameters;
     @FXML
     VBox subSolutions;
-    private final HashMap<String,String> errorMessageMap = new HashMap<>();
-    private final Map<String,String> generatedCodeText = new HashMap<>();
+    private final HashMap<String,String> generatedCodeText = new HashMap<>();
     private GeneratorData generatorData;
     private MustacheFactory mf;
     private Mustache m;
@@ -78,7 +86,6 @@ public class DiagramPresenter implements Initializable {
         AnchorPane.setRightAnchor(diagramGrid,15.0);
         bindModelData();
         setArrows();
-        setMessageMap();
         baseCaseSelect.setVisible(false);
         diagramGrid.setVisible(false);
         calculatedSolution.setVisible(false);
@@ -88,7 +95,7 @@ public class DiagramPresenter implements Initializable {
         subParameters.setVisible(false);
         subSolutions.setVisible(false);
 
-        buttonHandler = new PresenterButtonHandler();
+        buttonHandler = new PresenterButtonHandler(model.getInputFormatting());
 
         generatedCodeWebEngine = generatedCodeTemplate.getEngine();
         mf = new DefaultMustacheFactory();
@@ -111,11 +118,6 @@ public class DiagramPresenter implements Initializable {
             throw new RuntimeException(e);
         }
         generatedCodeWebEngine.loadContent(html);
-    }
-    private void setMessageMap() {
-        errorMessageMap.put("RuntimeException","Revisa el contenido y que concuerde con el formato: "+model.getInputFormatting());
-        errorMessageMap.put("BaseCaseException","Revisa el contenido, no puedes introducir un caso base o una solución como parámetro");
-        errorMessageMap.put("IncorrectSelectionException","Esta opción es incorrecta, elige otra");
     }
 
     public DiagramPresenter(BaseDiagram model,String pathName) throws IOException {
@@ -286,11 +288,7 @@ public class DiagramPresenter implements Initializable {
     }
 
     public void showErrorInputAlert(Exception e){
-        Alert inputErrorAlert = new Alert(Alert.AlertType.ERROR);
-        inputErrorAlert.setTitle("Error");
-        inputErrorAlert.setHeaderText(e.getMessage());
-        inputErrorAlert.setContentText(errorMessageMap.get(e.getClass().getSimpleName()));
-        inputErrorAlert.showAndWait();
+        buttonHandler.showErrorAlert(e);
     }
     private void refreshDiagram(){
         solutionSelect.setVisible(false);
@@ -299,8 +297,8 @@ public class DiagramPresenter implements Initializable {
         decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
     }
     @FXML
-    public void returnToMenu() throws IOException {
-        buttonHandler.returnToMenu(new Alert(Alert.AlertType.CONFIRMATION),"Confirmación","¿Estas seguro de que quieres volver al menú?",diagramGrid);
+    public void returnToMenu() throws IOException, AlertTypeIndexOutOfBounds {
+        buttonHandler.returnToMenu(1,"Confirmación","¿Estas seguro de que quieres volver al menú?",diagramGrid);
     }
     @FXML
     public void resetDiagram() {
@@ -333,7 +331,7 @@ public class DiagramPresenter implements Initializable {
         else{
             alert.close();
         }*/
-        buttonHandler.resetDiagram(new Alert(Alert.AlertType.CONFIRMATION),"Confirmación","¿Estas seguro de que quieres borrar todos los valores introducidos?");
+        buttonHandler.resetDiagram(1,"Confirmación","¿Estas seguro de que quieres borrar todos los valores introducidos?");
         updateMustacheTemplate();
     }
     private void setArrows() {
