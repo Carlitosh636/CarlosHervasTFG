@@ -17,11 +17,11 @@ public abstract class ButtonHandler {
         return alert.showAndWait();
     }
     public Alert selectAlertType(int index) throws AlertTypeIndexOutOfBounds {
-        switch (index){
-            case 1 : return new Alert(Alert.AlertType.CONFIRMATION);
-            case 2 : return new Alert(Alert.AlertType.ERROR);
-            default: throw new AlertTypeIndexOutOfBounds("No alert type for provided index");
-        }
+        return switch (index) {
+            case 1 -> new Alert(Alert.AlertType.CONFIRMATION);
+            case 2 -> new Alert(Alert.AlertType.ERROR);
+            default -> throw new AlertTypeIndexOutOfBounds("No alert type for provided index");
+        };
     }
 
 }

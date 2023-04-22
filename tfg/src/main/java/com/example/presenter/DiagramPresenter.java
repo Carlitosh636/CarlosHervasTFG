@@ -79,6 +79,7 @@ public class DiagramPresenter implements Initializable {
     private MustacheFactory mf;
     private Mustache m;
     private PresenterButtonHandler buttonHandler;
+    private PresenterInputHandler inputHandler;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
@@ -95,8 +96,8 @@ public class DiagramPresenter implements Initializable {
         subParameters.setVisible(false);
         subSolutions.setVisible(false);
 
-        buttonHandler = new PresenterButtonHandler(model.getInputFormatting());
-
+        buttonHandler = new PresenterButtonHandler();
+        inputHandler = new PresenterInputHandler(model.getInputFormatting());
         generatedCodeWebEngine = generatedCodeTemplate.getEngine();
         mf = new DefaultMustacheFactory();
         m = mf.compile("generatedCodeTemplate.mustache");
@@ -212,8 +213,6 @@ public class DiagramPresenter implements Initializable {
         if(model.getType() == DiagramType.valueOf("COMPLEX")){
             generatedCodeText.put("functionName",generatorData.functionName.get(decompositionSelect.getSelectionModel().getSelectedIndex()+1));
         }
-        subSolutions.getChildren().clear();
-        subParameters.getChildren().clear();
         solutionSelect.getItems().clear();
         subParameters.setVisible(true);
         subSolutions.setVisible(true);
@@ -228,8 +227,10 @@ public class DiagramPresenter implements Initializable {
             e.printStackTrace();
             return;
         }
+
         subSolutions.getChildren().clear();
         subParameters.getChildren().clear();
+
         for(SimpleStringProperty ele : model.getSubParameters()){
             Label lb = new Label();
             lb.setStyle("-fx-text-fill: white;");
@@ -288,7 +289,7 @@ public class DiagramPresenter implements Initializable {
     }
 
     public void showErrorInputAlert(Exception e){
-        buttonHandler.showErrorAlert(e);
+        inputHandler.showErrorAlert(e);
     }
     private void refreshDiagram(){
         solutionSelect.setVisible(false);
