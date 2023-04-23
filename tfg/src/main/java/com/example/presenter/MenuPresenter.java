@@ -35,9 +35,10 @@ public class MenuPresenter {
     @FXML
     Button b4;
     private final Map<Button,ButtonRelatedData> buttonsPaths = new HashMap<>();
-    BaseDiagram model;
-
+    private BaseDiagram model;
+    private MenuButtonHandler menuButtonHandler;
     public void initialize() throws IOException {
+        menuButtonHandler = new MenuButtonHandler();
         buttonsPaths.put(b1,new ButtonRelatedData(new ArithmeticDiagram(new RecursivePowerDiagram(),"diagramData/RecursiveDiagramData.json"),"generatedData/RecursivePotencyGeneration.json"));
         buttonsPaths.put(b2,new ButtonRelatedData(new ArithmeticDiagram(new SlowAdditionDiagram(),"diagramData/SlowAdditionData.json"),"generatedData/SlowAdditionGeneration.json"));
         buttonsPaths.put(b3,new ButtonRelatedData(new ArraySortingDiagram(new ArraySortDiagram(),"diagramData/SortListData.json"),"generatedData/SortListGeneration.json"));
@@ -45,22 +46,14 @@ public class MenuPresenter {
         buttonsPaths.forEach((k,v)-> k.setOnAction(actionEvent -> {
             model = v.getBaseDiagram();
             try {
-                loadScene(model,v.getGenFilePath());
+                loadScene(model,v.getGenFilePath(),k);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }));
     }
-    private void loadScene(BaseDiagram model,String filePath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramViewer.fxml"));
-        loader.setControllerFactory(controller-> {
-            try {
-                return new DiagramPresenter(model,filePath);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        Pane pane = loader.load();
-        b1.getScene().setRoot(pane);
+    @FXML
+    private void loadScene(BaseDiagram model,String filePath, Button button) throws IOException {
+        menuButtonHandler.loadScene(model, filePath, button);
     }
 }
