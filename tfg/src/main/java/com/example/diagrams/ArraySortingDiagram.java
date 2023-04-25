@@ -11,8 +11,8 @@ public class ArraySortingDiagram extends BaseDiagram{
     int[] l;
     int[] r;
     ArrayList<String> partSols = new ArrayList<>();
-    public ArraySortingDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
-        super(builder, diagramDataName);
+    public ArraySortingDiagram(IDiagramActions builder, String index) throws IOException {
+        super(builder, index);
         diagramActions.setAlgorithmMap();
         setSolutionOperations();
     }

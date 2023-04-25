@@ -2,6 +2,7 @@ package com.example.diagrams;
 
 import com.example.enums.DiagramType;
 import com.example.model.DiagramData;
+import com.example.utils.Serializator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -41,10 +42,9 @@ public abstract class BaseDiagram {
     protected List<Integer> correctSolutions;
     protected int algorithmIndex;
     protected String inputFormatting;
-    protected BaseDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
+    protected BaseDiagram(IDiagramActions builder, String index) throws IOException {
         this.diagramActions =builder;
-        ObjectMapper objMapper = new ObjectMapper();
-        diagramData =objMapper.readValue(new File(diagramDataName),DiagramData.class);
+        diagramData = Serializator.deserialize(index);
         this.operation=diagramData.getOperation();
         this.params =new HashMap<>();
         this.heading = new SimpleStringProperty(diagramData.getHeading());

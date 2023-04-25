@@ -6,10 +6,10 @@ import io.jsondb.JsonDBTemplate;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.Objects;
 
 public class Serializator {
-    private static String dbFilesLocation = "src/main/resources/jsondb";
+    private static String dbFilesLocation = "tfg/src/main/resources/jsondb";
     private static final File diagramDataDir = new File("diagramData");
     private static String baseScanPackage = "com.example.model";
     private static final JsonDBTemplate dbTemplate = new JsonDBTemplate(dbFilesLocation,baseScanPackage);
@@ -20,6 +20,10 @@ public class Serializator {
         }
     }
     public static void serializeAll() throws IOException {
+        File dbLocation = new File(dbFilesLocation);
+        if(dbLocation.isDirectory() && Objects.requireNonNull(dbLocation.list()).length != 0){
+            return;
+        }
         ObjectMapper objMapper = new ObjectMapper();
         File[] files = diagramDataDir.listFiles();
         int index = 1;
@@ -34,7 +38,7 @@ public class Serializator {
         }
 
     }
-    public static void deserialize(){
-        System.out.println(dbTemplate.findById("1", DiagramData.class).toString());
+    public static DiagramData deserialize(String index){
+        return dbTemplate.findById(index, DiagramData.class);
     }
 }

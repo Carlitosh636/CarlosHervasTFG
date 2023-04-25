@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class StringDiagram extends BaseDiagram{
-    public StringDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
-        super(builder, diagramDataName);
+    public StringDiagram(IDiagramActions builder, String index) throws IOException {
+        super(builder, index);
         diagramActions.setAlgorithmMap();
         setSolutionOperations();
     }
