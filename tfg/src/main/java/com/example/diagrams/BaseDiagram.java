@@ -45,30 +45,30 @@ public abstract class BaseDiagram {
         this.diagramActions =builder;
         ObjectMapper objMapper = new ObjectMapper();
         diagramData =objMapper.readValue(new File(diagramDataName),DiagramData.class);
-        this.operation=diagramData.operation;
+        this.operation=diagramData.getOperation();
         this.params =new HashMap<>();
-        this.heading = new SimpleStringProperty(diagramData.heading);
-        this.type = DiagramType.valueOf(diagramData.type);
-        diagramData.params.forEach((k,v)-> params.put(k,new SimpleStringProperty(v)));
-        this.reductionChoices=diagramData.reductionChoices;
-        this.problemSizeChoices=diagramData.problemSizeChoices;
-        this.baseCaseChoices=diagramData.baseCaseChoices;
-        this.baseCaseParameters=diagramData.baseCaseParameters;
-        this.originalSol=new SimpleStringProperty(diagramData.originalSol);
-        this.calculatedSol = new SimpleStringProperty(diagramData.calculatedSol);
-        this.currentProblemSize = new SimpleIntegerProperty(diagramData.currentProblemSize);
-        this.currentBaseCase = new SimpleIntegerProperty(diagramData.currentBaseCase);
-        this.currentReductionSolutions = new SimpleIntegerProperty(diagramData.currentReductionSolutions);
-        this.currentReduction = new SimpleIntegerProperty(diagramData.currentReduction);
+        this.heading = new SimpleStringProperty(diagramData.getHeading());
+        this.type = DiagramType.valueOf(diagramData.getType());
+        diagramData.getParams().forEach((k,v)-> params.put(k,new SimpleStringProperty(v)));
+        this.reductionChoices=diagramData.getReductionChoices();
+        this.problemSizeChoices=diagramData.getProblemSizeChoices();
+        this.baseCaseChoices=diagramData.getBaseCaseChoices();
+        this.baseCaseParameters=diagramData.getBaseCaseParameters();
+        this.originalSol=new SimpleStringProperty(diagramData.getOriginalSol());
+        this.calculatedSol = new SimpleStringProperty(diagramData.getCalculatedSol());
+        this.currentProblemSize = new SimpleIntegerProperty(diagramData.getCurrentProblemSize());
+        this.currentBaseCase = new SimpleIntegerProperty(diagramData.getCurrentBaseCase());
+        this.currentReductionSolutions = new SimpleIntegerProperty(diagramData.getCurrentReductionSolutions());
+        this.currentReduction = new SimpleIntegerProperty(diagramData.getCurrentReduction());
         this.selectedSolution = new SimpleIntegerProperty();
         this.subParameters =new ArrayList<>();
         this.subSolutions =new ArrayList<>();
         this.solutionsChoices = new ArrayList<>();
-        this.solutionsChoices.addAll(diagramData.solutionsChoices);
-        this.correctSizeChoices = diagramData.correctSizeChoices;
-        this.correctBaseCases = diagramData.correctBaseCases;
-        this.correctSolutions = diagramData.correctSolutions;
-        this.inputFormatting = diagramData.inputFormatting;
+        this.solutionsChoices.addAll(diagramData.getSolutionsChoices());
+        this.correctSizeChoices = diagramData.getCorrectSizeChoices();
+        this.correctBaseCases = diagramData.getCorrectBaseCases();
+        this.correctSolutions = diagramData.getCorrectSolutions();
+        this.inputFormatting = diagramData.getInputFormatting();
     }
 
     public abstract void processInputs() throws Exception;
@@ -82,7 +82,7 @@ public abstract class BaseDiagram {
         this.subParameters.clear();
         this.subSolutions.clear();
         this.params.clear();
-        diagramData.params.forEach((k,v)-> params.put(k,new SimpleStringProperty(v)));
+        diagramData.getParams().forEach((k,v)-> params.put(k,new SimpleStringProperty(v)));
     }
 
     public DiagramType getType() {

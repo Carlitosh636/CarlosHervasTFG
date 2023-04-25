@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.utils.Serializator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,8 +13,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Serializator.initialize();
+        //Serializator.serializeAll();
+        Serializator.deserialize();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramSelector.fxml"));
-        Parent root = (Parent) loader.load();
+        Parent root = loader.load();
         Scene main = new Scene(root);
         stage.setScene(main);
         stage.setTitle("Mi TFG");
