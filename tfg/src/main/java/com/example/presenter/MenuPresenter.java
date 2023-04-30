@@ -34,6 +34,8 @@ public class MenuPresenter {
     Button b3;
     @FXML
     Button b4;
+    @FXML
+    Button b5;
     private final Map<Button,ButtonRelatedData> buttonsPaths = new HashMap<>();
     private BaseDiagram model;
     private MenuButtonHandler menuButtonHandler;
@@ -43,6 +45,7 @@ public class MenuPresenter {
         buttonsPaths.put(b2,new ButtonRelatedData(new ArithmeticDiagram(new SlowAdditionDiagram(),"2"),"generatedData/SlowAdditionGeneration.json"));
         buttonsPaths.put(b3,new ButtonRelatedData(new ArraySortingDiagram(new ArraySortDiagram(),"3"),"generatedData/SortListGeneration.json"));
         buttonsPaths.put(b4,new ButtonRelatedData(new StringDiagram(new ReverseStringDiagram(),"4"),"generatedData/ReverseStringGeneration.json"));
+        buttonsPaths.put(b5,new ButtonRelatedData(new StringDiagram(new EqualStringsDiagram(),"5"),"generatedData/ReverseStringGeneration.json"));
         buttonsPaths.forEach((k,v)-> k.setOnAction(actionEvent -> {
             model = v.getBaseDiagram();
             try {

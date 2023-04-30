@@ -5,42 +5,42 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane hgap="10.0" style="-fx-background-color: #000833;" vgap="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presenter.MenuPresenter">
+<GridPane hgap="10.0" style="-fx-background-color: #000833;" vgap="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presenter.MenuPresenter">
    <columnConstraints>
-      <ColumnConstraints/>
-      <ColumnConstraints/>
-      <ColumnConstraints/>
-      <ColumnConstraints/>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints/>
+      <RowConstraints />
    </rowConstraints>
    <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
-   <Button fx:id="b1" id="greenButton" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css"
-           text="Cálculo de la potencia" GridPane.columnIndex="0" GridPane.rowIndex="0">
+   <Button id="greenButton" fx:id="b1" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="Cálculo de la potencia" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <font>
-         <Font size="16.0"/>
+         <Font size="16.0" />
       </font>
    </Button>
-   <Button fx:id="b2" id="greenButton" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css"
-           text="Suma lenta" GridPane.columnIndex="1" GridPane.rowIndex="0">
+   <Button id="greenButton" fx:id="b2" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="Suma lenta" GridPane.columnIndex="1" GridPane.rowIndex="0">
       <font>
-         <Font size="16.0"/>
+         <Font size="16.0" />
       </font>
    </Button>
-   <Button fx:id="b3" id="greenButton" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css"
-           text="Ordenación de lista" GridPane.columnIndex="2" GridPane.rowIndex="0">
+   <Button id="greenButton" fx:id="b3" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="Ordenación de lista" GridPane.columnIndex="2" GridPane.rowIndex="0">
       <font>
-         <Font size="16.0"/>
+         <Font size="16.0" />
       </font>
    </Button>
-   <Button fx:id="b4" id="greenButton" layoutX="450.0" layoutY="30.0" mnemonicParsing="false" prefHeight="50.0"
-           stylesheets="@../css/button.css" text="Revertir string" GridPane.columnIndex="3">
+   <Button id="greenButton" fx:id="b4" layoutX="450.0" layoutY="30.0" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="Revertir string" GridPane.columnIndex="3">
       <font>
-         <Font size="16.0"/>
+         <Font size="16.0" />
+      </font>
+   </Button>
+   <Button id="greenButton" fx:id="b5" layoutX="552.0" layoutY="30.0" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="¿Strings son iguales?" GridPane.columnIndex="4">
+      <font>
+         <Font size="16.0" />
       </font>
    </Button>
 </GridPane>

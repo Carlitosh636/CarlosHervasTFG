@@ -15,19 +15,20 @@ public class StringDiagram extends BaseDiagram{
     }
     @Override
     public void processInputs() throws Exception {
-        algorithmIndex = currentProblemSize.get() * 2 + currentReduction.get();
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         paramsParsed.put("baseCaseValue",baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
         diagramActions.setParams(paramsParsed);
+        System.out.println(paramsParsed);
         Map<String,String> solutions = calculateSolution(-1);
+        System.out.println(solutions);
         originalSol.set("f = "+solutions.get("ogSol"));
     }
     @Override
     public void processSolutions() throws Exception {
-        algorithmIndex = currentProblemSize.get() * 2 + currentReduction.get();
-        System.out.println(algorithmIndex);
+        algorithmIndex = currentProblemSize.get() + currentReduction.get();
         Map<String,String> solutions = calculateSolution(algorithmIndex);
+        System.out.println(solutions);
         setSubData(solutions);
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));
         Map<String,String> paramsParsed = new HashMap<>();

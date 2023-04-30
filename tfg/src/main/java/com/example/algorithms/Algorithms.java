@@ -165,4 +165,30 @@ public class Algorithms {
     public static int[] getSmaller(int[] a, int pivot) {
         return Arrays.stream(a).filter(ele->ele<pivot).toArray();
     }
+
+    public static boolean equalStrings1(String input1, String input2, String baseCaseValue){
+        if (input1.length() != input2.length()){
+            return false;
+        }
+        if (Objects.equals(input1,baseCaseValue)){
+            return true;
+        }
+        else{
+            return (input1.charAt(0) == input2.charAt(0)) && (equalStrings1(input1.substring(1),input2.substring(1),baseCaseValue));
+        }
+    }
+    public static boolean equalStrings2(String input1, String input2, String baseCaseValue){
+        if (input1.length() != input2.length()){
+            return false;
+        }
+        if (Objects.equals(input1,baseCaseValue)){
+            return true;
+        }
+        if(input1.charAt(0) != input2.charAt(0)){
+            return false;
+        }
+        else{
+            return equalStrings2(input1.substring(1),input2.substring(1),baseCaseValue);
+        }
+    }
 }
