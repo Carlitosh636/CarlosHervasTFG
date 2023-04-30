@@ -16,6 +16,7 @@ import java.util.function.Supplier;
 public abstract class BaseDiagram {
     protected IDiagramActions diagramActions;
     protected DiagramType type;
+    private final DiagramData diagramData;
     protected SimpleStringProperty heading;
     protected Map<String,SimpleStringProperty> params;
     protected SimpleStringProperty originalSol;
@@ -41,7 +42,7 @@ public abstract class BaseDiagram {
     protected String inputFormatting;
     protected BaseDiagram(IDiagramActions builder, String index) {
         this.diagramActions =builder;
-        DiagramData diagramData = Serializer.deserialize(index);
+        diagramData = Serializer.deserialize(index);
         this.params =new HashMap<>();
         this.heading = new SimpleStringProperty(diagramData.getHeading());
         this.type = DiagramType.valueOf(diagramData.getType());
@@ -74,12 +75,12 @@ public abstract class BaseDiagram {
     public abstract boolean checkSolutionsEqual(String calcSol);
     public abstract String calculateWithSelectedOperation(int index);
 
-    /*public void resetSubValues(){
+    public void resetSubValues(){
         this.subParameters.clear();
         this.subSolutions.clear();
         this.params.clear();
         diagramData.getParams().forEach((k,v)-> params.put(k,new SimpleStringProperty(v)));
-    }*/
+    }
 
     public DiagramType getType() {
         return type;

@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class PresenterButtonHandler extends ButtonHandler {
 
@@ -24,7 +25,19 @@ public class PresenterButtonHandler extends ButtonHandler {
             alert.close();
         }
     }
-    public void resetDiagram(int alertTypeIndex,String title, String content){
-        //TODO: IMPLEMENT
+    public String resetDiagram(int alertTypeIndex,String title, String content, Map<String,String> genCode) throws AlertTypeIndexOutOfBounds {
+        ButtonType action =  super.setAlertData(alertTypeIndex,title,content).orElse(null);
+        assert action != null;
+        if(action.equals(ButtonType.OK)){
+            genCode.put("functionName","FUNCIÓN\n");
+            genCode.put("baseCases","\nCASO(S) BASE");
+            genCode.put("recursiveCases","\nCASO(S) RECURSIVOS");
+            genCode.put("auxFunctions","");
+            return "OK";
+        }
+        else{
+            alert.close();
+            return "CLOSE";
+        }
     }
 }

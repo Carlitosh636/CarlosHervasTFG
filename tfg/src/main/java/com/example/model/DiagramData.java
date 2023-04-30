@@ -2,11 +2,13 @@ package com.example.model;
 
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
+
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 @Document(collection = "diagrams",schemaVersion = "1.0")
-public class DiagramData {
+public class DiagramData implements Serializable {
     @Id
     private String id;
     private String type;
@@ -199,32 +201,5 @@ public class DiagramData {
 
     public void setInputFormatting(String inputFormatting) {
         this.inputFormatting = inputFormatting;
-    }
-
-    @Override
-    public String toString() {
-        return "DiagramData{" +
-                "id='" + id + '\'' +
-                ", type='" + type + '\'' +
-                ", heading='" + heading + '\'' +
-                ", params=" + params +
-                ", originalData='" + originalData + '\'' +
-                ", originalSol='" + originalSol + '\'' +
-                ", calculatedSol='" + calculatedSol + '\'' +
-                ", currentProblemSize=" + currentProblemSize +
-                ", currentBaseCase=" + currentBaseCase +
-                ", currentReduction=" + currentReduction +
-                ", currentReductionSolutions=" + currentReductionSolutions +
-                ", problemSizeChoices=" + problemSizeChoices +
-                ", currentBaseCaseIndex=" + currentBaseCaseIndex +
-                ", baseCaseChoices=" + baseCaseChoices +
-                ", baseCaseParameters=" + baseCaseParameters +
-                ", reductionChoices=" + reductionChoices +
-                ", solutionsChoices=" + solutionsChoices +
-                ", correctSizeChoices=" + correctSizeChoices +
-                ", correctBaseCases=" + correctBaseCases +
-                ", correctSolutions=" + correctSolutions +
-                ", inputFormatting='" + inputFormatting + '\'' +
-                '}';
     }
 }

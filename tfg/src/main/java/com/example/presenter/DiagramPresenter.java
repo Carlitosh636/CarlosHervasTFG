@@ -186,6 +186,12 @@ public class DiagramPresenter implements Initializable {
                                     model.processInputs();
                                     decompositionSelect.setVisible(true);
                                     originalSolution.setVisible(true);
+
+                                    subSolutions.getChildren().clear();
+                                    subParameters.getChildren().clear();
+                                    model.getSubParameters().clear();
+                                    model.getSubSolutions().clear();
+
                                 } catch (Exception e) {
                                     showErrorInputAlert(new RuntimeException("Error al introducir los datos de entrada"));
                                     e.printStackTrace();
@@ -303,17 +309,9 @@ public class DiagramPresenter implements Initializable {
         buttonHandler.returnToMenu(1,"Confirmación","¿Estas seguro de que quieres volver al menú?",diagramGrid);
     }
     @FXML
-    public void resetDiagram() {
-        /*Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmación");
-        alert.setContentText("¿Estas seguro de que quieres borrar todos los valores introducidos?");
-        Optional<ButtonType> action = alert.showAndWait();
-        if(action.get()==ButtonType.OK){
-            generatedCodeText.put("functionName","FUNCIÓN\n");
-            generatedCodeText.put("baseCases","\nCASO(S) BASE");
-            generatedCodeText.put("recursiveCases","\nCASO(S) RECURSIVOS");
-            generatedCodeText.put("auxFunctions","");
-
+    public void resetDiagram() throws AlertTypeIndexOutOfBounds {
+        String action = buttonHandler.resetDiagram(1,"Confirmación","¿Estas seguro de que quieres borrar todos los valores introducidos y reinciar el diagrama?",generatedCodeText);
+        if(action.equals("OK")){
             problemSizeSelect.getSelectionModel().clearSelection();
             baseCaseSelect.getSelectionModel().clearSelection();
             subSolutions.getChildren().clear();
@@ -323,18 +321,13 @@ public class DiagramPresenter implements Initializable {
             model.resetSubValues();
             calculatedSolution.setVisible(false);
             model.originalSolProperty().set("");
-            diagramGrid.setVisible(false);
             decompositionSelect.setVisible(false);
             solutionSelect.setVisible(false);
             subParameters.setVisible(false);
             subSolutions.setVisible(false);
             originalSolution.setVisible(false);
+            updateMustacheTemplate();
         }
-        else{
-            alert.close();
-        }*/
-        buttonHandler.resetDiagram(1,"Confirmación","¿Estas seguro de que quieres borrar todos los valores introducidos?");
-        updateMustacheTemplate();
     }
     private void setArrows() {
         originalDataSolutionArrow.getChildren().add(returnArrow(60,0,250,0));
