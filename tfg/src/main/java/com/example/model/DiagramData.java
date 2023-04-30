@@ -2,12 +2,11 @@ package com.example.model;
 
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
-
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
 @Document(collection = "diagrams",schemaVersion = "1.0")
-public class DiagramData implements Serializable {
+public class DiagramData {
     @Id
     private String id;
     private String type;
@@ -20,15 +19,12 @@ public class DiagramData implements Serializable {
     private int currentBaseCase;
     private int currentReduction;
     private int currentReductionSolutions;
-    private String operation;
-    private String reducedOperation;
     private List<String> problemSizeChoices;
     private int currentBaseCaseIndex;
     private List<List<String>> baseCaseChoices;
     private List<List<String>> baseCaseParameters;
     private List<List<String>> reductionChoices;
     private List<List<String>> solutionsChoices;
-    private String recursiveCallParameters;
     private List<Integer> correctSizeChoices;
     private List<List<Integer>> correctBaseCases;
     private List<Integer> correctSolutions;
@@ -125,22 +121,6 @@ public class DiagramData implements Serializable {
         this.currentReductionSolutions = currentReductionSolutions;
     }
 
-    public String getOperation() {
-        return operation;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation;
-    }
-
-    public String getReducedOperation() {
-        return reducedOperation;
-    }
-
-    public void setReducedOperation(String reducedOperation) {
-        this.reducedOperation = reducedOperation;
-    }
-
     public List<String> getProblemSizeChoices() {
         return problemSizeChoices;
     }
@@ -189,14 +169,6 @@ public class DiagramData implements Serializable {
         this.solutionsChoices = solutionsChoices;
     }
 
-    public String getRecursiveCallParameters() {
-        return recursiveCallParameters;
-    }
-
-    public void setRecursiveCallParameters(String recursiveCallParameters) {
-        this.recursiveCallParameters = recursiveCallParameters;
-    }
-
     public List<Integer> getCorrectSizeChoices() {
         return correctSizeChoices;
     }
@@ -243,15 +215,12 @@ public class DiagramData implements Serializable {
                 ", currentBaseCase=" + currentBaseCase +
                 ", currentReduction=" + currentReduction +
                 ", currentReductionSolutions=" + currentReductionSolutions +
-                ", operation='" + operation + '\'' +
-                ", reducedOperation='" + reducedOperation + '\'' +
                 ", problemSizeChoices=" + problemSizeChoices +
                 ", currentBaseCaseIndex=" + currentBaseCaseIndex +
                 ", baseCaseChoices=" + baseCaseChoices +
                 ", baseCaseParameters=" + baseCaseParameters +
                 ", reductionChoices=" + reductionChoices +
                 ", solutionsChoices=" + solutionsChoices +
-                ", recursiveCallParameters='" + recursiveCallParameters + '\'' +
                 ", correctSizeChoices=" + correctSizeChoices +
                 ", correctBaseCases=" + correctBaseCases +
                 ", correctSolutions=" + correctSolutions +

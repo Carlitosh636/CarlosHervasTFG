@@ -16,7 +16,6 @@ import java.util.function.Supplier;
 public abstract class BaseDiagram {
     protected IDiagramActions diagramActions;
     protected DiagramType type;
-    private final DiagramData diagramData;
     protected SimpleStringProperty heading;
     protected Map<String,SimpleStringProperty> params;
     protected SimpleStringProperty originalSol;
@@ -27,7 +26,6 @@ public abstract class BaseDiagram {
     protected SimpleIntegerProperty currentBaseCase;
     protected SimpleIntegerProperty currentReduction;
     protected SimpleIntegerProperty currentReductionSolutions;
-    protected String operation;
     protected List<String> problemSizeChoices;
     protected int currentBaseCaseIndex;
     protected List<List<String>> baseCaseChoices;
@@ -41,18 +39,17 @@ public abstract class BaseDiagram {
     protected List<Integer> correctSolutions;
     protected int algorithmIndex;
     protected String inputFormatting;
-    protected BaseDiagram(IDiagramActions builder, String index) throws IOException {
+    protected BaseDiagram(IDiagramActions builder, String index) {
         this.diagramActions =builder;
-        diagramData = Serializer.deserialize(index);
-        this.operation=diagramData.getOperation();
+        DiagramData diagramData = Serializer.deserialize(index);
         this.params =new HashMap<>();
         this.heading = new SimpleStringProperty(diagramData.getHeading());
         this.type = DiagramType.valueOf(diagramData.getType());
-        diagramData.getParams().forEach((k,v)-> params.put(k,new SimpleStringProperty(v)));
-        this.reductionChoices=diagramData.getReductionChoices();
-        this.problemSizeChoices=diagramData.getProblemSizeChoices();
-        this.baseCaseChoices=diagramData.getBaseCaseChoices();
-        this.baseCaseParameters=diagramData.getBaseCaseParameters();
+        diagramData.getParams().forEach((k, v)-> params.put(k,new SimpleStringProperty(v)));
+        this.reductionChoices= diagramData.getReductionChoices();
+        this.problemSizeChoices= diagramData.getProblemSizeChoices();
+        this.baseCaseChoices= diagramData.getBaseCaseChoices();
+        this.baseCaseParameters= diagramData.getBaseCaseParameters();
         this.originalSol=new SimpleStringProperty(diagramData.getOriginalSol());
         this.calculatedSol = new SimpleStringProperty(diagramData.getCalculatedSol());
         this.currentProblemSize = new SimpleIntegerProperty(diagramData.getCurrentProblemSize());
@@ -77,12 +74,12 @@ public abstract class BaseDiagram {
     public abstract boolean checkSolutionsEqual(String calcSol);
     public abstract String calculateWithSelectedOperation(int index);
 
-    public void resetSubValues(){
+    /*public void resetSubValues(){
         this.subParameters.clear();
         this.subSolutions.clear();
         this.params.clear();
         diagramData.getParams().forEach((k,v)-> params.put(k,new SimpleStringProperty(v)));
-    }
+    }*/
 
     public DiagramType getType() {
         return type;
