@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Serializator {
+public class Serializer {
     private static String dbFilesLocation = "tfg/src/main/resources/jsondb";
     private static final File diagramDataDir = new File("diagramData");
     private static String baseScanPackage = "com.example.model";

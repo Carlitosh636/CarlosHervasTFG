@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.utils.Serializator;
+import com.example.utils.Serializer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,8 +13,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Serializator.initialize();
-        Serializator.serializeAll();
+        Serializer.initialize();
+        Serializer.serializeAll();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramSelector.fxml"));
         Parent root = loader.load();
         Scene main = new Scene(root);

@@ -2,11 +2,10 @@ package com.example.diagrams;
 
 import com.example.enums.DiagramType;
 import com.example.model.DiagramData;
-import com.example.utils.Serializator;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.utils.Serializer;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +43,7 @@ public abstract class BaseDiagram {
     protected String inputFormatting;
     protected BaseDiagram(IDiagramActions builder, String index) throws IOException {
         this.diagramActions =builder;
-        diagramData = Serializator.deserialize(index);
+        diagramData = Serializer.deserialize(index);
         this.operation=diagramData.getOperation();
         this.params =new HashMap<>();
         this.heading = new SimpleStringProperty(diagramData.getHeading());
