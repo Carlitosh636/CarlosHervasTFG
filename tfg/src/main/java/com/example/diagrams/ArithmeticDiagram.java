@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class ArithmeticDiagram extends BaseDiagram{
 
-    public ArithmeticDiagram(IDiagramActions builder, String index) throws IOException {
-        super(builder, index);
+    public ArithmeticDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
+        super(builder, diagramDataName);
         diagramActions.setAlgorithmMap();
         setSolutionOperations();
     }

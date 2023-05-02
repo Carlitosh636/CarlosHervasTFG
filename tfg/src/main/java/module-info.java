@@ -4,7 +4,6 @@ module tfg {
     requires javafx.web;
     requires com.fasterxml.jackson.databind;
     requires com.github.mustachejava;
-    requires jsondb.core;
 
     opens com.example to javafx.fxml;
     exports com.example;
@@ -16,8 +15,6 @@ module tfg {
     opens com.example.exceptions to javafx.fxml;
     exports com.example.model;
     opens com.example.model to javafx.fxml;
-    exports com.example.utils;
-    opens com.example.utils to javafx.fxml;
     exports com.example.enums;
     opens com.example.enums to javafx.fxml;
     exports com.example.presenter;

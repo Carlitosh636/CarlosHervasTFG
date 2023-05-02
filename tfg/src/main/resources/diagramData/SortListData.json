@@ -1,0 +1,25 @@
+{
+  "type" : "COMPLEX",
+  "heading" : "Dado una lista con tamaño n llamada list, ordenarla de forma recursiva\nEjemplo: f([7,3,8,2,4,6,1,5]) -> [1,2,3,4,5,6,7,8]",
+  "params" : {
+    "array" : ""
+  },
+  "originalData" : "",
+  "originalSol" : "",
+  "calculatedSol" : "",
+  "currentProblemSize" : 0,
+  "currentBaseCase" : 0,
+  "currentReduction" : 0,
+  "currentReductionSolutions" : 0,
+  "reducedOperation" : "",
+  "problemSizeChoices" : [ "n = len(a)" ],
+  "currentBaseCaseIndex" : 0,
+  "baseCaseChoices" : [ [ "n <= 1" ] ],
+  "baseCaseParameters" : [ [ "0" ] ],
+  "reductionChoices" : [ [ "v1 = a[:mid]\nv2 = a[mid:]\nmid = n//2", "a[:-1]\ntail = a[-1]", "a\nm = a.remove(min(a))","v1,v2\nv1=smaller_than(a,pivot)\nv2=greater_than(a,pivot)\npivot = a[n//2]" ] ],
+  "solutionsChoices" : [ ["Concatenar v1 y v2","Mezclar v1 y v2"],["Insertar tail en lista ordenada","Concatenar tail a la cabeza de f'"],["Concatenar m a la cola de f'","Concatenar m a la cabeza de f'"],["Concatenar pivot a la cabeza de v1 + v2","fConcatenar pivot a la cola de v1 + v2","Concatenar pivot entre v1 y v2"]],
+  "correctSizeChoices": [0],
+  "correctBaseCases": [[0]],
+  "correctSolutions" : [ 1,0,1,2 ],
+  "inputFormatting" : "Una lista de números enteros, sin corchetes y separados por comas (Ej: 6,5,4,3,2)"
+}

@@ -2,15 +2,16 @@ package com.example.diagrams;
 
 import com.example.enums.DiagramType;
 import com.example.model.DiagramData;
-import com.example.utils.Serializer;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import java.util.*;
 import java.util.function.Supplier;
 
 public abstract class BaseDiagram {
@@ -40,9 +41,18 @@ public abstract class BaseDiagram {
     protected List<Integer> correctSolutions;
     protected int algorithmIndex;
     protected String inputFormatting;
-    protected BaseDiagram(IDiagramActions builder, String index) {
-        this.diagramActions =builder;
-        diagramData = Serializer.deserialize(index);
+    protected BaseDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
+        this.diagramActions = builder;
+        try{
+            File input = Paths.get(Objects.requireNonNull(getClass().getResource(diagramDataName)).toURI()).toFile();
+            ObjectMapper objMapper = new ObjectMapper();
+            diagramData =objMapper.readValue(input,DiagramData.class);
+        }
+        catch (IOException e){
+            throw new IOException("The diagram file does not exist or couldn't be loaded"+e);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
         this.params =new HashMap<>();
         this.heading = new SimpleStringProperty(diagramData.getHeading());
         this.type = DiagramType.valueOf(diagramData.getType());

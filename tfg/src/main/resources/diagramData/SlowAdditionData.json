@@ -1,0 +1,26 @@
+{
+  "type" : "SIMPLE",
+  "heading" : "Dados a, b ∈ N, hallar su suma. Solo se puede sumar o restar una unidad\na los números.\nEjemplo: f(s,b) = a + b. Para a = 3 y b = 5, f(3,5) = 8",
+  "params" : {
+    "a" : "",
+    "b" : ""
+  },
+  "originalData" : "",
+  "originalSol" : "",
+  "calculatedSol" : "",
+  "currentProblemSize" : 0,
+  "currentBaseCase" : 0,
+  "currentReduction" : 0,
+  "currentReductionSolutions" : 0,
+  "reducedOperation" : "",
+  "problemSizeChoices" : [ "a","b","min(a,b)" ],
+  "currentBaseCaseIndex" : 0,
+  "baseCaseChoices" : [ [ "a = 0" ],["b = 0"],["min(a,b)=0"] ],
+  "baseCaseParameters" : [ [ "0" ],[ "0" ],["0"] ],
+  "reductionChoices" : [ [ "a - 1,b","a - 1, b + 1" ], ["a,b - 1","a + 1,b - 1"], ["min(a,b) - 1", "a-1,b-1"] ],
+  "solutionsChoices" : [ [ "f' + 1", "f' - 1", "f' + a"],["f' + 1","No hacer nada"],["f' + 1", "f' - 1", "f' + b"],["f' + 1","No hacer nada"], [ "f' + 1", "f' - 1", "f' + min(a,b)"], [ "f' + 1", "f' - 1 + 1", "f' + 1 + 1"] ],
+  "correctSizeChoices": [0,1,2],
+  "correctBaseCases": [[0],[0],[0]],
+  "correctSolutions" : [ 0,1,0,1,0,2 ],
+  "inputFormatting" : "Un número entero en cada cuadro de input (ej: 3 y 5)"
+}

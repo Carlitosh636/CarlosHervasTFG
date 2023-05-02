@@ -46,11 +46,6 @@
             <artifactId>compiler</artifactId>
             <version>0.9.10</version>
         </dependency>
-        <dependency>
-            <groupId>io.jsondb</groupId>
-            <artifactId>jsondb-core</artifactId>
-            <version>1.0.115-j11</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>

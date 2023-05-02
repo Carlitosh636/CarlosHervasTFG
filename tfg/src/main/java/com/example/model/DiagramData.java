@@ -1,22 +1,17 @@
 package com.example.model;
 
-import io.jsondb.annotation.Document;
-import io.jsondb.annotation.Id;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-@Document(collection = "diagrams",schemaVersion = "1.0")
 public class DiagramData implements Serializable {
-    @Id
-    private String id;
     private String type;
     private String heading;
     private Map<String,String> params;
     private String originalData;
     private String originalSol;
     private String calculatedSol;
+    private String reducedOperation;
     private int currentProblemSize;
     private int currentBaseCase;
     private int currentReduction;
@@ -33,14 +28,6 @@ public class DiagramData implements Serializable {
     private String inputFormatting;
     public DiagramData(){
 
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getType() {
@@ -202,4 +189,13 @@ public class DiagramData implements Serializable {
     public void setInputFormatting(String inputFormatting) {
         this.inputFormatting = inputFormatting;
     }
+
+    public String getReducedOperation() {
+        return reducedOperation;
+    }
+
+    public void setReducedOperation(String reducedOperation) {
+        this.reducedOperation = reducedOperation;
+    }
+
 }

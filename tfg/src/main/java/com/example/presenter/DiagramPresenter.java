@@ -6,6 +6,7 @@ import com.example.exceptions.AlertTypeIndexOutOfBounds;
 import com.example.exceptions.BaseCaseException;
 import com.example.exceptions.IncorrectSelectionException;
 import com.example.model.Arrow;
+import com.example.model.DiagramData;
 import com.example.model.GeneratorData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mustachejava.DefaultMustacheFactory;
@@ -28,12 +29,12 @@ import javafx.scene.web.WebView;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class DiagramPresenter implements Initializable {
     @FXML
@@ -123,10 +124,15 @@ public class DiagramPresenter implements Initializable {
 
     public DiagramPresenter(BaseDiagram model,String pathName) throws IOException {
         this.model = model;
-        ObjectMapper objMapper = new ObjectMapper();
-        try {
-            generatorData = objMapper.readValue(new File(pathName),GeneratorData.class);
-        } catch (IOException e) {
+        try{
+            File input = Paths.get(Objects.requireNonNull(getClass().getResource(pathName)).toURI()).toFile();
+            ObjectMapper objMapper = new ObjectMapper();
+            generatorData = objMapper.readValue(input,GeneratorData.class);
+
+        }
+        catch (IOException e){
+            throw new IOException("The diagram file does not exist or couldn't be loaded");
+        } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }
