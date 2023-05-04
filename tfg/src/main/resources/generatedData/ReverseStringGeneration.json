@@ -4,8 +4,8 @@
     "s == ''": "''"
   },
   "recursiveCases": [[
-    "\n\telse:\n\t\treturn s[0] + reverse_string(s[1:])",
-    "\n\telse:\n\t\treturn reverse_string(s[1:]) + s[0]"
+    "\n\t\treturn s[0] + reverse_string(s[1:])",
+    "\n\t\treturn reverse_string(s[1:]) + s[0]"
   ]],
   "auxFunctions": []
 }

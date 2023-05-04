@@ -97,11 +97,11 @@ public class DiagramPresenter implements Initializable {
         mf = new DefaultMustacheFactory();
         m = mf.compile("generatedCodeTemplate.mustache");
 
-        generatedCodeText.put("functionName","FUNCIÓN\n");
+        generatedCodeText.put("functionName","FUNCIÓN");
         generatedCodeText.put("baseCase","\nCASO(S) BASE");
         generatedCodeText.put("returnValue","\nCASO(S) BASE");
         generatedCodeText.put("recursiveCases","\nCASO(S) RECURSIVOS");
-        generatedCodeText.put("auxFunctions","");
+        generatedCodeText.put("auxFunctions","\n");
         updateMustacheTemplate();
     }
     private void updateMustacheTemplate(){
