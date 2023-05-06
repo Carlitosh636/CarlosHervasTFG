@@ -2,6 +2,10 @@
     text-area-background: #0d0d61;
     -fx-font-size: 18;
     -fx-text-fill: white;
+    -fx-font-family: "trebuchet MS", sans-serif;
+    -fx-color: #000000;
+    -fx-letter-spacing: 0.5px;
+    -fx-line-height: 21px;
 }
 
 .text-area .content {
