@@ -1,0 +1,8 @@
+-Generador de código:
+    -que parsee los datos del modelo en vez de tener que depender 100% de json
+    -El formato se ve fatal, no hace caso a los formatos del json. Capaz haya que cargarse el Mustache e ir de otra forma
+    -el gen code json para el equal strings
+
+-Poner nueva excepción para el caso de IOException y similares, y que la app tire un dialog con error en tal caso.
+-quicksort hacer mejor con partición de hoare
+-mejorar enunciados
