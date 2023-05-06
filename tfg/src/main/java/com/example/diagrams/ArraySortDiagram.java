@@ -32,6 +32,12 @@ public class ArraySortDiagram implements IDiagramActions{
     }
 
     @Override
+    public Map<String, String> setGenCodeParams(String problemSize, String returnValue) {
+        //TODO: IMPLEMENT
+        return null;
+    }
+
+    @Override
     public List<List<Supplier>> setSolutionOperations() {
         List<Supplier> s1 = new ArrayList<>();
         s1.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(Arrays.stream(l), Arrays.stream(r)).toArray()));

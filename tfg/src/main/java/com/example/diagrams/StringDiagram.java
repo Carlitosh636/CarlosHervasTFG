@@ -24,6 +24,13 @@ public class StringDiagram extends BaseDiagram{
         System.out.println(solutions);
         originalSol.set("f = "+solutions.get("ogSol"));
     }
+
+    @Override
+    public Map<String, String> processProblemSizeAndBaseCases() {
+        Map<String, String> values = diagramActions.setGenCodeParams(baseCaseChoices.get(currentProblemSize.get()).get(currentBaseCaseIndex), returnValues.get(currentProblemSize.get()).get(currentBaseCaseIndex));
+        return values;
+    }
+
     @Override
     public void processSolutions() throws Exception {
         algorithmIndex = currentProblemSize.get() + currentReduction.get();

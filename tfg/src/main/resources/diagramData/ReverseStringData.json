@@ -1,6 +1,6 @@
 {
   "type" : "SIMPLE",
-  "heading" : "Dada una cadena de n caracteres llamada s, escribir dicha cadena al revés.\nEjemplo: f('carlos') -> 'solrac'",
+  "heading" : "Dada una cadena de n caracteres llamada s, escribir dicha cadena al revés.\nEjemplo: f(carlos) -> solrac",
   "params" : {
     "input" : ""
   },
@@ -16,6 +16,7 @@
   "currentBaseCaseIndex" : 0,
   "baseCaseChoices" : [ [ "s = ''" ]],
   "baseCaseParameters" : [ [""] ],
+  "returnValues": [ ["''"] ],
   "reductionChoices" : [ [ "s[1:]\nchar=s[0]" ] ],
   "solutionsChoices" : [ [ "[char] + f'","f' + [char]"] ],
   "correctSizeChoices": [0],

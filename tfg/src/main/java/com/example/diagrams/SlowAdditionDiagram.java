@@ -18,6 +18,16 @@ public class SlowAdditionDiagram implements IDiagramActions{
         partSol = Double.parseDouble(newValues.get("partSol"));
         baseCaseValue = Integer.parseInt(newValues.get("baseCaseValue"));
     }
+
+    @Override
+    public Map<String, String> setGenCodeParams(String baseCase,String returnValue) {
+        Map<String,String> returnVal = new HashMap<>();
+        returnVal.put("functionName","def slow_addition(a, b):");
+        returnVal.put("baseCase",String.format("if %s",baseCase));
+        returnVal.put("returnValue",String.format("return %s",returnValue));
+        return returnVal;
+    }
+
     @Override
     public List<List<Supplier>> setSolutionOperations() {
         List<Supplier> s1 = new ArrayList<>();

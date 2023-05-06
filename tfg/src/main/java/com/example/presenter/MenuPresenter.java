@@ -2,9 +2,7 @@ package com.example.presenter;
 
 import com.example.diagrams.*;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -41,7 +39,7 @@ public class MenuPresenter {
     private MenuButtonHandler menuButtonHandler;
     public void initialize() throws IOException {
         menuButtonHandler = new MenuButtonHandler();
-        buttonsPaths.put(b1,new ButtonRelatedData(new ArithmeticDiagram(new RecursivePowerDiagram(),"/diagramData/RecursivePotency.json"),"/generatedData/RecursivePotencyGeneration.json"));
+        buttonsPaths.put(b1,new ButtonRelatedData(new ArithmeticDiagram(new RecursivePowerDiagram(), "/diagramData/RecursivePotencyData.json"),"/generatedData/RecursivePotencyGeneration.json"));
         buttonsPaths.put(b2,new ButtonRelatedData(new ArithmeticDiagram(new SlowAdditionDiagram(),"/diagramData/SlowAdditionData.json"),"/generatedData/SlowAdditionGeneration.json"));
         buttonsPaths.put(b3,new ButtonRelatedData(new ArraySortingDiagram(new ArraySortDiagram(),"/diagramData/SortListData.json"),"/generatedData/SortListGeneration.json"));
         buttonsPaths.put(b4,new ButtonRelatedData(new StringDiagram(new ReverseStringDiagram(),"/diagramData/ReverseStringData.json"),"/generatedData/ReverseStringGeneration.json"));

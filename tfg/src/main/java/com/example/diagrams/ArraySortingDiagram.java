@@ -33,6 +33,15 @@ public class ArraySortingDiagram extends BaseDiagram{
         Map<String,String> solutions = calculateSolution(-1);
         originalSol.set("f="+solutions.get("ogSol"));
     }
+
+    @Override
+    public Map<String, String> processProblemSizeAndBaseCases() {
+        //TODO: IMPLEMENT
+        Map<String, String> values = diagramActions.setGenCodeParams(problemSizeChoices.get(currentProblemSize.get()), returnValues.get(currentProblemSize.get()).get(currentBaseCaseIndex));
+        return values;
+    }
+
+
     @Override
     public void processSolutions() throws Exception {
         algorithmIndex = currentProblemSize.get() + currentReduction.get();

@@ -28,6 +28,15 @@ public class EqualStringsDiagram implements IDiagramActions{
     }
 
     @Override
+    public Map<String, String> setGenCodeParams(String problemSize, String returnValue) {
+        Map<String,String> returnVal = new HashMap<>();
+        returnVal.put("functionName","def reverse(s):");
+        returnVal.put("baseCase",String.format("if %s == %d",problemSize,baseCaseValue));
+        returnVal.put("returnValue",String.format("return %s",returnValue));
+        return returnVal;
+    }
+
+    @Override
     public void setAlgorithmMap() {
         algorithmMap.put(-1,()->{
             Map<String,String> returnVal = new HashMap<>();

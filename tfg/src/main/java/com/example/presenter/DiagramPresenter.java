@@ -36,7 +36,7 @@ public class DiagramPresenter implements Initializable {
     WebEngine generatedCodeWebEngine;
     @FXML
     AnchorPane root;
-    protected BaseDiagram model;
+    private BaseDiagram model;
     @FXML
     public TextArea heading;
     @FXML
@@ -141,9 +141,6 @@ public class DiagramPresenter implements Initializable {
         if(!problemSizeSelect.getSelectionModel().isEmpty()){
             baseCaseSelect.getItems().setAll(model.getBaseCaseChoices().get(model.getCurrentProblemSize()));
         }
-        //TODO: determinar índice
-        generatedCodeText.put("functionName", generatorData.functionName.get(0));
-        updateMustacheTemplate();
     }
     public void onChangeBaseCase() {
         if(baseCaseSelect.getSelectionModel().getSelectedIndex()<0){
@@ -198,10 +195,12 @@ public class DiagramPresenter implements Initializable {
             originalData.getChildren().addAll(tfs);
         }
         diagramGrid.setVisible(true);
-        generatedCodeText.put("baseCase", (String) generatorData.baseCases.keySet().toArray()[baseCaseSelect.getSelectionModel().getSelectedIndex()]);
-        generatedCodeText.put("returnValue",(String) generatorData.baseCases.values().toArray()[baseCaseSelect.getSelectionModel().getSelectedIndex()]);
-        updateMustacheTemplate();
+        Map<String,String> genValues = model.processProblemSizeAndBaseCases();
+        updateGenCodeParams("functionName",genValues.get("functionName"));
+        updateGenCodeParams("baseCase",genValues.get("baseCase"));
+        updateGenCodeParams("returnValue",genValues.get("returnValue"));
     }
+
     public void onDecompositionChange() {
         if(decompositionSelect.getSelectionModel().getSelectedIndex()<0){
             return;
@@ -215,6 +214,7 @@ public class DiagramPresenter implements Initializable {
 
         handleDecomposition();
     }
+
     protected void handleDecomposition() {
         try {
             model.processSolutions();
@@ -256,7 +256,6 @@ public class DiagramPresenter implements Initializable {
             String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex());
             calculatedSolution.setVisible(true);
             if(model.checkSolutionsEqual(calcSol)){
-                //if solutions are equal BUT it is not the correct solution
                 if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(model.getCurrentReductionSolutions())){
                     calculatedSolution.setText("Incorrecto! La operación da esta solución pero no para todos los casos\nValor calculado: "+model.getCalculatedSol());
                     calculatedSolution.setStyle("-fx-text-fill: #f2433a;");
@@ -288,6 +287,12 @@ public class DiagramPresenter implements Initializable {
     public void showErrorInputAlert(Exception e){
         inputHandler.showErrorAlert(e);
     }
+
+    private void updateGenCodeParams(String genCodeTextKey, String value) {
+        generatedCodeText.put(genCodeTextKey,value);
+        updateMustacheTemplate();
+    }
+
     private void refreshDiagram(){
         solutionSelect.setVisible(false);
         calculatedSolution.setVisible(false);
@@ -298,6 +303,7 @@ public class DiagramPresenter implements Initializable {
     public void returnToMenu() throws IOException, AlertTypeIndexOutOfBounds {
         buttonHandler.returnToMenu(1,"Confirmación","¿Estas seguro de que quieres volver al menú?",diagramGrid);
     }
+
     @FXML
     public void resetDiagram() throws AlertTypeIndexOutOfBounds {
         String action = buttonHandler.resetDiagram(1,"Confirmación","¿Estas seguro de que quieres borrar todos los valores introducidos y reinciar el diagrama?",generatedCodeText);
@@ -319,6 +325,7 @@ public class DiagramPresenter implements Initializable {
             updateMustacheTemplate();
         }
     }
+
     private void setArrows() {
         originalDataSolutionArrow.getChildren().add(returnArrow(60,0,250,0));
         partialDataSolutionArrow.getChildren().add(returnArrow(60,0,250,0));

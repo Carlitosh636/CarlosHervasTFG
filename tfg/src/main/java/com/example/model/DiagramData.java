@@ -12,6 +12,7 @@ public class DiagramData implements Serializable {
     private String originalSol;
     private String calculatedSol;
     private String reducedOperation;
+    private List<List<String>> returnValues;
     private int currentProblemSize;
     private int currentBaseCase;
     private int currentReduction;
@@ -140,6 +141,14 @@ public class DiagramData implements Serializable {
 
     public void setBaseCaseParameters(List<List<String>> baseCaseParameters) {
         this.baseCaseParameters = baseCaseParameters;
+    }
+
+    public List<List<String>> getReturnValues() {
+        return returnValues;
+    }
+
+    public void setReturnValues(List<List<String>> returnValues) {
+        this.returnValues = returnValues;
     }
 
     public List<List<String>> getReductionChoices() {

@@ -17,6 +17,7 @@
   "currentBaseCaseIndex" : 0,
   "baseCaseChoices" : [ [ "a = 0" ],["b = 0"],["min(a,b)=0"] ],
   "baseCaseParameters" : [ [ "0" ],[ "0" ],["0"] ],
+  "returnValues": [ [ "b" ],["a"],["min(a,b)"] ],
   "reductionChoices" : [ [ "a - 1,b","a - 1, b + 1" ], ["a,b - 1","a + 1,b - 1"], ["min(a,b) - 1", "a-1,b-1"] ],
   "solutionsChoices" : [ [ "f' + 1", "f' - 1", "f' + a"],["f' + 1","No hacer nada"],["f' + 1", "f' - 1", "f' + b"],["f' + 1","No hacer nada"], [ "f' + 1", "f' - 1", "f' + min(a,b)"], [ "f' + 1", "f' - 1 + 1", "f' + 1 + 1"] ],
   "correctSizeChoices": [0,1,2],

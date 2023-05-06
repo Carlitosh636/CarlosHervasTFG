@@ -7,14 +7,23 @@ import java.util.function.Supplier;
 
 public class RecursivePowerDiagram implements IDiagramActions{
     Map<Integer, Callable<Map<String,String>>> algorithmMap= new HashMap<>();
-    static double a,b,partSol;
-    static int baseCaseValue;
+    double a,b,partSol;
+    int baseCaseValue;
     @Override
     public void setParams(Map<String, String> newValues) {
         a = Double.parseDouble(newValues.get("a"));
         b = Double.parseDouble(newValues.get("b"));
         partSol = Double.parseDouble(newValues.get("partSol"));
         baseCaseValue = Integer.parseInt(newValues.get("baseCaseValue"));
+    }
+
+    @Override
+    public Map<String,String> setGenCodeParams(String baseCase, String returnValue) {
+        Map<String,String> returnVal = new HashMap<>();
+        returnVal.put("functionName","def power(a, b):");
+        returnVal.put("baseCase",String.format("if %s",baseCase));
+        returnVal.put("returnValue",String.format("return %s",returnValue));
+        return returnVal;
     }
 
     @Override

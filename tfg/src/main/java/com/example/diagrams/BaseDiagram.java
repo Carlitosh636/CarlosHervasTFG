@@ -25,6 +25,7 @@ public abstract class BaseDiagram {
     protected SimpleIntegerProperty currentReductionSolutions;
     protected List<String> problemSizeChoices;
     protected int currentBaseCaseIndex;
+    protected List<List<String>> returnValues;
     protected List<List<String>> baseCaseChoices;
     protected List<List<String>> baseCaseParameters;
     protected List<List<String>> reductionChoices;
@@ -47,6 +48,7 @@ public abstract class BaseDiagram {
         this.problemSizeChoices= diagramData.getProblemSizeChoices();
         this.baseCaseChoices= diagramData.getBaseCaseChoices();
         this.baseCaseParameters= diagramData.getBaseCaseParameters();
+        this.returnValues = diagramData.getReturnValues();
         this.originalSol=new SimpleStringProperty(diagramData.getOriginalSol());
         this.calculatedSol = new SimpleStringProperty(diagramData.getCalculatedSol());
         this.currentProblemSize = new SimpleIntegerProperty(diagramData.getCurrentProblemSize());
@@ -65,6 +67,7 @@ public abstract class BaseDiagram {
     }
 
     public abstract void processInputs() throws Exception;
+    public abstract Map<String,String> processProblemSizeAndBaseCases();
     public abstract void processSolutions() throws Exception;
     public abstract boolean checkNotBaseCase(int index,List<String>input) throws Exception;
 
