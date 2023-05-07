@@ -18,9 +18,13 @@ public class RecursivePowerDiagram implements IDiagramActions{
     }
 
     @Override
+    public String getFunctionName(int index) {
+        return "def power(a, b):";
+    }
+
+    @Override
     public Map<String,String> setGenCodeParams(String baseCase, String returnValue) {
         Map<String,String> returnVal = new HashMap<>();
-        returnVal.put("functionName","def power(a, b):");
         returnVal.put("baseCase",String.format("if %s",baseCase));
         returnVal.put("returnValue",String.format("return %s",returnValue));
         return returnVal;
@@ -94,6 +98,5 @@ public class RecursivePowerDiagram implements IDiagramActions{
     public boolean checkSolutionsEqual(String calcSol, String ogSol) {
         return calcSol.equals(ogSol);
     }
-
 
 }

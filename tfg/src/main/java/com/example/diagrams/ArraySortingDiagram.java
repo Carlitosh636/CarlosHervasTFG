@@ -1,8 +1,10 @@
 package com.example.diagrams;
 
+import com.example.algorithms.Algorithms;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class ArraySortingDiagram extends BaseDiagram{
@@ -40,7 +42,6 @@ public class ArraySortingDiagram extends BaseDiagram{
         Map<String, String> values = diagramActions.setGenCodeParams(problemSizeChoices.get(currentProblemSize.get()), returnValues.get(currentProblemSize.get()).get(currentBaseCaseIndex));
         return values;
     }
-
 
     @Override
     public void processSolutions() throws Exception {

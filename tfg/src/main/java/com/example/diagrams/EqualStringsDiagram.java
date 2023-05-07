@@ -28,10 +28,13 @@ public class EqualStringsDiagram implements IDiagramActions{
     }
 
     @Override
+    public String getFunctionName(int index) {
+        return "def reverse(s):";
+    }
+    @Override
     public Map<String, String> setGenCodeParams(String problemSize, String returnValue) {
         Map<String,String> returnVal = new HashMap<>();
-        returnVal.put("functionName","def reverse(s):");
-        returnVal.put("baseCase",String.format("if %s == %d",problemSize,baseCaseValue));
+        returnVal.put("baseCase",String.format("if %s == %s",problemSize,baseCaseValue));
         returnVal.put("returnValue",String.format("return %s",returnValue));
         return returnVal;
     }
@@ -80,4 +83,5 @@ public class EqualStringsDiagram implements IDiagramActions{
     public boolean checkSolutionsEqual(String calcSol, String ogSol) {
         return calcSol.equals(ogSol);
     }
+
 }

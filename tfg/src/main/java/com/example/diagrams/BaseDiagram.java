@@ -67,6 +67,9 @@ public abstract class BaseDiagram {
     }
 
     public abstract void processInputs() throws Exception;
+    public String processFunctionName(int index){
+        return diagramActions.getFunctionName(index);
+    }
     public abstract Map<String,String> processProblemSizeAndBaseCases();
     public abstract void processSolutions() throws Exception;
     public abstract boolean checkNotBaseCase(int index,List<String>input) throws Exception;

@@ -1,8 +1,4 @@
 {
-  "functionName": ["def reverse_string(s):\n"],
-  "baseCases": {
-    "s == ''": "''"
-  },
   "recursiveCases": [[
     "\n\t\treturn s[0] + reverse_string(s[1:])",
     "\n\t\treturn reverse_string(s[1:]) + s[0]"

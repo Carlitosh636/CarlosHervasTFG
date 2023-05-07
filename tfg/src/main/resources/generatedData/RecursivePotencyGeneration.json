@@ -1,9 +1,4 @@
 {
-  "functionName": ["def power(a, b):"],
-  "baseCases":{
-    "b == 0": "1",
-    "b == 1": "a"
-  },
   "recursiveCases": [[
     "\n\t\treturn b * power(a, b - 1)",
     "\n\t\treturn a * power(a, b - 1)",

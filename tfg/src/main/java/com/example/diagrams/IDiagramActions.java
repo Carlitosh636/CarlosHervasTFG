@@ -12,4 +12,5 @@ public interface IDiagramActions {
     boolean checkNotBaseCase(List<String> baseCases,List<String> inputs) throws Exception;
     Map<String,String> calculateSolution(int index) throws Exception;
     boolean checkSolutionsEqual(String calcSol, String ogSol);
+    String getFunctionName(int index);
 }

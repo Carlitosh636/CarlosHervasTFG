@@ -16,6 +16,7 @@
   "currentBaseCaseIndex" : 0,
   "baseCaseChoices" : [ [ "n <= 1" ] ],
   "baseCaseParameters" : [ [ "0" ] ],
+  "returnValues" : [["a"]],
   "reductionChoices" : [ [ "v1 = a[:mid]\nv2 = a[mid:]\nmid = n//2", "a[:-1]\ntail = a[-1]", "a\nm = a.remove(min(a))","v1,v2\nv1=smaller_than(a,pivot)\nv2=greater_than(a,pivot)\npivot = a[n//2]" ] ],
   "solutionsChoices" : [ ["Concatenar v1 y v2","Mezclar v1 y v2"],["Insertar tail en lista ordenada","Concatenar tail a la cabeza de f'"],["Concatenar m a la cola de f'","Concatenar m a la cabeza de f'"],["Concatenar pivot a la cabeza de v1 + v2","fConcatenar pivot a la cola de v1 + v2","Concatenar pivot entre v1 y v2"]],
   "correctSizeChoices": [0],

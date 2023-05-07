@@ -9,6 +9,14 @@ import java.util.stream.IntStream;
 
 public class ArraySortDiagram implements IDiagramActions{
     Map<Integer, Callable<Map<String,String>>> algorithmMap= new HashMap<>();
+    Map<Integer,String> functionNames = new HashMap<>(){{
+        put(0,"def sort_list(a):\n\tn = len(a)");
+        put(1,"def merge_sort(a):\n\tn = len(a)");
+        put(2,"def merge_sort(a):\n\tn = len(a)");
+        put(3,"def insert_sort(a):\n\tn = len(a)");
+        put(4,"def select_sort(a):\n\tn = len(a)");
+        put(5,"def quick_sort(a,low,high):\n\tn = len(a)");
+    }};
     static int[] array;
     static int mid;
     static int[] l;
@@ -28,13 +36,19 @@ public class ArraySortDiagram implements IDiagramActions{
             e.printStackTrace();
             throw e;
         }
-
     }
 
     @Override
-    public Map<String, String> setGenCodeParams(String problemSize, String returnValue) {
-        //TODO: IMPLEMENT
-        return null;
+    public String getFunctionName(int index) {
+        return functionNames.get(index);
+    }
+
+    @Override
+    public Map<String, String> setGenCodeParams(String baseCase, String returnValue) {
+        Map<String,String> returnVal = new HashMap<>();
+        returnVal.put("baseCase",String.format("if %s",baseCase));
+        returnVal.put("returnValue",String.format("return %s",returnValue));
+        return returnVal;
     }
 
     @Override
@@ -134,6 +148,7 @@ public class ArraySortDiagram implements IDiagramActions{
     public boolean checkSolutionsEqual(String calcSol, String ogSol) {
         return calcSol.equals(ogSol);
     }
+
     private int[] stringToArrayInt(String data) throws Exception{
         data = data.replaceAll("[\\[\\]()\s{}]","");
         try{

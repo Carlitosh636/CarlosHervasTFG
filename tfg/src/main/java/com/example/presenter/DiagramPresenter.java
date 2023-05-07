@@ -195,8 +195,9 @@ public class DiagramPresenter implements Initializable {
             originalData.getChildren().addAll(tfs);
         }
         diagramGrid.setVisible(true);
+        String functionName = model.processFunctionName(0);
         Map<String,String> genValues = model.processProblemSizeAndBaseCases();
-        updateGenCodeParams("functionName",genValues.get("functionName"));
+        updateGenCodeParams("functionName",functionName);
         updateGenCodeParams("baseCase",genValues.get("baseCase"));
         updateGenCodeParams("returnValue",genValues.get("returnValue"));
     }
@@ -206,7 +207,8 @@ public class DiagramPresenter implements Initializable {
             return;
         }
         if(model.getType() == DiagramType.valueOf("COMPLEX")){
-            generatedCodeText.put("functionName",generatorData.functionName.get(decompositionSelect.getSelectionModel().getSelectedIndex()+1));
+            String updatedFunction = model.processFunctionName(decompositionSelect.getSelectionModel().getSelectedIndex()+1);
+            updateGenCodeParams("functionName",updatedFunction);
         }
         solutionSelect.getItems().clear();
         subParameters.setVisible(true);
