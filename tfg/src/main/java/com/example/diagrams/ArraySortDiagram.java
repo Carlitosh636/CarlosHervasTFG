@@ -12,10 +12,9 @@ public class ArraySortDiagram implements IDiagramActions{
     Map<Integer,String> functionNames = new HashMap<>(){{
         put(0,"def sort_list(a):\n\tn = len(a)");
         put(1,"def merge_sort(a):\n\tn = len(a)");
-        put(2,"def merge_sort(a):\n\tn = len(a)");
-        put(3,"def insert_sort(a):\n\tn = len(a)");
-        put(4,"def select_sort(a):\n\tn = len(a)");
-        put(5,"def quick_sort(a,low,high):\n\tn = len(a)");
+        put(2,"def insert_sort(a):\n\tn = len(a)");
+        put(3,"def select_sort(a):\n\tn = len(a)");
+        put(4,"def quick_sort(a,low,high):\n\tn = len(a)");
     }};
     static int[] array;
     static int mid;

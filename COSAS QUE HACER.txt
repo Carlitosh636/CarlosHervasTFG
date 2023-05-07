@@ -2,8 +2,6 @@
     -El formato se ve fatal, no hace caso a los formatos del json. Capaz haya que cargarse el Mustache e ir de otra forma
     -Cambiar el style, se ve muy pequeña la fuente, ver si se puede poner algo tipo Consolas y el gen codigo más bonito (tipo fondo negro, fuente verde)
     -Ya se parsean la función y caso base. Falta los casos recursivos/funciones aux (Deberían ponerse las funciones aux? preguntar a Manuel)
-        HAY QUE HACER TAMBIÉN LOS DE SORT LIST, QUE NO ESTÁN IMPLEMENTADOS. ver los TODO
-    -Al reiniciar los datos no se reinicia el generador de código. Mirar eso.
 -Poner nueva excepción para el caso de IOException y similares, y que la app tire un dialog con error en tal caso.
 -quicksort hacer mejor con partición de hoare
 -mejorar enunciados

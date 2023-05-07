@@ -29,8 +29,7 @@ public class ArithmeticDiagram extends BaseDiagram {
 
     @Override
     public Map<String, String> processProblemSizeAndBaseCases() {
-        Map<String, String> values = diagramActions.setGenCodeParams(baseCaseChoices.get(currentProblemSize.get()).get(currentBaseCaseIndex), returnValues.get(currentProblemSize.get()).get(currentBaseCaseIndex));
-        return values;
+        return diagramActions.setGenCodeParams(baseCaseChoices.get(currentProblemSize.get()).get(currentBaseCaseIndex), returnValues.get(currentProblemSize.get()).get(currentBaseCaseIndex));
     }
 
     @Override

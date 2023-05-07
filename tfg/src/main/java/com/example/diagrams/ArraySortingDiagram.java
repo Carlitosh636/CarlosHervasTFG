@@ -38,9 +38,7 @@ public class ArraySortingDiagram extends BaseDiagram{
 
     @Override
     public Map<String, String> processProblemSizeAndBaseCases() {
-        //TODO: IMPLEMENT
-        Map<String, String> values = diagramActions.setGenCodeParams(problemSizeChoices.get(currentProblemSize.get()), returnValues.get(currentProblemSize.get()).get(currentBaseCaseIndex));
-        return values;
+        return diagramActions.setGenCodeParams(problemSizeChoices.get(currentProblemSize.get()), returnValues.get(currentProblemSize.get()).get(currentBaseCaseIndex));
     }
 
     @Override
