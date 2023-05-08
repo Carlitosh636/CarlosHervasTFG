@@ -22,7 +22,7 @@ public class ArraySortingDiagram extends BaseDiagram{
     public void processInputs() throws Exception {
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)-> paramsParsed.put(k,v.get()));
-        array = Arrays.stream(params.get("array").get().split(",")).mapToInt(Integer::parseInt).toArray();
+        array = Arrays.stream(params.get("array").get().split(",")).map(s->s.replace(" ","")).mapToInt(Integer::parseInt).toArray();
         mid = array.length / 2;
         l = new int[mid];
         r = new int[array.length - mid];

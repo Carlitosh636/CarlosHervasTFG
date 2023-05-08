@@ -151,7 +151,7 @@ public class ArraySortDiagram implements IDiagramActions{
     private int[] stringToArrayInt(String data) throws Exception{
         data = data.replaceAll("[\\[\\]()\s{}]","");
         try{
-            return Arrays.stream(data.split(",")).mapToInt(Integer::parseInt).toArray();
+            return Arrays.stream(data.split(",")).map(s->s.replace(" ","")).mapToInt(Integer::parseInt).toArray();
         }
         catch (NumberFormatException e){
             e.printStackTrace();
