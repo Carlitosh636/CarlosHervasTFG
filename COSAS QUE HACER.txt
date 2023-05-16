@@ -1,7 +1,9 @@
 -Generador de código:
     -El formato se ve fatal, no hace caso a los formatos del json. Capaz haya que cargarse el Mustache e ir de otra forma
-    -Cambiar el style, se ve muy pequeña la fuente, ver si se puede poner algo tipo Consolas y el gen codigo más bonito (tipo fondo negro, fuente verde)
     -Ya se parsean la función y caso base. Falta los casos recursivos/funciones aux (Deberían ponerse las funciones aux? preguntar a Manuel)
 -Poner nueva excepción para el caso de IOException y similares, y que la app tire un dialog con error en tal caso.
 -quicksort hacer mejor con partición de hoare
+-Escoger una paleta de colores específica para toda la app (buscar en google), importante tener un limite de colores, evitar una paleta secuencial o monocromatica
+    Que haya coherencia, no poner las preguntas en distintos colores por ej
+        -Cambiar el style, se ve muy pequeña la fuente, ver si se puede poner algo tipo Consolas y el gen codigo más bonito
 -mejorar enunciados
