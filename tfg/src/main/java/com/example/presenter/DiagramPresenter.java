@@ -118,7 +118,7 @@ public class DiagramPresenter implements Initializable {
 
     public DiagramPresenter(BaseDiagram model,String pathName) throws IOException {
         this.model = model;
-        generatorData = FileUtils.returnGeneratorDataFromInputStream(pathName);
+        generatorData = FileUtils.returnObjectFromInputStream(pathName,GeneratorData.class);
     }
     protected void bindModelData() {
         originalSolution.textProperty().bind(model.originalSolProperty());
@@ -336,8 +336,8 @@ public class DiagramPresenter implements Initializable {
     private void setArrows() {
         originalDataSolutionArrow.getChildren().add(returnArrow(60,0,250,0));
         partialDataSolutionArrow.getChildren().add(returnArrow(60,0,250,0));
-        datasArrow.getChildren().add(returnArrow(0,0,0,60));
-        solutionsArrow.getChildren().add(returnArrow(0,60,0,0));
+        datasArrow.getChildren().add(returnArrow(0,0,0,100));
+        solutionsArrow.getChildren().add(returnArrow(0,100,0,0));
     }
     private Arrow returnArrow(double startX, double startY, double endX, double endY){
         Arrow arrow = new Arrow();

@@ -39,7 +39,7 @@ public abstract class BaseDiagram {
     protected String inputFormatting;
     protected BaseDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
         this.diagramActions = builder;
-        diagramData = FileUtils.returnDiagramDataFromInputStream(diagramDataName);
+        diagramData = FileUtils.returnObjectFromInputStream(diagramDataName,DiagramData.class);
         this.params =new HashMap<>();
         this.heading = new SimpleStringProperty(diagramData.getHeading());
         this.type = DiagramType.valueOf(diagramData.getType());
