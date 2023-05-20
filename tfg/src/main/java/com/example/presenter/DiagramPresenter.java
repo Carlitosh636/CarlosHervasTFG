@@ -8,8 +8,6 @@ import com.example.exceptions.IncorrectSelectionException;
 import com.example.model.Arrow;
 import com.example.model.GeneratorData;
 import com.example.utils.FileUtils;
-import com.github.mustachejava.DefaultMustacheFactory;
-import com.github.mustachejava.Mustache;
 import javafx.beans.property.SimpleStringProperty;
 import com.github.mustachejava.MustacheFactory;
 import javafx.fxml.FXML;
@@ -23,22 +21,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.net.URL;
 import java.util.*;
 
 public class DiagramPresenter implements Initializable {
     @FXML
-    WebView generatedCodeTemplate;
-    WebEngine generatedCodeWebEngine;
-    @FXML
     AnchorPane root;
     private BaseDiagram model;
     @FXML
     public TextArea heading;
+    @FXML
+    TextArea generatedCodeTemplate;
     @FXML
     StackPane originalDataSolutionArrow;
     @FXML
@@ -71,8 +65,6 @@ public class DiagramPresenter implements Initializable {
     VBox subSolutions;
     private final HashMap<String,String> generatedCodeText = new HashMap<>();
     private GeneratorData generatorData;
-    private MustacheFactory mf;
-    private Mustache m;
     private PresenterButtonHandler buttonHandler;
     private PresenterInputHandler inputHandler;
     @Override
@@ -93,27 +85,15 @@ public class DiagramPresenter implements Initializable {
 
         buttonHandler = new PresenterButtonHandler();
         inputHandler = new PresenterInputHandler(model.getInputFormatting());
-        generatedCodeWebEngine = generatedCodeTemplate.getEngine();
-        mf = new DefaultMustacheFactory();
-        m = mf.compile("generatedCodeTemplate.mustache");
 
         generatedCodeText.put("functionName","FUNCIÓN");
         generatedCodeText.put("baseCase","\nCASO(S) BASE");
         generatedCodeText.put("returnValue","\nCASO(S) BASE");
         generatedCodeText.put("recursiveCases","\nCASO(S) RECURSIVOS");
         generatedCodeText.put("auxFunctions","\n");
-        updateMustacheTemplate();
-    }
-    private void updateMustacheTemplate(){
-        StringWriter wr = new StringWriter();
-        String html;
-        try {
-            m.execute(wr,generatedCodeText).flush();
-            html = wr.toString();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        generatedCodeWebEngine.loadContent(html);
+
+        generatedCodeTemplate.setText("AQUI Y CADA VEZ QUE SE ACTUALIZE EN GENCODE TENEMOS QUE HACER UN SET TEXT DEL GENERATED CODE TEXT");
+
     }
 
     public DiagramPresenter(BaseDiagram model,String pathName) throws IOException {
@@ -278,7 +258,6 @@ public class DiagramPresenter implements Initializable {
                 generatedCodeText.put("auxFunctions","");
             }
             generatedCodeText.put("recursiveCases",generatorData.recursiveCases.get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-            updateMustacheTemplate();
         }
 
         catch (Exception e){
@@ -292,7 +271,6 @@ public class DiagramPresenter implements Initializable {
 
     private void updateGenCodeParams(String genCodeTextKey, String value) {
         generatedCodeText.put(genCodeTextKey,value);
-        updateMustacheTemplate();
     }
 
     private void refreshDiagram(){
@@ -329,7 +307,6 @@ public class DiagramPresenter implements Initializable {
             generatedCodeText.put("returnValue","\nCASO(S) BASE");
             generatedCodeText.put("recursiveCases","\nCASO(S) RECURSIVOS");
             generatedCodeText.put("auxFunctions","\n");
-            updateMustacheTemplate();
         }
     }
 

@@ -1,0 +1,13 @@
+.text-area{
+    text-area-background: #0a0d24
+}
+#genCodeBackground{
+    -fx-font-size: 18;
+    -fx-text-fill: #00cc1b;
+    -fx-font-family: "consolas", sans-serif;
+    -fx-line-height: 21px;
+}
+
+.text-area .content {
+    -fx-background-color: text-area-background;
+}

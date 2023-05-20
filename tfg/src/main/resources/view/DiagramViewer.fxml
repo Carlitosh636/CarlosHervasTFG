@@ -4,9 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.web.*?>
 
-<AnchorPane fx:id="root" style="-fx-background-color: #000833;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presenter.DiagramPresenter">
+<AnchorPane fx:id="root" style="-fx-background-color: #404CA8;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presenter.DiagramPresenter">
    <VBox maxHeight="1080.0" maxWidth="1920.0">
       <HBox spacing="30.0">
          <TextArea fx:id="heading" editable="false" maxWidth="1000.0" prefHeight="250.0" prefWidth="800.0" stylesheets="@../css/header.css" text="ENUNCIADO&#10;&#10;">
@@ -14,7 +13,11 @@
                <Font size="24.0" />
             </font>
          </TextArea>
-         <WebView fx:id="generatedCodeTemplate" maxHeight="250.0" maxWidth="900.0" minHeight="-1.0" minWidth="-1.0" prefHeight="250.0" prefWidth="700.0" />
+         <TextArea id="genCodeBackground" fx:id="generatedCodeTemplate" editable="false" layoutX="20.0" layoutY="20.0" maxWidth="1000.0" prefHeight="250.0" prefWidth="600.0" stylesheets="@../css/gen-code-style.css" text="&#10;&#10;">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </TextArea>
          <VBox.margin>
             <Insets />
          </VBox.margin>
@@ -133,8 +136,8 @@
                </padding>
             </Label>
          </GridPane>
-         <VBox spacing="20.0" fx:id="buttonsBox">
-            <Button id="greenButton" fx:id="resetDiagram" onAction="#resetDiagram" stylesheets="@../css/button.css" text="Reiniciar datos" textFill="WHITE">
+         <VBox fx:id="buttonsBox" spacing="20.0">
+            <Button id="button1" fx:id="resetDiagram" onAction="#resetDiagram" stylesheets="@../css/button.css" text="Reiniciar datos" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -142,7 +145,7 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button id="redButton" fx:id="returnMenuButton" onAction="#returnToMenu" stylesheets="@../css/button.css" text="Volver al menú" textFill="WHITE">
+            <Button id="button2" fx:id="returnMenuButton" onAction="#returnToMenu" stylesheets="@../css/button.css" text="Volver al menú" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

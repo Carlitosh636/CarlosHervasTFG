@@ -2,19 +2,19 @@
     -fx-background-radius: 15;
     -fx-background-insets: 0;
 }
-#redButton{
-    -fx-background-color: linear-gradient(#ff5400, #be1d00);
-    -fx-text-fill: white;
+#button2{
+    -fx-background-color: #7c40ad;
+    -fx-text-fill: black;
 }
-#redButton:hover{
-    -fx-background-color: linear-gradient(#b50000, #590000);
-    -fx-text-fill: white;
+#button2:hover{
+    -fx-background-color: #6c3896;
+    -fx-text-fill: black;
 }
-#greenButton{
-    -fx-background-color: linear-gradient(#34eb7a, #239e52);
-        -fx-text-fill: black;
+#button1{
+    -fx-background-color: #40A89D;
+    -fx-text-fill: black;
 }
-#greenButton:hover{
-    -fx-background-color: linear-gradient(#2abf63, #19783d);
-        -fx-text-fill: black;
+#button1:hover{
+    -fx-background-color: #369188;
+    -fx-text-fill: black;
 }
