@@ -62,7 +62,7 @@ public class DiagramPresenter implements Initializable {
     VBox subParameters;
     @FXML
     VBox subSolutions;
-    private final HashMap<String,String> generatedCodeText = new HashMap<>();
+    private final LinkedHashMap<String,String> generatedCodeText = new LinkedHashMap<>();
     private GeneratorData generatorData;
     private PresenterButtonHandler buttonHandler;
     private PresenterInputHandler inputHandler;
@@ -86,13 +86,18 @@ public class DiagramPresenter implements Initializable {
         inputHandler = new PresenterInputHandler(model.getInputFormatting());
 
         generatedCodeText.put("functionName","FUNCIÓN");
-        generatedCodeText.put("baseCase","\nCASO(S) BASE");
-        generatedCodeText.put("returnValue","\nCASO(S) BASE");
-        generatedCodeText.put("recursiveCases","\nCASO(S) RECURSIVOS");
-        generatedCodeText.put("auxFunctions","\n");
+        generatedCodeText.put("baseCase","CASO(S) BASE");
+        generatedCodeText.put("returnValue","CASO(S) BASE");
+        generatedCodeText.put("recursiveCases","CASO(S) RECURSIVOS");
+        generatedCodeText.put("auxFunctions","");
+        setGenText();
+    }
 
-        generatedCodeTemplate.setText("AQUI Y CADA VEZ QUE SE ACTUALIZE EN GENCODE TENEMOS QUE HACER UN SET TEXT DEL GENERATED CODE TEXT");
-
+    private void setGenText() {
+        generatedCodeTemplate.textProperty().set("");
+        generatedCodeText.values().forEach(val->{
+            generatedCodeTemplate.textProperty().set(generatedCodeTemplate.getText() + val + "\n");
+        });
     }
 
     public DiagramPresenter(BaseDiagram model,String pathName) throws IOException {
@@ -177,8 +182,9 @@ public class DiagramPresenter implements Initializable {
         String functionName = model.processFunctionName(0);
         Map<String,String> genValues = model.processProblemSizeAndBaseCases();
         updateGenCodeParams("functionName",functionName);
-        updateGenCodeParams("baseCase",genValues.get("baseCase"));
-        updateGenCodeParams("returnValue",genValues.get("returnValue"));
+        updateGenCodeParams("baseCase","\t"+genValues.get("baseCase"));
+        updateGenCodeParams("returnValue","\t\t"+genValues.get("returnValue"));
+        setGenText();
     }
 
     public void onDecompositionChange() {
@@ -251,12 +257,13 @@ public class DiagramPresenter implements Initializable {
                 calculatedSolution.setStyle("-fx-text-fill: #f2433a;");
             }
             if(model.getType() == DiagramType.valueOf("COMPLEX")){
-                generatedCodeText.put("auxFunctions",generatorData.auxFunctions.get(decompositionSelect.getSelectionModel().getSelectedIndex()));
+                updateGenCodeParams("auxFunctions",generatorData.auxFunctions.get(decompositionSelect.getSelectionModel().getSelectedIndex()));
             }
             else{
-                generatedCodeText.put("auxFunctions","");
+                updateGenCodeParams("auxFunctions","");
             }
-            generatedCodeText.put("recursiveCases",generatorData.recursiveCases.get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
+            updateGenCodeParams("recursiveCases","\telse"+generatorData.recursiveCases.get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
+            setGenText();
         }
 
         catch (Exception e){
@@ -302,10 +309,11 @@ public class DiagramPresenter implements Initializable {
             subSolutions.setVisible(false);
             originalSolution.setVisible(false);
             generatedCodeText.put("functionName","FUNCIÓN");
-            generatedCodeText.put("baseCase","\nCASO(S) BASE");
-            generatedCodeText.put("returnValue","\nCASO(S) BASE");
-            generatedCodeText.put("recursiveCases","\nCASO(S) RECURSIVOS");
-            generatedCodeText.put("auxFunctions","\n");
+            generatedCodeText.put("baseCase","CASO(S) BASE");
+            generatedCodeText.put("returnValue","CASO(S) BASE");
+            generatedCodeText.put("recursiveCases","CASO(S) RECURSIVOS");
+            generatedCodeText.put("auxFunctions","");
+            setGenText();
         }
     }
 
@@ -315,6 +323,7 @@ public class DiagramPresenter implements Initializable {
         datasArrow.getChildren().add(returnArrow(0,0,0,100));
         solutionsArrow.getChildren().add(returnArrow(0,100,0,0));
     }
+
     private Arrow returnArrow(double startX, double startY, double endX, double endY){
         Arrow arrow = new Arrow();
         arrow.setStartX(startX);
