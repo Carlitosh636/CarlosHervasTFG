@@ -3,7 +3,6 @@ module tfg {
     requires javafx.fxml;
     requires javafx.web;
     requires com.fasterxml.jackson.databind;
-    requires com.github.mustachejava;
 
     opens com.example to javafx.fxml;
     exports com.example;

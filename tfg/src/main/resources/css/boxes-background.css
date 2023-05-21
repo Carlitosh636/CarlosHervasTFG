@@ -2,10 +2,14 @@
     -fx-border-style: solid;
     -fx-border-width: 2;
     -fx-border-insets: 5;
-    -fx-border-color: blue transparent transparent transparent;
+    -fx-border-color: #58e8da;
+    -fx-background-color: #306382;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+
 }
 #diagramDataHolders{
-    -fx-background-color: #05235e;
+    -fx-background-color: #215954;
     -fx-background-radius: 15;
 
 }

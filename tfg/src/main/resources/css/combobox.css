@@ -53,12 +53,12 @@
 }
 #combo-box-3{
     -fx-background-color:
-        #FFD58C;
+        #be7be8;
     -fx-background-radius : 30px;
 }
 #combo-box-3:hover{
     -fx-background-color:
-        #bf9f67;
+        #ab6fd1;
     -fx-background-radius : 30px;
 }
 #combo-box-3 .list-view{

@@ -9,7 +9,6 @@ import com.example.model.Arrow;
 import com.example.model.GeneratorData;
 import com.example.utils.FileUtils;
 import javafx.beans.property.SimpleStringProperty;
-import com.github.mustachejava.MustacheFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
