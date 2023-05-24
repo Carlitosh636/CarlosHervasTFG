@@ -308,11 +308,6 @@ public class DiagramPresenter implements Initializable {
             subParameters.setVisible(false);
             subSolutions.setVisible(false);
             originalSolution.setVisible(false);
-            generatedCodeText.put("functionName","FUNCIÓN");
-            generatedCodeText.put("baseCase","CASO(S) BASE");
-            generatedCodeText.put("returnValue","CASO(S) BASE");
-            generatedCodeText.put("recursiveCases","CASO(S) RECURSIVOS");
-            generatedCodeText.put("auxFunctions","");
             setGenText();
         }
     }

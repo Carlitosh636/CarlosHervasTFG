@@ -1,9 +1,8 @@
 -Generador de código:
-    -Cargarse el mustache, usar un text area y poner las cosas ahi con el map igual que antes.
     -Ahora se parsean el nombre de funcion y caso base, ahora toca casos recursivos.
 
--Cambiar los combobox de color, y que sea todo consitente.
+-Los diagramas que tengan varios subproblemas posibles (como impar en potencia) deberían generarse diagramas (o subproblemas) abajo, no ser opciones distinas
 
--Poner nueva excepción para el caso de IOException y similares, y que la app tire un dialog con error en tal caso.
+-Poner nueva excepción para el caso de IOException y similares, y que la app tire un dialog con error en tal caso. En general mirar el tema de las excepciones.
 -quicksort hacer mejor con partición de hoare
 -mejorar enunciados

@@ -1,6 +1,7 @@
 .button{
     -fx-background-radius: 15;
     -fx-background-insets: 0;
+    -fx-cursor:hand;
 }
 #button2{
     -fx-background-color: #7c40ad;
