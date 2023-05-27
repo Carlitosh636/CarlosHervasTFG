@@ -2,9 +2,7 @@ package com.example.presenter;
 
 import com.example.diagrams.BaseDiagram;
 import com.example.enums.DiagramType;
-import com.example.exceptions.AlertTypeIndexOutOfBounds;
-import com.example.exceptions.BaseCaseException;
-import com.example.exceptions.IncorrectSelectionException;
+import com.example.exceptions.*;
 import com.example.model.Arrow;
 import com.example.model.GeneratorData;
 import com.example.utils.FileUtils;
@@ -65,7 +63,7 @@ public class DiagramPresenter implements Initializable {
     private final LinkedHashMap<String,String> generatedCodeText = new LinkedHashMap<>();
     private GeneratorData generatorData;
     private PresenterButtonHandler buttonHandler;
-    private PresenterInputHandler inputHandler;
+    private ExceptionHandler inputHandler;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
@@ -83,7 +81,7 @@ public class DiagramPresenter implements Initializable {
         subSolutions.setVisible(false);
 
         buttonHandler = new PresenterButtonHandler();
-        inputHandler = new PresenterInputHandler(model.getInputFormatting());
+        inputHandler = new ExceptionHandler(model.getInputFormatting());
 
         generatedCodeText.put("functionName","FUNCIÓN");
         generatedCodeText.put("baseCase","CASO(S) BASE");
@@ -164,13 +162,13 @@ public class DiagramPresenter implements Initializable {
                                     model.getSubSolutions().clear();
 
                                 } catch (Exception e) {
-                                    showErrorInputAlert(new RuntimeException("Error al introducir los datos de entrada"));
+                                    showErrorInputAlert(new IncorrectInputException("Error al introducir los datos de entrada"));
                                     e.printStackTrace();
                                 }
                                 refreshDiagram();
                             }
                         } catch (Exception e) {
-                            showErrorInputAlert(new RuntimeException("Error al introducir los datos de entrada"));
+                            showErrorInputAlert(new IncorrectInputException("Error al introducir los datos de entrada"));
                             e.printStackTrace();
                         }
                     }
@@ -286,8 +284,12 @@ public class DiagramPresenter implements Initializable {
         decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
     }
     @FXML
-    public void returnToMenu() throws IOException, AlertTypeIndexOutOfBounds {
-        buttonHandler.returnToMenu(1,"Confirmación","¿Estas seguro de que quieres volver al menú?",diagramGrid);
+    public void returnToMenu() {
+        try {
+            buttonHandler.returnToMenu(1,"Confirmación","¿Estas seguro de que quieres volver al menú?",diagramGrid);
+        } catch (AlertTypeIndexOutOfBounds | InternallyCausedRuntimeException e) {
+            showErrorInputAlert(e);
+        }
     }
 
     @FXML
