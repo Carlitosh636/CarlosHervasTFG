@@ -1,6 +1,6 @@
 {
   "type" : "SIMPLE",
-  "heading" : "Dados a, b ∈ N, hallar su suma. Solo se puede sumar o restar una unidad\na los números.\nEjemplo: f(s,b) = a + b. Para a = 3 y b = 5, f(3,5) = 8",
+  "heading" : "Dados a, b ∈ N, hallar su suma. Solo se puede sumar o restar una unidad a los números.\nEjemplo: f(s,b) = a + b. Para a = 3 y b = 5, f(3,5) = 8",
   "params" : {
     "a" : "",
     "b" : ""

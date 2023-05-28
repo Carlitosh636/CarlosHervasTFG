@@ -105,6 +105,7 @@ public class DiagramPresenter implements Initializable {
         model.currentBaseCaseProperty().bind(baseCaseSelect.getSelectionModel().selectedIndexProperty());
         model.currentReductionProperty().bind(decompositionSelect.getSelectionModel().selectedIndexProperty());
         model.selectedSolutionProperty().bind(solutionSelect.getSelectionModel().selectedIndexProperty());
+        heading.setWrapText(true);
         heading.textProperty().bind(model.headingProperty());
     }
     public void onChangeProblemSize() {
