@@ -13,10 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import java.io.IOException;
 import java.net.URL;
@@ -136,11 +133,16 @@ public class DiagramPresenter implements Initializable {
         if(originalData.getChildren().isEmpty()){
             List<TextField> tfs = new ArrayList<>();
             for(String s : model.getParams().keySet()){
+                HBox box = new HBox();
+                Label paramName = new Label(s+" = ");
+                paramName.setFont(originalSolution.getFont());
+                paramName.setStyle("-fx-text-fill: white;-fx-font-size: 18;");
                 TextField tf = new TextField();
-                tf.setPromptText(s);
                 tf.setFont(originalSolution.getFont());
                 tf.setMaxWidth(100);
                 tf.setMaxHeight(30);
+                box.getChildren().addAll(paramName,tf);
+                originalData.getChildren().add(box);
                 tfs.add(tf);
                 model.getParams().get(s).bindBidirectional(tf.textProperty());
                 tf.setOnAction(actionEvent1 -> {
@@ -174,7 +176,6 @@ public class DiagramPresenter implements Initializable {
                     }
                 });
             }
-            originalData.getChildren().addAll(tfs);
         }
         diagramGrid.setVisible(true);
         String functionName = model.processFunctionName(0);
@@ -243,16 +244,16 @@ public class DiagramPresenter implements Initializable {
             if(model.checkSolutionsEqual(calcSol)){
                 if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(model.getCurrentReductionSolutions())){
                     calculatedSolution.setText("Incorrecto! La operación da esta solución pero no para todos los casos\nValor calculado: "+model.getCalculatedSol());
-                    calculatedSolution.setStyle("-fx-text-fill: #f2433a;");
+                    calculatedSolution.setStyle("-fx-text-fill: #ff0015;");
                 }
                 else{
                     calculatedSolution.setText("Correcto!\nValor calculado: "+model.getCalculatedSol());
-                    calculatedSolution.setStyle("-fx-text-fill: #48f542;");
+                    calculatedSolution.setStyle("-fx-text-fill: #03fc77;");
                 }
             }
             else{
                 calculatedSolution.setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
-                calculatedSolution.setStyle("-fx-text-fill: #f2433a;");
+                calculatedSolution.setStyle("-fx-text-fill: #ff0015;");
             }
             if(model.getType() == DiagramType.valueOf("COMPLEX")){
                 updateGenCodeParams("auxFunctions",generatorData.auxFunctions.get(decompositionSelect.getSelectionModel().getSelectedIndex()));
