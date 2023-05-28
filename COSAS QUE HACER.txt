@@ -1,7 +1,5 @@
 -Generador de código:
     -Ahora se parsean el nombre de funcion y caso base, ahora toca casos recursivos.
-
--Los diagramas que tengan varios subproblemas posibles (como impar en potencia) deberían generarse diagramas (o subproblemas) abajo, no ser opciones distinas
-
+-Arreglar el reiniciar datos de diagrama, no funciona al darle "Si"
 -quicksort hacer mejor con partición de hoare
 -mejorar enunciados

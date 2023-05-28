@@ -43,7 +43,7 @@ public class MenuPresenter {
         buttonsPaths.put(b2,new ButtonRelatedData(new ArithmeticDiagram(new SlowAdditionDiagram(),"/diagramData/SlowAdditionData.json"),"/generatedData/SlowAdditionGeneration.json"));
         buttonsPaths.put(b3,new ButtonRelatedData(new ArraySortingDiagram(new ArraySortDiagram(),"/diagramData/SortListData.json"),"/generatedData/SortListGeneration.json"));
         buttonsPaths.put(b4,new ButtonRelatedData(new StringDiagram(new ReverseStringDiagram(),"/diagramData/ReverseStringData.json"),"/generatedData/ReverseStringGeneration.json"));
-        buttonsPaths.put(b5,new ButtonRelatedData(new StringDiagram(new EqualStringsDiagram(),"/diagramData/EqualStringsData.json"),"/generatedData/ReverseStringGeneration.json"));
+        buttonsPaths.put(b5,new ButtonRelatedData(new StringDiagram(new EqualStringsDiagram(),"/diagramData/EqualStringsData.json"),"/generatedData/none.json"));
         buttonsPaths.forEach((k,v)-> k.setOnAction(actionEvent -> {
             model = v.getBaseDiagram();
             try {

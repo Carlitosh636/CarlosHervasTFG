@@ -19,3 +19,11 @@
     -fx-background-color: #369188;
     -fx-text-fill: black;
 }
+#button3{
+    -fx-background-color: #4080A8;
+    -fx-text-fill: black;
+}
+#button3:hover{
+    -fx-background-color: #387194;
+    -fx-text-fill: black;
+}

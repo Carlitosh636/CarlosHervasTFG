@@ -137,7 +137,7 @@
             </Label>
          </GridPane>
          <VBox fx:id="buttonsBox" spacing="20.0">
-            <Button id="button1" fx:id="resetDiagram" onAction="#resetDiagram" stylesheets="@../css/button.css" text="Reiniciar datos" textFill="WHITE">
+            <Button id="button1" fx:id="resetDiagram" onAction="#resetDiagram" prefWidth="175.0" stylesheets="@../css/button.css" text="Reiniciar datos" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -145,7 +145,15 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button id="button2" fx:id="returnMenuButton" onAction="#returnToMenu" stylesheets="@../css/button.css" text="Volver al menú" textFill="WHITE">
+            <Button id="button2" fx:id="returnMenuButton" onAction="#returnToMenu" prefWidth="175.0" stylesheets="@../css/button.css" text="Volver al menú" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button id="button3" fx:id="showMoreFunctions" layoutX="20.0" layoutY="70.0" onAction="#showMoreFuncs" prefWidth="175.0" stylesheets="@../css/button.css" text="Mostrar funciones auxiliares" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

@@ -9,10 +9,7 @@ import com.example.utils.FileUtils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import java.io.IOException;
@@ -57,6 +54,8 @@ public class DiagramPresenter implements Initializable {
     VBox subParameters;
     @FXML
     VBox subSolutions;
+    @FXML
+    Button showMoreFunctions;
     private final LinkedHashMap<String,String> generatedCodeText = new LinkedHashMap<>();
     private GeneratorData generatorData;
     private PresenterButtonHandler buttonHandler;
@@ -76,7 +75,6 @@ public class DiagramPresenter implements Initializable {
         originalSolution.setVisible(false);
         subParameters.setVisible(false);
         subSolutions.setVisible(false);
-
         buttonHandler = new PresenterButtonHandler();
         inputHandler = new ExceptionHandler(model.getInputFormatting());
 
@@ -86,6 +84,8 @@ public class DiagramPresenter implements Initializable {
         generatedCodeText.put("recursiveCases","CASO(S) RECURSIVOS");
         generatedCodeText.put("auxFunctions","");
         setGenText();
+        showMoreFunctions.setVisible(false);
+
     }
 
     private void setGenText() {
@@ -98,6 +98,7 @@ public class DiagramPresenter implements Initializable {
     public DiagramPresenter(BaseDiagram model,String pathName) throws IOException {
         this.model = model;
         generatorData = FileUtils.returnObjectFromInputStream(pathName,GeneratorData.class);
+
     }
     protected void bindModelData() {
         originalSolution.textProperty().bind(model.originalSolProperty());
@@ -256,13 +257,10 @@ public class DiagramPresenter implements Initializable {
                 calculatedSolution.setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
                 calculatedSolution.setStyle("-fx-text-fill: #ff0015;");
             }
-            if(model.getType() == DiagramType.valueOf("COMPLEX")){
-                updateGenCodeParams("auxFunctions",generatorData.auxFunctions.get(decompositionSelect.getSelectionModel().getSelectedIndex()));
-            }
-            else{
-                updateGenCodeParams("auxFunctions","");
-            }
             updateGenCodeParams("recursiveCases","\telse"+generatorData.recursiveCases.get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
+            if(!generatorData.auxFunctions.isEmpty()){
+                showMoreFunctions.setVisible(true);
+            }
             setGenText();
         }
 
@@ -295,6 +293,12 @@ public class DiagramPresenter implements Initializable {
     }
 
     @FXML
+    public void showMoreFuncs() {
+        updateGenCodeParams("auxFunctions",generatorData.auxFunctions.get(decompositionSelect.getSelectionModel().getSelectedIndex()));
+        setGenText();
+    }
+
+    @FXML
     public void resetDiagram() throws AlertTypeIndexOutOfBounds {
         String action = buttonHandler.resetDiagram(1,"Confirmación","¿Estas seguro de que quieres borrar todos los valores introducidos y reinciar el diagrama?",generatedCodeText);
         if(action.equals("OK")){
@@ -312,6 +316,7 @@ public class DiagramPresenter implements Initializable {
             subParameters.setVisible(false);
             subSolutions.setVisible(false);
             originalSolution.setVisible(false);
+            showMoreFunctions.setVisible(false);
             setGenText();
         }
     }
