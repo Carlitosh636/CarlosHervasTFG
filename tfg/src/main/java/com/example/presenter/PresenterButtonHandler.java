@@ -32,7 +32,7 @@ public class PresenterButtonHandler extends ButtonHandler {
     public String resetDiagram(int alertTypeIndex,String title, String content, Map<String,String> genCode) throws AlertTypeIndexOutOfBounds {
         ButtonType action =  super.setAlertDataAndStyle(alertTypeIndex,title,content).orElse(null);
         assert action != null;
-        if(action.equals(ButtonType.OK)){
+        if(action.equals(okButton)){
             genCode.put("functionName","FUNCIÓN");
             genCode.put("baseCase","CASO(S) BASE");
             genCode.put("returnValue","CASO(S) BASE");

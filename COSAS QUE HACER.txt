@@ -1,5 +1,4 @@
 -Generador de código:
     -Ahora se parsean el nombre de funcion y caso base, ahora toca casos recursivos.
--Arreglar el reiniciar datos de diagrama, no funciona al darle "Si"
 -quicksort hacer mejor con partición de hoare
 -mejorar enunciados
