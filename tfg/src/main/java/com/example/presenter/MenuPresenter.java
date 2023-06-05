@@ -3,6 +3,7 @@ package com.example.presenter;
 import com.example.diagrams.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,6 +26,8 @@ class ButtonRelatedData{
 }
 public class MenuPresenter {
     @FXML
+    AnchorPane anchor;
+    @FXML
     Button b1;
     @FXML
     Button b2;
@@ -37,6 +40,7 @@ public class MenuPresenter {
     private final Map<Button,ButtonRelatedData> buttonsPaths = new HashMap<>();
     private BaseDiagram model;
     private MenuButtonHandler menuButtonHandler;
+
     public void initialize() throws IOException {
         menuButtonHandler = new MenuButtonHandler();
         buttonsPaths.put(b1,new ButtonRelatedData(new ArithmeticDiagram(new RecursivePowerDiagram(), "/diagramData/RecursivePotencyData.json"),"/generatedData/RecursivePotencyGeneration.json"));
@@ -53,8 +57,10 @@ public class MenuPresenter {
             }
         }));
     }
+
     @FXML
     private void loadScene(BaseDiagram model,String filePath, Button button) throws IOException {
         menuButtonHandler.loadScene(model, filePath, button);
     }
+
 }

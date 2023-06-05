@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -21,8 +22,7 @@ public class App extends Application {
         stage.show();
         stage.setMaxHeight(1080);
         stage.setMaxWidth(1920);
-        stage.setMinHeight(800);
-        stage.setMinWidth(1600);
-        stage.setMaximized(true);
+        stage.setMinHeight(768);
+        stage.setMinWidth(1336);
     }
 }

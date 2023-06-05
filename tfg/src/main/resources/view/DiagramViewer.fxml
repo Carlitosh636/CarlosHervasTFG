@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="root" style="-fx-background-color: #404CA8;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presenter.DiagramPresenter">
-   <VBox maxHeight="1080.0" maxWidth="1920.0">
+   <VBox alignment="TOP_CENTER" maxHeight="1080.0" maxWidth="1920.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
       <HBox spacing="30.0">
          <TextArea fx:id="heading" editable="false" maxWidth="1000.0" prefHeight="250.0" prefWidth="800.0" stylesheets="@../css/header.css" text="ENUNCIADO&#10;&#10;">
             <font>
@@ -22,13 +22,10 @@
             <Insets />
          </VBox.margin>
          <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="20.0" />
          </padding>
       </HBox>
       <HBox spacing="50.0">
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
          <VBox id="background" fx:id="SizeAndBaseCaseBox" prefHeight="300.0" prefWidth="300.0" spacing="10.0" stylesheets="@../css/boxes-background.css">
             <padding>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -73,12 +70,12 @@
             </padding>
             <VBox fx:id="originalData" minHeight="-Infinity" minWidth="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <StackPane fx:id="originalDataSolutionArrow" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label fx:id="calculatedSolution" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <Label fx:id="calculatedSolution" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label id="diagramDataHolders" fx:id="originalSolution" alignment="CENTER" contentDisplay="CENTER" stylesheets="@../css/boxes-background.css" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Label id="diagramDataHolders" fx:id="originalSolution" alignment="CENTER" contentDisplay="CENTER" stylesheets="@../css/boxes-background.css" textFill="WHITE" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
@@ -89,7 +86,7 @@
             <StackPane fx:id="datasArrow" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <StackPane fx:id="solutionsArrow" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <VBox id="diagramDataHolders" fx:id="subParameters" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
-               <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT">
+               <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" wrapText="true">
                   <font>
                      <Font size="15.0" />
                   </font>
@@ -100,7 +97,7 @@
             </VBox>
             <StackPane fx:id="partialDataSolutionArrow" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <VBox id="diagramDataHolders" fx:id="subSolutions" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="3" GridPane.rowIndex="5">
-               <Label alignment="CENTER" contentDisplay="CENTER">
+               <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
                   <font>
                      <Font size="15.0" />
                   </font>
@@ -136,7 +133,7 @@
                </padding>
             </Label>
          </GridPane>
-         <VBox fx:id="buttonsBox" spacing="20.0">
+         <VBox id="background" fx:id="buttonsBox" spacing="20.0" stylesheets="@../css/boxes-background.css">
             <Button id="button1" fx:id="resetDiagram" onAction="#resetDiagram" prefWidth="175.0" stylesheets="@../css/button.css" text="Reiniciar datos" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <opaqueInsets>
                   <Insets />
