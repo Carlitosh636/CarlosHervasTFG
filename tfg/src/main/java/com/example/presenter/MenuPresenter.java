@@ -53,14 +53,15 @@ public class MenuPresenter {
             try {
                 loadScene(model,v.getGenFilePath(),k);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                //throw new RuntimeException(e);
+                //TODO: MANAGE INTERNALLY
             }
         }));
     }
 
     @FXML
     private void loadScene(BaseDiagram model,String filePath, Button button) throws IOException {
-        menuButtonHandler.loadScene(model, filePath, button);
+        menuButtonHandler.loadVisualizer(model, filePath, button);
     }
 
 }

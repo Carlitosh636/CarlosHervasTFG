@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class MenuButtonHandler extends ButtonHandler {
 
-    public void loadScene(BaseDiagram model, String filePath, Button button) throws IOException {
+    public void loadVisualizer(BaseDiagram model, String filePath, Button button) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramViewer.fxml"));
         loader.setControllerFactory(controller-> {
             try {

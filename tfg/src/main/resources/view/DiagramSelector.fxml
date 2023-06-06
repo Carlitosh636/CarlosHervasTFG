@@ -6,59 +6,65 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="anchor" style="-fx-background-color: #404CA8;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presenter.MenuPresenter">
-   <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
-      <children>
-         <Label alignment="CENTER" contentDisplay="CENTER" text="Selecciona un problema" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font size="36.0" />
-            </font>
-            <padding>
-               <Insets left="20.0" right="20.0" />
-            </padding>
-         </Label>
-         <GridPane id="background" alignment="CENTER" hgap="10.0" maxWidth="900.0" stylesheets="@../css/boxes-background.css" vgap="20.0">
-            <columnConstraints>
-               <ColumnConstraints />
-               <ColumnConstraints />
-               <ColumnConstraints />
-               <ColumnConstraints />
-               <ColumnConstraints />
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints />
-            </rowConstraints>
-            <padding>
-               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </padding>
-            <Button id="button1" fx:id="b1" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="Cálculo de la potencia" GridPane.columnIndex="0" GridPane.rowIndex="0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
-            <Button id="button1" fx:id="b2" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="Suma lenta" GridPane.columnIndex="1" GridPane.rowIndex="0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
-            <Button id="button1" fx:id="b3" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="Ordenación de lista" GridPane.columnIndex="2" GridPane.rowIndex="0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
-            <Button id="button1" fx:id="b4" layoutX="450.0" layoutY="30.0" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="Revertir string" GridPane.columnIndex="3">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
-            <Button id="button1" fx:id="b5" layoutX="552.0" layoutY="30.0" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="¿Strings son iguales?" GridPane.columnIndex="4">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
-         </GridPane>
-      </children>
+   <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+         AnchorPane.topAnchor="20.0">
       <padding>
-         <Insets left="20.0" right="20.0" />
+         <Insets left="20.0" right="20.0"/>
       </padding>
+      <Label alignment="CENTER" contentDisplay="CENTER" text="Selecciona un problema" textAlignment="CENTER"
+             textFill="WHITE">
+         <font>
+            <Font size="36.0"/>
+         </font>
+         <padding>
+            <Insets left="20.0" right="20.0"/>
+         </padding>
+      </Label>
+      <GridPane id="background" alignment="CENTER" hgap="10.0" maxWidth="900.0"
+                stylesheets="@../css/boxes-background.css" vgap="20.0">
+         <columnConstraints>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints/>
+         </rowConstraints>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+         </padding>
+         <Button id="button1" fx:id="b1" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css"
+                 text="Cálculo de la potencia" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <font>
+               <Font size="16.0"/>
+            </font>
+         </Button>
+         <Button id="button1" fx:id="b2" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css"
+                 text="Suma lenta" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <font>
+               <Font size="16.0"/>
+            </font>
+         </Button>
+         <Button id="button1" fx:id="b3" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css"
+                 text="Ordenación de lista" GridPane.columnIndex="2" GridPane.rowIndex="0">
+            <font>
+               <Font size="16.0"/>
+            </font>
+         </Button>
+         <Button id="button1" fx:id="b4" layoutX="450.0" layoutY="30.0" mnemonicParsing="false" prefHeight="50.0"
+                 stylesheets="@../css/button.css" text="Revertir string" GridPane.columnIndex="3">
+            <font>
+               <Font size="16.0"/>
+            </font>
+         </Button>
+         <Button id="button1" fx:id="b5" layoutX="552.0" layoutY="30.0" mnemonicParsing="false" prefHeight="50.0"
+                 stylesheets="@../css/button.css" text="¿Strings son iguales?" GridPane.columnIndex="4">
+            <font>
+               <Font size="16.0"/>
+            </font>
+         </Button>
+      </GridPane>
    </VBox>
 </AnchorPane>
