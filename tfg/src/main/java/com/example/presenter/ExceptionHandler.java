@@ -12,6 +12,7 @@ public class ExceptionHandler {
         errorMessageMap.put("BaseCaseException","Revisa el contenido, no puedes introducir un caso base o una solución como parámetro");
         errorMessageMap.put("IncorrectSelectionException","Esta opción es incorrecta, elige otra");
         errorMessageMap.put("InternallyCausedRuntimeException","Ha ocurrido un error interno en la aplicación.");
+        errorMessageMap.put("IOException","Error al cargar los datos.");
     }
     public void showErrorAlert(Exception exceptionType){
         Alert inputErrorAlert = new Alert(Alert.AlertType.ERROR);

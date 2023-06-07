@@ -59,7 +59,7 @@ public class DiagramPresenter implements Initializable {
     private final LinkedHashMap<String,String> generatedCodeText = new LinkedHashMap<>();
     private GeneratorData generatorData;
     private PresenterButtonHandler buttonHandler;
-    private ExceptionHandler inputHandler;
+    private ExceptionHandler exceptionHandler;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
@@ -76,7 +76,7 @@ public class DiagramPresenter implements Initializable {
         subParameters.setVisible(false);
         subSolutions.setVisible(false);
         buttonHandler = new PresenterButtonHandler();
-        inputHandler = new ExceptionHandler(model.getInputFormatting());
+        exceptionHandler = new ExceptionHandler(model.getInputFormatting());
 
         generatedCodeText.put("functionName","FUNCIÓN");
         generatedCodeText.put("baseCase","CASO(S) BASE");
@@ -270,7 +270,7 @@ public class DiagramPresenter implements Initializable {
     }
 
     public void showErrorInputAlert(Exception e){
-        inputHandler.showErrorAlert(e);
+        exceptionHandler.showErrorAlert(e);
     }
 
     private void updateGenCodeParams(String genCodeTextKey, String value) {

@@ -2,4 +2,3 @@
     -Ahora se parsean el nombre de funcion y caso base, ahora toca casos recursivos.
 -quicksort hacer mejor con partición de hoare
 -mejorar enunciados
-- manejar el error IOException del MenuPresenter.

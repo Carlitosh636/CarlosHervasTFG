@@ -40,9 +40,11 @@ public class MenuPresenter {
     private final Map<Button,ButtonRelatedData> buttonsPaths = new HashMap<>();
     private BaseDiagram model;
     private MenuButtonHandler menuButtonHandler;
+    private ExceptionHandler exceptionHandler;
 
     public void initialize() throws IOException {
         menuButtonHandler = new MenuButtonHandler();
+        exceptionHandler = new ExceptionHandler(null);
         buttonsPaths.put(b1,new ButtonRelatedData(new ArithmeticDiagram(new RecursivePowerDiagram(), "/diagramData/RecursivePotencyData.json"),"/generatedData/RecursivePotencyGeneration.json"));
         buttonsPaths.put(b2,new ButtonRelatedData(new ArithmeticDiagram(new SlowAdditionDiagram(),"/diagramData/SlowAdditionData.json"),"/generatedData/SlowAdditionGeneration.json"));
         buttonsPaths.put(b3,new ButtonRelatedData(new ArraySortingDiagram(new ArraySortDiagram(),"/diagramData/SortListData.json"),"/generatedData/SortListGeneration.json"));
@@ -53,8 +55,7 @@ public class MenuPresenter {
             try {
                 loadScene(model,v.getGenFilePath(),k);
             } catch (IOException e) {
-                //throw new RuntimeException(e);
-                //TODO: MANAGE INTERNALLY
+                exceptionHandler.showErrorAlert(new IOException("Error de datos"));
             }
         }));
     }
