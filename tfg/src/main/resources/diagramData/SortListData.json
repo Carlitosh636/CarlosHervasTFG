@@ -19,6 +19,7 @@
   "returnValues" : [["a"]],
   "reductionChoices" : [ [ "mid = n//2\nv1 = a[:mid]\nv2 = a[mid:]", "tail = a[-1]\na[:-1]", "m = a.remove(min(a))\na","pivot = a[n//2]\nv1=smaller_than(a,pivot)\nv2=greater_than(a,pivot)\nv1,v2" ] ],
   "solutionsChoices" : [ ["Concatenar v1 y v2","Mezclar v1 y v2"],["Insertar tail en lista ordenada","Concatenar tail a la cabeza de f'"],["Concatenar m a la cola de f'","Concatenar m a la cabeza de f'"],["Concatenar pivot a la cabeza de v1 + v2","fConcatenar pivot a la cola de v1 + v2","Concatenar pivot entre v1 y v2"]],
+  "recursiveCases" :[],
   "correctSizeChoices": [0],
   "correctBaseCases": [[0]],
   "correctSolutions" : [ 1,0,1,2 ],

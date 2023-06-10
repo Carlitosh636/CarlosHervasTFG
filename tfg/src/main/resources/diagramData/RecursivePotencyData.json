@@ -20,6 +20,7 @@
   "returnValues": [ [ "1","a" ] ],
   "reductionChoices" : [ [ "a,b - 1", "a,b // 2" ] ],
   "solutionsChoices" : [ [ "f' * b", "f' * a", "f' ** a" ], [ "f' ** 2", "f' * b" ], [ "f' ** 2", "f' * b", "a * f' ** 2" ] ],
+  "recursiveCases" :[],
   "correctSizeChoices": [0],
   "correctBaseCases": [[0,1]],
   "correctSolutions" : [ 1, 0, 2 ],

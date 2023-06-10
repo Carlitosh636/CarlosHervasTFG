@@ -20,6 +20,7 @@
   "returnValues": [ [ "b" ],["a"],["min(a,b)"] ],
   "reductionChoices" : [ [ "a - 1,b","a - 1, b + 1" ], ["a,b - 1","a + 1,b - 1"], ["min(a,b) - 1", "a-1,b-1"] ],
   "solutionsChoices" : [ [ "f' + 1", "f' - 1", "f' + a"],["f' + 1","No hacer nada"],["f' + 1", "f' - 1", "f' + b"],["f' + 1","No hacer nada"], [ "f' + 1", "f' - 1", "f' + min(a,b)"], [ "f' + 1", "f' - 1 + 1", "f' + 1 + 1"] ],
+  "recursiveCases" :[],
   "correctSizeChoices": [0,1,2],
   "correctBaseCases": [[0],[0],[0]],
   "correctSolutions" : [ 0,1,0,1,0,2 ],

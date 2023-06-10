@@ -1,7 +1,7 @@
 {
   "recursiveCases": [[
-    "\n\t\treturn s[0] + reverse_string(s[1:])",
-    "\n\t\treturn reverse_string(s[1:]) + s[0]"
+    "s[0] + reverse_string(s[1:])",
+    "reverse_string(s[1:]) + s[0]"
   ]],
   "auxFunctions": []
 }

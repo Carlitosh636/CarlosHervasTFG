@@ -19,14 +19,15 @@ public class ReverseStringDiagram implements IDiagramActions{
 
     @Override
     public String getFunctionName(int index) {
-        return "def reverse(s):";
+        return "def reverse_string(s):";
     }
 
     @Override
     public Map<String, String> setGenCodeParams(String baseCase, String returnValue) {
         Map<String,String> returnVal = new HashMap<>();
-        returnVal.put("baseCase",String.format("if %s",baseCase));
+        returnVal.put("baseCase",String.format("if %s:",baseCase));
         returnVal.put("returnValue",String.format("return %s",returnValue));
+        returnVal.put("auxCode","char=s[0]");
         return returnVal;
     }
 

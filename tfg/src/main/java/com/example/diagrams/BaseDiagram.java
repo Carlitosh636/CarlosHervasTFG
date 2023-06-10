@@ -30,6 +30,7 @@ public abstract class BaseDiagram {
     protected List<List<String>> baseCaseChoices;
     protected List<List<String>> baseCaseParameters;
     protected List<List<String>> reductionChoices;
+    protected List<List<String>> recursiveCases;
     protected List<List<Supplier>> solutionOperations;
     protected List<List<String>> solutionsChoices;
     protected SimpleIntegerProperty selectedSolution;
@@ -66,6 +67,7 @@ public abstract class BaseDiagram {
         this.correctBaseCases = diagramData.getCorrectBaseCases();
         this.correctSolutions = diagramData.getCorrectSolutions();
         this.inputFormatting = diagramData.getInputFormatting();
+        this.recursiveCases = diagramData.getRecursiveCases();
     }
 
     public abstract void processInputs() throws Exception;
@@ -134,7 +136,9 @@ public abstract class BaseDiagram {
     public SimpleIntegerProperty currentReductionProperty() {
         return currentReduction;
     }
-
+    public List<List<String>> getRecursiveCases() {
+        return recursiveCases;
+    }
     public int getCurrentReductionSolutions() {
         return currentReductionSolutions.get();
     }

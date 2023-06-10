@@ -23,6 +23,7 @@ public class DiagramData implements Serializable {
     private List<List<String>> baseCaseParameters;
     private List<List<String>> reductionChoices;
     private List<List<String>> solutionsChoices;
+    private List<List<String>> recursiveCases;
     private List<Integer> correctSizeChoices;
     private List<List<Integer>> correctBaseCases;
     private List<Integer> correctSolutions;
@@ -77,6 +78,22 @@ public class DiagramData implements Serializable {
 
     public void setCalculatedSol(String calculatedSol) {
         this.calculatedSol = calculatedSol;
+    }
+
+    public String getReducedOperation() {
+        return reducedOperation;
+    }
+
+    public void setReducedOperation(String reducedOperation) {
+        this.reducedOperation = reducedOperation;
+    }
+
+    public List<List<String>> getReturnValues() {
+        return returnValues;
+    }
+
+    public void setReturnValues(List<List<String>> returnValues) {
+        this.returnValues = returnValues;
     }
 
     public int getCurrentProblemSize() {
@@ -143,14 +160,6 @@ public class DiagramData implements Serializable {
         this.baseCaseParameters = baseCaseParameters;
     }
 
-    public List<List<String>> getReturnValues() {
-        return returnValues;
-    }
-
-    public void setReturnValues(List<List<String>> returnValues) {
-        this.returnValues = returnValues;
-    }
-
     public List<List<String>> getReductionChoices() {
         return reductionChoices;
     }
@@ -165,6 +174,14 @@ public class DiagramData implements Serializable {
 
     public void setSolutionsChoices(List<List<String>> solutionsChoices) {
         this.solutionsChoices = solutionsChoices;
+    }
+
+    public List<List<String>> getRecursiveCases() {
+        return recursiveCases;
+    }
+
+    public void setRecursiveCases(List<List<String>> recursiveCases) {
+        this.recursiveCases = recursiveCases;
     }
 
     public List<Integer> getCorrectSizeChoices() {
@@ -198,13 +215,4 @@ public class DiagramData implements Serializable {
     public void setInputFormatting(String inputFormatting) {
         this.inputFormatting = inputFormatting;
     }
-
-    public String getReducedOperation() {
-        return reducedOperation;
-    }
-
-    public void setReducedOperation(String reducedOperation) {
-        this.reducedOperation = reducedOperation;
-    }
-
 }

@@ -57,6 +57,7 @@ public class DiagramPresenter implements Initializable {
     @FXML
     Button showMoreFunctions;
     private final LinkedHashMap<String,String> generatedCodeText = new LinkedHashMap<>();
+    private Map<String,String> genCode;
     private GeneratorData generatorData;
     private PresenterButtonHandler buttonHandler;
     private ExceptionHandler exceptionHandler;
@@ -81,6 +82,7 @@ public class DiagramPresenter implements Initializable {
         generatedCodeText.put("functionName","FUNCIÓN");
         generatedCodeText.put("baseCase","CASO(S) BASE");
         generatedCodeText.put("returnValue","CASO(S) BASE");
+        generatedCodeText.put("auxCode","MORE STUFF");
         generatedCodeText.put("recursiveCases","CASO(S) RECURSIVOS");
         generatedCodeText.put("auxFunctions","");
         setGenText();
@@ -181,10 +183,10 @@ public class DiagramPresenter implements Initializable {
         }
         diagramGrid.setVisible(true);
         String functionName = model.processFunctionName(0);
-        Map<String,String> genValues = model.processProblemSizeAndBaseCases();
+        genCode = model.processProblemSizeAndBaseCases();
         updateGenCodeParams("functionName",functionName);
-        updateGenCodeParams("baseCase","\t"+genValues.get("baseCase"));
-        updateGenCodeParams("returnValue","\t\t"+genValues.get("returnValue"));
+        updateGenCodeParams("baseCase","\t"+genCode.get("baseCase"));
+        updateGenCodeParams("returnValue","\t\t"+genCode.get("returnValue"));
         setGenText();
     }
 
@@ -257,7 +259,8 @@ public class DiagramPresenter implements Initializable {
                 calculatedSolution.setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
                 calculatedSolution.setStyle("-fx-text-fill: #ff0015;");
             }
-            updateGenCodeParams("recursiveCases","\telse"+generatorData.recursiveCases.get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
+            updateGenCodeParams("auxCode","\telse:\n\t\t" + genCode.get("auxCode"));
+            updateGenCodeParams("recursiveCases","\t\treturn " + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
             if(!generatorData.auxFunctions.isEmpty()){
                 showMoreFunctions.setVisible(true);
             }
