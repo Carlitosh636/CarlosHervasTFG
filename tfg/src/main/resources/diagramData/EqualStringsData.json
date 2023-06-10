@@ -19,7 +19,7 @@
   "returnValues": [ [ "\"\"","\"\""] ],
   "reductionChoices" : [["s[1:] t[1:]"],["s[1:] t[1:]"]],
   "solutionsChoices" : [ [ "s[0] == t[0] or s[1:] == t[1:]","s[0] == t[0] and s[1:] == t[1:]"],["s[1:] != t[1:]","s[1:] == t[1:]"]],
-  "recursiveCases" :[],
+  "recursiveCases" :[["return s[0] == t[0] or equal_strings(s[1:], t[1:])", "return s[0] == t[0] and equal_strings(s[1:], t[1:])"],["return not equal_strings(s[1:], t[1:])","\"return equal_strings(s[1:], t[1:])\""]],
   "correctSizeChoices": [0],
   "correctBaseCases": [[0,1]],
   "correctSolutions" : [1,1],

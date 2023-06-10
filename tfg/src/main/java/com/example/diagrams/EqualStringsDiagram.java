@@ -29,7 +29,7 @@ public class EqualStringsDiagram implements IDiagramActions{
 
     @Override
     public String getFunctionName(int index) {
-        return "def reverse(s):";
+        return "def equal_strings(s, t):";
     }
     @Override
     public Map<String, String> setGenCodeParams(String problemSize, String returnValue) {

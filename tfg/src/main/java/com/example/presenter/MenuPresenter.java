@@ -9,21 +9,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-class ButtonRelatedData{
-    BaseDiagram baseDiagram;
-    String genFilePath;
-    public ButtonRelatedData(BaseDiagram baseDiagram, String genFilePath) {
-        this.baseDiagram = baseDiagram;
-        this.genFilePath = genFilePath;
-    }
-    public BaseDiagram getBaseDiagram() {
-        return baseDiagram;
-    }
-
-    public String getGenFilePath() {
-        return genFilePath;
-    }
-}
 public class MenuPresenter {
     @FXML
     AnchorPane anchor;
@@ -37,7 +22,7 @@ public class MenuPresenter {
     Button b4;
     @FXML
     Button b5;
-    private final Map<Button,ButtonRelatedData> buttonsPaths = new HashMap<>();
+    private final Map<Button,BaseDiagram> buttonsPaths = new HashMap<>();
     private BaseDiagram model;
     private MenuButtonHandler menuButtonHandler;
     private ExceptionHandler exceptionHandler;
@@ -45,15 +30,14 @@ public class MenuPresenter {
     public void initialize() throws IOException {
         menuButtonHandler = new MenuButtonHandler();
         exceptionHandler = new ExceptionHandler(null);
-        buttonsPaths.put(b1,new ButtonRelatedData(new ArithmeticDiagram(new RecursivePowerDiagram(), "/diagramData/RecursivePotencyData.json"),"/generatedData/RecursivePotencyGeneration.json"));
-        buttonsPaths.put(b2,new ButtonRelatedData(new ArithmeticDiagram(new SlowAdditionDiagram(),"/diagramData/SlowAdditionData.json"),"/generatedData/SlowAdditionGeneration.json"));
-        buttonsPaths.put(b3,new ButtonRelatedData(new ArraySortingDiagram(new ArraySortDiagram(),"/diagramData/SortListData.json"),"/generatedData/SortListGeneration.json"));
-        buttonsPaths.put(b4,new ButtonRelatedData(new StringDiagram(new ReverseStringDiagram(),"/diagramData/ReverseStringData.json"),"/generatedData/ReverseStringGeneration.json"));
-        buttonsPaths.put(b5,new ButtonRelatedData(new StringDiagram(new EqualStringsDiagram(),"/diagramData/EqualStringsData.json"),"/generatedData/none.json"));
+        buttonsPaths.put(b1,new ArithmeticDiagram(new RecursivePowerDiagram(), "/diagramData/RecursivePotencyData.json"));
+        buttonsPaths.put(b2,new ArithmeticDiagram(new SlowAdditionDiagram(),"/diagramData/SlowAdditionData.json"));
+        buttonsPaths.put(b3,new ArraySortingDiagram(new ArraySortDiagram(),"/diagramData/SortListData.json"));
+        buttonsPaths.put(b4,new StringDiagram(new ReverseStringDiagram(),"/diagramData/ReverseStringData.json"));
+        buttonsPaths.put(b5,new StringDiagram(new EqualStringsDiagram(),"/diagramData/EqualStringsData.json"));
         buttonsPaths.forEach((k,v)-> k.setOnAction(actionEvent -> {
-            model = v.getBaseDiagram();
             try {
-                loadScene(model,v.getGenFilePath(),k);
+                loadScene(v,k);
             } catch (IOException e) {
                 exceptionHandler.showErrorAlert(new IOException("Error de datos"));
             }
@@ -61,8 +45,8 @@ public class MenuPresenter {
     }
 
     @FXML
-    private void loadScene(BaseDiagram model,String filePath, Button button) throws IOException {
-        menuButtonHandler.loadVisualizer(model, filePath, button);
+    private void loadScene(BaseDiagram model, Button button) throws IOException {
+        menuButtonHandler.loadVisualizer(model, button);
     }
 
 }

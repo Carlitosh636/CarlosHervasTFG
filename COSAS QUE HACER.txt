@@ -1,4 +1,5 @@
--Generador de código:
-    -Ahora se parsean el nombre de funcion y caso base, ahora toca casos recursivos.
+
+-implementar de nuevo el aux functions y mostrar su botón en el presenter (ahora está comentado)
+-más problemas
 -quicksort hacer mejor con partición de hoare
 -mejorar enunciados

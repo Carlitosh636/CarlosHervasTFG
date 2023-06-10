@@ -9,11 +9,11 @@ import java.io.IOException;
 
 public class MenuButtonHandler extends ButtonHandler {
 
-    public void loadVisualizer(BaseDiagram model, String filePath, Button button) throws IOException {
+    public void loadVisualizer(BaseDiagram model, Button button) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramViewer.fxml"));
         loader.setControllerFactory(controller-> {
             try {
-                return new DiagramPresenter(model,filePath);
+                return new DiagramPresenter(model);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -24,5 +24,6 @@ public class App extends Application {
         stage.setMaxWidth(1920);
         stage.setMinHeight(768);
         stage.setMinWidth(1336);
+        stage.setMaximized(true);
     }
 }

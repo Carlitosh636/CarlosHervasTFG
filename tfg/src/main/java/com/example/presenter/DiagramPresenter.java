@@ -58,7 +58,6 @@ public class DiagramPresenter implements Initializable {
     Button showMoreFunctions;
     private final LinkedHashMap<String,String> generatedCodeText = new LinkedHashMap<>();
     private Map<String,String> genCode;
-    private GeneratorData generatorData;
     private PresenterButtonHandler buttonHandler;
     private ExceptionHandler exceptionHandler;
     @Override
@@ -82,7 +81,7 @@ public class DiagramPresenter implements Initializable {
         generatedCodeText.put("functionName","FUNCIÓN");
         generatedCodeText.put("baseCase","CASO(S) BASE");
         generatedCodeText.put("returnValue","CASO(S) BASE");
-        generatedCodeText.put("auxCode","MORE STUFF");
+        generatedCodeText.put("auxCode","");
         generatedCodeText.put("recursiveCases","CASO(S) RECURSIVOS");
         generatedCodeText.put("auxFunctions","");
         setGenText();
@@ -97,10 +96,8 @@ public class DiagramPresenter implements Initializable {
         });
     }
 
-    public DiagramPresenter(BaseDiagram model,String pathName) throws IOException {
+    public DiagramPresenter(BaseDiagram model) throws IOException {
         this.model = model;
-        generatorData = FileUtils.returnObjectFromInputStream(pathName,GeneratorData.class);
-
     }
     protected void bindModelData() {
         originalSolution.textProperty().bind(model.originalSolProperty());
@@ -259,11 +256,17 @@ public class DiagramPresenter implements Initializable {
                 calculatedSolution.setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
                 calculatedSolution.setStyle("-fx-text-fill: #ff0015;");
             }
-            updateGenCodeParams("auxCode","\telse:\n\t\t" + genCode.get("auxCode"));
-            updateGenCodeParams("recursiveCases","\t\treturn " + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-            if(!generatorData.auxFunctions.isEmpty()){
-                showMoreFunctions.setVisible(true);
+            if(genCode.get("auxCode") != null){
+                updateGenCodeParams("auxCode","\telse:\n\t\t" + genCode.get("auxCode"));
             }
+            else{
+                updateGenCodeParams("auxCode","\telse:\n\t\t");
+            }
+            updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
+            //TODO:SHOW AUX FUNCTIONS
+            /*if(!generatorData.auxFunctions.isEmpty()){
+                showMoreFunctions.setVisible(true);
+            }*/
             setGenText();
         }
 
@@ -297,8 +300,9 @@ public class DiagramPresenter implements Initializable {
 
     @FXML
     public void showMoreFuncs() {
-        updateGenCodeParams("auxFunctions",generatorData.auxFunctions.get(decompositionSelect.getSelectionModel().getSelectedIndex()));
-        setGenText();
+        //TODO: SHOW AUX FUNCTIONS
+        //updateGenCodeParams("auxFunctions",generatorData.auxFunctions.get(decompositionSelect.getSelectionModel().getSelectedIndex()));
+        //setGenText();
     }
 
     @FXML

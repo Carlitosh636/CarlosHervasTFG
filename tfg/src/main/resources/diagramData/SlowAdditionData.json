@@ -15,12 +15,41 @@
   "reducedOperation" : "",
   "problemSizeChoices" : [ "a","b","min(a,b)" ],
   "currentBaseCaseIndex" : 0,
-  "baseCaseChoices" : [ [ "a = 0" ],["b = 0"],["min(a,b)=0"] ],
+  "baseCaseChoices" : [ [ "a == 0" ],["b == 0"],["min(a,b)==0"] ],
   "baseCaseParameters" : [ [ "0" ],[ "0" ],["0"] ],
   "returnValues": [ [ "b" ],["a"],["min(a,b)"] ],
   "reductionChoices" : [ [ "a - 1,b","a - 1, b + 1" ], ["a,b - 1","a + 1,b - 1"], ["min(a,b) - 1", "a-1,b-1"] ],
   "solutionsChoices" : [ [ "f' + 1", "f' - 1", "f' + a"],["f' + 1","No hacer nada"],["f' + 1", "f' - 1", "f' + b"],["f' + 1","No hacer nada"], [ "f' + 1", "f' - 1", "f' + min(a,b)"], [ "f' + 1", "f' - 1 + 1", "f' + 1 + 1"] ],
-  "recursiveCases" :[],
+  "recursiveCases" :[
+    [
+      "return slow_addition(a-1,b) + 1",
+      "return slow_addition(a-1,b) - 1",
+      "return slow_addition(a-1,b) + a"
+    ],
+    [
+      "return slow_addition(a-1,b+1) + 1",
+      "return slow_addition(a-1,b+1)"
+    ],
+    [
+      "return slow_addition(a,b-1) + 1",
+      "return slow_addition(a,b-1) - 1",
+      "return slow_addition(a,b-1) + a"
+    ],
+    [
+      "return slow_addition(a+1,b-1) + 1",
+      "return slow_addition(a+1,b-1)"
+    ],
+    [
+      "if a < b:return slow_addition(a-1,b) + 1\n\telse\n\t\treturn slow_addition(a,b-1) + 1",
+      "if a < b:return slow_addition(a-1,b) - 1\n\telse\n\t\treturn slow_addition(a,b-1) - 1",
+      "if a < b:return slow_addition(a-1,b) + min(a,b)\n\telse\n\t\treturn slow_addition(a,b-1) + min(a,b)"
+    ],
+    [
+      "return slow_addition(a-1,b-1) + 1",
+      "return slow_addition(a-1,b-1) - 1",
+      "return slow_addition(a-1,b-1) + 1 + 1"
+    ]
+  ],
   "correctSizeChoices": [0,1,2],
   "correctBaseCases": [[0],[0],[0]],
   "correctSolutions" : [ 0,1,0,1,0,2 ],

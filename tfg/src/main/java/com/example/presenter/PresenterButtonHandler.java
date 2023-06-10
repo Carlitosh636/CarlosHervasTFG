@@ -36,6 +36,7 @@ public class PresenterButtonHandler extends ButtonHandler {
             genCode.put("functionName","FUNCIÓN");
             genCode.put("baseCase","CASO(S) BASE");
             genCode.put("returnValue","CASO(S) BASE");
+            genCode.put("auxCode","");
             genCode.put("recursiveCases","CASO(S) RECURSIVOS");
             genCode.put("auxFunctions","");
             return "OK";
