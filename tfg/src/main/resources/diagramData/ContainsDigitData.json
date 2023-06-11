@@ -1,0 +1,29 @@
+{
+  "type" : "SIMPLE",
+  "heading" : "Dado un entero no negativo n, y un dı́gito d entre 0 y 9 (ambos inclusive), determinar si d es una de las cifras de n\nEjemplo: Si la función booleana es f(n, d), f(3082, 2) = True",
+  "params" : {
+    "n" : "",
+    "d" : ""
+  },
+  "originalData" : "",
+  "originalSol" : "",
+  "calculatedSol" : "",
+  "currentProblemSize" : 0,
+  "currentBaseCase" : 0,
+  "currentReduction" : 0,
+  "currentReductionSolutions" : 0,
+  "reducedOperation" : "",
+  "problemSizeChoices" : [ "Nº de dígitos en n","n" ],
+  "currentBaseCaseIndex" : 0,
+  "baseCaseChoices" : [ [ "n < 10","n < 10\nn % 10 == d"] ],
+  "baseCaseParameters" : [ [ " < 10"," % 10 == d" ] ],
+  "returnValues": [ [ "n == d","True"] ],
+  "reductionChoices" : [["n // 10","n // 10"]],
+  "solutionsChoices" : [[ "(n % 10 == d) or f'","(n % 10 == d) and f'","(n % 10 == 0) or f'" ],["not f'","(n % 10 == d) or f'","f'"]],
+  "recursiveCases" :[["return (n % 10 == d) or contiene_digito_cola_lineal(n//10,d)", "return (n % 10 == d) and contiene_digito_cola_lineal(n//10,d)","return (n % 10 == 0) or contiene_digito_cola_lineal(n//10,d)"],
+    ["return not contiene_digito_cola(n//10,d)","return (n % 10 == d) or contiene_digito_cola(n//10,d)","return contiene_digito_cola(n//10,d)"]],
+  "correctSizeChoices": [0],
+  "correctBaseCases": [[0,1]],
+  "correctSolutions" : [0,2],
+  "inputFormatting" : "Dos dígitos, el primero no negativo y el segundo entre 0 y 9 (Ej: 5432, 2)"
+}

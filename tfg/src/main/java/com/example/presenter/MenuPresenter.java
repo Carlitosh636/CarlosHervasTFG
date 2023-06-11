@@ -22,8 +22,9 @@ public class MenuPresenter {
     Button b4;
     @FXML
     Button b5;
+    @FXML
+    Button b6;
     private final Map<Button,BaseDiagram> buttonsPaths = new HashMap<>();
-    private BaseDiagram model;
     private MenuButtonHandler menuButtonHandler;
     private ExceptionHandler exceptionHandler;
 
@@ -35,6 +36,7 @@ public class MenuPresenter {
         buttonsPaths.put(b3,new ArraySortingDiagram(new ArraySortDiagram(),"/diagramData/SortListData.json"));
         buttonsPaths.put(b4,new StringDiagram(new ReverseStringDiagram(),"/diagramData/ReverseStringData.json"));
         buttonsPaths.put(b5,new StringDiagram(new EqualStringsDiagram(),"/diagramData/EqualStringsData.json"));
+        buttonsPaths.put(b6,new StringDiagram(new ContainsDigitDiagram(),"/diagramData/ContainsDigitData.json"));
         buttonsPaths.forEach((k,v)-> k.setOnAction(actionEvent -> {
             try {
                 loadScene(v,k);

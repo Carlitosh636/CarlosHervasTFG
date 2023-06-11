@@ -1,5 +1,15 @@
 
 -implementar de nuevo el aux functions y mostrar su botón en el presenter (ahora está comentado)
--más problemas
+-mirar si los builders se pueden refactorizar para solo tener 2 (diagrama simple y multiple), que cada instancia maneje el parsing del input en vez del builder.
+-más problemas (contains digit en proceso, luego hacer list contains element y selection sort)
 -quicksort hacer mejor con partición de hoare
 -mejorar enunciados
+
+aux functions de sort list:
+  "auxFunctions": [
+    "def merge(a,b):\n\tif a == []:\n\t\treturn b\n\telif b == []:\n\t\treturn a\n\telse:\n\t\tif a[0] < b[0]:\n\t\t\treturn [a[0]] + mezcla(a[1:], b)\n\t\telse:\n\t\t\treturn [b[0]] + mezcla(a, b[1:])",
+    "def inserta_en_lista_ordenada(list,n)\n\tindex = len(list)\n\tfor i in range(len(list)):\n\t\tif list[i] > n:\n\t\t\tindex = i\n\t\t\tbreak\n\tif index == len(list):\n\t\tlist = list[:index] + [n]\n\telse:\n\t\tlist = list[:index] + [n] + list[index:]\n\treturn a",
+    "",
+    "def get_smaller_than_or_equal_to(a,pivot):\n\treturn [i for i in a if i<=pivot]\ndef get_greater_than(a,pivot):\n\t return [i for i in a if i>pivot]"
+  ]
+}

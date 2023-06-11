@@ -191,4 +191,24 @@ public class Algorithms {
             return equalStrings2(input1.substring(1),input2.substring(1),baseCaseValue);
         }
     }
+
+    public static boolean containsDigitTail(double n, double d) {
+        if(n<10){
+            return n == d;
+        } else if (n % 10 == d) {
+            return true;
+        }
+        else{
+            return containsDigitTail(n/10,d);
+        }
+    }
+
+    public static boolean containsDigitTailLineal(double n, double d) {
+        if(n<10){
+            return n == d;
+        }
+        else{
+            return (n % 10 == d) || containsDigitTail(n/10,d);
+        }
+    }
 }

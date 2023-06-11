@@ -70,7 +70,7 @@
             </padding>
             <VBox fx:id="originalData" minHeight="-Infinity" minWidth="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <StackPane fx:id="originalDataSolutionArrow" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label fx:id="calculatedSolution" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <Label fx:id="calculatedSolution" contentDisplay="CENTER" maxWidth="50.0" minHeight="-Infinity" minWidth="-Infinity" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font>
