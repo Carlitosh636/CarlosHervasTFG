@@ -33,8 +33,19 @@ public class ContainsDigitDiagram implements IDiagramActions{
     @Override
     public Map<String, String> setGenCodeParams(String baseCase, String returnValue) {
         Map<String,String> returnVal = new HashMap<>();
-        returnVal.put("baseCase",String.format("if %s:",baseCase));
-        returnVal.put("returnValue",String.format("return %s",returnValue));
+        String bC = "";
+        String rV = "";
+        if(baseCase.contains("\n")){
+            System.out.println(Arrays.toString(baseCase.split("\n")));
+            System.out.println(Arrays.toString(returnValue.split("\n")));
+
+        }
+        else{
+            bC = baseCase;
+            rV = returnValue;
+        }
+        returnVal.put("baseCase",String.format("if %s:",bC));
+        returnVal.put("returnValue",String.format("return %s",rV));
         return returnVal;
     }
 

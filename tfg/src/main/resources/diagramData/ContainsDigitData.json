@@ -17,7 +17,7 @@
   "currentBaseCaseIndex" : 0,
   "baseCaseChoices" : [ [ "n < 10","n < 10\nn % 10 == d"] ],
   "baseCaseParameters" : [ [ " < 10"," % 10 == d" ] ],
-  "returnValues": [ [ "n == d","True"] ],
+  "returnValues": [ [ "n == d","n == d\nTrue"] ],
   "reductionChoices" : [["n // 10"],["n // 10"]],
   "solutionsChoices" : [[ "(n % 10 == d) or f'","(n % 10 == d) and f'","(n % 10 == 0) or f'" ],["not f'","(n % 10 == d) or f'","f'"]],
   "recursiveCases" :[["return (n % 10 == d) or contiene_digito_cola_lineal(n//10,d)", "return (n % 10 == d) and contiene_digito_cola_lineal(n//10,d)","return (n % 10 == 0) or contiene_digito_cola_lineal(n//10,d)"],

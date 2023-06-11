@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class StringDiagram extends BaseDiagram{
     }
     @Override
     public void processInputs() throws Exception {
-        Map<String,String> paramsParsed = new HashMap<>();
+        LinkedHashMap<String,String> paramsParsed = new LinkedHashMap<>();
         params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         paramsParsed.put("baseCaseValue",baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
         diagramActions.setParams(paramsParsed);

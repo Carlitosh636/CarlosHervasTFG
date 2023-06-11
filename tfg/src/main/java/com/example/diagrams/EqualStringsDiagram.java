@@ -34,7 +34,7 @@ public class EqualStringsDiagram implements IDiagramActions{
     @Override
     public Map<String, String> setGenCodeParams(String problemSize, String returnValue) {
         Map<String,String> returnVal = new HashMap<>();
-        returnVal.put("baseCase",String.format("if %s == %s",problemSize,baseCaseValue));
+        returnVal.put("baseCase",String.format("if %s == %s:",problemSize,""));
         returnVal.put("returnValue",String.format("return %s",returnValue));
         return returnVal;
     }

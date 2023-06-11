@@ -1,5 +1,6 @@
 
 -implementar de nuevo el aux functions y mostrar su botón en el presenter (ahora está comentado)
+-los casos base del codegen están mal para dos de los diagramas de strings
 -mirar si los builders se pueden refactorizar para solo tener 2 (diagrama simple y multiple), que cada instancia maneje el parsing del input en vez del builder.
 -más problemas (contains digit en proceso, luego hacer list contains element y selection sort)
 -quicksort hacer mejor con partición de hoare
