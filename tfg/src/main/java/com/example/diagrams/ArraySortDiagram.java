@@ -115,7 +115,6 @@ public class ArraySortDiagram implements IDiagramActions{
         algorithmMap.put(3,()->{
             Map<String,String> returnVal = new HashMap<>();
             int pivot = copyArray[mid-1];
-            System.out.println(pivot);
             int[] smallerElements = Algorithms.getSmaller(copyArray,pivot);
             int[] greaterElements = Algorithms.getGreater(copyArray,pivot);
             returnVal.put("reducedOperation1",Arrays.toString(smallerElements));

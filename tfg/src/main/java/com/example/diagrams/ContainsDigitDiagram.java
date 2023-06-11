@@ -63,7 +63,7 @@ public class ContainsDigitDiagram implements IDiagramActions{
 
     @Override
     public boolean checkNotBaseCase(List<String> baseCases, List<String> inputs) throws Exception {
-        return inputs.get(0).length() <= 1;
+        return inputs.get(1).length() <= 1;
     }
 
     @Override

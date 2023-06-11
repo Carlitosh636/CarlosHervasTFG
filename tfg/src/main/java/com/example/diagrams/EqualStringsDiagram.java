@@ -54,7 +54,7 @@ public class EqualStringsDiagram implements IDiagramActions{
             returnVal.put("currentReductionSolutions","0");
             return returnVal;
         });
-        algorithmMap.put(0,()->{
+        algorithmMap.put(1,()->{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol",String.valueOf(Algorithms.equalStrings2(inputs[0],inputs[1],baseCaseValue)));
             returnVal.put("partSol",returnVal.get("ogSol"));

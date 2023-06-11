@@ -198,7 +198,6 @@ public class DiagramPresenter implements Initializable {
         solutionSelect.getItems().clear();
         subParameters.setVisible(true);
         subSolutions.setVisible(true);
-
         handleDecomposition();
     }
 

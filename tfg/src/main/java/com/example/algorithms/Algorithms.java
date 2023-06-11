@@ -193,6 +193,7 @@ public class Algorithms {
     }
 
     public static boolean containsDigitTail(double n, double d) {
+        n = Math.floor(n);
         if(n<10){
             return n == d;
         } else if (n % 10 == d) {
@@ -204,6 +205,7 @@ public class Algorithms {
     }
 
     public static boolean containsDigitTailLineal(double n, double d) {
+        n = Math.floor(n);
         if(n<10){
             return n == d;
         }
