@@ -19,7 +19,7 @@ import java.util.*;
 public class DiagramPresenter implements Initializable {
     @FXML
     AnchorPane root;
-    private BaseDiagram model;
+    private final BaseDiagram model;
     @FXML
     public TextArea heading;
     @FXML
@@ -249,6 +249,9 @@ public class DiagramPresenter implements Initializable {
                 else{
                     calculatedSolution.setText("Correcto!\nValor calculado: "+model.getCalculatedSol());
                     calculatedSolution.setStyle("-fx-text-fill: #03fc77;");
+                    if(!model.getAuxFunctions().isEmpty()){
+                        showMoreFunctions.setVisible(true);
+                    }
                 }
             }
             else{
@@ -262,10 +265,7 @@ public class DiagramPresenter implements Initializable {
                 updateGenCodeParams("auxCode","\telse:\n\t\t");
             }
             updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-            //TODO:SHOW AUX FUNCTIONS
-            /*if(!generatorData.auxFunctions.isEmpty()){
-                showMoreFunctions.setVisible(true);
-            }*/
+
             setGenText();
         }
 
@@ -299,9 +299,8 @@ public class DiagramPresenter implements Initializable {
 
     @FXML
     public void showMoreFuncs() {
-        //TODO: SHOW AUX FUNCTIONS
-        //updateGenCodeParams("auxFunctions",generatorData.auxFunctions.get(decompositionSelect.getSelectionModel().getSelectedIndex()));
-        //setGenText();
+        updateGenCodeParams("auxFunctions",model.getAuxFunctions().get(decompositionSelect.getSelectionModel().getSelectedIndex()));
+        setGenText();
     }
 
     @FXML

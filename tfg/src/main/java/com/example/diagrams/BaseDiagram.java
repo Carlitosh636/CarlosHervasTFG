@@ -39,6 +39,7 @@ public abstract class BaseDiagram {
     protected List<Integer> correctSolutions;
     protected int algorithmIndex;
     protected String inputFormatting;
+    protected List<String> auxFunctions;
 
     protected BaseDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
         this.diagramActions = builder;
@@ -181,5 +182,9 @@ public abstract class BaseDiagram {
 
     public String getInputFormatting() {
         return inputFormatting;
+    }
+
+    public List<String> getAuxFunctions() {
+        return auxFunctions;
     }
 }
