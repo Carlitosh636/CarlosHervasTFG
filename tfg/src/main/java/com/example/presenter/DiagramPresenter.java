@@ -4,8 +4,6 @@ import com.example.diagrams.BaseDiagram;
 import com.example.enums.DiagramType;
 import com.example.exceptions.*;
 import com.example.model.Arrow;
-import com.example.model.GeneratorData;
-import com.example.utils.FileUtils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

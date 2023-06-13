@@ -82,7 +82,7 @@
             </Label>
             <ComboBox id="combo-box-4" fx:id="baseCaseSelect" minWidth="125.0" onAction="#onChangeBaseCase" stylesheets="@../css/combobox.css" />
          </VBox>
-         <GridPane id="background" fx:id="diagramGrid" hgap="10.0" maxHeight="-Infinity" stylesheets="@../css/boxes-background.css" vgap="5.0">
+         <GridPane id="background" fx:id="diagramGrid" hgap="10.0" maxHeight="300.0" stylesheets="@../css/boxes-background.css" vgap="5.0">
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
