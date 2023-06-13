@@ -82,90 +82,179 @@
             </Label>
             <ComboBox id="combo-box-4" fx:id="baseCaseSelect" minWidth="125.0" onAction="#onChangeBaseCase" stylesheets="@../css/combobox.css" />
          </VBox>
-         <GridPane id="background" fx:id="diagramGrid" hgap="10.0" maxHeight="300.0" stylesheets="@../css/boxes-background.css" vgap="5.0">
-            <columnConstraints>
-               <ColumnConstraints />
-               <ColumnConstraints />
-               <ColumnConstraints />
-               <ColumnConstraints />
-               <ColumnConstraints />
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-            </rowConstraints>
-            <padding>
-               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </padding>
-            <VBox fx:id="originalData" minHeight="-Infinity" minWidth="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <StackPane fx:id="originalDataSolutionArrow" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label fx:id="calculatedSolution" contentDisplay="CENTER" maxWidth="50.0" minHeight="-Infinity" minWidth="-Infinity" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label id="diagramDataHolders" fx:id="originalSolution" alignment="CENTER" contentDisplay="CENTER" stylesheets="@../css/boxes-background.css" textFill="WHITE" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </Label>
-            <StackPane fx:id="datasArrow" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <StackPane fx:id="solutionsArrow" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <VBox id="diagramDataHolders" fx:id="subParameters" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
-               <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" wrapText="true">
-                  <font>
-                     <Font size="15.0" />
-                  </font>
-               </Label>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </VBox>
-            <StackPane fx:id="partialDataSolutionArrow" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <VBox id="diagramDataHolders" fx:id="subSolutions" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="3" GridPane.rowIndex="5">
-               <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
-                  <font>
-                     <Font size="15.0" />
-                  </font>
-               </Label>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </VBox>
-            <ComboBox id="combo-box-4" fx:id="decompositionSelect" minWidth="150.0" onAction="#onDecompositionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.rowIndex="3">
-               <GridPane.margin>
-                  <Insets right="5.0" />
-               </GridPane.margin>
-            </ComboBox>
-            <ComboBox id="combo-box-4" fx:id="solutionSelect" onAction="#onSolutionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.columnIndex="4" GridPane.rowIndex="3">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </ComboBox>
-            <Label text="3. Subproblema" textFill="WHITE" GridPane.rowIndex="2">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
-            </Label>
-            <Label layoutX="27.0" layoutY="66.0" minHeight="-Infinity" minWidth="-Infinity" text="4: Regla recursiva" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="2">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
-            </Label>
-         </GridPane>
+         <HBox>
+            <children>
+               <GridPane id="background" fx:id="diagramGrid" hgap="10.0" maxHeight="300.0" stylesheets="@../css/boxes-background.css" vgap="5.0">
+                  <columnConstraints>
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                  </rowConstraints>
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+                  <VBox minHeight="-Infinity" minWidth="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <StackPane GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label contentDisplay="CENTER" maxWidth="50.0" minHeight="-Infinity" minWidth="-Infinity" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label id="diagramDataHolders" alignment="CENTER" contentDisplay="CENTER" stylesheets="@../css/boxes-background.css" textFill="WHITE" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <StackPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <StackPane GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <VBox id="diagramDataHolders" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" wrapText="true">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Label>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <StackPane GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <VBox id="diagramDataHolders" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                     <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Label>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <ComboBox id="combo-box-4" fx:id="decompositionSelect" minWidth="150.0" onAction="#onDecompositionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="5.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <ComboBox id="combo-box-4" fx:id="solutionSelect" onAction="#onSolutionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <Label text="3. Subproblema" textFill="WHITE" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="27.0" layoutY="66.0" minHeight="-Infinity" minWidth="-Infinity" text="4: Regla recursiva" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+               </GridPane>
+               <GridPane id="background" fx:id="diagramGrid2" hgap="10.0" maxHeight="300.0" stylesheets="@../css/boxes-background.css" vgap="5.0">
+                  <columnConstraints>
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                  </rowConstraints>
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+                  <VBox minHeight="-Infinity" minWidth="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <StackPane GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label contentDisplay="CENTER" maxWidth="50.0" minHeight="-Infinity" minWidth="-Infinity" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label id="diagramDataHolders" alignment="CENTER" contentDisplay="CENTER" stylesheets="@../css/boxes-background.css" textFill="WHITE" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <StackPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <StackPane GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <VBox id="diagramDataHolders" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" wrapText="true">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Label>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <StackPane GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <VBox id="diagramDataHolders" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                     <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Label>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+                  <ComboBox id="combo-box-4" fx:id="decompositionSelect2" minWidth="150.0" onAction="#onDecompositionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="5.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <ComboBox id="combo-box-4" fx:id="solutionSelect2" onAction="#onSolutionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <Label text="3. Subproblema" textFill="WHITE" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="27.0" layoutY="66.0" minHeight="-Infinity" minWidth="-Infinity" text="4: Regla recursiva" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </Label>
+               </GridPane>
+
+            </children>
+         </HBox>
       </HBox>
       <padding>
          <Insets left="20.0" right="20.0" />

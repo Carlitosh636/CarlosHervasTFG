@@ -41,6 +41,7 @@ public class MenuPresenter {
             try {
                 loadScene(v,k);
             } catch (IOException e) {
+                e.printStackTrace();
                 exceptionHandler.showErrorAlert(new IOException("Error de datos"));
             }
         }));
