@@ -16,28 +16,28 @@
                   </font>
                </TextArea>
                <VBox id="background" fx:id="buttonsBox" alignment="TOP_CENTER" spacing="30.0">
-                  <Button id="button1" fx:id="resetDiagram" onAction="#resetDiagram" prefWidth="175.0" stylesheets="@../css/button.css" text="Reiniciar datos" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Button id="button1" fx:id="resetDiagram" onAction="#resetDiagram" prefWidth="200.0" stylesheets="@../css/button.css" text="Reiniciar datos" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button id="button2" fx:id="returnMenuButton" onAction="#returnToMenu" prefWidth="175.0" stylesheets="@../css/button.css" text="Volver al menú" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Button id="button2" fx:id="returnMenuButton" onAction="#returnToMenu" prefWidth="200.0" stylesheets="@../css/button.css" text="Volver al menú" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button id="button3" fx:id="showMoreFunctions" layoutX="20.0" layoutY="70.0" onAction="#showMoreFuncs" prefWidth="175.0" stylesheets="@../css/button.css" text="Mostrar funciones auxiliares" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
+                  <Button id="button3" fx:id="showMoreFunctions" layoutX="20.0" layoutY="70.0" onAction="#showMoreFuncs" prefWidth="200.0" stylesheets="@../css/button.css" text="Mostrar funciones auxiliares" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                      </font>
                   </Button>
                   <padding>
