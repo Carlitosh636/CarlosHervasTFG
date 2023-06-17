@@ -18,10 +18,6 @@ import java.util.*;
 
 public class DiagramPresenter implements Initializable {
     @FXML
-    public ComboBox<String> decompositionSelect2;
-    @FXML
-    public ComboBox<String> solutionSelect2;
-    @FXML
     AnchorPane root;
     private final BaseDiagram model;
     @FXML
@@ -42,8 +38,11 @@ public class DiagramPresenter implements Initializable {
     ComboBox<String> decompositionSelect;
     @FXML
     ComboBox<String> solutionSelect;
-    private DiagramVisualizerData diagramVisualizerData;
-    private DiagramVisualizerData diagramVisualizerData2;
+    @FXML
+    public ComboBox<String> decompositionSelect2;
+    @FXML
+    public ComboBox<String> solutionSelect2;
+    private Map<String,DiagramVisualizerData> diagramsVisualizers = new HashMap<>();
 
     @FXML
     Button showMoreFunctions;
@@ -53,21 +52,29 @@ public class DiagramPresenter implements Initializable {
     private ExceptionHandler exceptionHandler;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        diagramVisualizerData = initializeDiagramVisualizerData(diagramGrid);
-        diagramVisualizerData2 = initializeDiagramVisualizerData(diagramGrid2);
+        diagramsVisualizers.put("Visualizer 1", initializeDiagramVisualizerData(diagramGrid));
+        diagramsVisualizers.put("Visualizer 2", initializeDiagramVisualizerData(diagramGrid2));
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
         AnchorPane.setLeftAnchor(SizeAndBaseCaseBox,15.0);
         AnchorPane.setRightAnchor(diagramGrid,15.0);
         bindModelData();
         setArrows();
+
         baseCaseSelect.setVisible(false);
         diagramGrid.setVisible(false);
-        diagramVisualizerData.getCalculatedSolution().setVisible(false);
+        diagramGrid2.setVisible(false);
         decompositionSelect.setVisible(false);
         solutionSelect.setVisible(false);
-        diagramVisualizerData.getOriginalData().setVisible(false);
-        diagramVisualizerData.getSubParameters().setVisible(false);
-        diagramVisualizerData.getSubSolutions().setVisible(false);
+        decompositionSelect2.setVisible(false);
+        solutionSelect2.setVisible(false);
+
+        diagramsVisualizers.values().forEach(v->{
+            v.getCalculatedSolution().setVisible(false);
+            v.getOriginalData().setVisible(false);
+            v.getSubParameters().setVisible(false);
+            v.getSubSolutions().setVisible(false);
+        });
+
         buttonHandler = new PresenterButtonHandler();
         exceptionHandler = new ExceptionHandler(model.getInputFormatting());
 
@@ -94,7 +101,7 @@ public class DiagramPresenter implements Initializable {
         this.model = model;
     }
     protected void bindModelData() {
-        diagramVisualizerData.getOriginalSolution().textProperty().bind(model.originalSolProperty());
+        diagramsVisualizers.get("Visualizer 1").getOriginalSolution().textProperty().bind(model.originalSolProperty());
         model.currentProblemSizeProperty().bind(problemSizeSelect.getSelectionModel().selectedIndexProperty());
         model.currentBaseCaseProperty().bind(baseCaseSelect.getSelectionModel().selectedIndexProperty());
         model.currentReductionProperty().bind(decompositionSelect.getSelectionModel().selectedIndexProperty());
@@ -125,19 +132,21 @@ public class DiagramPresenter implements Initializable {
             return;
         }
         model.setCurrentBaseCaseIndex(baseCaseSelect.getSelectionModel().getSelectedIndex());
-        if(diagramVisualizerData.getOriginalData().getChildren().isEmpty()){
+        if(diagramsVisualizers.get("Visualizer 1").getOriginalData().getChildren().isEmpty()){
             List<TextField> tfs = new ArrayList<>();
             for(String s : model.getParams().keySet()){
                 HBox box = new HBox();
                 Label paramName = new Label(s+" = ");
-                paramName.setFont(diagramVisualizerData.getOriginalSolution().getFont());
-                paramName.setStyle("-fx-text-fill: white;-fx-font-size: 18;");
+                paramName.setFont(diagramsVisualizers.get("Visualizer 1").getOriginalSolution().getFont());
+                paramName.setStyle("-fx-text-fill: white;-fx-font-size: 18;" +
+                        "-fx-max-width: 50px;");
+                paramName.setWrapText(true);
                 TextField tf = new TextField();
-                tf.setFont(diagramVisualizerData.getOriginalSolution().getFont());
+                tf.setFont(diagramsVisualizers.get("Visualizer 1").getOriginalSolution().getFont());
                 tf.setMaxWidth(100);
                 tf.setMaxHeight(30);
                 box.getChildren().addAll(paramName,tf);
-                diagramVisualizerData.addValueToOriginalData(box);
+                diagramsVisualizers.get("Visualizer 1").addValueToOriginalData(box);
                 tfs.add(tf);
                 model.getParams().get(s).bindBidirectional(tf.textProperty());
                 tf.setOnAction(actionEvent1 -> {
@@ -151,9 +160,9 @@ public class DiagramPresenter implements Initializable {
                                 try {
                                     model.processInputs();
                                     decompositionSelect.setVisible(true);
-                                    diagramVisualizerData.getOriginalSolution().setVisible(true);
-                                    diagramVisualizerData.getSubSolutions().getChildren().clear();
-                                    diagramVisualizerData.getSubParameters().getChildren().clear();
+                                    diagramsVisualizers.get("Visualizer 1").getOriginalSolution().setVisible(true);
+                                    diagramsVisualizers.get("Visualizer 1").getSubSolutions().getChildren().clear();
+                                    diagramsVisualizers.get("Visualizer 1").getSubParameters().getChildren().clear();
                                     model.getSubParameters().clear();
                                     model.getSubSolutions().clear();
 
@@ -173,7 +182,7 @@ public class DiagramPresenter implements Initializable {
         }
         diagramGrid.setVisible(true);
         diagramGrid2.setVisible(true );
-        diagramVisualizerData.originalData.setVisible(true);
+        diagramsVisualizers.get("Visualizer 1").originalData.setVisible(true);
         String functionName = model.processFunctionName(0);
         genCode = model.processProblemSizeAndBaseCases();
         updateGenCodeParams("functionName",functionName);
@@ -191,8 +200,8 @@ public class DiagramPresenter implements Initializable {
             updateGenCodeParams("functionName",updatedFunction);
         }
         solutionSelect.getItems().clear();
-        diagramVisualizerData.getSubParameters().setVisible(true);
-        diagramVisualizerData.getSubSolutions().setVisible(true);
+        diagramsVisualizers.get("Visualizer 1").getSubParameters().setVisible(true);
+        diagramsVisualizers.get("Visualizer 1").getSubSolutions().setVisible(true);
         handleDecomposition();
     }
 
@@ -205,23 +214,23 @@ public class DiagramPresenter implements Initializable {
             return;
         }
 
-        diagramVisualizerData.getSubSolutions().getChildren().clear();
-        diagramVisualizerData.getSubParameters().getChildren().clear();
+        diagramsVisualizers.get("Visualizer 1").getSubSolutions().getChildren().clear();
+        diagramsVisualizers.get("Visualizer 1").getSubParameters().getChildren().clear();
         for(SimpleStringProperty ele : model.getSubParameters()){
             Label lb = new Label();
             lb.setStyle("-fx-text-fill: white;");
-            lb.setFont(diagramVisualizerData.getOriginalSolution().getFont());
+            lb.setFont(diagramsVisualizers.get("Visualizer 1").getOriginalSolution().getFont());
             lb.setText(ele.get());
             lb.setTextAlignment(TextAlignment.CENTER);
-            diagramVisualizerData.getSubParameters().getChildren().add(lb);
+            diagramsVisualizers.get("Visualizer 1").getSubParameters().getChildren().add(lb);
         }
         for(SimpleStringProperty ele : model.getSubSolutions()){
             Label lb = new Label();
             lb.setStyle("-fx-text-fill: white;");
-            lb.setFont(diagramVisualizerData.getOriginalSolution().getFont());
+            lb.setFont(diagramsVisualizers.get("Visualizer 1").getOriginalSolution().getFont());
             lb.setText(ele.get());
             lb.setTextAlignment(TextAlignment.CENTER);
-            diagramVisualizerData.getSubSolutions().getChildren().add(lb);
+            diagramsVisualizers.get("Visualizer 1").getSubSolutions().getChildren().add(lb);
         }
         model.getSubParameters().clear();
         model.getSubSolutions().clear();
@@ -235,23 +244,23 @@ public class DiagramPresenter implements Initializable {
                 return;
             }
             String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex());
-            diagramVisualizerData.getCalculatedSolution().setVisible(true);
+            diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setVisible(true);
             if(model.checkSolutionsEqual(calcSol)){
                 if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(model.getCurrentReductionSolutions())){
-                    diagramVisualizerData.getCalculatedSolution().setText("Incorrecto! La operación da esta solución pero no para todos los casos\nValor calculado: "+model.getCalculatedSol());
-                    diagramVisualizerData.getCalculatedSolution().setStyle("-fx-text-fill: #ff0015;");
+                    diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setText("Incorrecto! La operación da esta solución pero no para todos los casos\nValor calculado: "+model.getCalculatedSol());
+                    diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setStyle("-fx-text-fill: #fff317;");
                 }
                 else{
-                    diagramVisualizerData.getCalculatedSolution().setText("Correcto!\nValor calculado: "+model.getCalculatedSol());
-                    diagramVisualizerData.getCalculatedSolution().setStyle("-fx-text-fill: #03fc77;");
+                    diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setText("Correcto!\nValor calculado: "+model.getCalculatedSol());
+                    diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setStyle("-fx-text-fill: #03fc77;");
                     if(model.getAuxFunctions() != null){
                         showMoreFunctions.setVisible(true);
                     }
                 }
             }
             else{
-                diagramVisualizerData.getCalculatedSolution().setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
-                diagramVisualizerData.getCalculatedSolution().setStyle("-fx-text-fill: #ff0015;");
+                diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
+                diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setStyle("-fx-text-fill: #ff0015;");
             }
             if(genCode.get("auxCode") != null){
                 updateGenCodeParams("auxCode","\telse:\n\t\t" + genCode.get("auxCode"));
@@ -279,7 +288,7 @@ public class DiagramPresenter implements Initializable {
 
     private void refreshDiagram(){
         solutionSelect.setVisible(false);
-        diagramVisualizerData.getCalculatedSolution().setVisible(false);
+        diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setVisible(false);
         decompositionSelect.getItems().clear();
         decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
     }
@@ -304,28 +313,35 @@ public class DiagramPresenter implements Initializable {
         if(action.equals("OK")){
             problemSizeSelect.getSelectionModel().clearSelection();
             baseCaseSelect.getSelectionModel().clearSelection();
-            diagramVisualizerData.getSubSolutions().getChildren().clear();
-            diagramVisualizerData.getSubParameters().getChildren().clear();
+            diagramsVisualizers.values().forEach(v->{
+                v.getSubSolutions().getChildren().clear();
+                v.getSubParameters().getChildren().clear();
+                v.getOriginalData().getChildren().clear();
+                v.getCalculatedSolution().setVisible(false);
+                v.getSubParameters().setVisible(false);
+                v.getSubSolutions().setVisible(false);
+                v.getOriginalSolution().setVisible(false);
+            });
+
             solutionSelect.getItems().clear();
-            diagramVisualizerData.getOriginalData().getChildren().clear();
             model.resetSubValues();
-            diagramVisualizerData.getCalculatedSolution().setVisible(false);
             model.originalSolProperty().set("");
             decompositionSelect.setVisible(false);
             solutionSelect.setVisible(false);
-            diagramVisualizerData.getSubParameters().setVisible(false);
-            diagramVisualizerData.getSubSolutions().setVisible(false);
-            diagramVisualizerData.getOriginalSolution().setVisible(false);
+            decompositionSelect2.setVisible(false);
+            solutionSelect2.setVisible(false);
             showMoreFunctions.setVisible(false);
+            diagramGrid.setVisible(false);
+            diagramGrid2.setVisible(false);
             setGenText();
         }
     }
 
     private void setArrows() {
-        diagramVisualizerData.getOriginalDataSolutionArrow().getChildren().add(returnArrow(60,0,250,0));
-        diagramVisualizerData.getPartialDataSolutionArrow().getChildren().add(returnArrow(60,0,250,0));
-        diagramVisualizerData.getDatasArrow().getChildren().add(returnArrow(0,0,0,100));
-        diagramVisualizerData.getSolutionsArrow().getChildren().add(returnArrow(0,100,0,0));
+        diagramsVisualizers.get("Visualizer 1").getOriginalDataSolutionArrow().getChildren().add(returnArrow(60,0,250,0));
+        diagramsVisualizers.get("Visualizer 1").getPartialDataSolutionArrow().getChildren().add(returnArrow(60,0,250,0));
+        diagramsVisualizers.get("Visualizer 1").getDatasArrow().getChildren().add(returnArrow(0,0,0,100));
+        diagramsVisualizers.get("Visualizer 1").getSolutionsArrow().getChildren().add(returnArrow(0,100,0,0));
     }
 
     private Arrow returnArrow(double startX, double startY, double endX, double endY){
