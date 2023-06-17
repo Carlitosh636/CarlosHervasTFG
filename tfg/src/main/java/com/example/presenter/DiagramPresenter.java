@@ -181,7 +181,7 @@ public class DiagramPresenter implements Initializable {
             }
         }
         diagramGrid.setVisible(true);
-        diagramGrid2.setVisible(true );
+        //diagramGrid2.setVisible(true);
         diagramsVisualizers.get("Visualizer 1").originalData.setVisible(true);
         String functionName = model.processFunctionName(0);
         genCode = model.processProblemSizeAndBaseCases();
