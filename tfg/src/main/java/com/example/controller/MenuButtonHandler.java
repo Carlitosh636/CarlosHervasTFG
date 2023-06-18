@@ -1,4 +1,4 @@
-package com.example.presenter;
+package com.example.controller;
 
 import com.example.diagrams.BaseDiagram;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,7 @@ public class MenuButtonHandler extends ButtonHandler {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramViewer.fxml"));
         loader.setControllerFactory(controller-> {
             try {
-                return new DiagramPresenter(model);
+                return new DiagramController(model);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

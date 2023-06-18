@@ -16,6 +16,6 @@ module tfg {
     opens com.example.model to javafx.fxml;
     exports com.example.enums;
     opens com.example.enums to javafx.fxml;
-    exports com.example.presenter;
-    opens com.example.presenter to javafx.fxml;
+    exports com.example.controller;
+    opens com.example.controller to javafx.fxml;
 }

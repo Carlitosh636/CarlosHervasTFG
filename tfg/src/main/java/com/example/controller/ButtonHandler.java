@@ -1,4 +1,4 @@
-package com.example.presenter;
+package com.example.controller;
 
 import com.example.exceptions.AlertTypeIndexOutOfBounds;
 import javafx.scene.control.Alert;

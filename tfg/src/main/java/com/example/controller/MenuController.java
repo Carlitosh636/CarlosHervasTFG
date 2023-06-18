@@ -1,4 +1,4 @@
-package com.example.presenter;
+package com.example.controller;
 
 import com.example.diagrams.*;
 import javafx.fxml.FXML;
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MenuPresenter {
+public class MenuController {
     @FXML
     AnchorPane anchor;
     @FXML

@@ -1,4 +1,4 @@
-package com.example.presenter;
+package com.example.controller;
 
 import com.example.diagrams.BaseDiagram;
 import com.example.enums.DiagramType;
@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class DiagramPresenter implements Initializable {
+public class DiagramController implements Initializable {
     @FXML
     AnchorPane root;
     private final BaseDiagram model;
@@ -97,7 +97,7 @@ public class DiagramPresenter implements Initializable {
         });
     }
 
-    public DiagramPresenter(BaseDiagram model) throws IOException {
+    public DiagramController(BaseDiagram model) throws IOException {
         this.model = model;
     }
     protected void bindModelData() {
