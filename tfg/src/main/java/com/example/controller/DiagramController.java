@@ -43,7 +43,6 @@ public class DiagramController implements Initializable {
     @FXML
     public ComboBox<String> solutionSelect2;
     private Map<String,DiagramVisualizerData> diagramsVisualizers = new HashMap<>();
-    private boolean hasMultipleCases = false;
 
     @FXML
     Button showMoreFunctions;
@@ -101,6 +100,7 @@ public class DiagramController implements Initializable {
     }
     protected void bindModelData() {
         diagramsVisualizers.get("Visualizer 1").getOriginalSolution().textProperty().bind(model.originalSolProperty());
+        diagramsVisualizers.get("Visualizer 2").getOriginalSolution().textProperty().bind(model.originalSolProperty());
         model.currentProblemSizeProperty().bind(problemSizeSelect.getSelectionModel().selectedIndexProperty());
         model.currentBaseCaseProperty().bind(baseCaseSelect.getSelectionModel().selectedIndexProperty());
         model.currentReductionProperty().bind(decompositionSelect.getSelectionModel().selectedIndexProperty());
@@ -138,6 +138,7 @@ public class DiagramController implements Initializable {
         }
         diagramGrid.setVisible(true);
         diagramsVisualizers.get("Visualizer 1").originalData.setVisible(true);
+        diagramsVisualizers.get("Visualizer 2").originalData.setVisible(true);
         String functionName = model.processFunctionName(0);
         genCode = model.processProblemSizeAndBaseCases();
         updateGenCodeParams("functionName",functionName);
@@ -208,14 +209,16 @@ public class DiagramController implements Initializable {
             String updatedFunction = model.processFunctionName(decompositionSelect.getSelectionModel().getSelectedIndex()+1);
             updateGenCodeParams("functionName",updatedFunction);
         }
-        hasMultipleCases = model.isHasMultipleCases();
-        if (hasMultipleCases){
+        if (model.hasMultipleCases(decompositionSelect.getSelectionModel().getSelectedIndex())){
             diagramGrid2.setVisible(true);
-            diagramsVisualizers.get("Visualizer 2").originalData.setVisible(true);
+            decompositionSelect2.setVisible(true);
+            solutionSelect2.setVisible(true);
         }
         solutionSelect.getItems().clear();
         diagramsVisualizers.get("Visualizer 1").getSubParameters().setVisible(true);
         diagramsVisualizers.get("Visualizer 1").getSubSolutions().setVisible(true);
+        diagramsVisualizers.get("Visualizer 2").getSubParameters().setVisible(true);
+        diagramsVisualizers.get("Visualizer 2").getSubSolutions().setVisible(true);
         handleDecomposition();
     }
 
@@ -230,6 +233,8 @@ public class DiagramController implements Initializable {
 
         diagramsVisualizers.get("Visualizer 1").getSubSolutions().getChildren().clear();
         diagramsVisualizers.get("Visualizer 1").getSubParameters().getChildren().clear();
+        diagramsVisualizers.get("Visualizer 2").getSubSolutions().getChildren().clear();
+        diagramsVisualizers.get("Visualizer 2").getSubParameters().getChildren().clear();
         for(SimpleStringProperty ele : model.getSubParameters()){
             Label lb = new Label();
             lb.setStyle("-fx-text-fill: white;");
@@ -237,6 +242,7 @@ public class DiagramController implements Initializable {
             lb.setText(ele.get());
             lb.setTextAlignment(TextAlignment.CENTER);
             diagramsVisualizers.get("Visualizer 1").getSubParameters().getChildren().add(lb);
+            //diagramsVisualizers.get("Visualizer 2").getSubParameters().getChildren().add(lb);
         }
         for(SimpleStringProperty ele : model.getSubSolutions()){
             Label lb = new Label();
@@ -245,6 +251,7 @@ public class DiagramController implements Initializable {
             lb.setText(ele.get());
             lb.setTextAlignment(TextAlignment.CENTER);
             diagramsVisualizers.get("Visualizer 1").getSubSolutions().getChildren().add(lb);
+            //diagramsVisualizers.get("Visualizer 2").getSubSolutions().getChildren().add(lb);
         }
         model.getSubParameters().clear();
         model.getSubSolutions().clear();
@@ -262,7 +269,7 @@ public class DiagramController implements Initializable {
             if(model.checkSolutionsEqual(calcSol)){
                 if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(model.getCurrentReductionSolutions())){
                     diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setText("Incorrecto! La operación da esta solución pero no para todos los casos\nValor calculado: "+model.getCalculatedSol());
-                    diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setStyle("-fx-text-fill: #fff317;");
+                    diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setStyle("-fx-text-fill: #fcf049;");
                 }
                 else{
                     diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setText("Correcto!\nValor calculado: "+model.getCalculatedSol());
@@ -274,7 +281,7 @@ public class DiagramController implements Initializable {
             }
             else{
                 diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
-                diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setStyle("-fx-text-fill: #ff0015;");
+                diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setStyle("-fx-text-fill: #fcf049;");
             }
             if(genCode.get("auxCode") != null){
                 updateGenCodeParams("auxCode","\telse:\n\t\t" + genCode.get("auxCode"));
@@ -303,6 +310,7 @@ public class DiagramController implements Initializable {
     private void refreshDiagram(){
         solutionSelect.setVisible(false);
         diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setVisible(false);
+        diagramsVisualizers.get("Visualizer 2").getCalculatedSolution().setVisible(true);
         decompositionSelect.getItems().clear();
         decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
     }
@@ -356,6 +364,11 @@ public class DiagramController implements Initializable {
         diagramsVisualizers.get("Visualizer 1").getPartialDataSolutionArrow().getChildren().add(returnArrow(60,0,250,0));
         diagramsVisualizers.get("Visualizer 1").getDatasArrow().getChildren().add(returnArrow(0,0,0,100));
         diagramsVisualizers.get("Visualizer 1").getSolutionsArrow().getChildren().add(returnArrow(0,100,0,0));
+
+        diagramsVisualizers.get("Visualizer 2").getOriginalDataSolutionArrow().getChildren().add(returnArrow(60,0,250,0));
+        diagramsVisualizers.get("Visualizer 2").getPartialDataSolutionArrow().getChildren().add(returnArrow(60,0,250,0));
+        diagramsVisualizers.get("Visualizer 2").getDatasArrow().getChildren().add(returnArrow(0,0,0,100));
+        diagramsVisualizers.get("Visualizer 2").getSolutionsArrow().getChildren().add(returnArrow(0,100,0,0));
     }
 
     private Arrow returnArrow(double startX, double startY, double endX, double endY){

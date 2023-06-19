@@ -36,7 +36,6 @@ public class StringDiagram extends BaseDiagram{
         setSubData(solutions);
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));
         Map<String,String> paramsParsed = new HashMap<>();
-        hasMultipleCases = diagramActions.checkIfMultipleCases();
         params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         paramsParsed.put("baseCaseValue",baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
         paramsParsed.put("partSol",solutions.get("partSol"));

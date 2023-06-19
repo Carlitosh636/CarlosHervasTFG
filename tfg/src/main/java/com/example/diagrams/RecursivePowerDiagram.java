@@ -23,10 +23,8 @@ public class RecursivePowerDiagram implements IDiagramActions{
     }
 
     @Override
-    public boolean checkIfMultipleCases() {
-        System.out.println(b);
-        System.out.println(b % 2);
-        return b % 2 != 0;
+    public boolean checkIfMultipleCases(int selectedIndex) {
+        return selectedIndex == 1;
     }
 
     @Override

@@ -2,9 +2,13 @@
     -Textos más grandes (excepto botones, ya están hechos)
 -Feats:
     -EL DIAGRAMA EXTRA PARA EL CASO RECURSIVO QUE DEPENDA DEL INPUT (ej: calculo potencia si descomp es //2).
-        -Detectar cuando ocurre ese caso, y rellenarlo con lo necesario en tal
-    -Los casos base del codegen hay que cambiarlos.
-    -mirar si los builders se pueden refactorizar para solo tener 2 (diagrama simple y multiple), que cada instancia maneje el parsing del input en vez del builder.
+        -Ya detecta cuando debe poner el segundo diagrama. Ahora poner que se "dividan" los dos diagramas los casos recursivos (en el caso
+        del diagrama de potencia recursiva, si ve que la reducción es la de //2, en un diagrama pone para b par y en el otro
+        para b impar. p ej si es b = 7, en el primero pone para b = 7 y en el segundo para b = 6).
+        -En este caso, el codegen o bien pone las dos funciones una debajo de la otra, o dependiendo del diagrama "enfocado" cambia el texto del codegen
+        -asegurarse que al clicar Reiniciar diagrama, se reinicen los dos, no solo el primero.
+    -LOS CASOS BASE DEL CODEGEN. CUANDO SON MÁS DE UN CASO BASE SE ROMPE, ARREGLARLO
+    -probar que no se rompa nada
     -más problemas (list contains element y selection sort, entre otros)
 -Memoria:
     - Hacer más subapartados (coger lo que ya hay e ir haciendo subapartados)

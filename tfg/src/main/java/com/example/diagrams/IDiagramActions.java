@@ -13,5 +13,5 @@ public interface IDiagramActions {
     Map<String,String> calculateSolution(int index) throws Exception;
     boolean checkSolutionsEqual(String calcSol, String ogSol);
     String getFunctionName(int index);
-    boolean checkIfMultipleCases();
+    boolean checkIfMultipleCases(int selectedIndex);
 }

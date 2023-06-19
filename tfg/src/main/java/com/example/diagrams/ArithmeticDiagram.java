@@ -23,7 +23,6 @@ public class ArithmeticDiagram extends BaseDiagram {
         paramsParsed.put("baseCaseValue", baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
         paramsParsed.put("partSol", "0");
         diagramActions.setParams(paramsParsed);
-        hasMultipleCases = diagramActions.checkIfMultipleCases();
         Map<String, String> solution = calculateSolution(-1);
         originalSol.set(String.format("f = %.0f", Double.parseDouble(solution.get("ogSol"))));
     }

@@ -67,7 +67,6 @@ public class DiagramVisualizerData {
         this.calculatedSolution = calculatedSolution;
     }
 
-
     public VBox getOriginalData() {
         return originalData;
     }

@@ -43,7 +43,7 @@ public class ArraySortDiagram implements IDiagramActions{
     }
 
     @Override
-    public boolean checkIfMultipleCases() {
+    public boolean checkIfMultipleCases(int selectedIndex) {
         return false;
     }
 
