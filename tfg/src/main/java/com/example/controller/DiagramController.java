@@ -133,22 +133,37 @@ public class DiagramController implements Initializable {
         model.setCurrentBaseCaseIndex(baseCaseSelect.getSelectionModel().getSelectedIndex());
 
         if(diagramsVisualizers.get("Visualizer 1").getOriginalData().getChildren().isEmpty()){
-            List<TextField> tfs = new ArrayList<>();
-            for(String s : model.getParams().keySet()){
-                HBox box = new HBox();
-                Label paramName = new Label(s+" = ");
-                paramName.setFont(diagramsVisualizers.get("Visualizer 1").getOriginalSolution().getFont());
-                paramName.setStyle("-fx-text-fill: white;-fx-font-size: 18;" +
-                        "-fx-max-width: 50px;");
-                paramName.setWrapText(true);
-                TextField tf = new TextField();
-                tf.setFont(diagramsVisualizers.get("Visualizer 1").getOriginalSolution().getFont());
-                tf.setMaxWidth(100);
-                tf.setMaxHeight(30);
-                box.getChildren().addAll(paramName,tf);
-                diagramsVisualizers.get("Visualizer 1").addValueToOriginalData(box);
-                tfs.add(tf);
-                model.getParams().get(s).bindBidirectional(tf.textProperty());
+            setInputParams(diagramsVisualizers.get("Visualizer 1"),1);
+            setInputParams(diagramsVisualizers.get("Visualizer 2"),2);
+        }
+        diagramGrid.setVisible(true);
+        diagramsVisualizers.get("Visualizer 1").originalData.setVisible(true);
+        String functionName = model.processFunctionName(0);
+        genCode = model.processProblemSizeAndBaseCases();
+        updateGenCodeParams("functionName",functionName);
+        updateGenCodeParams("baseCase","\t"+genCode.get("baseCase"));
+        updateGenCodeParams("returnValue","\t\t"+genCode.get("returnValue"));
+        setGenText();
+    }
+
+    private void setInputParams(DiagramVisualizerData visualizerData,int index) {
+        List<TextField> tfs = new ArrayList<>();
+        for(String s : model.getParams().keySet()){
+            HBox box = new HBox();
+            Label paramName = new Label(s+" = ");
+            paramName.setFont(visualizerData.getOriginalSolution().getFont());
+            paramName.setStyle("-fx-text-fill: white;-fx-font-size: 18;" +
+                    "-fx-max-width: 50px;");
+            paramName.setWrapText(true);
+            TextField tf = new TextField();
+            tf.setFont(visualizerData.getOriginalSolution().getFont());
+            tf.setMaxWidth(100);
+            tf.setMaxHeight(30);
+            box.getChildren().addAll(paramName,tf);
+            visualizerData.addValueToOriginalData(box);
+            tfs.add(tf);
+            model.getParams().get(s).bindBidirectional(tf.textProperty());
+            if(index == 1){
                 tf.setOnAction(actionEvent1 -> {
                     if(tfs.stream().noneMatch(tf1 -> tf1.getText().isEmpty())){
                         List<String> inputs = tfs.stream().map(ele -> ele.textProperty().get()).toList();
@@ -160,9 +175,9 @@ public class DiagramController implements Initializable {
                                 try {
                                     model.processInputs();
                                     decompositionSelect.setVisible(true);
-                                    diagramsVisualizers.get("Visualizer 1").getOriginalSolution().setVisible(true);
-                                    diagramsVisualizers.get("Visualizer 1").getSubSolutions().getChildren().clear();
-                                    diagramsVisualizers.get("Visualizer 1").getSubParameters().getChildren().clear();
+                                    visualizerData.getOriginalSolution().setVisible(true);
+                                    visualizerData.getSubSolutions().getChildren().clear();
+                                    visualizerData.getSubParameters().getChildren().clear();
                                     model.getSubParameters().clear();
                                     model.getSubSolutions().clear();
 
@@ -179,15 +194,10 @@ public class DiagramController implements Initializable {
                     }
                 });
             }
+            if(index == 2){
+                tf.setEditable(false);
+            }
         }
-        diagramGrid.setVisible(true);
-        diagramsVisualizers.get("Visualizer 1").originalData.setVisible(true);
-        String functionName = model.processFunctionName(0);
-        genCode = model.processProblemSizeAndBaseCases();
-        updateGenCodeParams("functionName",functionName);
-        updateGenCodeParams("baseCase","\t"+genCode.get("baseCase"));
-        updateGenCodeParams("returnValue","\t\t"+genCode.get("returnValue"));
-        setGenText();
     }
 
     public void onDecompositionChange() {
@@ -199,10 +209,9 @@ public class DiagramController implements Initializable {
             updateGenCodeParams("functionName",updatedFunction);
         }
         hasMultipleCases = model.isHasMultipleCases();
-        //TODO: if true, fill second diagram
-        System.out.println(hasMultipleCases);
         if (hasMultipleCases){
             diagramGrid2.setVisible(true);
+            diagramsVisualizers.get("Visualizer 2").originalData.setVisible(true);
         }
         solutionSelect.getItems().clear();
         diagramsVisualizers.get("Visualizer 1").getSubParameters().setVisible(true);
