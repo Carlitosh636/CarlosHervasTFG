@@ -31,6 +31,12 @@ public class EqualStringsDiagram implements IDiagramActions{
     public String getFunctionName(int index) {
         return "def equal_strings(s, t):";
     }
+
+    @Override
+    public boolean checkIfMultipleCases() {
+        return false;
+    }
+
     @Override
     public Map<String, String> setGenCodeParams(String problemSize, String returnValue) {
         Map<String,String> returnVal = new HashMap<>();

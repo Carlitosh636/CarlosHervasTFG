@@ -43,6 +43,7 @@ public class DiagramController implements Initializable {
     @FXML
     public ComboBox<String> solutionSelect2;
     private Map<String,DiagramVisualizerData> diagramsVisualizers = new HashMap<>();
+    private boolean hasMultipleCases = false;
 
     @FXML
     Button showMoreFunctions;
@@ -86,9 +87,7 @@ public class DiagramController implements Initializable {
         generatedCodeText.put("auxFunctions","");
         setGenText();
         showMoreFunctions.setVisible(false);
-
     }
-
 
     private void setGenText() {
         generatedCodeTemplate.textProperty().set("");
@@ -132,6 +131,7 @@ public class DiagramController implements Initializable {
             return;
         }
         model.setCurrentBaseCaseIndex(baseCaseSelect.getSelectionModel().getSelectedIndex());
+
         if(diagramsVisualizers.get("Visualizer 1").getOriginalData().getChildren().isEmpty()){
             List<TextField> tfs = new ArrayList<>();
             for(String s : model.getParams().keySet()){
@@ -181,7 +181,6 @@ public class DiagramController implements Initializable {
             }
         }
         diagramGrid.setVisible(true);
-        //diagramGrid2.setVisible(true);
         diagramsVisualizers.get("Visualizer 1").originalData.setVisible(true);
         String functionName = model.processFunctionName(0);
         genCode = model.processProblemSizeAndBaseCases();
@@ -198,6 +197,12 @@ public class DiagramController implements Initializable {
         if(model.getType() == DiagramType.valueOf("COMPLEX")){
             String updatedFunction = model.processFunctionName(decompositionSelect.getSelectionModel().getSelectedIndex()+1);
             updateGenCodeParams("functionName",updatedFunction);
+        }
+        hasMultipleCases = model.isHasMultipleCases();
+        //TODO: if true, fill second diagram
+        System.out.println(hasMultipleCases);
+        if (hasMultipleCases){
+            diagramGrid2.setVisible(true);
         }
         solutionSelect.getItems().clear();
         diagramsVisualizers.get("Visualizer 1").getSubParameters().setVisible(true);

@@ -40,6 +40,7 @@ public abstract class BaseDiagram {
     protected int algorithmIndex;
     protected String inputFormatting;
     protected List<String> auxFunctions;
+    protected boolean hasMultipleCases;
 
     protected BaseDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
         this.diagramActions = builder;
@@ -187,4 +188,13 @@ public abstract class BaseDiagram {
     public List<String> getAuxFunctions() {
         return auxFunctions;
     }
+
+    public boolean isHasMultipleCases() {
+        return hasMultipleCases;
+    }
+
+    public void setHasMultipleCases(boolean hasMultipleCases) {
+        this.hasMultipleCases = hasMultipleCases;
+    }
+
 }

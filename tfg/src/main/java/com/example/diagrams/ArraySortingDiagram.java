@@ -36,6 +36,8 @@ public class ArraySortingDiagram extends BaseDiagram{
         paramsParsed.put("l", Arrays.toString(l));
         paramsParsed.put("r", Arrays.toString(r));
         diagramActions.setParams(paramsParsed);
+        hasMultipleCases = diagramActions.checkIfMultipleCases();
+
         Map<String,String> solutions = calculateSolution(-1);
         originalSol.set("f="+solutions.get("ogSol"));
     }

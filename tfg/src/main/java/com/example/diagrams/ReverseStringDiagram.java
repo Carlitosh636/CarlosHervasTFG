@@ -23,6 +23,11 @@ public class ReverseStringDiagram implements IDiagramActions{
     }
 
     @Override
+    public boolean checkIfMultipleCases() {
+        return false;
+    }
+
+    @Override
     public Map<String, String> setGenCodeParams(String baseCase, String returnValue) {
         Map<String,String> returnVal = new HashMap<>();
         returnVal.put("baseCase",String.format("if %s:",baseCase));

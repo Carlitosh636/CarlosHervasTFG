@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 
 public class RecursivePowerDiagram implements IDiagramActions{
     Map<Integer, Callable<Map<String,String>>> algorithmMap= new HashMap<>();
-    double a,b,partSol;
+    static double a,b,partSol;
     int baseCaseValue;
     @Override
     public void setParams(Map<String, String> newValues) {
@@ -20,6 +20,13 @@ public class RecursivePowerDiagram implements IDiagramActions{
     @Override
     public String getFunctionName(int index) {
         return "def power(a, b):";
+    }
+
+    @Override
+    public boolean checkIfMultipleCases() {
+        System.out.println(b);
+        System.out.println(b % 2);
+        return b % 2 != 0;
     }
 
     @Override

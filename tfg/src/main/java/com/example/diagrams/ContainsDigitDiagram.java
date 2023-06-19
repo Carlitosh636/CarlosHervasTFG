@@ -95,4 +95,9 @@ public class ContainsDigitDiagram implements IDiagramActions{
             default -> null;
         };
     }
+
+    @Override
+    public boolean checkIfMultipleCases() {
+        return false;
+    }
 }
