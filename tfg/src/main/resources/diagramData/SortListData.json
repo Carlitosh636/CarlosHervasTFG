@@ -4,11 +4,7 @@
   "params" : {
     "array" : ""
   },
-  "originalData" : "",
-  "originalSol" : "",
-  "calculatedSol" : "",
   "currentProblemSize" : 0,
-  "currentBaseCase" : 0,
   "currentReduction" : 0,
   "currentReductionSolutions" : 0,
   "reducedOperation" : "",

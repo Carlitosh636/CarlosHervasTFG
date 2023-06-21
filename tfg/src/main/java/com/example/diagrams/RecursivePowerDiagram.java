@@ -57,6 +57,7 @@ public class RecursivePowerDiagram implements IDiagramActions{
         algorithmMap.put(-1, () ->{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol",String.valueOf(Algorithms.recursivePower1(a,b,baseCaseValue)));
+            returnVal.put("secondDecomposition","a,b // 2");
             return returnVal;
         });
 

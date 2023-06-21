@@ -8,13 +8,9 @@ public class DiagramData implements Serializable {
     private String type;
     private String heading;
     private Map<String,String> params;
-    private String originalData;
-    private String originalSol;
-    private String calculatedSol;
     private String reducedOperation;
     private List<List<String>> returnValues;
     private int currentProblemSize;
-    private int currentBaseCase;
     private int currentReduction;
     private int currentReductionSolutions;
     private List<String> problemSizeChoices;
@@ -56,30 +52,6 @@ public class DiagramData implements Serializable {
         this.params = params;
     }
 
-    public String getOriginalData() {
-        return originalData;
-    }
-
-    public void setOriginalData(String originalData) {
-        this.originalData = originalData;
-    }
-
-    public String getOriginalSol() {
-        return originalSol;
-    }
-
-    public void setOriginalSol(String originalSol) {
-        this.originalSol = originalSol;
-    }
-
-    public String getCalculatedSol() {
-        return calculatedSol;
-    }
-
-    public void setCalculatedSol(String calculatedSol) {
-        this.calculatedSol = calculatedSol;
-    }
-
     public String getReducedOperation() {
         return reducedOperation;
     }
@@ -102,14 +74,6 @@ public class DiagramData implements Serializable {
 
     public void setCurrentProblemSize(int currentProblemSize) {
         this.currentProblemSize = currentProblemSize;
-    }
-
-    public int getCurrentBaseCase() {
-        return currentBaseCase;
-    }
-
-    public void setCurrentBaseCase(int currentBaseCase) {
-        this.currentBaseCase = currentBaseCase;
     }
 
     public int getCurrentReduction() {

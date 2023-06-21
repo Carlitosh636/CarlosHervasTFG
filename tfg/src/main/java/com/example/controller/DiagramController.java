@@ -39,7 +39,7 @@ public class DiagramController implements Initializable {
     @FXML
     ComboBox<String> solutionSelect;
     @FXML
-    public ComboBox<String> decompositionSelect2;
+    public Label decompositionSelect2;
     @FXML
     public ComboBox<String> solutionSelect2;
     private Map<String,DiagramVisualizerData> diagramsVisualizers = new HashMap<>();
@@ -102,7 +102,6 @@ public class DiagramController implements Initializable {
         diagramsVisualizers.get("Visualizer 1").getOriginalSolution().textProperty().bind(model.originalSolProperty());
         diagramsVisualizers.get("Visualizer 2").getOriginalSolution().textProperty().bind(model.originalSolProperty());
         model.currentProblemSizeProperty().bind(problemSizeSelect.getSelectionModel().selectedIndexProperty());
-        model.currentBaseCaseProperty().bind(baseCaseSelect.getSelectionModel().selectedIndexProperty());
         model.currentReductionProperty().bind(decompositionSelect.getSelectionModel().selectedIndexProperty());
         model.selectedSolutionProperty().bind(solutionSelect.getSelectionModel().selectedIndexProperty());
         heading.setWrapText(true);
@@ -139,6 +138,7 @@ public class DiagramController implements Initializable {
         diagramGrid.setVisible(true);
         diagramsVisualizers.get("Visualizer 1").originalData.setVisible(true);
         diagramsVisualizers.get("Visualizer 2").originalData.setVisible(true);
+
         String functionName = model.processFunctionName(0);
         genCode = model.processProblemSizeAndBaseCases();
         updateGenCodeParams("functionName",functionName);
@@ -181,7 +181,8 @@ public class DiagramController implements Initializable {
                                     visualizerData.getSubParameters().getChildren().clear();
                                     model.getSubParameters().clear();
                                     model.getSubSolutions().clear();
-
+                                    model.getSubParameters2().clear();
+                                    model.getSubSolutions2().clear();
                                 } catch (Exception e) {
                                     showErrorInputAlert(new IncorrectInputException("Error al introducir los datos de entrada"));
                                     e.printStackTrace();
@@ -196,6 +197,7 @@ public class DiagramController implements Initializable {
                 });
             }
             if(index == 2){
+                decompositionSelect2.setVisible(true);
                 tf.setEditable(false);
             }
         }
@@ -213,6 +215,13 @@ public class DiagramController implements Initializable {
             diagramGrid2.setVisible(true);
             decompositionSelect2.setVisible(true);
             solutionSelect2.setVisible(true);
+            /*TODO: PARA EL SEGUNDO DIAGRAMA, SU DESCOMPOSICIÓN SE DEBE SETEAR A LA FUERZA IGUAL A LA QUE SE HA SELECCIONADO EN EL DIAGRAMA 1
+            PERO CON LA FÓRMULA LIGERAMENTE DISTINTA. EN EL BUILDER Y RECURSIVEPOTENCYDIAGRAM SE DEBE DETERMINAR EL TEXTO A PONER ENE L COMBOBOX. HACERLO
+            TAMBIÉN INEDITABLE.
+            LUEGO SETEAR LOS SUBPARAMS, SUBSOLUCION Y LO MÁS IMPORTANTES, LAS SOLUCIONES DEL DIAGRAMA
+            CADA UNO TENDRÁ LA RESPECTIVA A LA SUYA.*/
+            decompositionSelect2.setText(String.valueOf(model.getParams().get("secondDecomposition").get()));
+            //decompositionSelect.getItems().remove(decompositionSelect.getItems().size()-1);
         }
         solutionSelect.getItems().clear();
         diagramsVisualizers.get("Visualizer 1").getSubParameters().setVisible(true);
@@ -230,7 +239,6 @@ public class DiagramController implements Initializable {
             e.printStackTrace();
             return;
         }
-
         diagramsVisualizers.get("Visualizer 1").getSubSolutions().getChildren().clear();
         diagramsVisualizers.get("Visualizer 1").getSubParameters().getChildren().clear();
         diagramsVisualizers.get("Visualizer 2").getSubSolutions().getChildren().clear();
@@ -312,6 +320,7 @@ public class DiagramController implements Initializable {
         diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setVisible(false);
         diagramsVisualizers.get("Visualizer 2").getCalculatedSolution().setVisible(true);
         decompositionSelect.getItems().clear();
+        decompositionSelect2.setText("");
         decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
     }
     @FXML

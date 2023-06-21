@@ -224,11 +224,11 @@
                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                   </padding>
                </VBox>
-               <ComboBox id="combo-box-4" fx:id="decompositionSelect2" minWidth="150.0" onAction="#onDecompositionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.rowIndex="3">
-                  <GridPane.margin>
-                     <Insets right="5.0" />
-                  </GridPane.margin>
-               </ComboBox>
+               <Label fx:id="decompositionSelect2" alignment="CENTER" contentDisplay="CENTER" maxWidth="150.0" prefWidth="150.0" text="Label" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="3">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </Label>
                <ComboBox id="combo-box-4" fx:id="solutionSelect2" onAction="#onSolutionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.columnIndex="4" GridPane.rowIndex="3">
                   <GridPane.margin>
                      <Insets />
