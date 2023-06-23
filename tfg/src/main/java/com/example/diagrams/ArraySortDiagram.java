@@ -1,6 +1,7 @@
 package com.example.diagrams;
 
 import com.example.algorithms.Algorithms;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -46,6 +47,7 @@ public class ArraySortDiagram implements IDiagramActions{
     public boolean checkIfMultipleCases(int selectedIndex) {
         return false;
     }
+
 
     @Override
     public Map<String, String> setGenCodeParams(String baseCase, String returnValue) {
@@ -147,10 +149,6 @@ public class ArraySortDiagram implements IDiagramActions{
         return algorithmMap.get(index).call();
     }
 
-    @Override
-    public boolean checkSolutionsEqual(String calcSol, String ogSol) {
-        return calcSol.equals(ogSol);
-    }
 
     private int[] stringToArrayInt(String data) throws Exception{
         data = data.replaceAll("[\\[\\]()\s{}]","");

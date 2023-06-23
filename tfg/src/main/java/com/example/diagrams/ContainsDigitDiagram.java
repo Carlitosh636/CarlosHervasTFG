@@ -82,10 +82,6 @@ public class ContainsDigitDiagram implements IDiagramActions{
         return algorithmMap.get(index).call();
     }
 
-    @Override
-    public boolean checkSolutionsEqual(String calcSol, String ogSol) {
-        return calcSol.equals(ogSol);
-    }
 
     @Override
     public String getFunctionName(int index) {

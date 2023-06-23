@@ -1,6 +1,7 @@
 package com.example.diagrams;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringPropertyBase;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,9 +10,10 @@ import java.util.Map;
 
 public class ArithmeticDiagram extends BaseDiagram {
     Map<String, String> paramsParsed;
-
-    public ArithmeticDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
+    private final IMultipleDiagramActions multipleDiagramActions;
+    public ArithmeticDiagram(IDiagramActions builder, IMultipleDiagramActions multipleDiagramActions, String diagramDataName) throws IOException {
         super(builder, diagramDataName);
+        this.multipleDiagramActions = multipleDiagramActions;
         diagramActions.setAlgorithmMap();
         setSolutionOperations();
     }
@@ -68,6 +70,11 @@ public class ArithmeticDiagram extends BaseDiagram {
         return calculatedSol.get();
     }
 
+    @Override
+    public List<String> setVisualizerParams() {
+        return multipleDiagramActions.setVisualizerParams().values().stream().toList();
+    }
+
     private void setSubData(Map<String, String> data) {
         data.forEach((k, v) -> {
             if (k.contains("reducedOperation")) {
@@ -81,7 +88,7 @@ public class ArithmeticDiagram extends BaseDiagram {
 
     @Override
     public boolean checkSolutionsEqual(String calcSol) {
-        return diagramActions.checkSolutionsEqual(calcSol, originalSol.get().replace("f = ", ""));
+        return calcSol.equals(originalSol.get().replace("f = ", ""));
     }
 
 }

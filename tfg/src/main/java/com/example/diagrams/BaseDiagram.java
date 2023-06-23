@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public abstract class BaseDiagram {
     protected IDiagramActions diagramActions;
@@ -42,6 +43,7 @@ public abstract class BaseDiagram {
     protected int algorithmIndex;
     protected String inputFormatting;
     protected List<String> auxFunctions;
+    protected List<String> paramKeys;
 
     protected BaseDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
         this.diagramActions = builder;
@@ -73,6 +75,7 @@ public abstract class BaseDiagram {
         this.correctSolutions = diagramData.getCorrectSolutions();
         this.inputFormatting = diagramData.getInputFormatting();
         this.recursiveCases = diagramData.getRecursiveCases();
+        this.paramKeys = new ArrayList<>(diagramData.getParams().keySet());
     }
 
     public abstract void processInputs() throws Exception;
@@ -90,6 +93,8 @@ public abstract class BaseDiagram {
     public abstract boolean checkSolutionsEqual(String calcSol);
 
     public abstract String calculateWithSelectedOperation(int index);
+
+    public abstract List<String> setVisualizerParams();
 
     public void resetSubValues() {
         this.subParameters.clear();

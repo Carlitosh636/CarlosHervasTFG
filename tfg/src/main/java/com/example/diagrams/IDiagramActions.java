@@ -1,5 +1,7 @@
 package com.example.diagrams;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -11,7 +13,6 @@ public interface IDiagramActions {
     void setAlgorithmMap();
     boolean checkNotBaseCase(List<String> baseCases,List<String> inputs) throws Exception;
     Map<String,String> calculateSolution(int index) throws Exception;
-    boolean checkSolutionsEqual(String calcSol, String ogSol);
     String getFunctionName(int index);
     boolean checkIfMultipleCases(int selectedIndex);
 }

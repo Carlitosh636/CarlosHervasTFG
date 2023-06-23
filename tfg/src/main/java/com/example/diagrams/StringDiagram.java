@@ -55,13 +55,19 @@ public class StringDiagram extends BaseDiagram{
 
     @Override
     public boolean checkSolutionsEqual(String calcSol) {
-        return diagramActions.checkSolutionsEqual(calcSol,originalSol.get().replace("f = ",""));
+        return calcSol.equals(originalSol.get().replace("f = ",""));
     }
     @Override
     public String calculateWithSelectedOperation(int index) {
         calculatedSol.set(String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).get()));
         return calculatedSol.get();
     }
+
+    @Override
+    public List<String> setVisualizerParams() {
+        return null;
+    }
+
 
     private void setSubData(Map<String, String> data) {
         data.forEach((k,v)->{

@@ -43,7 +43,7 @@ public class DiagramController implements Initializable {
     public Label decompositionSelect2;
     @FXML
     public ComboBox<String> solutionSelect2;
-    private Map<String,DiagramVisualizerData> diagramsVisualizers = new HashMap<>();
+    private final Map<String,DiagramVisualizerData> diagramsVisualizers = new HashMap<>();
 
     @FXML
     Button showMoreFunctions;
@@ -51,7 +51,6 @@ public class DiagramController implements Initializable {
     private Map<String,String> genCode;
     private PresenterButtonHandler buttonHandler;
     private ExceptionHandler exceptionHandler;
-    private final List<String> paramsKeys = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         diagramsVisualizers.put("Visualizer 1", initializeDiagramVisualizerData(diagramGrid));
@@ -154,7 +153,6 @@ public class DiagramController implements Initializable {
         for(String s : model.getParams().keySet()){
             HBox box = new HBox();
             Label paramName = new Label(s+" = ");
-            paramsKeys.add(s);
             paramName.setFont(visualizerData.getOriginalSolution().getFont());
             paramName.setStyle("-fx-text-fill: white;-fx-font-size: 18;" +
                     "-fx-max-width: 50px;");
@@ -220,17 +218,17 @@ public class DiagramController implements Initializable {
             solutionSelect2.setVisible(true);
 
             AtomicInteger i = new AtomicInteger();
-            List<SimpleStringProperty> localParams = new ArrayList<>();
-            paramsKeys.forEach(k->{
-                localParams.add(model.getParams().get(k));
-            });
+            List<String> localParams =  model.setVisualizerParams();
             diagramsVisualizers.get("Visualizer 2").getOriginalData().getChildren().stream()
                     .map(ele-> (TextField) ((HBox) ele).getChildren().get(1))
                     .forEach(textField -> {
-                        textField.textProperty().set(localParams.get(i.get()).get());
+                        textField.textProperty().set(localParams.get(i.get()));
                         i.addAndGet(1);
                     });
             decompositionSelect2.setText(String.valueOf(model.getParams().get("secondDecomposition").get()));
+            model.getParams().forEach((k,v)->{
+                System.out.println(k+" "+v.get());
+            });
             //decompositionSelect.getItems().remove(decompositionSelect.getItems().size()-1);
         }
         solutionSelect.getItems().clear();

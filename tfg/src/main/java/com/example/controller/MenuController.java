@@ -31,8 +31,9 @@ public class MenuController {
     public void initialize() throws IOException {
         menuButtonHandler = new MenuButtonHandler();
         exceptionHandler = new ExceptionHandler(null);
-        buttonsPaths.put(b1,new ArithmeticDiagram(new RecursivePowerDiagram(), "/diagramData/RecursivePotencyData.json"));
-        buttonsPaths.put(b2,new ArithmeticDiagram(new SlowAdditionDiagram(),"/diagramData/SlowAdditionData.json"));
+        RecursivePowerDiagram recursivePowerDiagram = new RecursivePowerDiagram();
+        buttonsPaths.put(b1,new ArithmeticDiagram(recursivePowerDiagram,recursivePowerDiagram, "/diagramData/RecursivePotencyData.json"));
+        buttonsPaths.put(b2,new ArithmeticDiagram(new SlowAdditionDiagram(),null,"/diagramData/SlowAdditionData.json"));
         buttonsPaths.put(b3,new ArraySortingDiagram(new ArraySortDiagram(),"/diagramData/SortListData.json"));
         buttonsPaths.put(b4,new StringDiagram(new ReverseStringDiagram(),"/diagramData/ReverseStringData.json"));
         buttonsPaths.put(b5,new StringDiagram(new EqualStringsDiagram(),"/diagramData/EqualStringsData.json"));

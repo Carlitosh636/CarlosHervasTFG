@@ -1,11 +1,13 @@
 package com.example.diagrams;
 
 import com.example.algorithms.Algorithms;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
-public class RecursivePowerDiagram implements IDiagramActions{
+public class RecursivePowerDiagram implements IDiagramActions, IMultipleDiagramActions{
     Map<Integer, Callable<Map<String,String>>> algorithmMap= new HashMap<>();
     static double a,b,partSol;
     int baseCaseValue;
@@ -21,6 +23,7 @@ public class RecursivePowerDiagram implements IDiagramActions{
     public boolean checkIfMultipleCases(int selectedIndex) {
         return selectedIndex == 1;
     }
+
     @Override
     public String getFunctionName(int index) {
         return "def power(a, b):";
@@ -99,8 +102,10 @@ public class RecursivePowerDiagram implements IDiagramActions{
     }
 
     @Override
-    public boolean checkSolutionsEqual(String calcSol, String ogSol) {
-        return calcSol.equals(ogSol);
+    public Map<String, String> setVisualizerParams() {
+        Map<String, String> vals = new HashMap<>();
+        vals.put("a",String.format("%.0f",a));
+        vals.put("b",String.format("%.0f",b-1));
+        return vals;
     }
-
 }

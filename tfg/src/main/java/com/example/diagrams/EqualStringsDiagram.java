@@ -85,9 +85,4 @@ public class EqualStringsDiagram implements IDiagramActions{
         return algorithmMap.get(index).call();
     }
 
-    @Override
-    public boolean checkSolutionsEqual(String calcSol, String ogSol) {
-        return calcSol.equals(ogSol);
-    }
-
 }
