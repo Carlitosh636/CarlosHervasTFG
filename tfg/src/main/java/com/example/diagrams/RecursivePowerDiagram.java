@@ -18,15 +18,13 @@ public class RecursivePowerDiagram implements IDiagramActions{
     }
 
     @Override
-    public String getFunctionName(int index) {
-        return "def power(a, b):";
-    }
-
-    @Override
     public boolean checkIfMultipleCases(int selectedIndex) {
         return selectedIndex == 1;
     }
-
+    @Override
+    public String getFunctionName(int index) {
+        return "def power(a, b):";
+    }
     @Override
     public Map<String,String> setGenCodeParams(String baseCase, String returnValue) {
         Map<String,String> returnVal = new HashMap<>();

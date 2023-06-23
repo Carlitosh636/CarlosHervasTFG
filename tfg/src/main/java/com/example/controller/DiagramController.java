@@ -15,6 +15,7 @@ import javafx.scene.text.TextAlignment;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class DiagramController implements Initializable {
     @FXML
@@ -50,6 +51,7 @@ public class DiagramController implements Initializable {
     private Map<String,String> genCode;
     private PresenterButtonHandler buttonHandler;
     private ExceptionHandler exceptionHandler;
+    private List<String> paramsKeys = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         diagramsVisualizers.put("Visualizer 1", initializeDiagramVisualizerData(diagramGrid));
@@ -152,6 +154,7 @@ public class DiagramController implements Initializable {
         for(String s : model.getParams().keySet()){
             HBox box = new HBox();
             Label paramName = new Label(s+" = ");
+            paramsKeys.add(s);
             paramName.setFont(visualizerData.getOriginalSolution().getFont());
             paramName.setStyle("-fx-text-fill: white;-fx-font-size: 18;" +
                     "-fx-max-width: 50px;");
@@ -163,14 +166,14 @@ public class DiagramController implements Initializable {
             box.getChildren().addAll(paramName,tf);
             visualizerData.addValueToOriginalData(box);
             tfs.add(tf);
-            model.getParams().get(s).bindBidirectional(tf.textProperty());
             if(index == 1){
+                model.getParams().get(s).bindBidirectional(tf.textProperty());
                 tf.setOnAction(actionEvent1 -> {
                     if(tfs.stream().noneMatch(tf1 -> tf1.getText().isEmpty())){
                         List<String> inputs = tfs.stream().map(ele -> ele.textProperty().get()).toList();
                         try {
                             if(model.checkNotBaseCase(model.getCurrentProblemSize(),inputs)) {
-                                showErrorInputAlert(new BaseCaseException("No se puede introducir un caso base en el input"));
+                                showErrorInputAlert(new BaseCaseException("No se puede introducir un caso base en los parámetros de entrada"));
                             }
                             else{
                                 try {
@@ -215,11 +218,18 @@ public class DiagramController implements Initializable {
             diagramGrid2.setVisible(true);
             decompositionSelect2.setVisible(true);
             solutionSelect2.setVisible(true);
-            /*TODO: PARA EL SEGUNDO DIAGRAMA, SU DESCOMPOSICIÓN SE DEBE SETEAR A LA FUERZA IGUAL A LA QUE SE HA SELECCIONADO EN EL DIAGRAMA 1
-            PERO CON LA FÓRMULA LIGERAMENTE DISTINTA. EN EL BUILDER Y RECURSIVEPOTENCYDIAGRAM SE DEBE DETERMINAR EL TEXTO A PONER ENE L COMBOBOX. HACERLO
-            TAMBIÉN INEDITABLE.
-            LUEGO SETEAR LOS SUBPARAMS, SUBSOLUCION Y LO MÁS IMPORTANTES, LAS SOLUCIONES DEL DIAGRAMA
-            CADA UNO TENDRÁ LA RESPECTIVA A LA SUYA.*/
+
+            AtomicInteger i = new AtomicInteger();
+            List<SimpleStringProperty> localParams = new ArrayList<>();
+            paramsKeys.forEach(k->{
+                localParams.add(model.getParams().get(k));
+            });
+            diagramsVisualizers.get("Visualizer 2").getOriginalData().getChildren().stream()
+                    .map(ele-> (TextField) ((HBox) ele).getChildren().get(1))
+                    .forEach(textField -> {
+                        textField.textProperty().set(localParams.get(i.get()).get());
+                        i.addAndGet(1);
+                    });
             decompositionSelect2.setText(String.valueOf(model.getParams().get("secondDecomposition").get()));
             //decompositionSelect.getItems().remove(decompositionSelect.getItems().size()-1);
         }
@@ -244,27 +254,26 @@ public class DiagramController implements Initializable {
         diagramsVisualizers.get("Visualizer 2").getSubSolutions().getChildren().clear();
         diagramsVisualizers.get("Visualizer 2").getSubParameters().getChildren().clear();
         for(SimpleStringProperty ele : model.getSubParameters()){
-            Label lb = new Label();
-            lb.setStyle("-fx-text-fill: white;");
-            lb.setFont(diagramsVisualizers.get("Visualizer 1").getOriginalSolution().getFont());
-            lb.setText(ele.get());
-            lb.setTextAlignment(TextAlignment.CENTER);
-            diagramsVisualizers.get("Visualizer 1").getSubParameters().getChildren().add(lb);
-            //diagramsVisualizers.get("Visualizer 2").getSubParameters().getChildren().add(lb);
+            setVisualizerSubData(ele,diagramsVisualizers.get("Visualizer 1").getSubParameters());
+            setVisualizerSubData(ele,diagramsVisualizers.get("Visualizer 2").getSubParameters());
         }
         for(SimpleStringProperty ele : model.getSubSolutions()){
-            Label lb = new Label();
-            lb.setStyle("-fx-text-fill: white;");
-            lb.setFont(diagramsVisualizers.get("Visualizer 1").getOriginalSolution().getFont());
-            lb.setText(ele.get());
-            lb.setTextAlignment(TextAlignment.CENTER);
-            diagramsVisualizers.get("Visualizer 1").getSubSolutions().getChildren().add(lb);
-            //diagramsVisualizers.get("Visualizer 2").getSubSolutions().getChildren().add(lb);
+            setVisualizerSubData(ele,diagramsVisualizers.get("Visualizer 1").getSubSolutions());
+            setVisualizerSubData(ele,diagramsVisualizers.get("Visualizer 2").getSubSolutions());
         }
         model.getSubParameters().clear();
         model.getSubSolutions().clear();
         solutionSelect.getItems().setAll(model.getSolutionsChoices().get(model.getCurrentReductionSolutions()));
         solutionSelect.setVisible(true);
+    }
+
+    private void setVisualizerSubData(SimpleStringProperty ele, VBox box) {
+        Label lb = new Label();
+        lb.setStyle("-fx-text-fill: white;");
+        lb.setFont(diagramsVisualizers.get("Visualizer 1").getOriginalSolution().getFont());
+        lb.setText(ele.get());
+        lb.setTextAlignment(TextAlignment.CENTER);
+        box.getChildren().add(lb);
     }
 
     public void onSolutionChange() {
