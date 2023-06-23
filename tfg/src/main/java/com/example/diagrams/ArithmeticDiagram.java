@@ -24,7 +24,7 @@ public class ArithmeticDiagram extends BaseDiagram {
         paramsParsed.put("partSol", "0");
         diagramActions.setParams(paramsParsed);
         Map<String, String> solution = calculateSolution(-1);
-        params.put("secondDecomposition",new SimpleStringProperty(solution.get("secondDecomposition")));
+        params.put("secondDecomposition",new SimpleStringProperty(solution.getOrDefault("secondDecomposition","")));
         originalSol.set(String.format("f = %.0f", Double.parseDouble(solution.get("ogSol"))));
     }
 

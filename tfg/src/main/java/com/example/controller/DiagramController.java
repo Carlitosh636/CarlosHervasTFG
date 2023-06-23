@@ -51,7 +51,7 @@ public class DiagramController implements Initializable {
     private Map<String,String> genCode;
     private PresenterButtonHandler buttonHandler;
     private ExceptionHandler exceptionHandler;
-    private List<String> paramsKeys = new ArrayList<>();
+    private final List<String> paramsKeys = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         diagramsVisualizers.put("Visualizer 1", initializeDiagramVisualizerData(diagramGrid));
