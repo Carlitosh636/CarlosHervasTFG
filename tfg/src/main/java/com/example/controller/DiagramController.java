@@ -42,6 +42,8 @@ public class DiagramController implements Initializable {
     @FXML
     public Label decompositionSelect2;
     @FXML
+    Label baseCaseLabel;
+    @FXML
     public ComboBox<String> solutionSelect2;
     private final Map<String,DiagramVisualizerData> diagramsVisualizers = new HashMap<>();
 
@@ -68,6 +70,7 @@ public class DiagramController implements Initializable {
         solutionSelect.setVisible(false);
         decompositionSelect2.setVisible(false);
         solutionSelect2.setVisible(false);
+        baseCaseLabel.setVisible(false);
 
         diagramsVisualizers.values().forEach(v->{
             v.getCalculatedSolution().setVisible(false);
@@ -118,6 +121,7 @@ public class DiagramController implements Initializable {
         }
         baseCaseSelect.setVisible(true);
         baseCaseSelect.getItems().clear();
+        baseCaseLabel.setVisible(true);
         if(!problemSizeSelect.getSelectionModel().isEmpty()){
             baseCaseSelect.getItems().setAll(model.getBaseCaseChoices().get(model.getCurrentProblemSize()));
         }
@@ -367,6 +371,7 @@ public class DiagramController implements Initializable {
             showMoreFunctions.setVisible(false);
             diagramGrid.setVisible(false);
             diagramGrid2.setVisible(false);
+            baseCaseLabel.setVisible(false);
             setGenText();
         }
     }

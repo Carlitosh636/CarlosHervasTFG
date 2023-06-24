@@ -73,7 +73,7 @@
                   </padding>
                </Label>
                <ComboBox id="combo-box-4" fx:id="problemSizeSelect" minWidth="125.0" onAction="#onChangeProblemSize" stylesheets="@../css/combobox.css" />
-               <Label text="2. Caso(s) base" textFill="WHITE">
+               <Label fx:id="baseCaseLabel" text="2. Caso(s) base" textFill="WHITE">
                   <font>
                      <Font size="18.0" />
                   </font>
