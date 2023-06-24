@@ -19,14 +19,13 @@ public abstract class BaseDiagram {
     protected Map<String, SimpleStringProperty> params;
     protected SimpleStringProperty originalSol;
     protected List<SimpleStringProperty> subParameters;
-    protected List<SimpleStringProperty> subParameters2;
     protected List<SimpleStringProperty> subSolutions;
-    protected List<SimpleStringProperty> subSolutions2;
     protected SimpleStringProperty calculatedSol;
     protected SimpleStringProperty calculatedSol2;
     protected SimpleIntegerProperty currentProblemSize;
     protected SimpleIntegerProperty currentReduction;
     protected SimpleIntegerProperty currentReductionSolutions;
+    protected SimpleIntegerProperty currentReductionSolutions2;
     protected List<String> problemSizeChoices;
     protected int currentBaseCaseIndex;
     protected List<List<String>> returnValues;
@@ -44,6 +43,7 @@ public abstract class BaseDiagram {
     protected String inputFormatting;
     protected List<String> auxFunctions;
     protected List<String> paramKeys;
+    protected int multipleProblemIndexOffset;
 
     protected BaseDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
         this.diagramActions = builder;
@@ -62,12 +62,11 @@ public abstract class BaseDiagram {
         this.calculatedSol2 = new SimpleStringProperty("");
         this.currentProblemSize = new SimpleIntegerProperty(diagramData.getCurrentProblemSize());
         this.currentReductionSolutions = new SimpleIntegerProperty(diagramData.getCurrentReductionSolutions());
+        this.currentReductionSolutions2 = new SimpleIntegerProperty(diagramData.getCurrentReductionSolutions());
         this.currentReduction = new SimpleIntegerProperty(diagramData.getCurrentReduction());
         this.selectedSolution = new SimpleIntegerProperty();
         this.subParameters = new ArrayList<>();
-        this.subParameters2 = new ArrayList<>();
         this.subSolutions = new ArrayList<>();
-        this.subSolutions2 = new ArrayList<>();
         this.solutionsChoices = new ArrayList<>();
         this.solutionsChoices.addAll(diagramData.getSolutionsChoices());
         this.correctSizeChoices = diagramData.getCorrectSizeChoices();
@@ -76,6 +75,7 @@ public abstract class BaseDiagram {
         this.inputFormatting = diagramData.getInputFormatting();
         this.recursiveCases = diagramData.getRecursiveCases();
         this.paramKeys = new ArrayList<>(diagramData.getParams().keySet());
+        this.multipleProblemIndexOffset = 0;
     }
 
     public abstract void processInputs() throws Exception;
@@ -198,20 +198,16 @@ public abstract class BaseDiagram {
         return auxFunctions;
     }
 
-    public List<SimpleStringProperty> getSubParameters2() {
-        return subParameters2;
+    public int getCurrentReductionSolutions2() {
+        return currentReductionSolutions2.get();
     }
 
-    public void setSubParameters2(List<SimpleStringProperty> subParameters2) {
-        this.subParameters2 = subParameters2;
+    public SimpleIntegerProperty currentReductionSolutions2Property() {
+        return currentReductionSolutions2;
     }
 
-    public List<SimpleStringProperty> getSubSolutions2() {
-        return subSolutions2;
-    }
-
-    public void setSubSolutions2(List<SimpleStringProperty> subSolutions2) {
-        this.subSolutions2 = subSolutions2;
+    public void setCurrentReductionSolutions2(int currentReductionSolutions2) {
+        this.currentReductionSolutions2.set(currentReductionSolutions2);
     }
 
     public String getCalculatedSol2() {
@@ -224,5 +220,9 @@ public abstract class BaseDiagram {
 
     public void setCalculatedSol2(String calculatedSol2) {
         this.calculatedSol2.set(calculatedSol2);
+    }
+
+    public int getMultipleProblemIndexOffset() {
+        return multipleProblemIndexOffset;
     }
 }

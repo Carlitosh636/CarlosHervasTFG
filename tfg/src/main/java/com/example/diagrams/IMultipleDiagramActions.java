@@ -7,5 +7,6 @@ import java.util.Map;
 
 public interface IMultipleDiagramActions {
     Map<String, String> setVisualizerParams();
+    int determineMultipleDiagramKeyOffset();
 
 }

@@ -182,8 +182,6 @@ public class DiagramController implements Initializable {
                                     visualizerData.getSubParameters().getChildren().clear();
                                     model.getSubParameters().clear();
                                     model.getSubSolutions().clear();
-                                    model.getSubParameters2().clear();
-                                    model.getSubSolutions2().clear();
                                 } catch (Exception e) {
                                     showErrorInputAlert(new IncorrectInputException("Error al introducir los datos de entrada"));
                                     e.printStackTrace();
@@ -226,9 +224,6 @@ public class DiagramController implements Initializable {
                         i.addAndGet(1);
                     });
             decompositionSelect2.setText(String.valueOf(model.getParams().get("secondDecomposition").get()));
-            model.getParams().forEach((k,v)->{
-                System.out.println(k+" "+v.get());
-            });
             //decompositionSelect.getItems().remove(decompositionSelect.getItems().size()-1);
         }
         solutionSelect.getItems().clear();
@@ -262,6 +257,7 @@ public class DiagramController implements Initializable {
         model.getSubParameters().clear();
         model.getSubSolutions().clear();
         solutionSelect.getItems().setAll(model.getSolutionsChoices().get(model.getCurrentReductionSolutions()));
+        solutionSelect2.getItems().setAll(model.getSolutionsChoices().get(model.getCurrentReductionSolutions2()));
         solutionSelect.setVisible(true);
     }
 
@@ -328,7 +324,7 @@ public class DiagramController implements Initializable {
         diagramsVisualizers.get("Visualizer 2").getCalculatedSolution().setVisible(true);
         decompositionSelect.getItems().clear();
         decompositionSelect2.setText("");
-        decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize()));
+        decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize() + model.getMultipleProblemIndexOffset()));
     }
     @FXML
     public void returnToMenu() {
@@ -376,13 +372,13 @@ public class DiagramController implements Initializable {
     }
 
     private void setArrows() {
-        diagramsVisualizers.get("Visualizer 1").getOriginalDataSolutionArrow().getChildren().add(returnArrow(60,0,250,0));
-        diagramsVisualizers.get("Visualizer 1").getPartialDataSolutionArrow().getChildren().add(returnArrow(60,0,250,0));
+        diagramsVisualizers.get("Visualizer 1").getOriginalDataSolutionArrow().getChildren().add(returnArrow(60,0,200,0));
+        diagramsVisualizers.get("Visualizer 1").getPartialDataSolutionArrow().getChildren().add(returnArrow(60,0,200,0));
         diagramsVisualizers.get("Visualizer 1").getDatasArrow().getChildren().add(returnArrow(0,0,0,100));
         diagramsVisualizers.get("Visualizer 1").getSolutionsArrow().getChildren().add(returnArrow(0,100,0,0));
 
-        diagramsVisualizers.get("Visualizer 2").getOriginalDataSolutionArrow().getChildren().add(returnArrow(60,0,250,0));
-        diagramsVisualizers.get("Visualizer 2").getPartialDataSolutionArrow().getChildren().add(returnArrow(60,0,250,0));
+        diagramsVisualizers.get("Visualizer 2").getOriginalDataSolutionArrow().getChildren().add(returnArrow(60,0,200,0));
+        diagramsVisualizers.get("Visualizer 2").getPartialDataSolutionArrow().getChildren().add(returnArrow(60,0,200,0));
         diagramsVisualizers.get("Visualizer 2").getDatasArrow().getChildren().add(returnArrow(0,0,0,100));
         diagramsVisualizers.get("Visualizer 2").getSolutionsArrow().getChildren().add(returnArrow(0,100,0,0));
     }

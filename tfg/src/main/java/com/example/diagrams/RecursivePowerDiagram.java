@@ -58,7 +58,9 @@ public class RecursivePowerDiagram implements IDiagramActions, IMultipleDiagramA
         algorithmMap.put(-1, () ->{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol",String.valueOf(Algorithms.recursivePower1(a,b,baseCaseValue)));
-            returnVal.put("secondDecomposition","a,(b-1) // 2");
+            returnVal.put("secondDecomposition",
+                    b%2==0 ? "a, (b-1) // 2" : "a, b // 2"
+                    );
             return returnVal;
         });
 
@@ -75,11 +77,13 @@ public class RecursivePowerDiagram implements IDiagramActions, IMultipleDiagramA
                 returnVal.put("partSol",String.valueOf(Algorithms.recursivePower2(a,b/2,baseCaseValue)));
                 returnVal.put("reducedOperation",String.format("%.0f,%.0f",a,b/2));
                 returnVal.put("currentReductionSolutions",String.valueOf(1));
+                returnVal.put("currentReductionSolutions2",String.valueOf(2));
             }
             else{
                 returnVal.put("partSol",String.valueOf(Algorithms.recursivePower2(a,(b-1)/2,baseCaseValue)));
                 returnVal.put("reducedOperation",String.format("%.0f,%.0f",a,(b-1)/2));
                 returnVal.put("currentReductionSolutions",String.valueOf(2));
+                returnVal.put("currentReductionSolutions2",String.valueOf(1));
             }
             return returnVal;
         });
@@ -107,5 +111,12 @@ public class RecursivePowerDiagram implements IDiagramActions, IMultipleDiagramA
         vals.put("a",String.format("%.0f",a));
         vals.put("b",String.format("%.0f",b-1));
         return vals;
+    }
+
+    @Override
+    public int determineMultipleDiagramKeyOffset() {
+        if(b % 2 == 0)
+            return 0;
+        else return 1;
     }
 }

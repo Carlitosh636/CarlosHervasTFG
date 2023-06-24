@@ -26,6 +26,7 @@ public class ArithmeticDiagram extends BaseDiagram {
         paramsParsed.put("partSol", "0");
         diagramActions.setParams(paramsParsed);
         Map<String, String> solution = calculateSolution(-1);
+        multipleProblemIndexOffset = multipleDiagramActions.determineMultipleDiagramKeyOffset();
         params.put("secondDecomposition",new SimpleStringProperty(solution.getOrDefault("secondDecomposition","")));
         originalSol.set(String.format("f = %.0f", Double.parseDouble(solution.get("ogSol"))));
     }
@@ -41,6 +42,7 @@ public class ArithmeticDiagram extends BaseDiagram {
         Map<String, String> solutions = calculateSolution(algorithmIndex);
         setSubData(solutions);
         currentReductionSolutions.set(Integer.parseInt(solutions.get("currentReductionSolutions")));
+        currentReductionSolutions2.set(Integer.parseInt(solutions.getOrDefault("currentReductionSolutions2","0")));
         Map<String, String> paramsParsed = new HashMap<>();
         params.forEach((k, v) -> paramsParsed.put(k, v.get()));
         paramsParsed.put("baseCaseValue", baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
