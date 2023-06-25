@@ -1,8 +1,6 @@
 package com.example.diagrams;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringPropertyBase;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -66,10 +64,10 @@ public class ArithmeticDiagram extends BaseDiagram {
     }
 
     @Override
-    public String calculateWithSelectedOperation(int index, int currentSolutions) {
+    public String calculateWithSelectedOperation(int index, int currentSolutions,int offset) {
         calculatedSol.set(String.format(
                 "%.0f",
-                (double) solutionOperations.get(currentSolutions).get(index).get())
+                (double) solutionOperations.get(currentSolutions+offset).get(index).get())
         );
         return calculatedSol.get();
     }

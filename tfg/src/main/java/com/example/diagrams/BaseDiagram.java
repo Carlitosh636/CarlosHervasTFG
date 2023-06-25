@@ -9,7 +9,6 @@ import javafx.beans.property.SimpleStringProperty;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public abstract class BaseDiagram {
     protected IDiagramActions diagramActions;
@@ -98,7 +97,7 @@ public abstract class BaseDiagram {
 
     public abstract boolean checkSolutionsEqual(String calcSol, String ogSol);
 
-    public abstract String calculateWithSelectedOperation(int index, int currentSolutions);
+    public abstract String calculateWithSelectedOperation(int index, int currentSolutions,int offset);
 
     public abstract List<String> setVisualizerParams();
 

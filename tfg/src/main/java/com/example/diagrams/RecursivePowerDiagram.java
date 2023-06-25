@@ -1,7 +1,6 @@
 package com.example.diagrams;
 
 import com.example.algorithms.Algorithms;
-import javafx.beans.property.SimpleStringProperty;
 
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -9,13 +8,14 @@ import java.util.function.Supplier;
 
 public class RecursivePowerDiagram implements IDiagramActions, IMultipleDiagramActions{
     Map<Integer, Callable<Map<String,String>>> algorithmMap= new HashMap<>();
-    static double a,b,partSol;
+    static double a,b,partSol,partSol2;
     int baseCaseValue;
     @Override
     public void setParams(Map<String, String> newValues) {
         a = Double.parseDouble(newValues.get("a"));
         b = Double.parseDouble(newValues.get("b"));
         partSol = Double.parseDouble(newValues.get("partSol"));
+        partSol2 = Double.parseDouble(newValues.getOrDefault("partSol2","0"));
         baseCaseValue = Integer.parseInt(newValues.get("baseCaseValue"));
     }
 
@@ -50,7 +50,18 @@ public class RecursivePowerDiagram implements IDiagramActions, IMultipleDiagramA
         sols3.add((Supplier<Double>) () -> partSol * b);
         sols3.add((Supplier<Double>) () -> a * Math.pow(partSol,2));
 
-        return Arrays.asList(sols1, sols2, sols3);
+        List<Supplier> sols4 = new ArrayList<>();
+        sols4.add((Supplier<Double>) () -> partSol2 * b);
+        sols4.add((Supplier<Double>) () -> partSol2 * a);
+        sols4.add((Supplier<Double>) () -> Math.pow(partSol2,a));
+        List<Supplier> sols5 = new ArrayList<>();
+        sols5.add((Supplier<Double>) () -> Math.pow(partSol2,2));
+        sols5.add((Supplier<Double>) () -> partSol2 * b);
+        List<Supplier> sols6 = new ArrayList<>();
+        sols6.add((Supplier<Double>) () -> Math.pow(partSol2,2));
+        sols6.add((Supplier<Double>) () -> partSol2 * b);
+        sols6.add((Supplier<Double>) () -> a * Math.pow(partSol2,2));
+        return Arrays.asList(sols1, sols2, sols3,sols4,sols5,sols6);
     }
 
     @Override

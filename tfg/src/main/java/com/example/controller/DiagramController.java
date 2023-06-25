@@ -287,7 +287,7 @@ public class DiagramController implements Initializable {
             if(solutionSelect.getSelectionModel().getSelectedIndex()<0){
                 return;
             }
-            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 1"),solutionSelect,model.getCurrentReductionSolutions(),0);
+            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 1"),solutionSelect,model.getCurrentReductionSolutions(),0,0);
             if(genCode.get("auxCode") != null){
                 updateGenCodeParams("auxCode","\telse:\n\t\t" + genCode.get("auxCode"));
             }
@@ -306,7 +306,7 @@ public class DiagramController implements Initializable {
             if(solutionSelect2.getSelectionModel().getSelectedIndex()<0){
                 return;
             }
-            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 2"),solutionSelect2,model.getCurrentReductionSolutions2(),1);
+            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 2"),solutionSelect2,model.getCurrentReductionSolutions2(),1,3);
             updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
             setGenText();
         }
@@ -315,8 +315,8 @@ public class DiagramController implements Initializable {
             e.printStackTrace();
         }
     }
-    private void manageCalculatedSolution(DiagramVisualizerData diagramVisualizerData,ComboBox solutionSelect,int currentReductionSolutionsIndex,int indexAllSolved){
-        String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex(),currentReductionSolutionsIndex);
+    private void manageCalculatedSolution(DiagramVisualizerData diagramVisualizerData,ComboBox solutionSelect,int currentReductionSolutionsIndex,int indexAllSolved, int offset){
+        String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex(),currentReductionSolutionsIndex,offset);
         diagramVisualizerData.getCalculatedSolution().setVisible(true);
         if(model.checkSolutionsEqual(calcSol,diagramVisualizerData.getOriginalSolution().getText())){
             if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(currentReductionSolutionsIndex)){
