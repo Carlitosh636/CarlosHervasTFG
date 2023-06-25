@@ -29,6 +29,7 @@ public class ArithmeticDiagram extends BaseDiagram {
         multipleProblemIndexOffset = multipleDiagramActions.determineMultipleDiagramKeyOffset();
         params.put("secondDecomposition",new SimpleStringProperty(solution.getOrDefault("secondDecomposition","")));
         originalSol.set(String.format("f = %.0f", Double.parseDouble(solution.get("ogSol"))));
+        originalSol2.set(String.format("f = %.0f", Double.parseDouble(solution.getOrDefault("ogSol2",""))));
     }
 
     @Override
@@ -73,7 +74,7 @@ public class ArithmeticDiagram extends BaseDiagram {
     }
 
     @Override
-    public List<String> setVisualizerParams() {
+    public List<String> setVisualizerParams(){
         return multipleDiagramActions.setVisualizerParams().values().stream().toList();
     }
 
@@ -89,8 +90,8 @@ public class ArithmeticDiagram extends BaseDiagram {
     }
 
     @Override
-    public boolean checkSolutionsEqual(String calcSol) {
-        return calcSol.equals(originalSol.get().replace("f = ", ""));
+    public boolean checkSolutionsEqual(String calcSol, String ogSol) {
+        return calcSol.equals(ogSol.replace("f = ", ""));
     }
 
 }

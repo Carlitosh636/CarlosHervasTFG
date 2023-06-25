@@ -229,7 +229,7 @@
                      <Font size="18.0" />
                   </font>
                </Label>
-               <ComboBox id="combo-box-4" fx:id="solutionSelect2" onAction="#onSolutionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.columnIndex="4" GridPane.rowIndex="3">
+               <ComboBox id="combo-box-4" fx:id="solutionSelect2" onAction="#onSolutionChange2" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.columnIndex="4" GridPane.rowIndex="3">
                   <GridPane.margin>
                      <Insets />
                   </GridPane.margin>

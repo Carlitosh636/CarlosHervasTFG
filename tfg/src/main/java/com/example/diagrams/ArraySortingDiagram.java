@@ -76,8 +76,8 @@ public class ArraySortingDiagram extends BaseDiagram{
     }
 
     @Override
-    public boolean checkSolutionsEqual(String calcSol) {
-        return calcSol.equals(originalSol.get().replace("f=",""));
+    public boolean checkSolutionsEqual(String calcSol, String ogSol) {
+        return calcSol.equals(ogSol.replace("f=",""));
     }
 
     @Override

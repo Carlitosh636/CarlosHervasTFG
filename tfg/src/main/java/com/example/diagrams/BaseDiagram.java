@@ -18,6 +18,7 @@ public abstract class BaseDiagram {
     protected SimpleStringProperty heading;
     protected Map<String, SimpleStringProperty> params;
     protected SimpleStringProperty originalSol;
+    protected SimpleStringProperty originalSol2;
     protected List<SimpleStringProperty> subParameters;
     protected List<SimpleStringProperty> subSolutions;
     protected SimpleStringProperty calculatedSol;
@@ -58,6 +59,7 @@ public abstract class BaseDiagram {
         this.baseCaseParameters = diagramData.getBaseCaseParameters();
         this.returnValues = diagramData.getReturnValues();
         this.originalSol = new SimpleStringProperty("");
+        this.originalSol2 = new SimpleStringProperty("");
         this.calculatedSol = new SimpleStringProperty("");
         this.calculatedSol2 = new SimpleStringProperty("");
         this.currentProblemSize = new SimpleIntegerProperty(diagramData.getCurrentProblemSize());
@@ -90,7 +92,7 @@ public abstract class BaseDiagram {
 
     public abstract boolean checkNotBaseCase(int index, List<String> input) throws Exception;
 
-    public abstract boolean checkSolutionsEqual(String calcSol);
+    public abstract boolean checkSolutionsEqual(String calcSol, String ogSol);
 
     public abstract String calculateWithSelectedOperation(int index);
 
@@ -224,5 +226,17 @@ public abstract class BaseDiagram {
 
     public int getMultipleProblemIndexOffset() {
         return multipleProblemIndexOffset;
+    }
+
+    public String getOriginalSol2() {
+        return originalSol2.get();
+    }
+
+    public SimpleStringProperty originalSol2Property() {
+        return originalSol2;
+    }
+
+    public void setOriginalSol2(String originalSol2) {
+        this.originalSol2.set(originalSol2);
     }
 }

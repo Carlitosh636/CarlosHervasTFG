@@ -61,6 +61,7 @@ public class RecursivePowerDiagram implements IDiagramActions, IMultipleDiagramA
             returnVal.put("secondDecomposition",
                     b%2==0 ? "a, (b-1) // 2" : "a, b // 2"
                     );
+            returnVal.put("ogSol2",String.valueOf(Algorithms.recursivePower1(a,b-1,baseCaseValue)));
             return returnVal;
         });
 

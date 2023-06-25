@@ -104,7 +104,7 @@ public class DiagramController implements Initializable {
     }
     protected void bindModelData() {
         diagramsVisualizers.get("Visualizer 1").getOriginalSolution().textProperty().bind(model.originalSolProperty());
-        diagramsVisualizers.get("Visualizer 2").getOriginalSolution().textProperty().bind(model.originalSolProperty());
+        diagramsVisualizers.get("Visualizer 2").getOriginalSolution().textProperty().bind(model.originalSol2Property());
         model.currentProblemSizeProperty().bind(problemSizeSelect.getSelectionModel().selectedIndexProperty());
         model.currentReductionProperty().bind(decompositionSelect.getSelectionModel().selectedIndexProperty());
         model.selectedSolutionProperty().bind(solutionSelect.getSelectionModel().selectedIndexProperty());
@@ -279,25 +279,7 @@ public class DiagramController implements Initializable {
             if(solutionSelect.getSelectionModel().getSelectedIndex()<0){
                 return;
             }
-            String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex());
-            diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setVisible(true);
-            if(model.checkSolutionsEqual(calcSol)){
-                if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(model.getCurrentReductionSolutions())){
-                    diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setText("Incorrecto! La operación da esta solución pero no para todos los casos\nValor calculado: "+model.getCalculatedSol());
-                    diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setStyle("-fx-text-fill: #fcf049;");
-                }
-                else{
-                    diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setText("Correcto!\nValor calculado: "+model.getCalculatedSol());
-                    diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setStyle("-fx-text-fill: #03fc77;");
-                    if(model.getAuxFunctions() != null){
-                        showMoreFunctions.setVisible(true);
-                    }
-                }
-            }
-            else{
-                diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
-                diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setStyle("-fx-text-fill: #fcf049;");
-            }
+            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 1"),solutionSelect,model.getCurrentReductionSolutions());
             if(genCode.get("auxCode") != null){
                 updateGenCodeParams("auxCode","\telse:\n\t\t" + genCode.get("auxCode"));
             }
@@ -305,7 +287,6 @@ public class DiagramController implements Initializable {
                 updateGenCodeParams("auxCode","\telse:\n\t\t");
             }
             updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-
             setGenText();
         }
 
@@ -313,7 +294,41 @@ public class DiagramController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void onSolutionChange2() {
+        try{
+            if(solutionSelect2.getSelectionModel().getSelectedIndex()<0){
+                return;
+            }
+            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 2"),solutionSelect2,model.getCurrentReductionSolutions2());
+            updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
+            setGenText();
+        }
 
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    private void manageCalculatedSolution(DiagramVisualizerData diagramVisualizerData,ComboBox solutionSelect,int currentReductionSolutionsIndex){
+        String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex());
+        diagramVisualizerData.getCalculatedSolution().setVisible(true);
+        if(model.checkSolutionsEqual(calcSol,diagramVisualizerData.getOriginalSolution().getText())){
+            if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(currentReductionSolutionsIndex)){
+                diagramVisualizerData.getCalculatedSolution().setText("Incorrecto! La operación da esta solución pero no para todos los casos\nValor calculado: "+model.getCalculatedSol());
+                diagramVisualizerData.getCalculatedSolution().setStyle("-fx-text-fill: #fcf049;");
+            }
+            else{
+                diagramVisualizerData.getCalculatedSolution().setText("Correcto!\nValor calculado: "+model.getCalculatedSol());
+                diagramVisualizerData.getCalculatedSolution().setStyle("-fx-text-fill: #03fc77;");
+                if(model.getAuxFunctions() != null){
+                    showMoreFunctions.setVisible(true);
+                }
+            }
+        }
+        else{
+            diagramVisualizerData.getCalculatedSolution().setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
+            diagramVisualizerData.getCalculatedSolution().setStyle("-fx-text-fill: #fcf049;");
+        }
+    }
     public void showErrorInputAlert(Exception e){
         exceptionHandler.showErrorAlert(e);
     }
