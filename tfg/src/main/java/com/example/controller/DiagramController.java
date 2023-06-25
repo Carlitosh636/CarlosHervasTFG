@@ -276,6 +276,7 @@ public class DiagramController implements Initializable {
     private void setVisualizerSubData(SimpleStringProperty ele, VBox box) {
         Label lb = new Label();
         lb.setStyle("-fx-text-fill: white;");
+        lb.setWrapText(true);
         lb.setFont(diagramsVisualizers.get("Visualizer 1").getOriginalSolution().getFont());
         lb.setText(ele.get());
         lb.setTextAlignment(TextAlignment.CENTER);
