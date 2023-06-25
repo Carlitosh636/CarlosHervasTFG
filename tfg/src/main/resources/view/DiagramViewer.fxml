@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="root" style="-fx-background-color: #404CA8;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.DiagramController">
+<AnchorPane id="background" fx:id="root" stylesheets="@../css/general.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.DiagramController">
    <VBox alignment="TOP_CENTER" maxHeight="1080.0" maxWidth="1920.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
       <HBox maxHeight="500.0" spacing="30.0">
          <VBox maxHeight="500.0" prefHeight="500.0">
@@ -72,7 +72,7 @@
                      <Insets right="10.0" />
                   </padding>
                </Label>
-               <ComboBox id="combo-box-4" fx:id="problemSizeSelect" minWidth="150.0" onAction="#onChangeProblemSize" stylesheets="@../css/combobox.css" />
+               <ComboBox id="combo-box-4" fx:id="problemSizeSelect" minWidth="150.0" onAction="#onChangeProblemSize" />
                <Label fx:id="baseCaseLabel" minWidth="150.0" text="2. Caso(s) base" textFill="WHITE">
                   <font>
                      <Font size="18.0" />
@@ -81,7 +81,7 @@
                      <Insets right="10.0" />
                   </padding>
                </Label>
-               <ComboBox id="combo-box-4" fx:id="baseCaseSelect" minWidth="150.0" onAction="#onChangeBaseCase" stylesheets="@../css/combobox.css" />
+               <ComboBox id="combo-box-4" fx:id="baseCaseSelect" minWidth="150.0" onAction="#onChangeBaseCase" />
             </VBox>
             <GridPane id="background" fx:id="diagramGrid" alignment="TOP_CENTER" hgap="10.0" maxHeight="300.0" maxWidth="800.0" stylesheets="@../css/boxes-background.css" vgap="5.0">
                <columnConstraints>
@@ -140,12 +140,12 @@
                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                   </padding>
                </VBox>
-               <ComboBox id="combo-box-4" fx:id="decompositionSelect" minWidth="150.0" onAction="#onDecompositionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.rowIndex="3">
+               <ComboBox id="combo-box-4" fx:id="decompositionSelect" minWidth="150.0" onAction="#onDecompositionChange" prefWidth="150.0" GridPane.rowIndex="3">
                   <GridPane.margin>
                      <Insets right="5.0" />
                   </GridPane.margin>
                </ComboBox>
-               <ComboBox id="combo-box-4" fx:id="solutionSelect" onAction="#onSolutionChange" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.columnIndex="4" GridPane.rowIndex="3">
+               <ComboBox id="combo-box-4" fx:id="solutionSelect" onAction="#onSolutionChange" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
                   <GridPane.margin>
                      <Insets />
                   </GridPane.margin>
@@ -229,7 +229,7 @@
                      <Font size="18.0" />
                   </font>
                </Label>
-               <ComboBox id="combo-box-4" fx:id="solutionSelect2" onAction="#onSolutionChange2" prefWidth="150.0" stylesheets="@../css/combobox.css" GridPane.columnIndex="4" GridPane.rowIndex="3">
+               <ComboBox id="combo-box-4" fx:id="solutionSelect2" onAction="#onSolutionChange2" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
                   <GridPane.margin>
                      <Insets />
                   </GridPane.margin>

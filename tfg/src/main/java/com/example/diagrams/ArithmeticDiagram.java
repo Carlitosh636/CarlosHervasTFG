@@ -24,10 +24,12 @@ public class ArithmeticDiagram extends BaseDiagram {
         paramsParsed.put("partSol", "0");
         diagramActions.setParams(paramsParsed);
         Map<String, String> solution = calculateSolution(-1);
-        multipleProblemIndexOffset = multipleDiagramActions.determineMultipleDiagramKeyOffset();
+        if(multipleDiagramActions != null){
+            multipleProblemIndexOffset = multipleDiagramActions.determineMultipleDiagramKeyOffset();
+        }
         params.put("secondDecomposition",new SimpleStringProperty(solution.getOrDefault("secondDecomposition","")));
         originalSol.set(String.format("f = %.0f", Double.parseDouble(solution.get("ogSol"))));
-        originalSol2.set(String.format("f = %.0f", Double.parseDouble(solution.getOrDefault("ogSol2",""))));
+        originalSol2.set(String.format("f = %.0f", Double.parseDouble(solution.getOrDefault("ogSol2","0"))));
     }
 
     @Override
