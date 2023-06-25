@@ -399,8 +399,10 @@ public class DiagramController implements Initializable {
             });
 
             solutionSelect.getItems().clear();
+            solutionSelect2.getItems().clear();
             model.resetSubValues();
             model.originalSolProperty().set("");
+            model.originalSol2Property().set("");
             decompositionSelect.setVisible(false);
             solutionSelect.setVisible(false);
             decompositionSelect2.setVisible(false);

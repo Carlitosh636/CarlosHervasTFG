@@ -104,6 +104,8 @@ public abstract class BaseDiagram {
     public void resetSubValues() {
         this.subParameters.clear();
         this.subSolutions.clear();
+        this.subParameters2.clear();
+        this.subSolutions2.clear();
         this.params.clear();
         diagramData.getParams().forEach((k, v) -> params.put(k, new SimpleStringProperty(v)));
     }
