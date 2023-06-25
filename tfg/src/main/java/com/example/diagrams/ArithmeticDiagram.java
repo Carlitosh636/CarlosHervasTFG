@@ -48,6 +48,7 @@ public class ArithmeticDiagram extends BaseDiagram {
         params.forEach((k, v) -> paramsParsed.put(k, v.get()));
         paramsParsed.put("baseCaseValue", baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
         paramsParsed.put("partSol", solutions.get("partSol"));
+        paramsParsed.put("partSol2", solutions.getOrDefault("partSol2",""));
         diagramActions.setParams(paramsParsed);
     }
 
@@ -65,10 +66,10 @@ public class ArithmeticDiagram extends BaseDiagram {
     }
 
     @Override
-    public String calculateWithSelectedOperation(int index) {
+    public String calculateWithSelectedOperation(int index, int currentSolutions) {
         calculatedSol.set(String.format(
                 "%.0f",
-                (double) solutionOperations.get(currentReductionSolutions.get()).get(index).get())
+                (double) solutionOperations.get(currentSolutions).get(index).get())
         );
         return calculatedSol.get();
     }
@@ -80,11 +81,17 @@ public class ArithmeticDiagram extends BaseDiagram {
 
     private void setSubData(Map<String, String> data) {
         data.forEach((k, v) -> {
-            if (k.contains("reducedOperation")) {
+            if (k.equals("reducedOperation")) {
                 subParameters.add(new SimpleStringProperty(v));
             }
-            if (k.contains("partSol")) {
+            if (k.equals("partSol")) {
                 subSolutions.add(new SimpleStringProperty(String.format("f' = %.0f", Double.parseDouble(v))));
+            }
+            if (k.equals("reducedOperation2")) {
+                subParameters2.add(new SimpleStringProperty(v));
+            }
+            if (k.equals("partSol2")) {
+                subSolutions2.add(new SimpleStringProperty(String.format("f' = %.0f", Double.parseDouble(v))));
             }
         });
     }

@@ -76,13 +76,17 @@ public class RecursivePowerDiagram implements IDiagramActions, IMultipleDiagramA
             Map<String,String> returnVal = new HashMap<>();
             if(b%2==0){
                 returnVal.put("partSol",String.valueOf(Algorithms.recursivePower2(a,b/2,baseCaseValue)));
+                returnVal.put("partSol2",String.valueOf(Algorithms.recursivePower2(a,(b-2)/2,baseCaseValue)));
                 returnVal.put("reducedOperation",String.format("%.0f,%.0f",a,b/2));
+                returnVal.put("reducedOperation2",String.format("%.0f,%.0f",a,(b-2)/2));
                 returnVal.put("currentReductionSolutions",String.valueOf(1));
                 returnVal.put("currentReductionSolutions2",String.valueOf(2));
             }
             else{
                 returnVal.put("partSol",String.valueOf(Algorithms.recursivePower2(a,(b-1)/2,baseCaseValue)));
+                returnVal.put("partSol2",String.valueOf(Algorithms.recursivePower2(a,(b-1)/2,baseCaseValue)));
                 returnVal.put("reducedOperation",String.format("%.0f,%.0f",a,(b-1)/2));
+                returnVal.put("reducedOperation2",String.format("%.0f,%.0f",a,(b-1)/2));
                 returnVal.put("currentReductionSolutions",String.valueOf(2));
                 returnVal.put("currentReductionSolutions2",String.valueOf(1));
             }

@@ -53,6 +53,7 @@ public class DiagramController implements Initializable {
     private Map<String,String> genCode;
     private PresenterButtonHandler buttonHandler;
     private ExceptionHandler exceptionHandler;
+    private boolean[] allSolved = {false,false};
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         diagramsVisualizers.put("Visualizer 1", initializeDiagramVisualizerData(diagramGrid));
@@ -252,11 +253,18 @@ public class DiagramController implements Initializable {
         diagramsVisualizers.get("Visualizer 2").getSubParameters().getChildren().clear();
         for(SimpleStringProperty ele : model.getSubParameters()){
             setVisualizerSubData(ele,diagramsVisualizers.get("Visualizer 1").getSubParameters());
-            setVisualizerSubData(ele,diagramsVisualizers.get("Visualizer 2").getSubParameters());
         }
         for(SimpleStringProperty ele : model.getSubSolutions()){
             setVisualizerSubData(ele,diagramsVisualizers.get("Visualizer 1").getSubSolutions());
-            setVisualizerSubData(ele,diagramsVisualizers.get("Visualizer 2").getSubSolutions());
+        }
+        if (model.hasMultipleCases(decompositionSelect.getSelectionModel().getSelectedIndex())){
+            for(SimpleStringProperty ele : model.getSubParameters2()){
+                setVisualizerSubData(ele,diagramsVisualizers.get("Visualizer 2").getSubParameters());
+            }
+            for(SimpleStringProperty ele : model.getSubSolutions2()){
+                setVisualizerSubData(ele,diagramsVisualizers.get("Visualizer 2").getSubSolutions());
+            }
+
         }
         model.getSubParameters().clear();
         model.getSubSolutions().clear();
@@ -279,15 +287,14 @@ public class DiagramController implements Initializable {
             if(solutionSelect.getSelectionModel().getSelectedIndex()<0){
                 return;
             }
-            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 1"),solutionSelect,model.getCurrentReductionSolutions());
+            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 1"),solutionSelect,model.getCurrentReductionSolutions(),0);
             if(genCode.get("auxCode") != null){
                 updateGenCodeParams("auxCode","\telse:\n\t\t" + genCode.get("auxCode"));
             }
             else{
                 updateGenCodeParams("auxCode","\telse:\n\t\t");
             }
-            updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-            setGenText();
+
         }
 
         catch (Exception e){
@@ -299,7 +306,7 @@ public class DiagramController implements Initializable {
             if(solutionSelect2.getSelectionModel().getSelectedIndex()<0){
                 return;
             }
-            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 2"),solutionSelect2,model.getCurrentReductionSolutions2());
+            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 2"),solutionSelect2,model.getCurrentReductionSolutions2(),1);
             updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
             setGenText();
         }
@@ -308,13 +315,15 @@ public class DiagramController implements Initializable {
             e.printStackTrace();
         }
     }
-    private void manageCalculatedSolution(DiagramVisualizerData diagramVisualizerData,ComboBox solutionSelect,int currentReductionSolutionsIndex){
-        String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex());
+    private void manageCalculatedSolution(DiagramVisualizerData diagramVisualizerData,ComboBox solutionSelect,int currentReductionSolutionsIndex,int indexAllSolved){
+        String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex(),currentReductionSolutionsIndex);
         diagramVisualizerData.getCalculatedSolution().setVisible(true);
         if(model.checkSolutionsEqual(calcSol,diagramVisualizerData.getOriginalSolution().getText())){
             if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(currentReductionSolutionsIndex)){
                 diagramVisualizerData.getCalculatedSolution().setText("Incorrecto! La operación da esta solución pero no para todos los casos\nValor calculado: "+model.getCalculatedSol());
                 diagramVisualizerData.getCalculatedSolution().setStyle("-fx-text-fill: #fcf049;");
+                allSolved[indexAllSolved] = false;
+
             }
             else{
                 diagramVisualizerData.getCalculatedSolution().setText("Correcto!\nValor calculado: "+model.getCalculatedSol());
@@ -322,11 +331,24 @@ public class DiagramController implements Initializable {
                 if(model.getAuxFunctions() != null){
                     showMoreFunctions.setVisible(true);
                 }
+                allSolved[indexAllSolved] = true;
             }
         }
         else{
             diagramVisualizerData.getCalculatedSolution().setText("Incorrecto! Vuelve a intentarlo\nValor calculado: "+model.getCalculatedSol());
             diagramVisualizerData.getCalculatedSolution().setStyle("-fx-text-fill: #fcf049;");
+            allSolved[indexAllSolved] = false;
+
+        }
+        if (model.hasMultipleCases(decompositionSelect.getSelectionModel().getSelectedIndex())){
+            if(allSolved[0] && allSolved[1]){
+                updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
+                setGenText();
+            }
+        }
+        else{
+            updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
+            setGenText();
         }
     }
     public void showErrorInputAlert(Exception e){

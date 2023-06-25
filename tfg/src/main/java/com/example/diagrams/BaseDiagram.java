@@ -21,6 +21,8 @@ public abstract class BaseDiagram {
     protected SimpleStringProperty originalSol2;
     protected List<SimpleStringProperty> subParameters;
     protected List<SimpleStringProperty> subSolutions;
+    protected List<SimpleStringProperty> subParameters2;
+    protected List<SimpleStringProperty> subSolutions2;
     protected SimpleStringProperty calculatedSol;
     protected SimpleStringProperty calculatedSol2;
     protected SimpleIntegerProperty currentProblemSize;
@@ -69,6 +71,8 @@ public abstract class BaseDiagram {
         this.selectedSolution = new SimpleIntegerProperty();
         this.subParameters = new ArrayList<>();
         this.subSolutions = new ArrayList<>();
+        this.subParameters2 = new ArrayList<>();
+        this.subSolutions2 = new ArrayList<>();
         this.solutionsChoices = new ArrayList<>();
         this.solutionsChoices.addAll(diagramData.getSolutionsChoices());
         this.correctSizeChoices = diagramData.getCorrectSizeChoices();
@@ -94,7 +98,7 @@ public abstract class BaseDiagram {
 
     public abstract boolean checkSolutionsEqual(String calcSol, String ogSol);
 
-    public abstract String calculateWithSelectedOperation(int index);
+    public abstract String calculateWithSelectedOperation(int index, int currentSolutions);
 
     public abstract List<String> setVisualizerParams();
 
@@ -239,4 +243,13 @@ public abstract class BaseDiagram {
     public void setOriginalSol2(String originalSol2) {
         this.originalSol2.set(originalSol2);
     }
+
+    public List<SimpleStringProperty> getSubParameters2() {
+        return subParameters2;
+    }
+
+    public List<SimpleStringProperty> getSubSolutions2() {
+        return subSolutions2;
+    }
 }
+

@@ -58,8 +58,8 @@ public class StringDiagram extends BaseDiagram{
         return calcSol.equals(ogSol.replace("f = ",""));
     }
     @Override
-    public String calculateWithSelectedOperation(int index) {
-        calculatedSol.set(String.valueOf(solutionOperations.get(currentReductionSolutions.get()).get(index).get()));
+    public String calculateWithSelectedOperation(int index, int currentSolutions) {
+        calculatedSol.set(String.valueOf(solutionOperations.get(currentSolutions).get(index).get()));
         return calculatedSol.get();
     }
 
