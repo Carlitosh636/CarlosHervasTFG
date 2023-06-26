@@ -1,5 +1,6 @@
 .dialog-pane {
     -fx-background-color: #4080A8;
+    -fx-border-radius: 30px;
 }
 
 .dialog-pane .label {
@@ -8,13 +9,15 @@
 
 .dialog-pane:header .header-panel {
     -fx-background-color: #4080A8;
+    -fx-border-radius: 30px;
+
 }
 
 .dialog-pane:header .header-panel .label {
     -fx-font-size: 18;
 }
 .dialog-pane .button{
-   -fx-background-radius: 15;
+   -fx-background-radius: 5;
    -fx-background-insets: 0;
    -fx-background-color: #40A89D;
    -fx-text-fill: black;

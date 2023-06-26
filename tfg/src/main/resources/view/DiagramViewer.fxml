@@ -10,7 +10,7 @@
       <HBox maxHeight="500.0" spacing="30.0">
          <VBox maxHeight="500.0" prefHeight="500.0">
             <children>
-               <TextArea fx:id="heading" editable="false" maxWidth="1000.0" prefWidth="800.0" stylesheets="@../css/header.css" text="ENUNCIADO&#10;&#10;">
+               <TextArea id="header" fx:id="heading" editable="false" maxWidth="1000.0" prefWidth="800.0" stylesheets="@../css/header.css" text="ENUNCIADO&#10;&#10;">
                   <font>
                      <Font size="24.0" />
                   </font>
@@ -46,7 +46,7 @@
                </VBox>
             </children>
          </VBox>
-         <TextArea id="genCodeBackground" fx:id="generatedCodeTemplate" editable="false" layoutX="20.0" layoutY="20.0" maxHeight="500.0" maxWidth="1000.0" minHeight="400.0" prefHeight="250.0" prefWidth="800.0" stylesheets="@../css/gen-code-style.css" text="&#10;&#10;">
+         <TextArea id="genCodeBackground" fx:id="generatedCodeTemplate" editable="false" layoutX="20.0" layoutY="20.0" maxHeight="500.0" maxWidth="1000.0" minHeight="400.0" prefHeight="250.0" prefWidth="800.0" stylesheets="@../css/header.css" text="&#10;&#10;">
             <font>
                <Font size="24.0" />
             </font>

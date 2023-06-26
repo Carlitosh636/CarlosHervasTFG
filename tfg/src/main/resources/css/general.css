@@ -8,15 +8,15 @@
 }
 .combo-box .arrow-button{
     -fx-background-color:#82bf92;
-    -fx-background-radius : 15px;
+    -fx-background-radius : 10px;
 }
 .combo-box .list-cell{
     -fx-background-color:transparent;
-    -fx-background-radius : 30px;
+    -fx-background-radius : 10px;
     -fx-text-fill: black;
     -fx-outer-border: white;
     -fx-border-color: #40A89D;
-    -fx-border-radius : 30px;
+    -fx-border-radius : 10px;
     -fx-border-width: 2;
     -fx-font-size: 16;
 }
@@ -26,15 +26,15 @@
 #combo-box-4{
     -fx-background-color:
          #a4edb7;
-    -fx-background-radius : 30px;
+    -fx-background-radius : 10px;
 }
 #combo-box-4:hover{
     -fx-background-color:
          #7bb58a;
-    -fx-background-radius : 30px;
+    -fx-background-radius : 10px;
 }
 #combo-box-4 .list-view{
--fx-background-radius : 15px;
+-fx-background-radius : 10px;
     -fx-background-color:
          #96d9a7;
 }

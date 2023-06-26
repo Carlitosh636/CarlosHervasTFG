@@ -1,10 +1,20 @@
 .text-area{
-    text-area-background: #4080A8;
     -fx-font-size: 18;
-    -fx-text-fill: white;
-    -fx-font-family: "trebuchet MS", sans-serif;
-    -fx-color: #000000;
     -fx-letter-spacing: 0.5px;
+    -fx-line-height: 21px;
+    -fx-border-width: 2px;
+}
+
+#header{
+    text-area-background: #4080A8;
+    -fx-font-family: "trebuchet MS", sans-serif;
+    -fx-text-fill: white;
+}
+
+#genCodeBackground{
+    text-area-background: #0a0d24;
+    -fx-text-fill: #00cc1b;
+    -fx-font-family: "consolas", sans-serif;
     -fx-line-height: 21px;
 }
 

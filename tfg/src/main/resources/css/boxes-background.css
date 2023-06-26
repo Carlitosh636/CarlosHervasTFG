@@ -5,10 +5,9 @@
     -fx-background-color: #306382;
     -fx-border-radius: 30;
     -fx-background-radius: 30;
-
 }
 #diagramDataHolders{
     -fx-background-color: #215954;
-    -fx-background-radius: 15;
-
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
 }
