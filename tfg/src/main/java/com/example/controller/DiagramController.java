@@ -299,7 +299,8 @@ public class DiagramController implements Initializable {
             else{
                 updateGenCodeParams("auxCode","\telse:\n\t\t");
             }
-
+            updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
+            setGenText();
         }
 
         catch (Exception e){
