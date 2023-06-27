@@ -14,7 +14,6 @@
     -fx-background-color:transparent;
     -fx-background-radius : 10px;
     -fx-text-fill: black;
-    -fx-outer-border: white;
     -fx-border-color: #40A89D;
     -fx-border-radius : 10px;
     -fx-border-width: 2;
@@ -36,9 +35,9 @@
 #combo-box-4 .list-view{
 -fx-background-radius : 10px;
     -fx-background-color:
-         #96d9a7;
+         #82bf92;
 }
 #combo-box-4 .list-cell:hover{
     -fx-background-color:
-        #82bf92;
+        #74ad83;
 }

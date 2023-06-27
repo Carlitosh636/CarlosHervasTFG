@@ -55,12 +55,13 @@ public class DiagramController implements Initializable {
     private Map<String,String> genCode;
     private PresenterButtonHandler buttonHandler;
     private ExceptionHandler exceptionHandler;
-    private boolean[] allSolved = {false,false};
+    private final boolean[] allSolved = {false,false};
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         diagramsVisualizers.put("Visualizer 1", initializeDiagramVisualizerData(diagramGrid));
         diagramsVisualizers.put("Visualizer 2", initializeDiagramVisualizerData(diagramGrid2));
         problemSizeSelect.getItems().setAll(model.getProblemSizeChoices());
+        setCellFactoryForCombobox(problemSizeSelect);
         AnchorPane.setLeftAnchor(SizeAndBaseCaseBox,15.0);
         AnchorPane.setRightAnchor(diagramGrid,15.0);
         bindModelData();
@@ -127,6 +128,8 @@ public class DiagramController implements Initializable {
         baseCaseLabel.setVisible(true);
         if(!problemSizeSelect.getSelectionModel().isEmpty()){
             baseCaseSelect.getItems().setAll(model.getBaseCaseChoices().get(model.getCurrentProblemSize()));
+            setCellFactoryForCombobox(baseCaseSelect);
+
         }
     }
     public void onChangeBaseCase() {
@@ -163,11 +166,13 @@ public class DiagramController implements Initializable {
             paramName.setFont(visualizerData.getOriginalSolution().getFont());
             paramName.setStyle("-fx-text-fill: white;-fx-font-size: 18;" +
                     "-fx-max-width: 50px;");
+            paramName.setPrefWidth(50);
+            paramName.setMaxWidth(75);
             paramName.setWrapText(true);
             TextField tf = new TextField();
             tf.setFont(visualizerData.getOriginalSolution().getFont());
-            tf.setMaxWidth(100);
-            tf.setMaxHeight(30);
+            tf.setPrefWidth(150);
+            tf.setMaxWidth(200);
             box.getChildren().addAll(paramName,tf);
             visualizerData.addValueToOriginalData(box);
             tfs.add(tf);
@@ -193,7 +198,7 @@ public class DiagramController implements Initializable {
                                     showErrorInputAlert(new IncorrectInputException("Error al introducir los datos de entrada"));
                                     e.printStackTrace();
                                 }
-                                refreshDiagram();
+                                refreshDecomposition();
                             }
                         } catch (Exception e) {
                             showErrorInputAlert(new IncorrectInputException("Error al introducir los datos de entrada"));
@@ -273,7 +278,9 @@ public class DiagramController implements Initializable {
         model.getSubParameters().clear();
         model.getSubSolutions().clear();
         solutionSelect.getItems().setAll(model.getSolutionsChoices().get(model.getCurrentReductionSolutions()));
+        setCellFactoryForCombobox(solutionSelect);
         solutionSelect2.getItems().setAll(model.getSolutionsChoices().get(model.getCurrentReductionSolutions2()));
+        setCellFactoryForCombobox(solutionSelect2);
         solutionSelect.setVisible(true);
     }
 
@@ -365,14 +372,16 @@ public class DiagramController implements Initializable {
         generatedCodeText.put(genCodeTextKey,value);
     }
 
-    private void refreshDiagram(){
+    private void refreshDecomposition(){
         solutionSelect.setVisible(false);
         diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setVisible(false);
-        diagramsVisualizers.get("Visualizer 2").getCalculatedSolution().setVisible(true);
+        diagramsVisualizers.get("Visualizer 2").getCalculatedSolution().setVisible(false);
         decompositionSelect.getItems().clear();
         decompositionSelect2.setText("");
         decompositionSelect.getItems().setAll(model.getReductionChoices().get(model.getCurrentProblemSize() + model.getMultipleProblemIndexOffset()));
+        setCellFactoryForCombobox(decompositionSelect);
     }
+
     @FXML
     public void returnToMenu() {
         try {
@@ -419,6 +428,27 @@ public class DiagramController implements Initializable {
             baseCaseLabel.setVisible(false);
             setGenText();
         }
+    }
+
+    private void setCellFactoryForCombobox(ComboBox<String> combobox) {
+        combobox.setCellFactory(param-> new ListCell<>() {
+            final Label label = new Label() {{
+                setWrapText(true);
+                setPrefWidth(175);
+            }};
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (item == null || empty) {
+                    setGraphic(null);
+                } else {
+                    label.setText(item);
+                    setGraphic(label);
+                }
+            }
+        });
     }
 
     private void setArrows() {
