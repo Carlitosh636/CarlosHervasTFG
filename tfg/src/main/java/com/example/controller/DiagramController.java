@@ -26,6 +26,8 @@ public class DiagramController implements Initializable {
     @FXML
     GridPane diagramGrid2;
     @FXML
+    HBox diagramsHolder;
+    @FXML
     TextArea heading;
     @FXML
     TextArea generatedCodeTemplate;
@@ -216,7 +218,9 @@ public class DiagramController implements Initializable {
             updateGenCodeParams("functionName",updatedFunction);
         }
         if (model.hasMultipleCases(decompositionSelect.getSelectionModel().getSelectedIndex())){
+            diagramsHolder.getChildren().add(diagramGrid2);
             diagramGrid2.setVisible(true);
+            diagramsVisualizers.get("Visualizer 2").originalSolution.setVisible(true);
             decompositionSelect2.setVisible(true);
             solutionSelect2.setVisible(true);
 

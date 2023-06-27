@@ -15,7 +15,9 @@ public class RecursivePowerDiagram implements IDiagramActions, IMultipleDiagramA
         a = Double.parseDouble(newValues.get("a"));
         b = Double.parseDouble(newValues.get("b"));
         partSol = Double.parseDouble(newValues.get("partSol"));
-        partSol2 = Double.parseDouble(newValues.getOrDefault("partSol2","0"));
+        if (newValues.containsKey("partSol2") && !newValues.get("partSol2").isEmpty()){
+            partSol2 = Double.parseDouble(newValues.get("partSol2"));
+        }
         baseCaseValue = Integer.parseInt(newValues.get("baseCaseValue"));
     }
 
