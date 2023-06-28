@@ -56,7 +56,7 @@ public class EqualStringsDiagram implements IDiagramActions{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol",String.valueOf(Algorithms.equalStrings1(inputs[0],inputs[1],baseCaseValue)));
             returnVal.put("partSol",returnVal.get("ogSol"));
-            returnVal.put("reducedOperation",inputs[0].substring(1)+","+inputs[1].substring(1));
+            returnVal.put("reducedOperation",String.format("s = %s\nt = %s",inputs[0].substring(1),inputs[1].substring(1)));
             returnVal.put("currentReductionSolutions","0");
             return returnVal;
         });
@@ -64,7 +64,7 @@ public class EqualStringsDiagram implements IDiagramActions{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("ogSol",String.valueOf(Algorithms.equalStrings2(inputs[0],inputs[1],baseCaseValue)));
             returnVal.put("partSol",returnVal.get("ogSol"));
-            returnVal.put("reducedOperation",inputs[0].substring(1)+","+inputs[1].substring(1));
+            returnVal.put("reducedOperation",String.format("s = %s\nt = %s",inputs[0].substring(1),inputs[1].substring(1)));
             returnVal.put("currentReductionSolutions","1");
             return returnVal;
         });

@@ -38,7 +38,6 @@ public class ContainsDigitDiagram implements IDiagramActions{
         if(baseCase.contains("\n")){
             System.out.println(Arrays.toString(baseCase.split("\n")));
             System.out.println(Arrays.toString(returnValue.split("\n")));
-
         }
         else{
             bC = baseCase;
@@ -59,14 +58,14 @@ public class ContainsDigitDiagram implements IDiagramActions{
         algorithmMap.put(0, () -> {
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("partSol",String.valueOf(Algorithms.containsDigitTailLineal(n/10,d)));
-            returnVal.put("reducedOperation",String.format("%.0f, %.0f",n/10,d));
+            returnVal.put("reducedOperation",String.format("n = %.0f\nd = %.0f",n/10,d));
             returnVal.put("currentReductionSolutions",String.valueOf(0));
             return returnVal;
         });
         algorithmMap.put(1, () -> {
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("partSol",String.valueOf(Algorithms.containsDigitTail(n/10,d)));
-            returnVal.put("reducedOperation",String.format("%.0f, %.0f",n/10,d));
+            returnVal.put("reducedOperation",String.format("n = %.0f\nd = %.0f",n/10,d));
             returnVal.put("currentReductionSolutions",String.valueOf(1));
             return returnVal;
         });

@@ -94,8 +94,8 @@ public class ArraySortDiagram implements IDiagramActions{
         });
         algorithmMap.put(0, () -> {
             Map<String,String> returnVal = new HashMap<>();
-            returnVal.put("reducedOperation1",Arrays.toString(l));
-            returnVal.put("reducedOperation2",Arrays.toString(r));
+            returnVal.put("reducedOperation1","v1 = "+Arrays.toString(l));
+            returnVal.put("reducedOperation2","\nv2 = "+Arrays.toString(r));
             returnVal.put("partSol1",Arrays.toString(Algorithms.mergeSort(l)));
             returnVal.put("partSol2",Arrays.toString(Algorithms.mergeSort(r)));
             returnVal.put("currentReductionSolutions", String.valueOf(0));
@@ -105,7 +105,7 @@ public class ArraySortDiagram implements IDiagramActions{
             Map<String,String> returnVal = new HashMap<>();
             ele = copyArray[copyArray.length-1];
             reducedArray = Arrays.stream(copyArray).filter(e->e!=ele).toArray();
-            returnVal.put("reducedOperation",Arrays.toString(reducedArray));
+            returnVal.put("reducedOperation","a = "+Arrays.toString(reducedArray));
             returnVal.put("partSol",Arrays.toString(Algorithms.insertSort(reducedArray)));
             returnVal.put("currentReductionSolutions",String.valueOf(1));
             return returnVal;
@@ -114,7 +114,7 @@ public class ArraySortDiagram implements IDiagramActions{
             Map<String,String> returnVal = new HashMap<>();
             ele = Algorithms.getSmallest(copyArray);
             reducedArray = Arrays.stream(copyArray).filter(e->e!=ele).toArray();
-            returnVal.put("reducedOperation",Arrays.toString(reducedArray));
+            returnVal.put("reducedOperation","a = "+Arrays.toString(reducedArray));
             returnVal.put("partSol",Arrays.toString(Algorithms.selectSort(reducedArray)));
             returnVal.put("currentReductionSolutions",String.valueOf(2));
             return returnVal;
@@ -124,8 +124,8 @@ public class ArraySortDiagram implements IDiagramActions{
             int pivot = copyArray[mid-1];
             int[] smallerElements = Algorithms.getSmaller(copyArray,pivot);
             int[] greaterElements = Algorithms.getGreater(copyArray,pivot);
-            returnVal.put("reducedOperation1",Arrays.toString(smallerElements));
-            returnVal.put("reducedOperation2",Arrays.toString(greaterElements));
+            returnVal.put("reducedOperation1","v1 = "+Arrays.toString(smallerElements));
+            returnVal.put("reducedOperation2","\nv2 = "+Arrays.toString(greaterElements));
             returnVal.put("partSol1", Arrays.toString(Algorithms.quicksort(smallerElements,smallerElements.length / 2)));
             returnVal.put("partSol2", Arrays.toString(Algorithms.quicksort(greaterElements,greaterElements.length / 2)));
             returnVal.put("currentReductionSolutions", String.valueOf(3));

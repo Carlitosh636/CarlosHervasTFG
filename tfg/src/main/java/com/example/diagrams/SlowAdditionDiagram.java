@@ -74,28 +74,28 @@ public class SlowAdditionDiagram implements IDiagramActions{
         algorithmMap.put(0, () -> {
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption1(a-1,b,baseCaseValue)));
-            returnVal.put("reducedOperation",String.format("%d, %d",(int)a-1,(int)b));
+            returnVal.put("reducedOperation",String.format("a = %.0f\nb = %.0f",a-1,b));
             returnVal.put("currentReductionSolutions",String.valueOf(0));
             return returnVal;
         });
         algorithmMap.put(1,()->{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption1(a,b,baseCaseValue)));
-            returnVal.put("reducedOperation",String.format("%d, %d",(int)a-1,(int)b+1));
+            returnVal.put("reducedOperation",String.format("a = %.0f\nb = %.0f",a-1,b+1));
             returnVal.put("currentReductionSolutions",String.valueOf(1));
             return returnVal;
         });
         algorithmMap.put(2, () -> {
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption1(a,b-1,baseCaseValue)));
-            returnVal.put("reducedOperation",String.format("%d, %d",(int)a,(int)b-1));
+            returnVal.put("reducedOperation",String.format("a = %.0f\nb = %.0f",a,b-1));
             returnVal.put("currentReductionSolutions",String.valueOf(2));
             return returnVal;
         });
         algorithmMap.put(3,()->{
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption1(a,b,baseCaseValue)));
-            returnVal.put("reducedOperation",String.format("%d, %d",(int)a+1,(int)b-1));
+            returnVal.put("reducedOperation",String.format("a = %.0f\nb = %.0f",a+1,b-1));
             returnVal.put("currentReductionSolutions",String.valueOf(3));
             return returnVal;
         });
@@ -107,14 +107,14 @@ public class SlowAdditionDiagram implements IDiagramActions{
             else{
                 returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption2(a,b-1,baseCaseValue)));
             }
-            returnVal.put("reducedOperation",String.valueOf(Math.min(a, b-1)));
+            returnVal.put("reducedOperation",String.format("min(a,b) = %.0f", Math.min(a, b - 1)));
             returnVal.put("currentReductionSolutions",String.valueOf(4));
             return returnVal;
         });
         algorithmMap.put(5,() -> {
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption3(a-1,b-1,baseCaseValue)));
-            returnVal.put("reducedOperation",String.format("(%.0f - 1 , %.0f - 1)", a, b));
+            returnVal.put("reducedOperation",String.format("a = %.0f\nb = %.0f", a-1, b-1));
             returnVal.put("currentReductionSolutions",String.valueOf(5));
             return returnVal;
         });
