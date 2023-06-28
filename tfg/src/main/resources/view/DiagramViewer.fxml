@@ -90,8 +90,11 @@
                   <ColumnConstraints />
                   <ColumnConstraints />
                   <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
                </columnConstraints>
                <rowConstraints>
+                  <RowConstraints />
                   <RowConstraints />
                   <RowConstraints />
                   <RowConstraints />
@@ -166,6 +169,38 @@
                      <Insets right="10.0" />
                   </padding>
                </Label>
+               <Label alignment="CENTER" layoutX="22.0" layoutY="61.0" minWidth="125.0" text="Parámetros" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="1">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+                  <padding>
+                     <Insets right="10.0" />
+                  </padding>
+               </Label>
+               <Label alignment="CENTER" layoutX="212.0" layoutY="22.0" minWidth="125.0" text="Solución" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="3">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+                  <padding>
+                     <Insets right="10.0" />
+                  </padding>
+               </Label>
+               <Label alignment="CENTER" layoutX="357.0" layoutY="22.0" minWidth="125.0" text="Subparámetros" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+                  <padding>
+                     <Insets right="10.0" />
+                  </padding>
+               </Label>
+               <Label alignment="CENTER" layoutX="212.0" layoutY="186.0" minWidth="125.0" text="Subsolución" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+                  <padding>
+                     <Insets right="10.0" />
+                  </padding>
+               </Label>
             </GridPane>
 
          </children>
@@ -183,6 +218,7 @@
          <ColumnConstraints />
       </columnConstraints>
       <rowConstraints>
+         <RowConstraints />
          <RowConstraints />
          <RowConstraints />
          <RowConstraints />
@@ -250,6 +286,38 @@
          </padding>
       </Label>
       <Label layoutX="27.0" layoutY="66.0" minHeight="-Infinity" minWidth="125.0" text="4: Regla recursiva" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </Label>
+      <Label alignment="CENTER" minWidth="125.0" text="Parámetros" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="1">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </Label>
+      <Label alignment="CENTER" minWidth="125.0" text="Solución" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="3">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </Label>
+      <Label alignment="CENTER" minWidth="125.0" text="Subparámetros" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </Label>
+      <Label alignment="CENTER" minWidth="125.0" text="Subsolución" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="6">
          <font>
             <Font size="18.0" />
          </font>

@@ -412,7 +412,7 @@ public class DiagramController implements Initializable {
                 v.getSubSolutions().setVisible(false);
                 v.getOriginalSolution().setVisible(false);
             });
-
+            baseCaseSelect.setVisible(false);
             solutionSelect.getItems().clear();
             solutionSelect2.getItems().clear();
             model.resetSubValues();
