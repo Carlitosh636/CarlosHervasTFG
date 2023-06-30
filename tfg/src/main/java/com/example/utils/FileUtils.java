@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class FileUtils {
+    private static final ObjectMapper objMapper = new ObjectMapper();
     public static <T> T returnObjectFromInputStream(String path, Class<T> valueClass) throws IOException {
         try(InputStream input = FileUtils.class.getResourceAsStream(path)){
-            ObjectMapper objMapper = new ObjectMapper();
             return objMapper.readValue(input,valueClass);
         }
         catch (IOException e){
