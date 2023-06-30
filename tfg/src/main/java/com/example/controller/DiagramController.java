@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import java.io.IOException;
@@ -46,12 +48,14 @@ public class DiagramController implements Initializable {
     @FXML
     Label baseCaseLabel;
     @FXML
+    VBox codegenHolder;
+    @FXML
     public ComboBox<String> solutionSelect2;
     private final Map<String,DiagramVisualizerData> diagramsVisualizers = new HashMap<>();
-
     @FXML
     Button showMoreFunctions;
     private final LinkedHashMap<String,String> generatedCodeText = new LinkedHashMap<>();
+    private final LinkedHashMap<String,VBox> codeGenParts = new LinkedHashMap<>();
     private Map<String,String> genCode;
     private PresenterButtonHandler buttonHandler;
     private ExceptionHandler exceptionHandler;
@@ -86,6 +90,15 @@ public class DiagramController implements Initializable {
         buttonHandler = new PresenterButtonHandler();
         exceptionHandler = new ExceptionHandler(model.getInputFormatting());
 
+        codeGenParts.put("functionName",null);
+        codeGenParts.put("baseCase",null);
+        codeGenParts.put("returnValue",null);
+        codeGenParts.put("auxCode",null);
+        codeGenParts.put("recursiveCases",null);
+        codeGenParts.put("auxFunctions",null);
+
+        codeGenParts.keySet().forEach(this::addPartToCodeGenHolder);
+
         generatedCodeText.put("functionName","FUNCIÓN");
         generatedCodeText.put("baseCase","CASO(S) BASE");
         generatedCodeText.put("returnValue","CASO(S) BASE");
@@ -96,6 +109,28 @@ public class DiagramController implements Initializable {
         showMoreFunctions.setVisible(false);
     }
 
+    private void addLabelToCodeGenPart(VBox part, String text){
+        Label newLine = new Label();
+        newLine.setStyle("-fx-background-color: #000000;" +
+            "-fx-text-fill: #00cc1b;" +
+            "-fx-font-family: \"consolas\", sans-serif;" +
+            "-fx-line-height: 21px;" +
+            "-fx-font-size: 16px;");
+        newLine.setText(text);
+        newLine.setPrefHeight(30);
+        newLine.setPrefWidth(codegenHolder.getPrefWidth());
+        newLine.setMaxWidth(codegenHolder.getMaxWidth());
+        part.getChildren().add(newLine);
+
+    }
+    private void addPartToCodeGenHolder(String key){
+        VBox newBox = new VBox();
+        newBox.setPrefHeight(30);
+        newBox.setPrefWidth(codegenHolder.getPrefWidth());
+        newBox.setMaxWidth(codegenHolder.getMaxWidth());
+        codeGenParts.put(key,newBox);
+        codegenHolder.getChildren().add(codeGenParts.get(key));
+    }
     private void setGenText() {
         generatedCodeTemplate.textProperty().set("");
         generatedCodeText.values().forEach(val->{
@@ -151,6 +186,7 @@ public class DiagramController implements Initializable {
         diagramsVisualizers.get("Visualizer 2").originalData.setVisible(true);
 
         String functionName = model.processFunctionName(0);
+        addLabelToCodeGenPart(codeGenParts.get("functionName"),functionName);
         genCode = model.processProblemSizeAndBaseCases();
         updateGenCodeParams("functionName",functionName);
         updateGenCodeParams("baseCase","\t"+genCode.get("baseCase"));
@@ -238,7 +274,6 @@ public class DiagramController implements Initializable {
                         i.addAndGet(1);
                     });
             decompositionSelect2.setText(String.valueOf(model.getParams().get("secondDecomposition").get()));
-            //decompositionSelect.getItems().remove(decompositionSelect.getItems().size()-1);
         }
         solutionSelect.getItems().clear();
         diagramsVisualizers.get("Visualizer 1").getSubParameters().setVisible(true);
@@ -429,7 +464,22 @@ public class DiagramController implements Initializable {
             setGenText();
         }
     }
+    @FXML
+    public void copyToClipboard() {
+        StringBuilder stringBuilder = new StringBuilder();
+        codeGenParts.forEach((k,v)->{
+            v.getChildren().forEach(ele->{
+                Label theLabel = (Label) ele;
+                stringBuilder.append(theLabel.getText()).append("\n");
+            });
+        });
 
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(stringBuilder.toString());
+        clipboard.setContent(content);
+        System.out.println(clipboard.getString());
+    }
     private void setCellFactoryForCombobox(ComboBox<String> combobox) {
         combobox.setCellFactory(param-> new ListCell<>() {
             final Label label = new Label() {{
@@ -499,4 +549,6 @@ public class DiagramController implements Initializable {
         digVisualData.setSubSolutions((VBox) getNodeByRowColumnIndex(5,3,diagramGrid));
         return digVisualData;
     }
+
+
 }

@@ -5,6 +5,8 @@ import com.example.algorithms.Algorithms;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ContainsDigitDiagram implements IDiagramActions{
     Map<Integer, Callable<Map<String,String>>> algorithmMap= new HashMap<>();
@@ -33,18 +35,21 @@ public class ContainsDigitDiagram implements IDiagramActions{
     @Override
     public Map<String, String> setGenCodeParams(String baseCase, String returnValue) {
         Map<String,String> returnVal = new HashMap<>();
-        String bC = "";
-        String rV = "";
         if(baseCase.contains("\n")){
-            System.out.println(Arrays.toString(baseCase.split("\n")));
-            System.out.println(Arrays.toString(returnValue.split("\n")));
+            StringBuilder stringBuilder = new StringBuilder();
+            List<String> baseCases = Stream.of(baseCase.split("\n")).map(s -> "\tif " + s + ":\n").toList();
+            List<String> returnValues = Stream.of(returnValue.split("\n")).map(s -> "\t\treturn " + s+"\n").toList();
+            for(int i = 0; i<baseCases.size();i++){
+                stringBuilder.append(baseCases.get(i));
+                stringBuilder.append(returnValues.get(i));
+            }
+            returnVal.put("baseCase",stringBuilder.toString());
+            returnVal.put("returnValue","");
         }
         else{
-            bC = baseCase;
-            rV = returnValue;
+            returnVal.put("baseCase",String.format("if %s:",baseCase));
+            returnVal.put("returnValue",String.format("return %s",returnValue));
         }
-        returnVal.put("baseCase",String.format("if %s:",bC));
-        returnVal.put("returnValue",String.format("return %s",rV));
         return returnVal;
     }
 

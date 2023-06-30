@@ -13,6 +13,7 @@
 
 #genCodeBackground{
     text-area-background: #0a0d24;
+    -fx-background-color: #000000;
     -fx-text-fill: #00cc1b;
     -fx-font-family: "consolas", sans-serif;
     -fx-line-height: 21px;

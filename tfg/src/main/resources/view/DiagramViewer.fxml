@@ -40,6 +40,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
+                  <Button mnemonicParsing="false" onAction="#copyToClipboard" text="Copy to clipboard" />
                   <padding>
                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </padding>
@@ -51,6 +52,11 @@
                <Font size="24.0" />
             </font>
          </TextArea>
+         <VBox fx:id="codegenHolder" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="800.0">
+            <padding>
+               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+         </VBox>
          <VBox.margin>
             <Insets />
          </VBox.margin>
