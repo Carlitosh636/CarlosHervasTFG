@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.diagrams.*;
+import com.example.exceptions.AlertTypeIndexOutOfBounds;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -51,6 +52,14 @@ public class MenuController {
     @FXML
     private void loadScene(BaseDiagram model, Button button) throws IOException {
         menuButtonHandler.loadVisualizer(model, button);
+    }
+    @FXML
+    private void quitApplication(){
+        try {
+            menuButtonHandler.quitApplication();
+        } catch (AlertTypeIndexOutOfBounds e) {
+            exceptionHandler.showErrorAlert(e);
+        }
     }
 
 }

@@ -38,3 +38,11 @@
     -fx-background-color: #307e85;
     -fx-text-fill: black;
 }
+#button5{
+    -fx-background-color: #e5e846;
+    -fx-text-fill: black;
+}
+#button5:hover{
+    -fx-background-color: #ced13f;
+    -fx-text-fill: black;
+}

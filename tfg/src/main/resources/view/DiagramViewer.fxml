@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="background" fx:id="root" stylesheets="@../css/general.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.DiagramController">
+<AnchorPane id="background" fx:id="root" stylesheets="@../css/general.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.ProblemController">
    <VBox alignment="TOP_CENTER" maxHeight="1080.0" maxWidth="1920.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
       <HBox maxHeight="500.0" spacing="30.0">
          <VBox maxHeight="500.0" prefHeight="500.0">

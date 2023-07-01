@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.util.Map;
 
-public class PresenterButtonHandler extends ButtonHandler {
+public class ProblemButtonHandler extends ButtonHandler {
 
     public void returnToMenu(int alertTypeIndex, String title, String content, GridPane diagramGrid) throws AlertTypeIndexOutOfBounds, InternallyCausedRuntimeException {
         ButtonType action =  super.setAlertDataAndStyle(alertTypeIndex,title,content).orElse(null);

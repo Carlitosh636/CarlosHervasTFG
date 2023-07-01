@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class DiagramController implements Initializable {
+public class ProblemController implements Initializable {
     @FXML
     AnchorPane root;
     private final BaseDiagram model;
@@ -59,7 +59,7 @@ public class DiagramController implements Initializable {
     private final LinkedHashMap<String,String> generatedCodeText = new LinkedHashMap<>();
     private final LinkedHashMap<String,VBox> codeGenParts = new LinkedHashMap<>();
     private Map<String,String> genCode;
-    private PresenterButtonHandler buttonHandler;
+    private ProblemButtonHandler buttonHandler;
     private ExceptionHandler exceptionHandler;
     private final boolean[] allSolved = {false,false};
     @Override
@@ -90,7 +90,7 @@ public class DiagramController implements Initializable {
             v.getSubSolutions().setVisible(false);
         });
 
-        buttonHandler = new PresenterButtonHandler();
+        buttonHandler = new ProblemButtonHandler();
         exceptionHandler = new ExceptionHandler(model.getInputFormatting());
 
         codeGenParts.put("functionName",null);
@@ -159,7 +159,7 @@ public class DiagramController implements Initializable {
         });
     }
 
-    public DiagramController(BaseDiagram model) throws IOException {
+    public ProblemController(BaseDiagram model) throws IOException {
         this.model = model;
     }
     protected void bindModelData() {

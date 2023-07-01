@@ -58,6 +58,14 @@
                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
             </padding>
          </VBox>
+         <Button id="button5" mnemonicParsing="false" onAction="#quitApplication" stylesheets="@../css/button.css" text="Cerrar aplicación" textFill="#e4e4e4">
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin>
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Button>
       </children>
    </VBox>
    <padding>
