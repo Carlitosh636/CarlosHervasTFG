@@ -30,3 +30,11 @@
     -fx-background-color: #387194;
     -fx-text-fill: black;
 }
+#button4{
+    -fx-background-color: #3c9ba3;
+    -fx-text-fill: black;
+}
+#button4:hover{
+    -fx-background-color: #307e85;
+    -fx-text-fill: black;
+}

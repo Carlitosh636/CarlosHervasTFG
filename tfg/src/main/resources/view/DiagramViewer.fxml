@@ -32,6 +32,10 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
+                  <Button id="button4" fx:id="copyCodeButton" mnemonicParsing="false" onAction="#copyToClipboard" prefHeight="90.0" prefWidth="200.0" stylesheets="@../css/button.css" text="Copiar código generado" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
                   <Button id="button3" fx:id="showMoreFunctions" layoutX="20.0" layoutY="70.0" onAction="#showMoreFuncs" prefWidth="200.0" stylesheets="@../css/button.css" text="Mostrar funciones auxiliares" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
                      <opaqueInsets>
                         <Insets />
@@ -40,7 +44,6 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#copyToClipboard" text="Copy to clipboard" />
                   <padding>
                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </padding>

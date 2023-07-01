@@ -54,6 +54,8 @@ public class DiagramController implements Initializable {
     private final Map<String,DiagramVisualizerData> diagramsVisualizers = new HashMap<>();
     @FXML
     Button showMoreFunctions;
+    @FXML
+    Button copyCodeButton;
     private final LinkedHashMap<String,String> generatedCodeText = new LinkedHashMap<>();
     private final LinkedHashMap<String,VBox> codeGenParts = new LinkedHashMap<>();
     private Map<String,String> genCode;
@@ -79,6 +81,7 @@ public class DiagramController implements Initializable {
         decompositionSelect2.setVisible(false);
         solutionSelect2.setVisible(false);
         baseCaseLabel.setVisible(false);
+        copyCodeButton.setVisible(false);
 
         diagramsVisualizers.values().forEach(v->{
             v.getCalculatedSolution().setVisible(false);
@@ -208,6 +211,7 @@ public class DiagramController implements Initializable {
         addLabelToCodeGenPart("functionName",functionName);
         addLabelToCodeGenPart("baseCases",genCode.get("baseCase"));
         addLabelToCodeGenPart("returnValues",genCode.get("returnValue"));
+        copyCodeButton.setVisible(true);
 
         updateGenCodeParams("functionName",functionName);
         updateGenCodeParams("baseCase","\t"+genCode.get("baseCase"));
@@ -471,6 +475,8 @@ public class DiagramController implements Initializable {
                 v.getSubSolutions().setVisible(false);
                 v.getOriginalSolution().setVisible(false);
             });
+            copyCodeButton.setVisible(false);
+            codeGenParts.values().forEach(vBox -> vBox.getChildren().clear());
             baseCaseSelect.setVisible(false);
             solutionSelect.getItems().clear();
             solutionSelect2.getItems().clear();
