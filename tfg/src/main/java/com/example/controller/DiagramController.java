@@ -91,8 +91,8 @@ public class DiagramController implements Initializable {
         exceptionHandler = new ExceptionHandler(model.getInputFormatting());
 
         codeGenParts.put("functionName",null);
-        codeGenParts.put("baseCase",null);
-        codeGenParts.put("returnValue",null);
+        codeGenParts.put("baseCases",null);
+        codeGenParts.put("returnValues",null);
         codeGenParts.put("auxCode",null);
         codeGenParts.put("recursiveCases",null);
         codeGenParts.put("auxFunctions",null);
@@ -109,18 +109,25 @@ public class DiagramController implements Initializable {
         showMoreFunctions.setVisible(false);
     }
 
-    private void addLabelToCodeGenPart(VBox part, String text){
+    private void addLabelToCodeGenPart(String key, String text){
         Label newLine = new Label();
         newLine.setStyle("-fx-background-color: #000000;" +
             "-fx-text-fill: #00cc1b;" +
             "-fx-font-family: \"consolas\", sans-serif;" +
             "-fx-line-height: 21px;" +
             "-fx-font-size: 16px;");
-        newLine.setText(text);
+        String formatting = "";
+        switch (key){
+            case "functionName":
+                break;
+            case "baseCases":
+                formatting = "\t";
+        }
+        newLine.setText(formatting+text);
         newLine.setPrefHeight(30);
         newLine.setPrefWidth(codegenHolder.getPrefWidth());
         newLine.setMaxWidth(codegenHolder.getMaxWidth());
-        part.getChildren().add(newLine);
+        codeGenParts.get(key).getChildren().add(newLine);
 
     }
     private void addPartToCodeGenHolder(String key){
@@ -164,7 +171,6 @@ public class DiagramController implements Initializable {
         if(!problemSizeSelect.getSelectionModel().isEmpty()){
             baseCaseSelect.getItems().setAll(model.getBaseCaseChoices().get(model.getCurrentProblemSize()));
             setCellFactoryForCombobox(baseCaseSelect);
-
         }
     }
     public void onChangeBaseCase() {
@@ -186,9 +192,10 @@ public class DiagramController implements Initializable {
         diagramsVisualizers.get("Visualizer 2").originalData.setVisible(true);
 
         String functionName = model.processFunctionName(0);
-        addLabelToCodeGenPart(codeGenParts.get("functionName"),functionName);
+        addLabelToCodeGenPart("functionName",functionName);
         genCode = model.processProblemSizeAndBaseCases();
         updateGenCodeParams("functionName",functionName);
+        addLabelToCodeGenPart("baseCases",genCode.get("baseCase"));
         updateGenCodeParams("baseCase","\t"+genCode.get("baseCase"));
         updateGenCodeParams("returnValue","\t\t"+genCode.get("returnValue"));
         setGenText();
