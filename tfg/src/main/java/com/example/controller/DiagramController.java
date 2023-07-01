@@ -122,14 +122,24 @@ public class DiagramController implements Initializable {
                 break;
             case "baseCases":
                 formatting = "\t";
+                break;
+            case "returnValues":
+            case "recursiveCases":
+                formatting = "\t\t";
+                break;
+            case "auxCode":
+                formatting = "\telse:\n\t\t";
+                break;
         }
         newLine.setText(formatting+text);
         newLine.setPrefHeight(30);
         newLine.setPrefWidth(codegenHolder.getPrefWidth());
         newLine.setMaxWidth(codegenHolder.getMaxWidth());
+        codeGenParts.get(key).getChildren().clear();
         codeGenParts.get(key).getChildren().add(newLine);
 
     }
+
     private void addPartToCodeGenHolder(String key){
         VBox newBox = new VBox();
         newBox.setPrefHeight(30);
@@ -138,6 +148,7 @@ public class DiagramController implements Initializable {
         codeGenParts.put(key,newBox);
         codegenHolder.getChildren().add(codeGenParts.get(key));
     }
+
     private void setGenText() {
         generatedCodeTemplate.textProperty().set("");
         generatedCodeText.values().forEach(val->{
@@ -192,10 +203,13 @@ public class DiagramController implements Initializable {
         diagramsVisualizers.get("Visualizer 2").originalData.setVisible(true);
 
         String functionName = model.processFunctionName(0);
-        addLabelToCodeGenPart("functionName",functionName);
         genCode = model.processProblemSizeAndBaseCases();
-        updateGenCodeParams("functionName",functionName);
+
+        addLabelToCodeGenPart("functionName",functionName);
         addLabelToCodeGenPart("baseCases",genCode.get("baseCase"));
+        addLabelToCodeGenPart("returnValues",genCode.get("returnValue"));
+
+        updateGenCodeParams("functionName",functionName);
         updateGenCodeParams("baseCase","\t"+genCode.get("baseCase"));
         updateGenCodeParams("returnValue","\t\t"+genCode.get("returnValue"));
         setGenText();
@@ -343,11 +357,14 @@ public class DiagramController implements Initializable {
             }
             manageCalculatedSolution(diagramsVisualizers.get("Visualizer 1"),solutionSelect,model.getCurrentReductionSolutions(),0,0);
             if(genCode.get("auxCode") != null){
+                addLabelToCodeGenPart("auxCode", genCode.get("auxCode"));
                 updateGenCodeParams("auxCode","\telse:\n\t\t" + genCode.get("auxCode"));
             }
             else{
+                addLabelToCodeGenPart("auxCode", "");
                 updateGenCodeParams("auxCode","\telse:\n\t\t");
             }
+            addLabelToCodeGenPart("recursiveCases",model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
             updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
             setGenText();
         }
@@ -485,7 +502,6 @@ public class DiagramController implements Initializable {
         ClipboardContent content = new ClipboardContent();
         content.putString(stringBuilder.toString());
         clipboard.setContent(content);
-        System.out.println(clipboard.getString());
     }
     private void setCellFactoryForCombobox(ComboBox<String> combobox) {
         combobox.setCellFactory(param-> new ListCell<>() {
