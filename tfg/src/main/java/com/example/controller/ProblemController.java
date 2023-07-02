@@ -140,7 +140,37 @@ public class ProblemController implements Initializable {
         newLine.setMaxWidth(codegenHolder.getMaxWidth());
         codeGenParts.get(key).getChildren().clear();
         codeGenParts.get(key).getChildren().add(newLine);
-
+    }
+    private void addMultipleLabelToCodeGenPart(String key, List<String> text){
+        codeGenParts.get(key).getChildren().clear();
+        text.forEach(line->{
+            Label newLine = new Label();
+            newLine.setStyle("-fx-background-color: #000000;" +
+                "-fx-text-fill: #00cc1b;" +
+                "-fx-font-family: \"consolas\", sans-serif;" +
+                "-fx-line-height: 21px;" +
+                "-fx-font-size: 16px;");
+            String formatting = "";
+            switch (key){
+                case "functionName":
+                    break;
+                case "baseCases":
+                    formatting = "\t";
+                    break;
+                case "returnValues":
+                case "recursiveCases":
+                    formatting = "\t\t";
+                    break;
+                case "auxCode":
+                    formatting = "\telse:\n\t\t";
+                    break;
+            }
+            newLine.setText(formatting+line);
+            newLine.setPrefHeight(30);
+            newLine.setPrefWidth(codegenHolder.getPrefWidth());
+            newLine.setMaxWidth(codegenHolder.getMaxWidth());
+            codeGenParts.get(key).getChildren().add(newLine);
+        });
     }
 
     private void addPartToCodeGenHolder(String key){
@@ -368,9 +398,9 @@ public class ProblemController implements Initializable {
                 addLabelToCodeGenPart("auxCode", "");
                 updateGenCodeParams("auxCode","\telse:\n\t\t");
             }
-            addLabelToCodeGenPart("recursiveCases",model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-            updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-            setGenText();
+            //addLabelToCodeGenPart("recursiveCases",model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
+            //updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
+            //setGenText();
         }
 
         catch (Exception e){
@@ -383,8 +413,8 @@ public class ProblemController implements Initializable {
                 return;
             }
             manageCalculatedSolution(diagramsVisualizers.get("Visualizer 2"),solutionSelect2,model.getCurrentReductionSolutions2(),1,3);
-            updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-            setGenText();
+            //updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
+            //setGenText();
         }
 
         catch (Exception e){
@@ -423,6 +453,8 @@ public class ProblemController implements Initializable {
             }
         }
         else{
+            List<String> recursiveCases = List.of(model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()).split("\n"));
+            addMultipleLabelToCodeGenPart("recursiveCases", recursiveCases);
             updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
             setGenText();
         }
