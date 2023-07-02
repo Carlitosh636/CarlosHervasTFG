@@ -50,12 +50,7 @@
                </VBox>
             </children>
          </VBox>
-         <TextArea id="genCodeBackground" fx:id="generatedCodeTemplate" editable="false" layoutX="20.0" layoutY="20.0" maxHeight="500.0" maxWidth="1000.0" minHeight="400.0" prefHeight="250.0" prefWidth="800.0" stylesheets="@../css/header.css" text="&#10;&#10;">
-            <font>
-               <Font size="24.0" />
-            </font>
-         </TextArea>
-         <VBox fx:id="codegenHolder" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="800.0">
+         <VBox fx:id="codegenHolder" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0">
             <padding>
                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>

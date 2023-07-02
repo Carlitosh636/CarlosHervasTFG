@@ -56,7 +56,6 @@ public class ProblemController implements Initializable {
     Button showMoreFunctions;
     @FXML
     Button copyCodeButton;
-    private final LinkedHashMap<String,String> generatedCodeText = new LinkedHashMap<>();
     private final LinkedHashMap<String,VBox> codeGenParts = new LinkedHashMap<>();
     private Map<String,String> genCode;
     private ProblemButtonHandler buttonHandler;
@@ -72,7 +71,6 @@ public class ProblemController implements Initializable {
         AnchorPane.setRightAnchor(diagramGrid,15.0);
         bindModelData();
         setArrows();
-
         baseCaseSelect.setVisible(false);
         diagramGrid.setVisible(false);
         diagramGrid2.setVisible(false);
@@ -101,14 +99,6 @@ public class ProblemController implements Initializable {
         codeGenParts.put("auxFunctions",null);
 
         codeGenParts.keySet().forEach(this::addPartToCodeGenHolder);
-
-        generatedCodeText.put("functionName","FUNCIÓN");
-        generatedCodeText.put("baseCase","CASO(S) BASE");
-        generatedCodeText.put("returnValue","CASO(S) BASE");
-        generatedCodeText.put("auxCode","");
-        generatedCodeText.put("recursiveCases","CASO(S) RECURSIVOS");
-        generatedCodeText.put("auxFunctions","");
-        setGenText();
         showMoreFunctions.setVisible(false);
     }
 
@@ -182,16 +172,10 @@ public class ProblemController implements Initializable {
         codegenHolder.getChildren().add(codeGenParts.get(key));
     }
 
-    private void setGenText() {
-        generatedCodeTemplate.textProperty().set("");
-        generatedCodeText.values().forEach(val->{
-            generatedCodeTemplate.textProperty().set(generatedCodeTemplate.getText() + val + "\n");
-        });
-    }
-
     public ProblemController(BaseDiagram model) throws IOException {
         this.model = model;
     }
+
     protected void bindModelData() {
         diagramsVisualizers.get("Visualizer 1").getOriginalSolution().textProperty().bind(model.originalSolProperty());
         diagramsVisualizers.get("Visualizer 2").getOriginalSolution().textProperty().bind(model.originalSol2Property());
@@ -201,6 +185,7 @@ public class ProblemController implements Initializable {
         heading.setWrapText(true);
         heading.textProperty().bind(model.headingProperty());
     }
+
     public void onChangeProblemSize() {
         if(problemSizeSelect.getSelectionModel().getSelectedIndex()<0){
             return;
@@ -217,6 +202,7 @@ public class ProblemController implements Initializable {
             setCellFactoryForCombobox(baseCaseSelect);
         }
     }
+
     public void onChangeBaseCase() {
         if(baseCaseSelect.getSelectionModel().getSelectedIndex()<0){
             return;
@@ -236,18 +222,13 @@ public class ProblemController implements Initializable {
         diagramsVisualizers.get("Visualizer 2").originalData.setVisible(true);
 
         List<String> functionName = List.of(model.processFunctionName(0).split("\n"));
-        genCode = model.processProblemSizeAndBaseCases();
-
         addMultipleLabelToCodeGenPart("functionName",functionName);
+
+        genCode = model.processProblemSizeAndBaseCases();
         List<String> baseCases = List.of(genCode.get("baseCase").split("\n"));
         addMultipleLabelToCodeGenPart("baseCases",baseCases);
         addLabelToCodeGenPart("returnValues",genCode.get("returnValue"));
         copyCodeButton.setVisible(true);
-
-        //updateGenCodeParams("functionName",functionName);
-        updateGenCodeParams("baseCase","\t"+genCode.get("baseCase"));
-        updateGenCodeParams("returnValue","\t\t"+genCode.get("returnValue"));
-        setGenText();
     }
 
     private void setInputParams(DiagramVisualizerData visualizerData,int index) {
@@ -311,8 +292,8 @@ public class ProblemController implements Initializable {
             return;
         }
         if(model.getType() == DiagramType.valueOf("COMPLEX")){
-            String updatedFunction = model.processFunctionName(decompositionSelect.getSelectionModel().getSelectedIndex()+1);
-            updateGenCodeParams("functionName",updatedFunction);
+            List<String> updatedFunction = List.of(model.processFunctionName(decompositionSelect.getSelectionModel().getSelectedIndex()+1).split("\n"));
+            addMultipleLabelToCodeGenPart("functionName",updatedFunction);
         }
         if (model.hasMultipleCases(decompositionSelect.getSelectionModel().getSelectedIndex())){
             diagramsHolder.getChildren().add(diagramGrid2);
@@ -393,35 +374,30 @@ public class ProblemController implements Initializable {
             manageCalculatedSolution(diagramsVisualizers.get("Visualizer 1"),solutionSelect,model.getCurrentReductionSolutions(),0,0);
             if(genCode.get("auxCode") != null){
                 addLabelToCodeGenPart("auxCode", genCode.get("auxCode"));
-                updateGenCodeParams("auxCode","\telse:\n\t\t" + genCode.get("auxCode"));
             }
             else{
                 addLabelToCodeGenPart("auxCode", "");
-                updateGenCodeParams("auxCode","\telse:\n\t\t");
             }
-            //addLabelToCodeGenPart("recursiveCases",model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-            //updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-            //setGenText();
         }
 
         catch (Exception e){
             e.printStackTrace();
         }
     }
+
     public void onSolutionChange2() {
         try{
             if(solutionSelect2.getSelectionModel().getSelectedIndex()<0){
                 return;
             }
             manageCalculatedSolution(diagramsVisualizers.get("Visualizer 2"),solutionSelect2,model.getCurrentReductionSolutions2(),1,3);
-            //updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-            //setGenText();
         }
 
         catch (Exception e){
             e.printStackTrace();
         }
     }
+
     private void manageCalculatedSolution(DiagramVisualizerData diagramVisualizerData,ComboBox solutionSelect,int currentReductionSolutionsIndex,int indexAllSolved, int offset){
         String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex(),currentReductionSolutionsIndex,offset);
         diagramVisualizerData.getCalculatedSolution().setVisible(true);
@@ -449,23 +425,17 @@ public class ProblemController implements Initializable {
         }
         if (model.hasMultipleCases(decompositionSelect.getSelectionModel().getSelectedIndex())){
             if(allSolved[0] && allSolved[1]){
-                updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-                setGenText();
+                List<String> recursiveCases = List.of(model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()).split("\n"));
+                addMultipleLabelToCodeGenPart("recursiveCases", recursiveCases);
             }
         }
         else{
             List<String> recursiveCases = List.of(model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()).split("\n"));
             addMultipleLabelToCodeGenPart("recursiveCases", recursiveCases);
-            updateGenCodeParams("recursiveCases","\t\t" + model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()));
-            setGenText();
         }
     }
     public void showErrorInputAlert(Exception e){
         exceptionHandler.showErrorAlert(e);
-    }
-
-    private void updateGenCodeParams(String genCodeTextKey, String value) {
-        generatedCodeText.put(genCodeTextKey,value);
     }
 
     private void refreshDecomposition(){
@@ -489,13 +459,12 @@ public class ProblemController implements Initializable {
 
     @FXML
     public void showMoreFuncs() {
-        updateGenCodeParams("auxFunctions",model.getAuxFunctions().get(decompositionSelect.getSelectionModel().getSelectedIndex()));
-        setGenText();
+        addLabelToCodeGenPart("auxFunctions",model.getAuxFunctions().get(decompositionSelect.getSelectionModel().getSelectedIndex()));
     }
 
     @FXML
     public void resetDiagram() throws AlertTypeIndexOutOfBounds {
-        String action = buttonHandler.resetDiagram(1,"Confirmación","¿Estas seguro de que quieres borrar todos los valores introducidos y reinciar el diagrama?",generatedCodeText);
+        String action = buttonHandler.resetDiagram(1,"Confirmación","¿Estas seguro de que quieres borrar todos los valores introducidos y reinciar el diagrama?");
         if(action.equals("OK")){
             problemSizeSelect.getSelectionModel().clearSelection();
             baseCaseSelect.getSelectionModel().clearSelection();
@@ -524,7 +493,6 @@ public class ProblemController implements Initializable {
             diagramGrid.setVisible(false);
             diagramGrid2.setVisible(false);
             baseCaseLabel.setVisible(false);
-            setGenText();
         }
     }
     @FXML

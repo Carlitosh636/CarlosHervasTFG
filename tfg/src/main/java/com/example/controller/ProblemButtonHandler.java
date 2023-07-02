@@ -29,16 +29,10 @@ public class ProblemButtonHandler extends ButtonHandler {
             alert.close();
         }
     }
-    public String resetDiagram(int alertTypeIndex,String title, String content, Map<String,String> genCode) throws AlertTypeIndexOutOfBounds {
+    public String resetDiagram(int alertTypeIndex,String title, String content) throws AlertTypeIndexOutOfBounds {
         ButtonType action =  super.setAlertDataAndStyle(alertTypeIndex,title,content).orElse(null);
         assert action != null;
         if(action.equals(okButton)){
-            genCode.put("functionName","FUNCIÓN");
-            genCode.put("baseCase","CASO(S) BASE");
-            genCode.put("returnValue","CASO(S) BASE");
-            genCode.put("auxCode","");
-            genCode.put("recursiveCases","CASO(S) RECURSIVOS");
-            genCode.put("auxFunctions","");
             return "OK";
         }
         else{
