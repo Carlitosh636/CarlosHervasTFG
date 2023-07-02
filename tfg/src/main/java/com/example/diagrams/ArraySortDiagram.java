@@ -145,6 +145,11 @@ public class ArraySortDiagram implements IDiagramActions{
     }
 
     @Override
+    public boolean checkNotIncorrectInput(List<String> inputs) {
+        return false;
+    }
+
+    @Override
     public Map<String, String> calculateSolution(int index) throws Exception {
         return algorithmMap.get(index).call();
     }

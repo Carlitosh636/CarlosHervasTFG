@@ -82,6 +82,18 @@ public class ContainsDigitDiagram implements IDiagramActions{
     }
 
     @Override
+    public boolean checkNotIncorrectInput(List<String> inputs) {
+        for (String input : inputs){
+            try {
+                double d = Double.parseDouble(input);
+            } catch (NumberFormatException nfe) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public Map<String, String> calculateSolution(int index) throws Exception {
         return algorithmMap.get(index).call();
     }

@@ -12,6 +12,7 @@ public interface IDiagramActions {
     Map<String,String> setGenCodeParams(String baseCase, String returnValue);
     void setAlgorithmMap();
     boolean checkNotBaseCase(List<String> baseCases,List<String> inputs) throws Exception;
+    boolean checkNotIncorrectInput(List<String> inputs);
     Map<String,String> calculateSolution(int index) throws Exception;
     String getFunctionName(int index);
     boolean checkIfMultipleCases(int selectedIndex);

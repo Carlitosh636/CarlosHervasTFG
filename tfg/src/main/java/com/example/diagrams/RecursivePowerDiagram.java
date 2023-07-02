@@ -119,6 +119,18 @@ public class RecursivePowerDiagram implements IDiagramActions, IMultipleDiagramA
     }
 
     @Override
+    public boolean checkNotIncorrectInput(List<String> inputs) {
+        for(String input : inputs){
+            try{
+                int i = Integer.parseInt(input);
+            }
+            catch (NumberFormatException e){
+                return true;
+            }
+        }
+        return false;
+    }
+    @Override
     public Map<String,String> calculateSolution(int index) throws Exception {
         return algorithmMap.get(index).call();
     }

@@ -29,7 +29,7 @@ public class EqualStringsDiagram implements IDiagramActions{
 
     @Override
     public String getFunctionName(int index) {
-        return "def equal_strings(s, t):";
+        return "def equal_strings(s, t)\n\tn=len(s):";
     }
 
     @Override
@@ -77,6 +77,11 @@ public class EqualStringsDiagram implements IDiagramActions{
                 return true;
             }
         }
+        return false;
+    }
+
+    @Override
+    public boolean checkNotIncorrectInput(List<String> inputs) {
         return false;
     }
 

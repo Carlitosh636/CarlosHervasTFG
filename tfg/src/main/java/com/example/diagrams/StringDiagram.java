@@ -1,5 +1,6 @@
 package com.example.diagrams;
 
+import com.example.exceptions.IncorrectInputException;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.io.IOException;
@@ -31,6 +32,9 @@ public class StringDiagram extends BaseDiagram{
 
     @Override
     public void processSolutions() throws Exception {
+        if (diagramActions.checkNotIncorrectInput(params.values().stream().map(SimpleStringProperty::get).toList())){
+            throw new IncorrectInputException("Los valores introducidos no son válidos");
+        }
         algorithmIndex = currentProblemSize.get() + currentReduction.get() + currentBaseCaseIndex;
         Map<String,String> solutions = calculateSolution(algorithmIndex);
         setSubData(solutions);

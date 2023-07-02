@@ -1,5 +1,6 @@
 package com.example.diagrams;
 
+import com.example.exceptions.IncorrectInputException;
 import javafx.beans.property.SimpleStringProperty;
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,6 +19,9 @@ public class ArithmeticDiagram extends BaseDiagram {
 
     @Override
     public void processInputs() throws Exception {
+        if (diagramActions.checkNotIncorrectInput(params.values().stream().map(SimpleStringProperty::get).toList())){
+            throw new IncorrectInputException("Los valores introducidos no son válidos");
+        }
         paramsParsed = new HashMap<>();
         params.forEach((k, v) -> paramsParsed.put(k, v.get()));
         paramsParsed.put("baseCaseValue", baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));

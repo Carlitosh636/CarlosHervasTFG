@@ -1,5 +1,6 @@
 package com.example.diagrams;
 
+import com.example.exceptions.IncorrectInputException;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.io.IOException;
@@ -22,6 +23,9 @@ public class ArraySortingDiagram extends BaseDiagram{
     }
     @Override
     public void processInputs() throws Exception {
+        if (diagramActions.checkNotIncorrectInput(params.values().stream().map(SimpleStringProperty::get).toList())){
+            throw new IncorrectInputException("Los valores introducidos no son válidos");
+        }
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         array = Arrays.stream(params.get("array").get().split(",")).map(s->s.replace(" ","")).mapToInt(Integer::parseInt).toArray();

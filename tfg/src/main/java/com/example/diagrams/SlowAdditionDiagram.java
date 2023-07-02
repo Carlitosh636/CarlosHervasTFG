@@ -128,6 +128,12 @@ public class SlowAdditionDiagram implements IDiagramActions{
         }
         return false;
     }
+
+    @Override
+    public boolean checkNotIncorrectInput(List<String> inputs) {
+        return false;
+    }
+
     @Override
     public Map<String, String> calculateSolution(int index) throws Exception {
         return algorithmMap.get(index).call();

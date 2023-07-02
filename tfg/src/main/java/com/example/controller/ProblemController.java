@@ -268,13 +268,13 @@ public class ProblemController implements Initializable {
                                     model.getSubParameters().clear();
                                     model.getSubSolutions().clear();
                                 } catch (Exception e) {
-                                    showErrorInputAlert(new IncorrectInputException("Error al introducir los datos de entrada"));
+                                    showErrorInputAlert(new IncorrectInputException("Los valores introducidos no son válidos"));
                                     e.printStackTrace();
                                 }
                                 refreshDecomposition();
                             }
                         } catch (Exception e) {
-                            showErrorInputAlert(new IncorrectInputException("Error al introducir los datos de entrada"));
+                            showErrorInputAlert(new IncorrectInputException("Los valores introducidos no son válidos"));
                             e.printStackTrace();
                         }
                     }
