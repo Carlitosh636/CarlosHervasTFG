@@ -235,15 +235,16 @@ public class ProblemController implements Initializable {
         diagramsVisualizers.get("Visualizer 1").originalData.setVisible(true);
         diagramsVisualizers.get("Visualizer 2").originalData.setVisible(true);
 
-        String functionName = model.processFunctionName(0);
+        List<String> functionName = List.of(model.processFunctionName(0).split("\n"));
         genCode = model.processProblemSizeAndBaseCases();
 
-        addLabelToCodeGenPart("functionName",functionName);
-        addLabelToCodeGenPart("baseCases",genCode.get("baseCase"));
+        addMultipleLabelToCodeGenPart("functionName",functionName);
+        List<String> baseCases = List.of(genCode.get("baseCase").split("\n"));
+        addMultipleLabelToCodeGenPart("baseCases",baseCases);
         addLabelToCodeGenPart("returnValues",genCode.get("returnValue"));
         copyCodeButton.setVisible(true);
 
-        updateGenCodeParams("functionName",functionName);
+        //updateGenCodeParams("functionName",functionName);
         updateGenCodeParams("baseCase","\t"+genCode.get("baseCase"));
         updateGenCodeParams("returnValue","\t\t"+genCode.get("returnValue"));
         setGenText();
