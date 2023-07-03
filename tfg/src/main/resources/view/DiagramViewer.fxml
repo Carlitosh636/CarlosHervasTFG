@@ -111,7 +111,7 @@
                </padding>
                <VBox minWidth="125.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                <StackPane GridPane.columnIndex="2" GridPane.rowIndex="1" />
-               <Label contentDisplay="CENTER" maxWidth="150.0" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <Label contentDisplay="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                   <font>
                      <Font size="16.0" />
                   </font>
@@ -213,7 +213,7 @@
          <Insets left="20.0" right="20.0" />
       </padding>
    </VBox>
-   <GridPane id="background" fx:id="diagramGrid2" alignment="TOP_CENTER" hgap="10.0" maxHeight="700.0" maxWidth="800.0" stylesheets="@../css/boxes-background.css" vgap="5.0">
+   <GridPane id="background" fx:id="diagramGrid2" alignment="TOP_CENTER" hgap="10.0" stylesheets="@../css/boxes-background.css" vgap="5.0">
       <columnConstraints>
          <ColumnConstraints />
          <ColumnConstraints />
@@ -235,7 +235,7 @@
       </padding>
       <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <StackPane GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <Label contentDisplay="CENTER" maxWidth="100.0" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+      <Label contentDisplay="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
          <font>
             <Font size="16.0" />
          </font>
