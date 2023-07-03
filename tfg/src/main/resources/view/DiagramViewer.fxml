@@ -7,7 +7,7 @@
 
 <AnchorPane id="background" fx:id="root" stylesheets="@../css/general.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.ProblemController">
    <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
-      <HBox alignment="TOP_CENTER" maxHeight="500.0" spacing="30.0">
+      <HBox alignment="TOP_CENTER" spacing="30.0">
          <VBox maxHeight="500.0" prefHeight="500.0">
             <children>
                <TextArea id="header" fx:id="heading" editable="false" maxWidth="1000.0" prefWidth="800.0" stylesheets="@../css/header.css" text="ENUNCIADO&#10;&#10;">
@@ -50,7 +50,7 @@
                </VBox>
             </children>
          </VBox>
-         <VBox prefHeight="500.0" prefWidth="500.0">
+         <VBox prefWidth="500.0">
             <children>
                <Label maxHeight="20.0" text="Generador de código" textFill="WHITE">
                   <font>

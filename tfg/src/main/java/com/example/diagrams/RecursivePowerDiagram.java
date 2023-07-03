@@ -70,16 +70,19 @@ public class RecursivePowerDiagram implements IDiagramActions, IMultipleDiagramA
     public void setAlgorithmMap() {
         algorithmMap.put(-1, () ->{
             Map<String,String> returnVal = new HashMap<>();
+            returnVal.put("preSolOg","f(a,b)");
             returnVal.put("ogSol",String.valueOf(Algorithms.recursivePower1(a,b,baseCaseValue)));
             returnVal.put("secondDecomposition",
                     b%2==0 ? "a, (b-1) // 2" : "a, b // 2"
                     );
+            returnVal.put("preSolOg2","f(a,b-1)");
             returnVal.put("ogSol2",String.valueOf(Algorithms.recursivePower1(a,b-1,baseCaseValue)));
             return returnVal;
         });
 
         algorithmMap.put(0, () -> {
             Map<String,String> returnVal = new HashMap<>();
+            returnVal.put("prePartialSol","f'(a,b-1)");
             returnVal.put("partSol",String.valueOf(Algorithms.recursivePower1(a,b-1,baseCaseValue)));
             returnVal.put("reducedOperation",String.format("a = %.0f\nb = %.0f",a,b-1));
             returnVal.put("currentReductionSolutions",String.valueOf(0));
@@ -88,7 +91,9 @@ public class RecursivePowerDiagram implements IDiagramActions, IMultipleDiagramA
         algorithmMap.put(1, () -> {
             Map<String,String> returnVal = new HashMap<>();
             if(b%2==0){
+                returnVal.put("prePartialSol","f'(a,b//2)");
                 returnVal.put("partSol",String.valueOf(Algorithms.recursivePower2(a,b/2,baseCaseValue)));
+                returnVal.put("prePartialSol2","f'(a,(b-1)//2)");
                 returnVal.put("partSol2",String.valueOf(Algorithms.recursivePower2(a,(b-2)/2,baseCaseValue)));
                 returnVal.put("reducedOperation",String.format("a = %.0f\nb = %.0f",a,b/2));
                 returnVal.put("reducedOperation2",String.format("a = %.0f\nb = %.0f",a,(b-2)/2));
@@ -96,7 +101,9 @@ public class RecursivePowerDiagram implements IDiagramActions, IMultipleDiagramA
                 returnVal.put("currentReductionSolutions2",String.valueOf(2));
             }
             else{
+                returnVal.put("prePartialSol","f'(a,(b-1)//2)");
                 returnVal.put("partSol",String.valueOf(Algorithms.recursivePower2(a,(b-1)/2,baseCaseValue)));
+                returnVal.put("prePartialSol2","f'(a,b//2)");
                 returnVal.put("partSol2",String.valueOf(Algorithms.recursivePower2(a,(b-1)/2,baseCaseValue)));
                 returnVal.put("reducedOperation",String.format("a = %.0f\nb = %.0f",a,(b-1)/2));
                 returnVal.put("reducedOperation2",String.format("a = %.0f\nb = %.0f",a,(b-1)/2));

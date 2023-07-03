@@ -57,19 +57,22 @@ public class ContainsDigitDiagram implements IDiagramActions{
     public void setAlgorithmMap() {
         algorithmMap.put(-1, () ->{
             Map<String,String> returnVal = new HashMap<>();
-            returnVal.put("ogSol",String.valueOf(Algorithms.containsDigitTail(n,d)));
+            returnVal.put("preSolOg","f(n,d)");
+            returnVal.put("ogSol",String.valueOf(Algorithms.containsDigitTail(n, d)));
             return returnVal;
         });
         algorithmMap.put(0, () -> {
             Map<String,String> returnVal = new HashMap<>();
-            returnVal.put("partSol",String.valueOf(Algorithms.containsDigitTailLineal(n/10,d)));
+            returnVal.put("prePartialSol","f'(n//10,d)");
+            returnVal.put("partSol",String.valueOf(Algorithms.containsDigitTailLineal(n/10, d)));
             returnVal.put("reducedOperation",String.format("n = %.0f\nd = %.0f",n/10,d));
             returnVal.put("currentReductionSolutions",String.valueOf(0));
             return returnVal;
         });
         algorithmMap.put(1, () -> {
             Map<String,String> returnVal = new HashMap<>();
-            returnVal.put("partSol",String.valueOf(Algorithms.containsDigitTail(n/10,d)));
+            returnVal.put("prePartialSol","f'(n//10,d)");
+            returnVal.put("partSol",String.valueOf(Algorithms.containsDigitTail(n/10, d)));
             returnVal.put("reducedOperation",String.format("n = %.0f\nd = %.0f",n/10,d));
             returnVal.put("currentReductionSolutions",String.valueOf(1));
             return returnVal;

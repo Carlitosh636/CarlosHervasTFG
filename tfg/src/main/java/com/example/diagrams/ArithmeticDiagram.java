@@ -32,8 +32,8 @@ public class ArithmeticDiagram extends BaseDiagram {
             multipleProblemIndexOffset = multipleDiagramActions.determineMultipleDiagramKeyOffset();
         }
         params.put("secondDecomposition",new SimpleStringProperty(solution.getOrDefault("secondDecomposition","")));
-        originalSol.set(String.format("f = %.0f", Double.parseDouble(solution.get("ogSol"))));
-        originalSol2.set(String.format("f = %.0f", Double.parseDouble(solution.getOrDefault("ogSol2","0"))));
+        originalSol.set(String.format("%s = %.0f",solution.get("preSolOg"),Double.parseDouble(solution.get("ogSol"))));
+        originalSol2.set(String.format("%s = %.0f",solution.get("preSolOg2"),Double.parseDouble(solution.get("ogSol2"))));
     }
 
     @Override
@@ -89,13 +89,13 @@ public class ArithmeticDiagram extends BaseDiagram {
                 subParameters.add(new SimpleStringProperty(v));
             }
             if (k.equals("partSol")) {
-                subSolutions.add(new SimpleStringProperty(String.format("f' = %.0f", Double.parseDouble(v))));
+                subSolutions.add(new SimpleStringProperty(String.format("%s %.0f", data.get("prePartialSol"),Double.parseDouble(v))));
             }
             if (k.equals("reducedOperation2")) {
                 subParameters2.add(new SimpleStringProperty(v));
             }
             if (k.equals("partSol2")) {
-                subSolutions2.add(new SimpleStringProperty(String.format("f' = %.0f", Double.parseDouble(v))));
+                subSolutions2.add(new SimpleStringProperty(String.format("%s %.0f", data.get("prePartialSol2"),Double.parseDouble(v))));
             }
         });
     }

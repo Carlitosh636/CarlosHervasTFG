@@ -40,7 +40,7 @@ public class ArraySortingDiagram extends BaseDiagram{
         diagramActions.setParams(paramsParsed);
 
         Map<String,String> solutions = calculateSolution(-1);
-        originalSol.set("f="+solutions.get("ogSol"));
+        originalSol.set(solutions.get("preSolOg")+"="+solutions.get("ogSol"));
     }
 
     @Override
@@ -103,8 +103,12 @@ public class ArraySortingDiagram extends BaseDiagram{
             if(k.contains("reducedOperation")){
                 subParameters.add(new SimpleStringProperty(v));
             }
-            if(k.contains("partSol")){
-                subSolutions.add(new SimpleStringProperty(v));
+            if(k.contains("partSol1")){
+                subSolutions.add(new SimpleStringProperty(data.get("prePartialSol1") +"=" + v));
+                partSols.add(v);
+            }
+            if(k.contains("partSol2")){
+                subSolutions.add(new SimpleStringProperty(data.get("prePartialSol2") +"="+ v));
                 partSols.add(v);
             }
         });

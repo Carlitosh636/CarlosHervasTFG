@@ -21,8 +21,8 @@ public class StringDiagram extends BaseDiagram{
         params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         paramsParsed.put("baseCaseValue",baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
         diagramActions.setParams(paramsParsed);
-        Map<String,String> solutions = calculateSolution(-1);
-        originalSol.set("f = "+solutions.get("ogSol"));
+        Map<String,String> solution = calculateSolution(-1);
+        originalSol.set(String.format("%s = %s",solution.get("preSolOg"),solution.get("ogSol")));
     }
 
     @Override
@@ -79,7 +79,7 @@ public class StringDiagram extends BaseDiagram{
                 subParameters.add(new SimpleStringProperty(v));
             }
             if(k.contains("partSol")){
-                subSolutions.add(new SimpleStringProperty("f' = "+v));
+                subSolutions.add(new SimpleStringProperty(String.format("%s = %s", data.get("prePartialSol"),v)));
             }
         });
     }

@@ -48,12 +48,14 @@ public class ReverseStringDiagram implements IDiagramActions{
     public void setAlgorithmMap() {
         algorithmMap.put(-1,()->{
             Map<String,String> returnVal = new HashMap<>();
-            returnVal.put("ogSol",Algorithms.reverseString(input,baseCaseValue));
+            returnVal.put("preSolOg","f(s)");
+            returnVal.put("ogSol",String.valueOf(Algorithms.reverseString(input,baseCaseValue)));
             return returnVal;
         });
         algorithmMap.put(0,()->{
             Map<String,String> returnVal = new HashMap<>();
-            returnVal.put("partSol",Algorithms.reverseString(input.substring(1),baseCaseValue));
+            returnVal.put("prePartialSol","f'(s[1:])");
+            returnVal.put("partSol",String.valueOf(Algorithms.reverseString(input.substring(1),baseCaseValue)));
             returnVal.put("reducedOperation",String.format("s = %s",input.substring(1)));
             returnVal.put("currentReductionSolutions",String.valueOf(0));
             return returnVal;
