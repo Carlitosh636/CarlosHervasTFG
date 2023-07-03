@@ -152,7 +152,7 @@ public class ProblemController implements Initializable {
                     formatting = "\t\t";
                     break;
                 case "auxCode":
-                    formatting = "\telse:\n\t\t";
+                    formatting = "\telse:\n\t";
                     break;
             }
             newLine.setText(formatting+line);

@@ -157,6 +157,7 @@ public class ArraySortDiagram implements IDiagramActions{
 
     private int[] stringToArrayInt(String data) {
         data = data.replaceAll("[\\[\\]()\s{}]","");
+        System.out.println(data);
         try{
             return Arrays.stream(data.split(",")).map(s->s.replace(" ","")).mapToInt(Integer::parseInt).toArray();
         }

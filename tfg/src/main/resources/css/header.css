@@ -18,7 +18,13 @@
     -fx-font-family: "consolas", sans-serif;
     -fx-line-height: 21px;
 }
-
+#genCodeBorder{
+    -fx-background-radius: 5;
+    -fx-border-color: #58e8da;
+    -fx-border-radius : 5;
+    -fx-border-width: 3;
+    -fx-background-color: #000000;
+}
 .text-area .content {
     -fx-background-color: text-area-background;
 }
