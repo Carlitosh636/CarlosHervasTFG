@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ArithmeticDiagram extends BaseDiagram {
+public class ArithmeticProblem extends BaseProblem {
     Map<String, String> paramsParsed;
     private final IMultipleDiagramActions multipleDiagramActions;
-    public ArithmeticDiagram(IDiagramActions builder, IMultipleDiagramActions multipleDiagramActions, String diagramDataName) throws IOException {
+    public ArithmeticProblem(IDiagramActions builder, IMultipleDiagramActions multipleDiagramActions, String diagramDataName) throws IOException {
         super(builder, diagramDataName);
         this.multipleDiagramActions = multipleDiagramActions;
         diagramActions.setAlgorithmMap();

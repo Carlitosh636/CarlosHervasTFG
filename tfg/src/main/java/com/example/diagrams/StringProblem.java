@@ -9,8 +9,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class StringDiagram extends BaseDiagram{
-    public StringDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
+public class StringProblem extends BaseProblem {
+    public StringProblem(IDiagramActions builder, String diagramDataName) throws IOException {
         super(builder, diagramDataName);
         diagramActions.setAlgorithmMap();
         setSolutionOperations();

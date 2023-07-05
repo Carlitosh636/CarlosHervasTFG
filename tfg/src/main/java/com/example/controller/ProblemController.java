@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.diagrams.BaseDiagram;
+import com.example.diagrams.BaseProblem;
 import com.example.enums.DiagramType;
 import com.example.exceptions.*;
 import com.example.model.Arrow;
@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ProblemController implements Initializable {
     @FXML
     AnchorPane root;
-    private final BaseDiagram model;
+    private final BaseProblem model;
     @FXML
     GridPane diagramGrid;
     @FXML
@@ -172,7 +172,7 @@ public class ProblemController implements Initializable {
         codegenHolder.getChildren().add(codeGenParts.get(key));
     }
 
-    public ProblemController(BaseDiagram model) throws IOException {
+    public ProblemController(BaseProblem model) throws IOException {
         this.model = model;
     }
 

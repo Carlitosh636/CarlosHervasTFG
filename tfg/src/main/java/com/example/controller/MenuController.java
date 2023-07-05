@@ -25,7 +25,7 @@ public class MenuController {
     Button b5;
     @FXML
     Button b6;
-    private final Map<Button,BaseDiagram> buttonsPaths = new HashMap<>();
+    private final Map<Button, BaseProblem> buttonsPaths = new HashMap<>();
     private MenuButtonHandler menuButtonHandler;
     private ExceptionHandler exceptionHandler;
 
@@ -33,12 +33,12 @@ public class MenuController {
         menuButtonHandler = new MenuButtonHandler();
         exceptionHandler = new ExceptionHandler(null);
         RecursivePowerDiagram recursivePowerDiagram = new RecursivePowerDiagram();
-        buttonsPaths.put(b1,new ArithmeticDiagram(recursivePowerDiagram,recursivePowerDiagram, "/diagramData/RecursivePotencyData.json"));
-        buttonsPaths.put(b2,new ArithmeticDiagram(new SlowAdditionDiagram(),null,"/diagramData/SlowAdditionData.json"));
-        buttonsPaths.put(b3,new ArraySortingDiagram(new ArraySortDiagram(),"/diagramData/SortListData.json"));
-        buttonsPaths.put(b4,new StringDiagram(new ReverseStringDiagram(),"/diagramData/ReverseStringData.json"));
-        buttonsPaths.put(b5,new StringDiagram(new EqualStringsDiagram(),"/diagramData/EqualStringsData.json"));
-        buttonsPaths.put(b6,new StringDiagram(new ContainsDigitDiagram(),"/diagramData/ContainsDigitData.json"));
+        buttonsPaths.put(b1,new ArithmeticProblem(recursivePowerDiagram,recursivePowerDiagram, "/diagramData/RecursivePotencyData.json"));
+        buttonsPaths.put(b2,new ArithmeticProblem(new SlowAdditionDiagram(),null,"/diagramData/SlowAdditionData.json"));
+        buttonsPaths.put(b3,new ArraySortingProblem(new ArraySortDiagram(),"/diagramData/SortListData.json"));
+        buttonsPaths.put(b4,new StringProblem(new ReverseStringDiagram(),"/diagramData/ReverseStringData.json"));
+        buttonsPaths.put(b5,new StringProblem(new EqualStringsDiagram(),"/diagramData/EqualStringsData.json"));
+        buttonsPaths.put(b6,new StringProblem(new ContainsDigitDiagram(),"/diagramData/ContainsDigitData.json"));
         buttonsPaths.forEach((k,v)-> k.setOnAction(actionEvent -> {
             try {
                 loadScene(v,k);
@@ -50,7 +50,7 @@ public class MenuController {
     }
 
     @FXML
-    private void loadScene(BaseDiagram model, Button button) throws IOException {
+    private void loadScene(BaseProblem model, Button button) throws IOException {
         menuButtonHandler.loadVisualizer(model, button);
     }
     @FXML

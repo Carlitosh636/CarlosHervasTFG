@@ -1,8 +1,7 @@
 package com.example.controller;
 
-import com.example.diagrams.BaseDiagram;
+import com.example.diagrams.BaseProblem;
 import com.example.exceptions.AlertTypeIndexOutOfBounds;
-import com.example.exceptions.InternallyCausedRuntimeException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -12,7 +11,7 @@ import java.io.IOException;
 
 public class MenuButtonHandler extends ButtonHandler {
 
-    public void loadVisualizer(BaseDiagram model, Button button) throws IOException {
+    public void loadVisualizer(BaseProblem model, Button button) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramViewer.fxml"));
         loader.setControllerFactory(controller-> {
             try {

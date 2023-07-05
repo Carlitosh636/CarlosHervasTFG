@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.function.Supplier;
 
-public abstract class BaseDiagram {
+public abstract class BaseProblem {
     protected IDiagramActions diagramActions;
     protected DiagramType type;
     private final DiagramData diagramData;
@@ -47,7 +47,7 @@ public abstract class BaseDiagram {
     protected List<String> paramKeys;
     protected int multipleProblemIndexOffset;
 
-    protected BaseDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
+    protected BaseProblem(IDiagramActions builder, String diagramDataName) throws IOException {
         this.diagramActions = builder;
         diagramData = FileUtils.returnObjectFromInputStream(diagramDataName, DiagramData.class);
         this.params = new HashMap<>();

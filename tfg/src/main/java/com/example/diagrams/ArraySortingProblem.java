@@ -6,13 +6,13 @@ import javafx.beans.property.SimpleStringProperty;
 import java.io.IOException;
 import java.util.*;
 
-public class ArraySortingDiagram extends BaseDiagram{
+public class ArraySortingProblem extends BaseProblem {
     int[] array;
     int mid;
     int[] l;
     int[] r;
     ArrayList<String> partSols = new ArrayList<>();
-    public ArraySortingDiagram(IDiagramActions builder, String diagramDataName) throws IOException {
+    public ArraySortingProblem(IDiagramActions builder, String diagramDataName) throws IOException {
         super(builder, diagramDataName);
         diagramActions.setAlgorithmMap();
         this.auxFunctions = List.of("def merge(a,b):\n\tif a == []:\n\t\treturn b\n\telif b == []:\n\t\treturn a\n\telse:\n\t\tif a[0] < b[0]:\n\t\t\treturn [a[0]] + merge(a[1:], b)\n\t\telse:\n\t\t\treturn [b[0]] + merge(a, b[1:])",
