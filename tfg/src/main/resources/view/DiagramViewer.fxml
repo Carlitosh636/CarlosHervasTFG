@@ -36,7 +36,7 @@
                      <font>
                         <Font size="18.0" />
                      </font></Button>
-                  <Button id="button3" fx:id="showMoreFunctions" layoutX="20.0" layoutY="70.0" onAction="#showMoreFuncs" prefWidth="200.0" stylesheets="@../css/button.css" text="Mostrar funciones auxiliares" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
+                  <Button id="button3" fx:id="showMoreFunctions" layoutX="20.0" layoutY="70.0" onAction="#showMoreFuncs" prefHeight="90.0" prefWidth="200.0" stylesheets="@../css/button.css" text="Mostrar funciones auxiliares" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -50,14 +50,14 @@
                </VBox>
             </children>
          </VBox>
-         <VBox prefWidth="500.0">
+         <VBox>
             <children>
                <Label maxHeight="20.0" text="Generador de código" textFill="WHITE">
                   <font>
                      <Font size="16.0" />
                   </font>
                </Label>
-               <VBox id="genCodeBorder" fx:id="codegenHolder" prefWidth="500.0" stylesheets="@../css/header.css" />
+               <VBox id="genCodeBorder" fx:id="codegenHolder" stylesheets="@../css/header.css" />
             </children>
          </VBox>
          <VBox.margin>

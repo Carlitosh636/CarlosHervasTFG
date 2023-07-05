@@ -515,7 +515,7 @@ public class ProblemController implements Initializable {
         combobox.setCellFactory(param-> new ListCell<>() {
             final Label label = new Label() {{
                 setWrapText(true);
-                setPrefWidth(175);
+                setWidth(USE_COMPUTED_SIZE);
             }};
 
             @Override
