@@ -58,7 +58,7 @@ public class StringProblem extends BaseProblem {
     }
 
     @Override
-    public boolean checkSolutionsEqual(String calcSol) throws Exception {
+    public boolean checkSolutionsEqual(String calcSol,int index) throws Exception {
         String ogSol = diagramActions.calculateSolution(-1).get("ogSol");
         return calcSol.equals(ogSol);
     }

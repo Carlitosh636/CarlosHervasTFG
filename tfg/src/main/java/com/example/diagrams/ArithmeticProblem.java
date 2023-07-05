@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class ArithmeticProblem extends BaseProblem {
     Map<String, String> paramsParsed;
+    String ogSol2;
     private final IMultipleDiagramActions multipleDiagramActions;
     public ArithmeticProblem(IDiagramActions builder, IMultipleDiagramActions multipleDiagramActions, String diagramDataName) throws IOException {
         super(builder, diagramDataName);
@@ -34,6 +35,7 @@ public class ArithmeticProblem extends BaseProblem {
         params.put("secondDecomposition",new SimpleStringProperty(solution.getOrDefault("secondDecomposition","")));
         originalSol.set(String.format("%s = %.0f",solution.get("preSolOg"),Double.parseDouble(solution.get("ogSol"))));
         originalSol2.set(String.format("%s = %.0f",solution.get("preSolOg2"),Double.parseDouble(solution.get("ogSol2"))));
+        ogSol2 = solution.get("ogSol2");
     }
 
     @Override
@@ -101,8 +103,15 @@ public class ArithmeticProblem extends BaseProblem {
     }
 
     @Override
-    public boolean checkSolutionsEqual(String calcSol) throws Exception {
+    public boolean checkSolutionsEqual(String calcSol, int index) throws Exception {
         String ogSol = diagramActions.calculateSolution(-1).get("ogSol");
+        if (index == 1){
+            ogSol = ogSol2;
+        }
+        if (Double.parseDouble(ogSol) % 1 == 0){
+            ogSol = String.format("%.0f",Double.parseDouble(ogSol));
+        }
+        System.out.printf("Og: %s, Calc: %s%n",ogSol,calcSol);
         return calcSol.equals(ogSol);
     }
 

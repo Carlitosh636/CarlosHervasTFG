@@ -52,7 +52,7 @@
          </VBox>
          <VBox>
             <children>
-               <Label maxHeight="20.0" text="Generador de código" textFill="WHITE">
+               <Label maxHeight="20.0" minWidth="300.0" text="Generador de código" textFill="WHITE">
                   <font>
                      <Font size="16.0" />
                   </font>

@@ -95,7 +95,7 @@ public abstract class BaseProblem {
 
     public abstract boolean checkNotBaseCase(int index, List<String> input) throws Exception;
 
-    public abstract boolean checkSolutionsEqual(String calcSol) throws Exception;
+    public abstract boolean checkSolutionsEqual(String calcSol, int index) throws Exception;
 
     public abstract String calculateWithSelectedOperation(int index, int currentSolutions,int offset);
 

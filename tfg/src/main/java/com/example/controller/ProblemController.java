@@ -296,7 +296,9 @@ public class ProblemController implements Initializable {
             addMultipleLabelToCodeGenPart("functionName",updatedFunction);
         }
         if (model.hasMultipleCases(decompositionSelect.getSelectionModel().getSelectedIndex())){
-            diagramsHolder.getChildren().add(diagramGrid2);
+            if (diagramsHolder.getChildren().size()>1){
+                diagramsHolder.getChildren().add(diagramGrid2);
+            }
             diagramGrid2.setVisible(true);
             diagramsVisualizers.get("Visualizer 2").originalSolution.setVisible(true);
             decompositionSelect2.setVisible(true);
@@ -371,9 +373,10 @@ public class ProblemController implements Initializable {
             if(solutionSelect.getSelectionModel().getSelectedIndex()<0){
                 return;
             }
-            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 1"),solutionSelect,model.getCurrentReductionSolutions(),0,0);
+            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 1"),solutionSelect,model.getCurrentReductionSolutions(),0,0,0);
             if(genCode.get("auxCode") != null){
-                addLabelToCodeGenPart("auxCode", genCode.get("auxCode"));
+                List<String> auxCode = Arrays.stream(genCode.get("auxCode").split("\n")).toList();
+                addMultipleLabelToCodeGenPart("auxCode", auxCode);
             }
             else{
                 addLabelToCodeGenPart("auxCode", "");
@@ -390,7 +393,7 @@ public class ProblemController implements Initializable {
             if(solutionSelect2.getSelectionModel().getSelectedIndex()<0){
                 return;
             }
-            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 2"),solutionSelect2,model.getCurrentReductionSolutions2(),1,3);
+            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 2"),solutionSelect2,model.getCurrentReductionSolutions2(),1,3,1);
         }
 
         catch (Exception e){
@@ -398,10 +401,10 @@ public class ProblemController implements Initializable {
         }
     }
 
-    private void manageCalculatedSolution(DiagramVisualizerData diagramVisualizerData,ComboBox solutionSelect,int currentReductionSolutionsIndex,int indexAllSolved, int offset) throws Exception {
+    private void manageCalculatedSolution(DiagramVisualizerData diagramVisualizerData,ComboBox solutionSelect,int currentReductionSolutionsIndex,int indexAllSolved, int offset, int isOther) throws Exception {
         String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex(),currentReductionSolutionsIndex,offset);
         diagramVisualizerData.getCalculatedSolution().setVisible(true);
-        if(model.checkSolutionsEqual(calcSol)){
+        if(model.checkSolutionsEqual(calcSol,isOther)){
             if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(currentReductionSolutionsIndex)){
                 diagramVisualizerData.getCalculatedSolution().setText("Incorrecto! La operación da esta solución pero no para todos los casos\nValor calculado: "+model.getCalculatedSol());
                 diagramVisualizerData.getCalculatedSolution().setStyle("-fx-text-fill: #fcf049;");
