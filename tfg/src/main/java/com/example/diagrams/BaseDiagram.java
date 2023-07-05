@@ -95,7 +95,7 @@ public abstract class BaseDiagram {
 
     public abstract boolean checkNotBaseCase(int index, List<String> input) throws Exception;
 
-    public abstract boolean checkSolutionsEqual(String calcSol, String ogSol);
+    public abstract boolean checkSolutionsEqual(String calcSol) throws Exception;
 
     public abstract String calculateWithSelectedOperation(int index, int currentSolutions,int offset);
 

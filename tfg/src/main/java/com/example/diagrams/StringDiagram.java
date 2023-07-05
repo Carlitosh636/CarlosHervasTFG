@@ -58,8 +58,9 @@ public class StringDiagram extends BaseDiagram{
     }
 
     @Override
-    public boolean checkSolutionsEqual(String calcSol, String ogSol) {
-        return calcSol.equals(ogSol.replace("f = ",""));
+    public boolean checkSolutionsEqual(String calcSol) throws Exception {
+        String ogSol = diagramActions.calculateSolution(-1).get("ogSol");
+        return calcSol.equals(ogSol);
     }
     @Override
     public String calculateWithSelectedOperation(int index, int currentSolutions,int offset) {

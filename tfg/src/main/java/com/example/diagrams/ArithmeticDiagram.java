@@ -101,8 +101,9 @@ public class ArithmeticDiagram extends BaseDiagram {
     }
 
     @Override
-    public boolean checkSolutionsEqual(String calcSol, String ogSol) {
-        return calcSol.equals(ogSol.replace("f = ", ""));
+    public boolean checkSolutionsEqual(String calcSol) throws Exception {
+        String ogSol = diagramActions.calculateSolution(-1).get("ogSol");
+        return calcSol.equals(ogSol);
     }
 
 }

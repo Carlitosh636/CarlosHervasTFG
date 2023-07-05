@@ -398,10 +398,10 @@ public class ProblemController implements Initializable {
         }
     }
 
-    private void manageCalculatedSolution(DiagramVisualizerData diagramVisualizerData,ComboBox solutionSelect,int currentReductionSolutionsIndex,int indexAllSolved, int offset){
+    private void manageCalculatedSolution(DiagramVisualizerData diagramVisualizerData,ComboBox solutionSelect,int currentReductionSolutionsIndex,int indexAllSolved, int offset) throws Exception {
         String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex(),currentReductionSolutionsIndex,offset);
         diagramVisualizerData.getCalculatedSolution().setVisible(true);
-        if(model.checkSolutionsEqual(calcSol,diagramVisualizerData.getOriginalSolution().getText())){
+        if(model.checkSolutionsEqual(calcSol)){
             if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(currentReductionSolutionsIndex)){
                 diagramVisualizerData.getCalculatedSolution().setText("Incorrecto! La operación da esta solución pero no para todos los casos\nValor calculado: "+model.getCalculatedSol());
                 diagramVisualizerData.getCalculatedSolution().setStyle("-fx-text-fill: #fcf049;");
@@ -459,7 +459,8 @@ public class ProblemController implements Initializable {
 
     @FXML
     public void showMoreFuncs() {
-        addLabelToCodeGenPart("auxFunctions",model.getAuxFunctions().get(decompositionSelect.getSelectionModel().getSelectedIndex()));
+        List<String> linesAuxFunc = Arrays.stream(model.getAuxFunctions().get(decompositionSelect.getSelectionModel().getSelectedIndex()).split("\n")).toList();
+        addMultipleLabelToCodeGenPart("auxFunctions",linesAuxFunc);
     }
 
     @FXML

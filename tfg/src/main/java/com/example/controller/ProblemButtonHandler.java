@@ -4,8 +4,11 @@ import com.example.exceptions.AlertTypeIndexOutOfBounds;
 import com.example.exceptions.InternallyCausedRuntimeException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.StageStyle;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.Map;
