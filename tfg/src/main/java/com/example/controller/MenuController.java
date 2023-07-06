@@ -36,7 +36,7 @@ public class MenuController {
         RecursivePowerDiagram recursivePowerDiagram = new RecursivePowerDiagram();
         buttonsPaths.put(b1,new ArithmeticProblem(recursivePowerDiagram,recursivePowerDiagram, "/diagramData/RecursivePotencyData.json"));
         buttonsPaths.put(b2,new ArithmeticProblem(new SlowAdditionDiagram(),null,"/diagramData/SlowAdditionData.json"));
-        buttonsPaths.put(b3,new ArraySortingProblem(new ArraySortDiagram(),"/diagramData/SortListData.json"));
+        buttonsPaths.put(b3,new ArrayProblem(new ArraySortDiagram(),"/diagramData/SortListData.json"));
         buttonsPaths.put(b4,new StringProblem(new ReverseStringDiagram(),"/diagramData/ReverseStringData.json"));
         buttonsPaths.put(b5,new BooleanProblem(new EqualStringsDiagram(),"/diagramData/EqualStringsData.json"));
         buttonsPaths.put(b6,new BooleanProblem(new ContainsDigitDiagram(),"/diagramData/ContainsDigitData.json"));

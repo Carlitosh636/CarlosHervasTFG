@@ -7,13 +7,13 @@ import javafx.beans.property.SimpleStringProperty;
 import java.io.IOException;
 import java.util.*;
 
-public class ArraySortingProblem extends BaseProblem {
+public class ArrayProblem extends BaseProblem {
     int[] array;
     int mid;
     int[] l;
     int[] r;
     ArrayList<String> partSols = new ArrayList<>();
-    public ArraySortingProblem(IDiagramActions builder, String diagramDataName) throws IOException {
+    public ArrayProblem(IDiagramActions builder, String diagramDataName) throws IOException {
         super(builder, diagramDataName);
         diagramActions.setAlgorithmMap();
         this.auxFunctions = List.of("def merge(a,b):\n\tif a == []:\n\t\treturn b\n\telif b == []:\n\t\treturn a\n\telse:\n\t\tif a[0] < b[0]:\n\t\t\treturn [a[0]] + merge(a[1:], b)\n\t\telse:\n\t\t\treturn [b[0]] + merge(a, b[1:])",
@@ -58,14 +58,8 @@ public class ArraySortingProblem extends BaseProblem {
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         paramsParsed.put("mid", String.valueOf(mid));
-        if(partSols.size()>1){
-            paramsParsed.put("l", partSols.get(0));
-            paramsParsed.put("r", partSols.get(1));
-        }
-        else{
-            paramsParsed.put("l", Arrays.toString(l));
-            paramsParsed.put("r", Arrays.toString(r));
-        }
+        paramsParsed.put("l", partSols.get(0));
+        paramsParsed.put("r", partSols.get(1));
         diagramActions.setParams(paramsParsed);
     }
     private void setSolutionOperations() {

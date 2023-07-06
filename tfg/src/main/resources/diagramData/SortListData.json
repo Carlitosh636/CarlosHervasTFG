@@ -1,6 +1,6 @@
 {
   "type" : "COMPLEX",
-  "heading" : "Dado una lista con tamaño n llamada list, ordenarla de forma recursiva\nEjemplo: f([7, 3, 8, 2, 4, 6, 1, 5]) -> [1, 2, 3, 4, 5, 6, 7, 8]",
+  "heading" : "Dado una lista 'a' de números enteros con tamaño n, ordenarla de forma recursiva\nEjemplo: f([7, 3, 8, 2, 4, 6, 1, 5]) -> [1, 2, 3, 4, 5, 6, 7, 8]",
   "params" : {
     "array" : ""
   },
