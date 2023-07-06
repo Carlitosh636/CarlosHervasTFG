@@ -58,7 +58,7 @@ public class StringProblem extends BaseProblem {
     }
 
     @Override
-    public boolean checkSolutionsEqual(String calcSol,int index) throws Exception {
+    public boolean checkSolutionsEqual(String calcSol, boolean isOther) throws Exception {
         String ogSol = diagramActions.calculateSolution(-1).get("ogSol");
         return calcSol.equals(ogSol);
     }
@@ -71,6 +71,11 @@ public class StringProblem extends BaseProblem {
     @Override
     public List<String> setVisualizerParams() {
         return null;
+    }
+
+    @Override
+    public boolean isMainDiagram() {
+        return false;
     }
 
 

@@ -34,7 +34,7 @@ public class ArithmeticProblem extends BaseProblem {
         }
         params.put("secondDecomposition",new SimpleStringProperty(solution.getOrDefault("secondDecomposition","")));
         originalSol.set(String.format("%s = %.0f",solution.get("preSolOg"),Double.parseDouble(solution.get("ogSol"))));
-        originalSol2.set(String.format("%s = %.0f",solution.get("preSolOg2"),Double.parseDouble(solution.get("ogSol2"))));
+        originalSol2.set(String.format("%s = %.0f",solution.getOrDefault("preSolOg2",""),Double.parseDouble(solution.getOrDefault("ogSol2","0"))));
         ogSol2 = solution.get("ogSol2");
     }
 
@@ -85,6 +85,14 @@ public class ArithmeticProblem extends BaseProblem {
         return multipleDiagramActions.setVisualizerParams().values().stream().toList();
     }
 
+    @Override
+    public boolean isMainDiagram() {
+        if( multipleDiagramActions != null){
+            return multipleDiagramActions.determineMultipleDiagramKeyOffset() == 1;
+        }
+        return false;
+    }
+
     private void setSubData(Map<String, String> data) {
         data.forEach((k, v) -> {
             if (k.equals("reducedOperation")) {
@@ -103,15 +111,14 @@ public class ArithmeticProblem extends BaseProblem {
     }
 
     @Override
-    public boolean checkSolutionsEqual(String calcSol, int index) throws Exception {
+    public boolean checkSolutionsEqual(String calcSol, boolean isOther) throws Exception {
         String ogSol = diagramActions.calculateSolution(-1).get("ogSol");
-        if (index == 1){
+        if (isOther){
             ogSol = ogSol2;
         }
         if (Double.parseDouble(ogSol) % 1 == 0){
             ogSol = String.format("%.0f",Double.parseDouble(ogSol));
         }
-        System.out.printf("Og: %s, Calc: %s%n",ogSol,calcSol);
         return calcSol.equals(ogSol);
     }
 

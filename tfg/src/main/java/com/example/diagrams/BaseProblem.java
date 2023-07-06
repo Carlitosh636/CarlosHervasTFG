@@ -95,12 +95,13 @@ public abstract class BaseProblem {
 
     public abstract boolean checkNotBaseCase(int index, List<String> input) throws Exception;
 
-    public abstract boolean checkSolutionsEqual(String calcSol, int index) throws Exception;
+    public abstract boolean checkSolutionsEqual(String calcSol, boolean isOther) throws Exception;
 
     public abstract String calculateWithSelectedOperation(int index, int currentSolutions,int offset);
 
     public abstract List<String> setVisualizerParams();
 
+    public abstract boolean isMainDiagram();
     public void resetSubValues() {
         this.subParameters.clear();
         this.subSolutions.clear();
@@ -252,5 +253,6 @@ public abstract class BaseProblem {
     public List<SimpleStringProperty> getSubSolutions2() {
         return subSolutions2;
     }
+
 }
 

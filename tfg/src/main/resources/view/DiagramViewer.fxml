@@ -57,7 +57,10 @@
                      <Font size="16.0" />
                   </font>
                </Label>
-               <VBox id="genCodeBorder" fx:id="codegenHolder" stylesheets="@../css/header.css" />
+               <VBox id="genCodeBorder" fx:id="codegenHolder" stylesheets="@../css/header.css">
+                  <padding>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </padding></VBox>
             </children>
          </VBox>
          <VBox.margin>

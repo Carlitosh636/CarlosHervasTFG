@@ -156,7 +156,6 @@ public class ProblemController implements Initializable {
                     break;
             }
             newLine.setText(formatting+line);
-            newLine.setPrefHeight(30);
             newLine.setPrefWidth(codegenHolder.getPrefWidth());
             newLine.setMaxWidth(codegenHolder.getMaxWidth());
             codeGenParts.get(key).getChildren().add(newLine);
@@ -295,8 +294,9 @@ public class ProblemController implements Initializable {
             List<String> updatedFunction = List.of(model.processFunctionName(decompositionSelect.getSelectionModel().getSelectedIndex()+1).split("\n"));
             addMultipleLabelToCodeGenPart("functionName",updatedFunction);
         }
+        System.out.println(diagramsHolder.getChildren().size());
         if (model.hasMultipleCases(decompositionSelect.getSelectionModel().getSelectedIndex())){
-            if (diagramsHolder.getChildren().size()>1){
+            if (diagramsHolder.getChildren().size()==2){
                 diagramsHolder.getChildren().add(diagramGrid2);
             }
             diagramGrid2.setVisible(true);
@@ -373,7 +373,7 @@ public class ProblemController implements Initializable {
             if(solutionSelect.getSelectionModel().getSelectedIndex()<0){
                 return;
             }
-            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 1"),solutionSelect,model.getCurrentReductionSolutions(),0,0,0);
+            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 1"),solutionSelect,model.getCurrentReductionSolutions(),0,0,false);
             if(genCode.get("auxCode") != null){
                 List<String> auxCode = Arrays.stream(genCode.get("auxCode").split("\n")).toList();
                 addMultipleLabelToCodeGenPart("auxCode", auxCode);
@@ -393,7 +393,7 @@ public class ProblemController implements Initializable {
             if(solutionSelect2.getSelectionModel().getSelectedIndex()<0){
                 return;
             }
-            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 2"),solutionSelect2,model.getCurrentReductionSolutions2(),1,3,1);
+            manageCalculatedSolution(diagramsVisualizers.get("Visualizer 2"),solutionSelect2,model.getCurrentReductionSolutions2(),1,3,true);
         }
 
         catch (Exception e){
@@ -401,11 +401,11 @@ public class ProblemController implements Initializable {
         }
     }
 
-    private void manageCalculatedSolution(DiagramVisualizerData diagramVisualizerData,ComboBox solutionSelect,int currentReductionSolutionsIndex,int indexAllSolved, int offset, int isOther) throws Exception {
-        String calcSol = model.calculateWithSelectedOperation(solutionSelect.getSelectionModel().getSelectedIndex(),currentReductionSolutionsIndex,offset);
+    private void manageCalculatedSolution(DiagramVisualizerData diagramVisualizerData,ComboBox solSelect,int currentReductionSolutionsIndex,int indexAllSolved, int offset, boolean isOther) throws Exception {
+        String calcSol = model.calculateWithSelectedOperation(solSelect.getSelectionModel().getSelectedIndex(),currentReductionSolutionsIndex,offset);
         diagramVisualizerData.getCalculatedSolution().setVisible(true);
         if(model.checkSolutionsEqual(calcSol,isOther)){
-            if(solutionSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(currentReductionSolutionsIndex)){
+            if(solSelect.getSelectionModel().getSelectedIndex() != model.getCorrectSolutions().get(currentReductionSolutionsIndex)){
                 diagramVisualizerData.getCalculatedSolution().setText("Incorrecto! La operación da esta solución pero no para todos los casos\nValor calculado: "+model.getCalculatedSol());
                 diagramVisualizerData.getCalculatedSolution().setStyle("-fx-text-fill: #fcf049;");
                 allSolved[indexAllSolved] = false;
@@ -428,12 +428,18 @@ public class ProblemController implements Initializable {
         }
         if (model.hasMultipleCases(decompositionSelect.getSelectionModel().getSelectedIndex())){
             if(allSolved[0] && allSolved[1]){
-                List<String> recursiveCases = List.of(model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()).split("\n"));
+                List<String> recursiveCases;
+                if(model.isMainDiagram()){
+                    recursiveCases = List.of(model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()).split("\n"));
+                }
+                else{
+                    recursiveCases = List.of(model.getRecursiveCases().get(model.getCurrentReductionSolutions2()).get(solutionSelect2.getSelectionModel().getSelectedIndex()).split("\n"));
+                }
                 addMultipleLabelToCodeGenPart("recursiveCases", recursiveCases);
             }
         }
         else{
-            List<String> recursiveCases = List.of(model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solutionSelect.getSelectionModel().getSelectedIndex()).split("\n"));
+            List<String> recursiveCases = List.of(model.getRecursiveCases().get(model.getCurrentReductionSolutions()).get(solSelect.getSelectionModel().getSelectedIndex()).split("\n"));
             addMultipleLabelToCodeGenPart("recursiveCases", recursiveCases);
         }
     }
