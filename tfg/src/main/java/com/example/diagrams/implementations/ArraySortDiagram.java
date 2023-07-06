@@ -1,7 +1,6 @@
-package com.example.diagrams;
+package com.example.diagrams.implementations;
 
 import com.example.algorithms.Algorithms;
-import javafx.beans.property.SimpleStringProperty;
 
 import java.util.*;
 import java.util.concurrent.Callable;

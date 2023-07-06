@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.diagrams.BaseProblem;
+import com.example.diagrams.abstractions.BaseProblem;
 import com.example.exceptions.AlertTypeIndexOutOfBounds;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;

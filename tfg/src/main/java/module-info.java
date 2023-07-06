@@ -6,8 +6,6 @@ module tfg {
 
     opens com.example to javafx.fxml;
     exports com.example;
-    exports com.example.diagrams;
-    opens com.example.diagrams to javafx.fxml;
     exports com.example.algorithms;
     opens com.example.algorithms to javafx.fxml;
     exports com.example.exceptions;
@@ -18,4 +16,8 @@ module tfg {
     opens com.example.enums to javafx.fxml;
     exports com.example.controller;
     opens com.example.controller to javafx.fxml;
+    exports com.example.diagrams.abstractions;
+    opens com.example.diagrams.abstractions to javafx.fxml;
+    exports com.example.diagrams.implementations;
+    opens com.example.diagrams.implementations to javafx.fxml;
 }

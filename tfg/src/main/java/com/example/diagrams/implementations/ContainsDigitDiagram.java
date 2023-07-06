@@ -1,11 +1,10 @@
-package com.example.diagrams;
+package com.example.diagrams.implementations;
 
 import com.example.algorithms.Algorithms;
 
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ContainsDigitDiagram implements IDiagramActions{

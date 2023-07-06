@@ -1,5 +1,6 @@
-package com.example.diagrams;
+package com.example.diagrams.abstractions;
 
+import com.example.diagrams.implementations.IDiagramActions;
 import com.example.enums.DiagramType;
 import com.example.model.DiagramData;
 import com.example.utils.FileUtils;

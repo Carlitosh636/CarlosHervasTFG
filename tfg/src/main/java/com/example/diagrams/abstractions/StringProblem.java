@@ -1,5 +1,6 @@
-package com.example.diagrams;
+package com.example.diagrams.abstractions;
 
+import com.example.diagrams.implementations.IDiagramActions;
 import com.example.exceptions.IncorrectInputException;
 import javafx.beans.property.SimpleStringProperty;
 

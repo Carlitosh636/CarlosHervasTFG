@@ -1,4 +1,4 @@
-package com.example.diagrams;
+package com.example.diagrams.implementations;
 
 import javafx.beans.property.SimpleStringProperty;
 

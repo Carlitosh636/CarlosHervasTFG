@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.diagrams.BaseProblem;
+import com.example.diagrams.abstractions.BaseProblem;
 import com.example.enums.DiagramType;
 import com.example.exceptions.*;
 import com.example.model.Arrow;
@@ -226,7 +226,8 @@ public class ProblemController implements Initializable {
         genCode = model.processProblemSizeAndBaseCases();
         List<String> baseCases = List.of(genCode.get("baseCase").split("\n"));
         addMultipleLabelToCodeGenPart("baseCases",baseCases);
-        addLabelToCodeGenPart("returnValues",genCode.get("returnValue"));
+        List<String> returnValues = List.of(genCode.get("returnValue").split("\n"));
+        addMultipleLabelToCodeGenPart("returnValues",returnValues);
         copyCodeButton.setVisible(true);
     }
 

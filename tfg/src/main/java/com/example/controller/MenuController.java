@@ -1,6 +1,7 @@
 package com.example.controller;
 
-import com.example.diagrams.*;
+import com.example.diagrams.abstractions.*;
+import com.example.diagrams.implementations.*;
 import com.example.exceptions.AlertTypeIndexOutOfBounds;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -37,8 +38,8 @@ public class MenuController {
         buttonsPaths.put(b2,new ArithmeticProblem(new SlowAdditionDiagram(),null,"/diagramData/SlowAdditionData.json"));
         buttonsPaths.put(b3,new ArraySortingProblem(new ArraySortDiagram(),"/diagramData/SortListData.json"));
         buttonsPaths.put(b4,new StringProblem(new ReverseStringDiagram(),"/diagramData/ReverseStringData.json"));
-        buttonsPaths.put(b5,new StringProblem(new EqualStringsDiagram(),"/diagramData/EqualStringsData.json"));
-        buttonsPaths.put(b6,new StringProblem(new ContainsDigitDiagram(),"/diagramData/ContainsDigitData.json"));
+        buttonsPaths.put(b5,new BooleanProblem(new EqualStringsDiagram(),"/diagramData/EqualStringsData.json"));
+        buttonsPaths.put(b6,new BooleanProblem(new ContainsDigitDiagram(),"/diagramData/ContainsDigitData.json"));
         buttonsPaths.forEach((k,v)-> k.setOnAction(actionEvent -> {
             try {
                 loadScene(v,k);
