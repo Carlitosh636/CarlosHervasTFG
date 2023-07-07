@@ -95,7 +95,7 @@ public class ArraySortDiagram implements IDiagramActions{
         algorithmMap.put(0, () -> {
             Map<String,String> returnVal = new HashMap<>();
             returnVal.put("reducedOperation1","v1 = "+Arrays.toString(l));
-            returnVal.put("reducedOperation2","\nv2 = "+Arrays.toString(r));
+            returnVal.put("reducedOperation2","v2 = "+Arrays.toString(r));
             returnVal.put("prePartialSol1","f'(v1)");
             returnVal.put("prePartialSol2","f'(v2)");
             returnVal.put("partSol1",Arrays.toString(Algorithms.mergeSort(l)));
@@ -110,7 +110,7 @@ public class ArraySortDiagram implements IDiagramActions{
             returnVal.put("prePartialSol1","f'(a[:-1])");
             returnVal.put("prePartialSol2","tail");
             returnVal.put("reducedOperation1","a = "+Arrays.toString(reducedArray));
-            returnVal.put("reducedOperation2","\ntail = "+ele);
+            returnVal.put("reducedOperation2","tail = "+ele);
             returnVal.put("partSol1",Arrays.toString(Algorithms.insertSort(reducedArray)));
             returnVal.put("partSol2",String.valueOf(ele));
             returnVal.put("currentReductionSolutions",String.valueOf(1));
@@ -123,7 +123,7 @@ public class ArraySortDiagram implements IDiagramActions{
             returnVal.put("prePartialSol1","f'(a)");
             returnVal.put("prePartialSol2","m");
             returnVal.put("reducedOperation1","a = "+Arrays.toString(reducedArray));
-            returnVal.put("reducedOperation2","\nm = "+ele);
+            returnVal.put("reducedOperation2","m = "+ele);
             returnVal.put("partSol1",Arrays.toString(Algorithms.selectSort(reducedArray)));
             returnVal.put("partSol2",String.valueOf(ele));
             returnVal.put("currentReductionSolutions",String.valueOf(2));
@@ -135,7 +135,7 @@ public class ArraySortDiagram implements IDiagramActions{
             int[] smallerElements = Algorithms.getSmaller(copyArray,pivot);
             int[] greaterElements = Algorithms.getGreater(copyArray,pivot);
             returnVal.put("reducedOperation1","v1 = "+Arrays.toString(smallerElements));
-            returnVal.put("reducedOperation2","\nv2 = "+Arrays.toString(greaterElements));
+            returnVal.put("reducedOperation2","v2 = "+Arrays.toString(greaterElements));
             returnVal.put("prePartialSol1","f'(v1)");
             returnVal.put("prePartialSol2","f'(v2)");
             returnVal.put("partSol1",Arrays.toString(Algorithms.quicksort(smallerElements,smallerElements.length / 2)));
