@@ -26,6 +26,8 @@ public class MenuController {
     Button b5;
     @FXML
     Button b6;
+    @FXML
+    Button b7;
     private final Map<Button, BaseProblem> buttonsPaths = new HashMap<>();
     private MenuButtonHandler menuButtonHandler;
     private ExceptionHandler exceptionHandler;
@@ -40,6 +42,7 @@ public class MenuController {
         buttonsPaths.put(b4,new StringProblem(new ReverseStringDiagram(),"/diagramData/ReverseStringData.json"));
         buttonsPaths.put(b5,new BooleanProblem(new EqualStringsDiagram(),"/diagramData/EqualStringsData.json"));
         buttonsPaths.put(b6,new BooleanProblem(new ContainsDigitDiagram(),"/diagramData/ContainsDigitData.json"));
+        buttonsPaths.put(b7,new StringProblem(new VowelsInStringDiagram(),"/diagramData/VowelsInStringData.json"));
         buttonsPaths.forEach((k,v)-> k.setOnAction(actionEvent -> {
             try {
                 loadScene(v,k);

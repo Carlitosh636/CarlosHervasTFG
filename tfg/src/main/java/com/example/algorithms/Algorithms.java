@@ -213,4 +213,22 @@ public class Algorithms {
             return (n % 10 == d) || containsDigitTail(n/10,d);
         }
     }
+
+    public static int isVowel(char ch)
+    {
+        ch = Character.toUpperCase(ch);
+        if ("AEIOUÁÉÍÓÚ".indexOf(ch) != -1){
+            return 1;
+        }
+        return 0;
+    }
+
+    public static int countVowels(String str)
+    {
+        int n = str.length();
+        if (n == 1)
+            return isVowel(str.charAt(0));
+        int a = isVowel(str.charAt(0));
+        return countVowels(str.substring(1)) + a;
+    }
 }

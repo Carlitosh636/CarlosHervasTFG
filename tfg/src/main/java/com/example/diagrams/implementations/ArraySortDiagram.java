@@ -26,7 +26,7 @@ public class ArraySortDiagram implements IDiagramActions{
     @Override
     public void setParams(Map<String, String> newValues) throws Exception {
         try{
-            array = stringToArrayInt(newValues.get("array"));
+            array = stringToArrayInt(newValues.get("a"));
             mid = Integer.parseInt(newValues.get("mid"));
             l = stringToArrayInt(newValues.get("l"));
             r = stringToArrayInt(newValues.get("r"));

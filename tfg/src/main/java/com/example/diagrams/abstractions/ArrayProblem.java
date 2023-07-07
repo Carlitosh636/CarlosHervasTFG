@@ -29,7 +29,7 @@ public class ArrayProblem extends BaseProblem {
         }
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)-> paramsParsed.put(k,v.get()));
-        array = Arrays.stream(params.get("array").get().split(",")).map(s->s.replace(" ","")).mapToInt(Integer::parseInt).toArray();
+        array = Arrays.stream(params.get("a").get().split(",")).map(s->s.replace(" ","")).mapToInt(Integer::parseInt).toArray();
         mid = array.length / 2;
         l = new int[mid];
         r = new int[array.length - mid];

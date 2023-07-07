@@ -25,17 +25,17 @@
                            <Font size="30.0" />
                         </font>
                      </Label>
-                     <Button id="button1" fx:id="b4" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="Invertir string" textAlignment="CENTER" wrapText="true">
+                     <Button id="button1" fx:id="b4" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="350.0" stylesheets="@../css/button.css" text="Invertir string" textAlignment="CENTER" wrapText="true">
                         <font>
                            <Font size="24.0" />
                         </font>
                      </Button>
-                     <Button id="button1" fx:id="b5" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="¿Strings son iguales?" textAlignment="CENTER" wrapText="true">
+                     <Button id="button1" fx:id="b5" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="350.0" stylesheets="@../css/button.css" text="¿Strings son iguales?" textAlignment="CENTER" wrapText="true">
                         <font>
                            <Font size="24.0" />
                         </font>
                      </Button>
-                     <Button id="button1" fx:id="b6" alignment="CENTER" contentDisplay="CENTER" stylesheets="@../css/button.css" text="¿Número contiene dígito?" textAlignment="CENTER" wrapText="true">
+                     <Button id="button1" fx:id="b7" alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="143.0" mnemonicParsing="false" prefWidth="350.0" stylesheets="@../css/button.css" text="Número de vocales en string" textAlignment="CENTER" wrapText="true">
                         <font>
                            <Font size="24.0" />
                         </font>
@@ -52,12 +52,17 @@
                            <Font size="30.0" />
                         </font>
                      </Label>
-                     <Button id="button1" fx:id="b1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="Cálculo de la potencia" textAlignment="CENTER" wrapText="true">
+                     <Button id="button1" fx:id="b1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="350.0" stylesheets="@../css/button.css" text="Cálculo de la potencia" textAlignment="CENTER" wrapText="true">
                         <font>
                            <Font size="24.0" />
                         </font>
                      </Button>
-                     <Button id="button1" fx:id="b2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="Suma lenta" textAlignment="CENTER" wrapText="true">
+                     <Button id="button1" fx:id="b2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="350.0" stylesheets="@../css/button.css" text="Suma lenta" textAlignment="CENTER" wrapText="true">
+                        <font>
+                           <Font size="24.0" />
+                        </font>
+                     </Button>
+                     <Button id="button1" fx:id="b6" alignment="CENTER" contentDisplay="CENTER" prefWidth="350.0" stylesheets="@../css/button.css" text="¿Número contiene dígito?" textAlignment="CENTER" wrapText="true">
                         <font>
                            <Font size="24.0" />
                         </font>
@@ -74,7 +79,7 @@
                            <Font size="30.0" />
                         </font>
                      </Label>
-                     <Button id="button1" fx:id="b3" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" stylesheets="@../css/button.css" text="Ordenación de lista" textAlignment="CENTER" wrapText="true">
+                     <Button id="button1" fx:id="b3" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="350.0" stylesheets="@../css/button.css" text="Ordenación de lista" textAlignment="CENTER" wrapText="true">
                         <font>
                            <Font size="24.0" />
                         </font>

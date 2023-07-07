@@ -2,13 +2,13 @@
   "type" : "SIMPLE",
   "heading" : "Dada una cadena de n caracteres llamada s, escribir dicha cadena al revés.\nEjemplo: f(carlos) -> solrac",
   "params" : {
-    "input" : ""
+    "s" : ""
   },
   "currentProblemSize" : 0,
   "currentReduction" : 0,
   "currentReductionSolutions" : 0,
   "reducedOperation" : "",
-  "problemSizeChoices" : [ "n = len(string)" ],
+  "problemSizeChoices" : [ "n = len(s)" ],
   "currentBaseCaseIndex" : 0,
   "baseCaseChoices" : [ [ "s == \"\"" ]],
   "baseCaseParameters" : [ [""] ],

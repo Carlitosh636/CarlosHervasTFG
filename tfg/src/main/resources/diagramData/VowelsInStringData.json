@@ -1,0 +1,23 @@
+{
+  "type" : "SIMPLE",
+  "heading" : "Dada una cadena de n caracteres llamada s, calcular cuántas vocales tiene.\nEjemplo: f(java) -> 2",
+  "params" : {
+    "s" : ""
+  },
+  "currentProblemSize" : 0,
+  "currentReduction" : 0,
+  "currentReductionSolutions" : 0,
+  "reducedOperation" : "",
+  "problemSizeChoices" : [ "n = len(s)" ],
+  "currentBaseCaseIndex" : 0,
+  "baseCaseChoices" : [ [ "n == 0","n == 1" ]],
+  "baseCaseParameters" : [ ["0","1"] ],
+  "returnValues": [ ["0","isVowel(s[n - 1])"] ],
+  "reductionChoices" : [ [ "s[1:]\nchar=s[0]" ] ],
+  "solutionsChoices" : [ [ "f' * isVowel(char)","f' - isVowel(char)","f' + isVowel(char)"] ],
+  "recursiveCases": [["return countVowels(str[1:]) * isVowel(str[0]));", "return countVowels(str[1:]) - isVowel(str[0]));" , "return countVowels(str[1:]) + isVowel(str[0]));"]],
+  "correctSizeChoices": [0],
+  "correctBaseCases": [[0,1]],
+  "correctSolutions" : [ 2 ],
+  "inputFormatting" : "Un string cualquiera sin apóstrofes. (Ej: java)"
+}
