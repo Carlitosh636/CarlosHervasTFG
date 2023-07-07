@@ -15,7 +15,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        System.out.println(Algorithms.countVowels("java"));
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DiagramSelector.fxml"));
         Parent root = loader.load();
         Scene main = new Scene(root);

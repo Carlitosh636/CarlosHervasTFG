@@ -32,7 +32,6 @@ public class ReverseStringDiagram implements IDiagramActions{
         Map<String,String> returnVal = new HashMap<>();
         returnVal.put("baseCase",String.format("if %s:",baseCase));
         returnVal.put("returnValue",String.format("return %s",returnValue));
-        returnVal.put("auxCode","\nchar=s[0]");
         return returnVal;
     }
 

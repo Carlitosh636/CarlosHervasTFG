@@ -32,8 +32,6 @@ public class ProblemController implements Initializable {
     @FXML
     TextArea heading;
     @FXML
-    TextArea generatedCodeTemplate;
-    @FXML
     VBox SizeAndBaseCaseBox;
     @FXML
     ComboBox<String> problemSizeSelect;
@@ -114,14 +112,12 @@ public class ProblemController implements Initializable {
             case "functionName":
                 break;
             case "baseCases":
+            case "auxCode":
                 formatting = "\t";
                 break;
             case "returnValues":
             case "recursiveCases":
                 formatting = "\t\t";
-                break;
-            case "auxCode":
-                formatting = "\telse:\n\t\t";
                 break;
         }
         newLine.setText(formatting+text);
@@ -133,6 +129,20 @@ public class ProblemController implements Initializable {
     }
     private void addMultipleLabelToCodeGenPart(String key, List<String> text){
         codeGenParts.get(key).getChildren().clear();
+        String formatting = "";
+        switch (key){
+            case "functionName":
+                break;
+            case "baseCases":
+            case "auxCode":
+                formatting = "\t";
+                break;
+            case "returnValues":
+            case "recursiveCases":
+                formatting = "\t\t";
+                break;
+        }
+        String finalFormatting = formatting;
         text.forEach(line->{
             Label newLine = new Label();
             newLine.setStyle("-fx-background-color: #000000;" +
@@ -140,24 +150,10 @@ public class ProblemController implements Initializable {
                 "-fx-font-family: \"consolas\", sans-serif;" +
                 "-fx-line-height: 21px;" +
                 "-fx-font-size: 16px;");
-            String formatting = "";
-            switch (key){
-                case "functionName":
-                    break;
-                case "baseCases":
-                    formatting = "\t";
-                    break;
-                case "returnValues":
-                case "recursiveCases":
-                    formatting = "\t\t";
-                    break;
-                case "auxCode":
-                    formatting = "\telse:\n\t";
-                    break;
-            }
-            newLine.setText(formatting+line);
+            newLine.setText(finalFormatting +line);
             newLine.setPrefWidth(codegenHolder.getPrefWidth());
             newLine.setMaxWidth(codegenHolder.getMaxWidth());
+            newLine.setPrefHeight(10);
             codeGenParts.get(key).getChildren().add(newLine);
         });
     }
@@ -295,7 +291,6 @@ public class ProblemController implements Initializable {
             List<String> updatedFunction = List.of(model.processFunctionName(decompositionSelect.getSelectionModel().getSelectedIndex()+1).split("\n"));
             addMultipleLabelToCodeGenPart("functionName",updatedFunction);
         }
-        System.out.println(diagramsHolder.getChildren().size());
         if (model.hasMultipleCases(decompositionSelect.getSelectionModel().getSelectedIndex())){
             if (diagramsHolder.getChildren().size()==2){
                 diagramsHolder.getChildren().add(diagramGrid2);
@@ -375,13 +370,7 @@ public class ProblemController implements Initializable {
                 return;
             }
             manageCalculatedSolution(diagramsVisualizers.get("Visualizer 1"),solutionSelect,model.getCurrentReductionSolutions(),0,0,false);
-            if(genCode.get("auxCode") != null){
-                List<String> auxCode = Arrays.stream(genCode.get("auxCode").split("\n")).toList();
-                addMultipleLabelToCodeGenPart("auxCode", auxCode);
-            }
-            else{
-                addLabelToCodeGenPart("auxCode", "");
-            }
+            addLabelToCodeGenPart("auxCode","else:");
         }
 
         catch (Exception e){
