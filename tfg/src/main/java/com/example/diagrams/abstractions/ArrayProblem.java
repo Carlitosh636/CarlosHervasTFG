@@ -49,7 +49,7 @@ public class ArrayProblem extends BaseProblem {
 
     @Override
     public Map<String, String> processProblemSizeAndBaseCases() {
-        return diagramActions.setGenCodeParams(problemSizeChoices.get(currentProblemSize.get()), returnValues.get(currentProblemSize.get()).get(currentBaseCaseIndex));
+        return diagramActions.setGenCodeParams(baseCaseChoices.get(currentProblemSize.get()).get(currentBaseCaseIndex), returnValues.get(currentProblemSize.get()).get(currentBaseCaseIndex));
     }
 
     @Override

@@ -43,7 +43,7 @@ public class ArraySortMediumDiagram implements IDiagramActions, IAuxFuncsActions
     @Override
     public List<String> getAuxFuncs() {
         return List.of(
-            "def inserta_en_lista_ordenada(list,n)\n\tindex = len(list)\n\tfor i in range(len(list)):\n\t\tif list[i] > n:\n\t\t\tindex = i\n\t\t\tbreak\n\tif index == len(list):\n\t\tlist = list[:index] + [n]\n\telse:\n\t\tlist = list[:index] + [n] + list[index:]\n\treturn a",
+            "def inserta_en_lista_ordenada(list,n):\n\tindex = len(list)\n\tfor i in range(len(list)):\n\t\tif list[i] > n:\n\t\t\tindex = i\n\t\t\tbreak\n\tif index == len(list):\n\t\tlist = list[:index] + [n]\n\telse:\n\t\tlist = list[:index] + [n] + list[index:]\n\treturn list",
             "");
     }
 

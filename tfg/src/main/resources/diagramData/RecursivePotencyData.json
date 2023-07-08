@@ -18,9 +18,11 @@
   "solutionsChoices" : [ [ "f' * b", "f' * a", "f' ** a" ], [ "f' ** 2", "f' * b" ], [ "f' ** 2", "f' * b", "a * f' ** 2" ] ],
   "recursiveCases" :[["return b * power(a, b - 1)","return a * power(a, b - 1)","return power(a, b - 1) ** a"],
     ["return power(a, b // 2) ** 2","return b * power(a, b // 2)"],
-    ["return power(a, b // 2) ** 2","return b * power(a, b // 2)","if n % 2 == 0:\n\t\treturn power(a, b // 2)**2\n\telse:\n\t\treturn a * (power(a, (b - 1) // 2)**2)"]],
+    ["return power(a, b // 2) ** 2","return b * power(a, b // 2)","if b % 2 == 0:\n\treturn power(a, b // 2)**2\nelse:\n\treturn a * (power(a, (b - 1) // 2)**2)"]],
   "correctSizeChoices": [0],
-  "correctBaseCases": [[0,1]],
+  "correctBaseCases": [[0]],
+  "incorrectProblemSizeText" : ["","Selección incorrecta, provoca __"],
+  "incorrectBaseCaseText": [[],["","ughhhhhh"]],
   "correctSolutions" : [ 1, 0, 2 ],
   "inputFormatting" : "Un número entero en cada cuadro de input (ej: 3 y 5)"
 }

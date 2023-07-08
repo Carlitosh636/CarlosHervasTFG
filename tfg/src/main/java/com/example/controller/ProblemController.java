@@ -186,7 +186,7 @@ public class ProblemController implements Initializable {
             return;
         }
         if(!model.getCorrectSizeChoices().contains(problemSizeSelect.getSelectionModel().getSelectedIndex())){
-            showErrorInputAlert(new IncorrectSelectionException("Opción incorrecta"));
+            showErrorInputAlert(new IncorrectSelectionException(model.getIncorrectProblemSizeText().get(problemSizeSelect.getSelectionModel().getSelectedIndex())));
             return;
         }
         baseCaseSelect.setVisible(true);
@@ -203,7 +203,9 @@ public class ProblemController implements Initializable {
             return;
         }
         if(!model.getCorrectBaseCases().get(model.getCurrentProblemSize()).contains(baseCaseSelect.getSelectionModel().getSelectedIndex())){
-            showErrorInputAlert(new IncorrectSelectionException("Opción incorrecta"));
+            showErrorInputAlert(new IncorrectSelectionException(model.getIncorrectBaseCaseText().get(problemSizeSelect.getSelectionModel().getSelectedIndex()).get(
+                baseCaseSelect.getSelectionModel().getSelectedIndex()
+            )));
             return;
         }
         model.setCurrentBaseCaseIndex(baseCaseSelect.getSelectionModel().getSelectedIndex());
@@ -331,6 +333,8 @@ public class ProblemController implements Initializable {
         diagramsVisualizers.get("Visualizer 1").getSubParameters().getChildren().clear();
         diagramsVisualizers.get("Visualizer 2").getSubSolutions().getChildren().clear();
         diagramsVisualizers.get("Visualizer 2").getSubParameters().getChildren().clear();
+        diagramsVisualizers.get("Visualizer 1").getCalculatedSolution().setVisible(false);
+        diagramsVisualizers.get("Visualizer 2").getCalculatedSolution().setVisible(false);
         for(SimpleStringProperty ele : model.getSubParameters()){
             setVisualizerSubData(ele,diagramsVisualizers.get("Visualizer 1").getSubParameters());
         }
@@ -406,7 +410,9 @@ public class ProblemController implements Initializable {
                 diagramVisualizerData.getCalculatedSolution().setText("Correcto!\nValor calculado: "+model.getCalculatedSol());
                 diagramVisualizerData.getCalculatedSolution().setStyle("-fx-text-fill: #03fc77;");
                 if(model.getAuxFunctions() != null){
-                    showMoreFunctions.setVisible(true);
+                    if (!Objects.equals(model.getAuxFunctions().get(decompositionSelect.getSelectionModel().getSelectedIndex()), "")){
+                        showMoreFunctions.setVisible(true);
+                    }
                 }
                 allSolved[indexAllSolved] = true;
             }

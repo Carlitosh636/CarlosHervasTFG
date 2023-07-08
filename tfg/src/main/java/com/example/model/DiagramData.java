@@ -24,6 +24,8 @@ public class DiagramData implements Serializable {
     private List<List<Integer>> correctBaseCases;
     private List<Integer> correctSolutions;
     private String inputFormatting;
+    private List<String> incorrectProblemSizeText;
+    private List<List<String>> incorrectBaseCaseText;
     public DiagramData(){
 
     }
@@ -178,5 +180,21 @@ public class DiagramData implements Serializable {
 
     public void setInputFormatting(String inputFormatting) {
         this.inputFormatting = inputFormatting;
+    }
+
+    public List<String> getIncorrectProblemSizeText() {
+        return incorrectProblemSizeText;
+    }
+
+    public void setIncorrectProblemSizeText(List<String> incorrectProblemSizeText) {
+        this.incorrectProblemSizeText = incorrectProblemSizeText;
+    }
+
+    public List<List<String>> getIncorrectBaseCaseText() {
+        return incorrectBaseCaseText;
+    }
+
+    public void setIncorrectBaseCaseText(List<List<String>> incorrectBaseCaseText) {
+        this.incorrectBaseCaseText = incorrectBaseCaseText;
     }
 }

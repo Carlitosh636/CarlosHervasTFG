@@ -16,10 +16,12 @@
   "returnValues": [ [ "n == d","n == d\nTrue"] ],
   "reductionChoices" : [["n // 10"],["n // 10"]],
   "solutionsChoices" : [[ "(n % 10 == d) or f'","(n % 10 == d) and f'","(n % 10 == 0) or f'" ],["not f'","(n % 10 == d) or f'","f'"]],
-  "recursiveCases" :[["return (n % 10 == d) or contiene_digito_cola_lineal(n//10,d)", "return (n % 10 == d) and contiene_digito_cola_lineal(n//10,d)","return (n % 10 == 0) or contiene_digito_cola_lineal(n//10,d)"],
-    ["return not contiene_digito_cola(n//10,d)","return (n % 10 == d) or contiene_digito_cola(n//10,d)","return contiene_digito_cola(n//10,d)"]],
+  "recursiveCases" :[["return (n % 10 == d) or contiene_digito_cola(n//10,d)", "return (n % 10 == d) and contiene_digito_cola(n//10,d)","return (n % 10 == 0) or contiene_digito_cola(n//10,d)"],
+    ["return not contiene_digito_cola_lineal(n//10,d)","return (n % 10 == d) or contiene_digito_cola_lineal(n//10,d)","return contiene_digito_cola_lineal(n//10,d)"]],
   "correctSizeChoices": [0],
   "correctBaseCases": [[0,1]],
   "correctSolutions" : [0,2],
+  "incorrectProblemSizeText" : [],
+  "incorrectBaseCaseText": [[]],
   "inputFormatting" : "Dos dígitos, el primero no negativo y el segundo entre 0 y 9 (Ej: 5432, 2)"
 }

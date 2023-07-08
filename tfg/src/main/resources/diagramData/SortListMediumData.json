@@ -21,12 +21,14 @@
       "tail = a[-1]\nreturn [tail] + a"
     ],
     [
-      "m = min(a)\n\t\ta.remove(m)\n\t\treturn select_sort_rec(a) + [m]",
-      "m = min(a)\n\t\ta.remove(m)\n\t\treturn [m] + select_sort_rec(a)"
+      "m = min(a)\na.remove(m)\nreturn select_sort(a) + [m]",
+      "m = min(a)\na.remove(m)\nreturn [m] + select_sort(a)"
     ]
   ],
   "correctSizeChoices": [0],
   "correctBaseCases": [[0]],
   "correctSolutions" : [ 0,1 ],
+  "incorrectProblemSizeText" : [],
+  "incorrectBaseCaseText": [[]],
   "inputFormatting" : "Una lista de números enteros desordenada, sin corchetes y separados por comas. Espacio entre números opcional (Ej: 6,5,4,3,2)"
 }

@@ -47,6 +47,8 @@ public abstract class BaseProblem {
     protected List<String> auxFunctions;
     protected List<String> paramKeys;
     protected int multipleProblemIndexOffset;
+    private List<String> incorrectProblemSizeText;
+    private List<List<String>> incorrectBaseCaseText;
 
     protected BaseProblem(IDiagramActions builder, String diagramDataName) throws IOException {
         this.diagramActions = builder;
@@ -82,6 +84,8 @@ public abstract class BaseProblem {
         this.recursiveCases = diagramData.getRecursiveCases();
         this.paramKeys = new ArrayList<>(diagramData.getParams().keySet());
         this.multipleProblemIndexOffset = 0;
+        this.incorrectProblemSizeText = diagramData.getIncorrectProblemSizeText();
+        this.incorrectBaseCaseText = diagramData.getIncorrectBaseCaseText();
     }
 
     public abstract void processInputs() throws Exception;
@@ -255,5 +259,12 @@ public abstract class BaseProblem {
         return subSolutions2;
     }
 
+    public List<String> getIncorrectProblemSizeText() {
+        return incorrectProblemSizeText;
+    }
+
+    public List<List<String>> getIncorrectBaseCaseText() {
+        return incorrectBaseCaseText;
+    }
 }
 

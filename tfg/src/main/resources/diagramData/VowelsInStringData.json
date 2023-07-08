@@ -19,5 +19,7 @@
   "correctSizeChoices": [0],
   "correctBaseCases": [[0,1]],
   "correctSolutions" : [ 2 ],
+  "incorrectProblemSizeText" : [],
+  "incorrectBaseCaseText": [[]],
   "inputFormatting" : "Un string cualquiera sin apóstrofes. (Ej: java)"
 }

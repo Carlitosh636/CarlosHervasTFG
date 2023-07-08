@@ -36,8 +36,8 @@ public class ContainsDigitDiagram implements IDiagramActions{
         Map<String,String> returnVal = new HashMap<>();
         if(baseCase.contains("\n")){
             StringBuilder stringBuilder = new StringBuilder();
-            List<String> baseCases = Stream.of(baseCase.split("\n")).map(s -> "\tif " + s + ":\n").toList();
-            List<String> returnValues = Stream.of(returnValue.split("\n")).map(s -> "\t\treturn " + s+"\n").toList();
+            List<String> baseCases = Stream.of(baseCase.split("\n")).map(s -> "if " + s + ":\n").toList();
+            List<String> returnValues = Stream.of(returnValue.split("\n")).map(s -> "\treturn " + s+"\n").toList();
             for(int i = 0; i<baseCases.size();i++){
                 stringBuilder.append(baseCases.get(i));
                 stringBuilder.append(returnValues.get(i));
@@ -104,8 +104,8 @@ public class ContainsDigitDiagram implements IDiagramActions{
     @Override
     public String getFunctionName(int index) {
         return switch (index) {
-            case 0 -> "def contiene_digito_cola_lineal(n,d)";
-            case 1 -> "def contiene_digito_cola(n,d)";
+            case 0 -> "def contiene_digito_cola_lineal(n,d):";
+            case 1 -> "def contiene_digito_cola(n,d):";
             default -> null;
         };
     }

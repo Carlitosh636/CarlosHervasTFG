@@ -30,7 +30,7 @@ public class EqualStringsDiagram implements IDiagramActions{
 
     @Override
     public String getFunctionName(int index) {
-        return "def equal_strings(s, t)\n\tn=len(s):";
+        return "def equal_strings(s, t):\n\tn=len(s)";
     }
 
     @Override
@@ -43,8 +43,8 @@ public class EqualStringsDiagram implements IDiagramActions{
         Map<String,String> returnVal = new HashMap<>();
         if(baseCase.contains("\n")){
             StringBuilder stringBuilder = new StringBuilder();
-            List<String> baseCases = Stream.of(baseCase.split("\n")).map(s -> "\tif " + s + ":\n").toList();
-            List<String> returnValues = Stream.of(returnValue.split("\n")).map(s -> "\t\treturn " + s+"\n").toList();
+            List<String> baseCases = Stream.of(baseCase.split("\n")).map(s -> "if " + s + ":\n").toList();
+            List<String> returnValues = Stream.of(returnValue.split("\n")).map(s -> "\treturn " + s+"\n").toList();
             for(int i = 0; i<baseCases.size();i++){
                 stringBuilder.append(baseCases.get(i));
                 stringBuilder.append(returnValues.get(i));

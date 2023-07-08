@@ -19,5 +19,7 @@
   "correctSizeChoices": [0],
   "correctBaseCases": [[0,1]],
   "correctSolutions" : [1,1],
+  "incorrectProblemSizeText" : [],
+  "incorrectBaseCaseText": [[]],
   "inputFormatting" : "Dos palabras en la misma frase separadas por una coma (ej: hola,hola)"
 }
