@@ -240,8 +240,9 @@ public class ProblemController implements Initializable {
             paramName.setWrapText(true);
             TextField tf = new TextField();
             tf.setFont(visualizerData.getOriginalSolution().getFont());
-            tf.setPrefWidth(150);
+            tf.setPrefWidth(200);
             tf.setMaxWidth(200);
+            tf.setPromptText("ENTER para confirmar");
             box.getChildren().addAll(paramName,tf);
             visualizerData.addValueToOriginalData(box);
             tfs.add(tf);
