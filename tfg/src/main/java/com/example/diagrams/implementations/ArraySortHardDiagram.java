@@ -7,22 +7,18 @@ import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-public class ArraySortDiagram implements IDiagramActions{
+public class ArraySortHardDiagram implements IDiagramActions, IAuxFuncsActions{
     Map<Integer, Callable<Map<String,String>>> algorithmMap= new HashMap<>();
     Map<Integer,String> functionNames = new HashMap<>(){{
         put(0,"def sort_list(a):\n\tn = len(a)");
         put(1,"def merge_sort(a):\n\tn = len(a)");
-        put(2,"def insert_sort(a):\n\tn = len(a)");
-        put(3,"def select_sort(a):\n\tn = len(a)");
-        put(4,"def quick_sort(a,low,high):\n\tn = len(a)");
+        put(2,"def quick_sort(a,low,high):\n\tn = len(a)");
     }};
     static int[] array;
     static int mid;
     static int[] l;
     static int[] r;
     int[] copyArray;
-    int[] reducedArray;
-    int ele;
     @Override
     public void setParams(Map<String, String> newValues) throws Exception {
         try{
@@ -47,6 +43,12 @@ public class ArraySortDiagram implements IDiagramActions{
         return false;
     }
 
+    @Override
+    public List<String> getAuxFuncs() {
+        return List.of("def merge(a,b):\n\tif a == []:\n\t\treturn b\n\telif b == []:\n\t\treturn a\n\telse:\n\t\tif a[0] < b[0]:\n\t\t\treturn [a[0]] + merge(a[1:], b)\n\t\telse:\n\t\t\treturn [b[0]] + merge(a, b[1:])",
+            "def get_smaller_than_or_equal_to(a,pivot):\n\treturn [i for i in a if i<=pivot]\ndef get_greater_than(a,pivot):\n\t return [i for i in a if i>pivot]");
+    }
+
 
     @Override
     public Map<String, String> setGenCodeParams(String baseCase, String returnValue) {
@@ -62,26 +64,10 @@ public class ArraySortDiagram implements IDiagramActions{
         s1.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(Arrays.stream(l), Arrays.stream(r)).toArray()));
         s1.add((Supplier<String>) () -> Arrays.toString(Algorithms.merge(array, l, r, mid, array.length - mid)));
         List<Supplier> s2 = new ArrayList<>();
-        s2.add((Supplier<String>) () -> Arrays.toString(Algorithms.insertSort(array)));
-        s2.add((Supplier<String>) () -> {
-            int[] nA = new int[array.length];
-            System.arraycopy(Algorithms.insertSort(reducedArray), 0, nA, 1, reducedArray.length);
-            nA[0] = ele;
-            return Arrays.toString(nA);
-        });
-        List<Supplier> s3 = new ArrayList<>();
-        s3.add((Supplier<String>) () -> {
-            int[] nA = new int[array.length];
-            System.arraycopy(reducedArray, 0, nA, 0, reducedArray.length);
-            nA[array.length - 1] = ele;
-            return Arrays.toString(nA);
-        });
-        s3.add((Supplier<String>) () -> Arrays.toString(Algorithms.selectSort(array)));
-        List<Supplier> s4 = new ArrayList<>();
-        s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(Arrays.stream(new int[]{copyArray[mid-1]}),IntStream.concat(Arrays.stream(l), Arrays.stream(r))).toArray()));
-        s4.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(IntStream.concat(Arrays.stream(l), Arrays.stream(r)),Arrays.stream(new int[]{copyArray[mid-1]})).toArray()));
-        s4.add((Supplier<String>) () -> Arrays.toString(Algorithms.quicksort(array,mid)));
-        return List.of(s1,s2,s3,s4);
+        s2.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(Arrays.stream(new int[]{copyArray[mid-1]}),IntStream.concat(Arrays.stream(l), Arrays.stream(r))).toArray()));
+        s2.add((Supplier<String>) () -> Arrays.toString(IntStream.concat(IntStream.concat(Arrays.stream(l), Arrays.stream(r)),Arrays.stream(new int[]{copyArray[mid-1]})).toArray()));
+        s2.add((Supplier<String>) () -> Arrays.toString(Algorithms.quicksort(array,mid)));
+        return List.of(s1,s2);
     }
 
     @Override
@@ -105,32 +91,6 @@ public class ArraySortDiagram implements IDiagramActions{
         });
         algorithmMap.put(1,()->{
             Map<String,String> returnVal = new HashMap<>();
-            ele = copyArray[copyArray.length-1];
-            reducedArray = Arrays.stream(copyArray).filter(e->e!=ele).toArray();
-            returnVal.put("prePartialSol1","f'(a[:-1])");
-            returnVal.put("prePartialSol2","tail");
-            returnVal.put("reducedOperation1","a = "+Arrays.toString(reducedArray));
-            returnVal.put("reducedOperation2","tail = "+ele);
-            returnVal.put("partSol1",Arrays.toString(Algorithms.insertSort(reducedArray)));
-            returnVal.put("partSol2",String.valueOf(ele));
-            returnVal.put("currentReductionSolutions",String.valueOf(1));
-            return returnVal;
-        });
-        algorithmMap.put(2,()->{
-            Map<String,String> returnVal = new HashMap<>();
-            ele = Algorithms.getSmallest(copyArray);
-            reducedArray = Arrays.stream(copyArray).filter(e->e!=ele).toArray();
-            returnVal.put("prePartialSol1","f'(a)");
-            returnVal.put("prePartialSol2","m");
-            returnVal.put("reducedOperation1","a = "+Arrays.toString(reducedArray));
-            returnVal.put("reducedOperation2","m = "+ele);
-            returnVal.put("partSol1",Arrays.toString(Algorithms.selectSort(reducedArray)));
-            returnVal.put("partSol2",String.valueOf(ele));
-            returnVal.put("currentReductionSolutions",String.valueOf(2));
-            return returnVal;
-        });
-        algorithmMap.put(3,()->{
-            Map<String,String> returnVal = new HashMap<>();
             int pivot = copyArray[mid-1];
             int[] smallerElements = Algorithms.getSmaller(copyArray,pivot);
             int[] greaterElements = Algorithms.getGreater(copyArray,pivot);
@@ -140,7 +100,7 @@ public class ArraySortDiagram implements IDiagramActions{
             returnVal.put("prePartialSol2","f'(v2)");
             returnVal.put("partSol1",Arrays.toString(Algorithms.quicksort(smallerElements,smallerElements.length / 2)));
             returnVal.put("partSol2",Arrays.toString(Algorithms.quicksort(greaterElements,greaterElements.length / 2)));
-            returnVal.put("currentReductionSolutions", String.valueOf(3));
+            returnVal.put("currentReductionSolutions", String.valueOf(1));
             return returnVal;
         });
     }

@@ -1,0 +1,32 @@
+{
+  "type" : "COMPLEX",
+  "heading" : "Dado una lista 'a' de números enteros con tamaño n, ordenarla de menor a mayor de forma recursiva\nEjemplo: f([7, 3, 8, 2, 4, 6, 1, 5]) -> [1, 2, 3, 4, 5, 6, 7, 8]",
+  "params" : {
+    "a" : ""
+  },
+  "currentProblemSize" : 0,
+  "currentReduction" : 0,
+  "currentReductionSolutions" : 0,
+  "reducedOperation" : "",
+  "problemSizeChoices" : [ "n == len(a)" ],
+  "currentBaseCaseIndex" : 0,
+  "baseCaseChoices" : [ [ "n <= 1" ] ],
+  "baseCaseParameters" : [ [ "0" ] ],
+  "returnValues" : [["a"]],
+  "reductionChoices" : [ ["tail = a[-1]\na[:-1]", "m = a.remove(min(a))\na"] ],
+  "solutionsChoices" : [["Insertar tail en lista ordenada","Concatenar tail a la cabeza de f'"],["Concatenar m a la cola de f'","Concatenar m a la cabeza de f'"]],
+  "recursiveCases" :[
+    [
+      "return inserta_en_lista_ordenada(insert_sort(a[:-1]),a[-1])",
+      "tail = a[-1]\nreturn [tail] + a"
+    ],
+    [
+      "m = min(a)\n\t\ta.remove(m)\n\t\treturn select_sort_rec(a) + [m]",
+      "m = min(a)\n\t\ta.remove(m)\n\t\treturn [m] + select_sort_rec(a)"
+    ]
+  ],
+  "correctSizeChoices": [0],
+  "correctBaseCases": [[0]],
+  "correctSolutions" : [ 0,1 ],
+  "inputFormatting" : "Una lista de números enteros desordenada, sin corchetes y separados por comas. Espacio entre números opcional (Ej: 6,5,4,3,2)"
+}

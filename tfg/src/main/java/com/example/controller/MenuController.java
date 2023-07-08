@@ -28,6 +28,8 @@ public class MenuController {
     Button b6;
     @FXML
     Button b7;
+    @FXML
+    Button b8;
     private final Map<Button, BaseProblem> buttonsPaths = new HashMap<>();
     private MenuButtonHandler menuButtonHandler;
     private ExceptionHandler exceptionHandler;
@@ -36,13 +38,17 @@ public class MenuController {
         menuButtonHandler = new MenuButtonHandler();
         exceptionHandler = new ExceptionHandler(null);
         RecursivePowerDiagram recursivePowerDiagram = new RecursivePowerDiagram();
+        ArraySortHardDiagram arraySortHardDiagram = new ArraySortHardDiagram();
+        ArraySortMediumDiagram arraySortMediumDiagram = new ArraySortMediumDiagram();
         buttonsPaths.put(b1,new ArithmeticProblem(recursivePowerDiagram,recursivePowerDiagram, "/diagramData/RecursivePotencyData.json"));
         buttonsPaths.put(b2,new ArithmeticProblem(new SlowAdditionDiagram(),null,"/diagramData/SlowAdditionData.json"));
-        buttonsPaths.put(b3,new ArrayProblem(new ArraySortDiagram(),"/diagramData/SortListData.json"));
+        buttonsPaths.put(b3,new ArrayProblem(arraySortHardDiagram, "/diagramData/SortListHardData.json", arraySortHardDiagram));
         buttonsPaths.put(b4,new StringProblem(new ReverseStringDiagram(),"/diagramData/ReverseStringData.json"));
         buttonsPaths.put(b5,new BooleanProblem(new EqualStringsDiagram(),"/diagramData/EqualStringsData.json"));
         buttonsPaths.put(b6,new BooleanProblem(new ContainsDigitDiagram(),"/diagramData/ContainsDigitData.json"));
         buttonsPaths.put(b7,new StringProblem(new VowelsInStringDiagram(),"/diagramData/VowelsInStringData.json"));
+        buttonsPaths.put(b8,new ArrayProblem(arraySortMediumDiagram,"/diagramData/SortListMediumData.json", arraySortMediumDiagram));
+
         buttonsPaths.forEach((k,v)-> k.setOnAction(actionEvent -> {
             try {
                 loadScene(v,k);

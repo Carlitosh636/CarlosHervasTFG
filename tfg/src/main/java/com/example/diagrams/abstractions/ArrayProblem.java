@@ -1,5 +1,6 @@
 package com.example.diagrams.abstractions;
 
+import com.example.diagrams.implementations.IAuxFuncsActions;
 import com.example.diagrams.implementations.IDiagramActions;
 import com.example.exceptions.IncorrectInputException;
 import javafx.beans.property.SimpleStringProperty;
@@ -13,8 +14,10 @@ public class ArrayProblem extends BaseProblem {
     int[] l;
     int[] r;
     ArrayList<String> partSols = new ArrayList<>();
-    public ArrayProblem(IDiagramActions builder, String diagramDataName) throws IOException {
+    private final IAuxFuncsActions auxFuncsActions;
+    public ArrayProblem(IDiagramActions builder, String diagramDataName, IAuxFuncsActions auxFuncsActions) throws IOException {
         super(builder, diagramDataName);
+        this.auxFuncsActions = auxFuncsActions;
         diagramActions.setAlgorithmMap();
         this.auxFunctions = List.of("def merge(a,b):\n\tif a == []:\n\t\treturn b\n\telif b == []:\n\t\treturn a\n\telse:\n\t\tif a[0] < b[0]:\n\t\t\treturn [a[0]] + merge(a[1:], b)\n\t\telse:\n\t\t\treturn [b[0]] + merge(a, b[1:])",
                 "def inserta_en_lista_ordenada(list,n)\n\tindex = len(list)\n\tfor i in range(len(list)):\n\t\tif list[i] > n:\n\t\t\tindex = i\n\t\t\tbreak\n\tif index == len(list):\n\t\tlist = list[:index] + [n]\n\telse:\n\t\tlist = list[:index] + [n] + list[index:]\n\treturn a",
@@ -39,7 +42,7 @@ public class ArrayProblem extends BaseProblem {
         paramsParsed.put("l", Arrays.toString(l));
         paramsParsed.put("r", Arrays.toString(r));
         diagramActions.setParams(paramsParsed);
-
+        this.auxFunctions = auxFuncsActions.getAuxFuncs();
         Map<String,String> solutions = calculateSolution(-1);
         originalSol.set(solutions.get("preSolOg")+"="+solutions.get("ogSol"));
     }
