@@ -121,12 +121,12 @@
                <StackPane GridPane.columnIndex="2" GridPane.rowIndex="1" />
                <Label contentDisplay="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                   <font>
-                     <Font size="16.0" />
+                     <Font size="18.0" />
                   </font>
                </Label>
                <Label id="diagramDataHolders" alignment="CENTER" contentDisplay="CENTER" minWidth="100.0" stylesheets="@../css/boxes-background.css" textFill="WHITE" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                   <font>
-                     <Font size="15.0" />
+                     <Font size="18.0" />
                   </font>
                   <padding>
                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -137,7 +137,7 @@
                <VBox id="diagramDataHolders" alignment="CENTER" minHeight="-Infinity" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
                   <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" minWidth="75.0" wrapText="true">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="18.0" />
                      </font>
                   </Label>
                   <padding>
@@ -148,7 +148,7 @@
                <VBox id="diagramDataHolders" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="3" GridPane.rowIndex="5">
                   <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="18.0" />
                      </font>
                   </Label>
                   <padding>
@@ -245,12 +245,12 @@
       <StackPane GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <Label contentDisplay="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
          <font>
-            <Font size="16.0" />
+            <Font size="18.0" />
          </font>
       </Label>
       <Label id="diagramDataHolders" alignment="CENTER" contentDisplay="CENTER" maxWidth="150.0" minWidth="100.0" stylesheets="@../css/boxes-background.css" textFill="WHITE" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
          <font>
-            <Font size="15.0" />
+            <Font size="18.0" />
          </font>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -261,7 +261,7 @@
       <VBox id="diagramDataHolders" alignment="CENTER" minHeight="-Infinity" minWidth="100.0" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" minWidth="75.0" wrapText="true">
             <font>
-               <Font size="15.0" />
+               <Font size="18.0" />
             </font>
          </Label>
          <padding>
@@ -272,7 +272,7 @@
       <VBox id="diagramDataHolders" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/boxes-background.css" GridPane.columnIndex="3" GridPane.rowIndex="5">
          <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
             <font>
-               <Font size="15.0" />
+               <Font size="18.0" />
             </font>
          </Label>
          <padding>

@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleStringProperty;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ public class BooleanProblem extends BaseProblem{
     }
     @Override
     public void processInputs() throws Exception {
-        LinkedHashMap<String,String> paramsParsed = new LinkedHashMap<>();
+        HashMap<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         paramsParsed.put("baseCaseValue",baseCaseParameters.get(currentProblemSize.get()).get(currentBaseCaseIndex));
         diagramActions.setParams(paramsParsed);
