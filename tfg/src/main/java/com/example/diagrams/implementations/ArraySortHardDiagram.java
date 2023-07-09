@@ -101,6 +101,7 @@ public class ArraySortHardDiagram implements IDiagramActions, IAuxFuncsActions{
             returnVal.put("partSol1",Arrays.toString(Algorithms.quicksort(smallerElements,smallerElements.length / 2)));
             returnVal.put("partSol2",Arrays.toString(Algorithms.quicksort(greaterElements,greaterElements.length / 2)));
             returnVal.put("currentReductionSolutions", String.valueOf(1));
+            returnVal.put("pivot", String.valueOf(pivot));
             return returnVal;
         });
     }

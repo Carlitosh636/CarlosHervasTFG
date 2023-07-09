@@ -104,25 +104,21 @@ public class ArrayProblem extends BaseProblem {
             partSols.clear();
         }
         subParameters.add(new SimpleStringProperty(data.get("reducedOperation1")));
-        subParameters.add(new SimpleStringProperty(data.get("reducedOperation2")));
+        if(data.containsKey("pivot")){
+            subParameters.add(new SimpleStringProperty(data.get("reducedOperation2")+"\npivot="+data.get("pivot")));
+        }
+        else{
+            subParameters.add(new SimpleStringProperty(data.get("reducedOperation2")));
+        }
         subSolutions.add(new SimpleStringProperty(data.get("prePartialSol1") +"=" + data.get("partSol1")));
-        subSolutions.add(new SimpleStringProperty(data.get("prePartialSol2") +"=" + data.get("partSol2")));
+        if(data.containsKey("pivot")){
+            subSolutions.add(new SimpleStringProperty(data.get("prePartialSol2") +"=" + data.get("partSol2")+"\npivot="+data.get("pivot")));
+        }
+        else{
+            subSolutions.add(new SimpleStringProperty(data.get("prePartialSol2") +"=" + data.get("partSol2")));
+        }
         partSols.add(data.get("partSol1"));
         partSols.add(data.get("partSol2"));
-
-        /*data.forEach((k,v)->{
-            if(k.contains("reducedOperation")){
-                subParameters.add(new SimpleStringProperty(v));
-            }
-            if(k.contains("partSol1")){
-                subSolutions.add(new SimpleStringProperty(data.get("prePartialSol1") +"=" + v));
-                partSols.add(v);
-            }
-            if(k.contains("partSol2")){
-                subSolutions.add(new SimpleStringProperty(data.get("prePartialSol2") +"="+ v));
-                partSols.add(v);
-            }
-        });*/
     }
 
 }
