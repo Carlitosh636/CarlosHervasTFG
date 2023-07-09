@@ -1,7 +1,6 @@
 package com.example.algorithms;
 
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class Algorithms {
@@ -224,5 +223,48 @@ public class Algorithms {
             return isVowel(str.charAt(0));
         int a = isVowel(str.charAt(0));
         return countVowels(str.substring(1)) + a;
+    }
+
+    public static Set<Integer> getDigitSet(int num){
+        Set<Integer> mySet = new HashSet<>();
+        while(num>0){
+            int digit = num % 10;
+            num = num / 10;
+            mySet.add(digit);
+        }
+        //Set<Integer> otherSet = new HashSet<>(List.of(2, 3));
+        //mySet.retainAll(otherSet);
+        return mySet;
+    }
+
+    public static Set<Integer> digitsSharedLineal(int[] a){
+        int n = a.length;
+        if (n == 1){
+            return getDigitSet(a[0]);
+        }
+        else{
+            int ele = a[0];
+            int[] reducedArray = Arrays.stream(a).filter(v-> v != ele).toArray();
+            Set<Integer> mySet = digitsSharedLineal(reducedArray);
+            mySet.retainAll(getDigitSet(ele));
+            return mySet;
+        }
+    }
+    public static Set<Integer> digitSharedDyV(int[] a){
+        int n = a.length;
+        if (n == 1){
+            return getDigitSet(a[0]);
+        }
+        else{
+            int mid = n / 2;
+            int[] l = new int[mid];
+            int[] r = new int[n - mid];
+            System.arraycopy(a, 0, l, 0, mid);
+            if (n - mid >= 0) System.arraycopy(a, mid, r, mid - mid, n - mid);
+            Set<Integer> mySet1 = digitsSharedLineal(l);
+            Set<Integer> mySet2 = digitsSharedLineal(r);
+            mySet1.retainAll(mySet2);
+            return mySet1;
+        }
     }
 }
