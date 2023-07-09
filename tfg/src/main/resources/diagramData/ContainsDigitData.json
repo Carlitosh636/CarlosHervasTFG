@@ -21,7 +21,7 @@
   "correctSizeChoices": [0],
   "correctBaseCases": [[0,1]],
   "correctSolutions" : [0,2],
-  "incorrectProblemSizeText" : [],
+  "incorrectProblemSizeText" : ["","Opción incorrecta: En este problema queremos comprobar cada dígito, por lo que no tratamos con el valor del número, sino con sus cifras"],
   "incorrectBaseCaseText": [[]],
   "inputFormatting" : "Dos dígitos, el primero no negativo y el segundo entre 0 y 9 (Ej: 5432, 2)"
 }

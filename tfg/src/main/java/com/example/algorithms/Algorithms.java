@@ -10,9 +10,6 @@ public class Algorithms {
             if(baseCaseValue==0){
                 return 1;
             }
-            else if (baseCaseValue==1){
-                return base;
-            }
         }
         return recursivePower1(base,exp-1,baseCaseValue) * base;
     }
@@ -20,9 +17,6 @@ public class Algorithms {
         if(exp==baseCaseValue){
             if(baseCaseValue==0){
                 return 1;
-            }
-            if(baseCaseValue==1){
-                return base;
             }
         }
         else if(exp % 2 == 0){

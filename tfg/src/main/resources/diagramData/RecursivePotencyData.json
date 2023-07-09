@@ -9,7 +9,7 @@
   "currentReduction" : 0,
   "currentReductionSolutions" : 0,
   "reducedOperation" : "",
-  "problemSizeChoices" : [ "b","a" ],
+  "problemSizeChoices" : [ "b" ],
   "currentBaseCaseIndex" : 0,
   "baseCaseChoices" : [ [ "b == 0","b == a" ] ],
   "baseCaseParameters" : [ [ "0","1" ] ],
@@ -21,8 +21,8 @@
     ["return power(a, b // 2) ** 2","return b * power(a, b // 2)","if b % 2 == 0:\n\treturn power(a, b // 2)**2\nelse:\n\treturn a * (power(a, (b - 1) // 2)**2)"]],
   "correctSizeChoices": [0],
   "correctBaseCases": [[0]],
-  "incorrectProblemSizeText" : ["","Selección incorrecta, provoca __"],
-  "incorrectBaseCaseText": [[],["","ughhhhhh"]],
+  "incorrectProblemSizeText" : [""],
+  "incorrectBaseCaseText": [[],["","Selección incorrecta: Con este caso base, el resultado final es a*a, que no es a**b"]],
   "correctSolutions" : [ 1, 0, 2 ],
   "inputFormatting" : "Un número entero en cada cuadro de input (ej: 3 y 5)"
 }
