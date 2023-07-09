@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class DigitsSharedDiagram implements IDiagramActions{
+public class DigitsSharedDiagram implements IDiagramActions,IAuxFuncsActions{
     Map<Integer, Callable<Map<String,String>>> algorithmMap= new HashMap<>();
     Map<Integer,String> functionNames = new HashMap<>(){{
         put(0,"def digits_shared(a):\n\tn = len(a)");
@@ -43,19 +43,22 @@ public class DigitsSharedDiagram implements IDiagramActions{
         });
         List<Supplier> s2 = new ArrayList<>();
         s2.add((Supplier<String>) () -> {
-            Set<Integer> ints = Algorithms.digitsSharedLineal(l);
-            ints.addAll(Algorithms.digitsSharedLineal(r));
-            return ints.stream().map(String::valueOf).collect(Collectors.toSet()).toString();
+            Set<Integer> lSet = Arrays.stream(l).boxed().collect(Collectors.toSet());
+            Set<Integer> rSet = Arrays.stream(r).boxed().collect(Collectors.toSet());
+            lSet.addAll(rSet);
+            return lSet.stream().map(String::valueOf).collect(Collectors.toSet()).toString();
         });
         s2.add((Supplier<String>) () -> {
-            Set<Integer> ints = Algorithms.digitsSharedLineal(l);
-            ints.retainAll(Algorithms.digitsSharedLineal(r));
-            return ints.stream().map(String::valueOf).collect(Collectors.toSet()).toString();
+            Set<Integer> lSet = Arrays.stream(l).boxed().collect(Collectors.toSet());
+            Set<Integer> rSet = Arrays.stream(r).boxed().collect(Collectors.toSet());
+            lSet.retainAll(rSet);
+            return lSet.stream().map(String::valueOf).collect(Collectors.toSet()).toString();
         });
         s2.add((Supplier<String>) () -> {
-            Set<Integer> ints = Algorithms.digitsSharedLineal(l);
-            ints.removeAll(Algorithms.digitsSharedLineal(r));
-            return ints.stream().map(String::valueOf).collect(Collectors.toSet()).toString();
+            Set<Integer> lSet = Arrays.stream(l).boxed().collect(Collectors.toSet());
+            Set<Integer> rSet = Arrays.stream(r).boxed().collect(Collectors.toSet());
+            lSet.removeAll(rSet);
+            return lSet.stream().map(String::valueOf).collect(Collectors.toSet()).toString();
         });
         return List.of(s1,s2);
     }
@@ -149,5 +152,25 @@ public class DigitsSharedDiagram implements IDiagramActions{
     @Override
     public Map<String, String> calculateSolution(int index) throws Exception {
         return algorithmMap.get(index).call();
+    }
+
+    @Override
+    public List<String> getAuxFuncs() {
+        return List.of("""
+                def get_digit_set(num):
+                \tmySet = set()
+                \twhile(num > 0):
+                \t\tdigit = num % 10
+                \t\tnum = num // 10
+                \t\tmySet.add(digit)
+                \treturn mySet""",
+            """
+                def get_digit_set(num):
+                \tmySet = set()
+                \twhile(num > 0):
+                \t\tdigit = num % 10
+                \t\tnum = num // 10
+                \t\tmySet.add(digit)
+                \treturn mySet""");
     }
 }

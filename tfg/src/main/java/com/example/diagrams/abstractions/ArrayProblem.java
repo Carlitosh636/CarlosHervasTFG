@@ -61,6 +61,7 @@ public class ArrayProblem extends BaseProblem {
         Map<String,String> paramsParsed = new HashMap<>();
         params.forEach((k,v)-> paramsParsed.put(k,v.get()));
         paramsParsed.put("mid", String.valueOf(mid));
+        System.out.println(partSols);
         paramsParsed.put("l", partSols.get(0));
         paramsParsed.put("r", partSols.get(1));
         diagramActions.setParams(paramsParsed);

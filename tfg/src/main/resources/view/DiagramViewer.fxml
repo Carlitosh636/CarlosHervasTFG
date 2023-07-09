@@ -165,7 +165,7 @@
                      <Insets />
                   </GridPane.margin>
                </ComboBox>
-               <Label minWidth="125.0" text="3. Subproblema" textFill="WHITE" wrapText="true" GridPane.rowIndex="2">
+               <Label minWidth="125.0" text="3. Descomposición" textFill="WHITE" wrapText="true" GridPane.rowIndex="2">
                   <font>
                      <Font size="18.0" />
                   </font>
@@ -173,7 +173,7 @@
                      <Insets right="10.0" />
                   </padding>
                </Label>
-               <Label layoutX="27.0" layoutY="66.0" minHeight="-Infinity" minWidth="125.0" text="4: Regla recursiva" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
+               <Label layoutX="27.0" layoutY="66.0" minHeight="-Infinity" minWidth="125.0" text="4: Paso recursivo" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
                   <font>
                      <Font size="18.0" />
                   </font>
@@ -289,7 +289,7 @@
             <Insets />
          </GridPane.margin>
       </ComboBox>
-      <Label minWidth="125.0" text="3. Subproblema" textFill="WHITE" wrapText="true" GridPane.rowIndex="2">
+      <Label minWidth="125.0" text="3. Descomposición" textFill="WHITE" wrapText="true" GridPane.rowIndex="2">
          <font>
             <Font size="18.0" />
          </font>
@@ -297,7 +297,7 @@
             <Insets right="10.0" />
          </padding>
       </Label>
-      <Label layoutX="27.0" layoutY="66.0" minHeight="-Infinity" minWidth="125.0" text="4: Regla recursiva" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
+      <Label layoutX="27.0" layoutY="66.0" minHeight="-Infinity" minWidth="125.0" text="4. Paso recursivo" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
          <font>
             <Font size="18.0" />
          </font>

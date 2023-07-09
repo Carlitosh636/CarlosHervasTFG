@@ -24,8 +24,18 @@ public class ArraySortHardDiagram implements IDiagramActions, IAuxFuncsActions{
         try{
             array = Algorithms.stringToArrayInt(newValues.get("a"));
             mid = Integer.parseInt(newValues.get("mid"));
-            l = Algorithms.stringToArrayInt(newValues.get("l"));
-            r = Algorithms.stringToArrayInt(newValues.get("r"));
+            if (newValues.get("l").equals("[]")){
+                l = new int[]{};
+            }
+            else{
+                l = Algorithms.stringToArrayInt(newValues.get("l"));
+            }
+            if (newValues.get("r").equals("[]")){
+                r = new int[]{};
+            }
+            else{
+                r = Algorithms.stringToArrayInt(newValues.get("r"));
+            }
         }
         catch (Exception e){
             e.printStackTrace();

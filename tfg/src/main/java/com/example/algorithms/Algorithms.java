@@ -249,34 +249,6 @@ public class Algorithms {
         }
     }
 
-    public static Set<Integer> digitsUnion(int[] a){
-        int n = a.length;
-        if (n == 1){
-            return getDigitSet(a[0]);
-        }
-        else{
-            int ele = a[0];
-            int[] reducedArray = Arrays.stream(a).filter(v-> v != ele).toArray();
-            Set<Integer> mySet = digitsUnion(reducedArray);
-            mySet.addAll(getDigitSet(ele));
-            return mySet;
-        }
-    }
-
-    public static Set<Integer> digitsDifference(int[] a){
-        int n = a.length;
-        if (n == 1){
-            return getDigitSet(a[0]);
-        }
-        else{
-            int ele = a[0];
-            int[] reducedArray = Arrays.stream(a).filter(v-> v != ele).toArray();
-            Set<Integer> mySet = digitsDifference(reducedArray);
-            mySet.removeAll(getDigitSet(ele));
-            return mySet;
-        }
-    }
-
     public static Set<Integer> digitSharedDyV(int[] a){
         int n = a.length;
         if (n == 1){

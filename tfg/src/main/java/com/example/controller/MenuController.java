@@ -42,6 +42,7 @@ public class MenuController {
         RecursivePowerDiagram recursivePowerDiagram = new RecursivePowerDiagram();
         ArraySortHardDiagram arraySortHardDiagram = new ArraySortHardDiagram();
         ArraySortMediumDiagram arraySortMediumDiagram = new ArraySortMediumDiagram();
+        DigitsSharedDiagram digitsSharedDiagram = new DigitsSharedDiagram();
         buttonsPaths.put(b1,new ArithmeticProblem(recursivePowerDiagram,recursivePowerDiagram, "/diagramData/RecursivePotencyData.json"));
         buttonsPaths.put(b2,new ArithmeticProblem(new SlowAdditionDiagram(),null,"/diagramData/SlowAdditionData.json"));
         buttonsPaths.put(b3,new ArrayProblem(arraySortHardDiagram, "/diagramData/SortListHardData.json", arraySortHardDiagram));
@@ -50,7 +51,7 @@ public class MenuController {
         buttonsPaths.put(b6,new BooleanProblem(new ContainsDigitDiagram(),"/diagramData/ContainsDigitData.json"));
         buttonsPaths.put(b7,new StringProblem(new VowelsInStringDiagram(),"/diagramData/VowelsInStringData.json"));
         buttonsPaths.put(b8,new ArrayProblem(arraySortMediumDiagram,"/diagramData/SortListMediumData.json", arraySortMediumDiagram));
-        buttonsPaths.put(b9,new ArrayProblem(new DigitsSharedDiagram(),"/diagramData/DigitsSharedData.json", arraySortHardDiagram));
+        buttonsPaths.put(b9,new ArrayProblem(digitsSharedDiagram,"/diagramData/DigitsSharedData.json", digitsSharedDiagram));
 
         buttonsPaths.forEach((k,v)-> k.setOnAction(actionEvent -> {
             try {
