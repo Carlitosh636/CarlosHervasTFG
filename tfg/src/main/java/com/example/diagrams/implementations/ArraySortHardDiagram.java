@@ -38,8 +38,7 @@ public class ArraySortHardDiagram implements IDiagramActions, IAuxFuncsActions{
             }
         }
         catch (Exception e){
-            e.printStackTrace();
-            throw e;
+                        throw e;
         }
     }
 
@@ -90,10 +89,10 @@ public class ArraySortHardDiagram implements IDiagramActions, IAuxFuncsActions{
         });
         algorithmMap.put(0, () -> {
             Map<String,String> returnVal = new HashMap<>();
-            returnVal.put("reducedOperation1","a = "+Arrays.toString(l));
-            returnVal.put("reducedOperation2","tail = "+Arrays.toString(r));
-            returnVal.put("prePartialSol1","f'(a)");
-            returnVal.put("prePartialSol2","tail");
+            returnVal.put("reducedOperation1","v1 = "+Arrays.toString(l));
+            returnVal.put("reducedOperation2","v2 = "+Arrays.toString(r));
+            returnVal.put("prePartialSol1","f'(v1)");
+            returnVal.put("prePartialSol2","f'(v2)");
             returnVal.put("partSol1",Arrays.toString(Algorithms.mergeSort(l)));
             returnVal.put("partSol2",Arrays.toString(Algorithms.mergeSort(r)));
             returnVal.put("currentReductionSolutions", String.valueOf(0));

@@ -273,8 +273,7 @@ public class Algorithms {
             return Arrays.stream(data.split(",")).map(s->s.replace(" ","")).mapToInt(Integer::parseInt).toArray();
         }
         catch (NumberFormatException e){
-            e.printStackTrace();
-            throw e;
+                        throw e;
         }
     }
 }

@@ -25,8 +25,7 @@ public class ArraySortMediumDiagram implements IDiagramActions, IAuxFuncsActions
             mid = Integer.parseInt(newValues.get("mid"));
         }
         catch (Exception e){
-            e.printStackTrace();
-            throw e;
+                        throw e;
         }
     }
 
@@ -140,7 +139,6 @@ public class ArraySortMediumDiagram implements IDiagramActions, IAuxFuncsActions
             return Arrays.stream(data.split(",")).map(s->s.replace(" ","")).mapToInt(Integer::parseInt).toArray();
         }
         catch (NumberFormatException e){
-            e.printStackTrace();
             throw e;
         }
     }

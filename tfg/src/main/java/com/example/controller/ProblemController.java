@@ -268,13 +268,11 @@ public class ProblemController implements Initializable {
                                     model.getSubSolutions().clear();
                                 } catch (Exception e) {
                                     showErrorInputAlert(new IncorrectInputException("Los valores introducidos no son válidos"));
-                                    e.printStackTrace();
                                 }
                                 refreshDecomposition();
                             }
                         } catch (Exception e) {
                             showErrorInputAlert(new IncorrectInputException("Los valores introducidos no son válidos"));
-                            e.printStackTrace();
                         }
                     }
                 });
@@ -326,8 +324,7 @@ public class ProblemController implements Initializable {
             model.processSolutions();
         } catch (Exception e) {
             showErrorInputAlert(new RuntimeException("Error al introducir los datos de entrada"));
-            e.printStackTrace();
-            return;
+                        return;
         }
         diagramsVisualizers.get("Visualizer 1").getSubSolutions().getChildren().clear();
         diagramsVisualizers.get("Visualizer 1").getSubParameters().getChildren().clear();
@@ -379,8 +376,7 @@ public class ProblemController implements Initializable {
         }
 
         catch (Exception e){
-            e.printStackTrace();
-        }
+                    }
     }
 
     public void onSolutionChange2() {
@@ -392,8 +388,7 @@ public class ProblemController implements Initializable {
         }
 
         catch (Exception e){
-            e.printStackTrace();
-        }
+                    }
     }
 
     private void manageCalculatedSolution(DiagramVisualizerData diagramVisualizerData,ComboBox solSelect,int currentReductionSolutionsIndex,int indexAllSolved, int offset, boolean isOther) throws Exception {
@@ -465,8 +460,15 @@ public class ProblemController implements Initializable {
 
     @FXML
     public void showMoreFuncs() {
-        List<String> linesAuxFunc = Arrays.stream(model.getAuxFunctions().get(decompositionSelect.getSelectionModel().getSelectedIndex()).split("\n")).toList();
-        addMultipleLabelToCodeGenPart("auxFunctions",linesAuxFunc);
+        if (codeGenParts.get("auxFunctions").getChildren().size()<2){
+            showMoreFunctions.setText("Ocultar funciones auxiliares");
+            List<String> linesAuxFunc = Arrays.stream(model.getAuxFunctions().get(decompositionSelect.getSelectionModel().getSelectedIndex()).split("\n")).toList();
+            addMultipleLabelToCodeGenPart("auxFunctions",linesAuxFunc);
+        }
+        else{
+            showMoreFunctions.setText("Mostrar funciones auxiliares");
+            addMultipleLabelToCodeGenPart("auxFunctions",List.of(""));
+        }
     }
 
     @FXML

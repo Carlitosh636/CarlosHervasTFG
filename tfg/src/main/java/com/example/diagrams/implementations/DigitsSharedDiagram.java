@@ -72,8 +72,7 @@ public class DigitsSharedDiagram implements IDiagramActions,IAuxFuncsActions{
             r = Algorithms.stringToArrayInt(newValues.get("r"));
         }
         catch (Exception e){
-            e.printStackTrace();
-            throw e;
+                        throw e;
         }
     }
 
