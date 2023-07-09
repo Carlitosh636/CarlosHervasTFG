@@ -4,7 +4,7 @@ This project is an application for teaching recursive thinking via dynamic diagr
 The application implements a series of problems adapted for these diagrams, where the user creates the recursive algorithm with the help of a diagram.
 
 To execute, it requires:
-- Java Development Kit version 17 or higher.
+- Java Development Kit version 19 or higher.
 - Maven 3.9.3
 - An IDE, IntelliJ is highly recommended.
 
