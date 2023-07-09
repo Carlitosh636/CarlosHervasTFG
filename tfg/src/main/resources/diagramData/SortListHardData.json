@@ -21,9 +21,9 @@
       "mid = n // 2\na1 = merge_sort(a[:mid])\na2 = merge_sort(a[mid:])\nreturn merge(a1,a2)"
     ],
     [
-      "pivot = a[n // 2]\n\t\tv1 = get_smaller_than_or_equal_to(a, pivot)\n\t\tv1.remove (pivot)\n\t\tv2 = get_greater_than(a, pivot )\n\t\treturn [pivot] + (quicksort_variant(v1) + quicksort_variant(v2))",
-      "pivot = a[n // 2]\n\t\tv1 = get_smaller_than_or_equal_to(a, pivot)\n\t\tv1.remove (pivot)\n\t\tv2 = get_greater_than(a, pivot )\n\t\treturn (quicksort_variant(v1) + quicksort_variant(v2)) + [pivot]",
-      "pivot = a[n // 2]\n\t\tv1 = get_smaller_than_or_equal_to(a, pivot)\n\t\tv1.remove (pivot)\n\t\tv2 = get_greater_than(a, pivot )\n\t\treturn (quicksort_variant(v1) + [pivot]\n+ quicksort_variant(v2))"
+      "pivot = a[n // 2]\nv1 = get_smaller_than_or_equal_to(a, pivot)\nv1.remove (pivot)\nv2 = get_greater_than(a, pivot )\nreturn [pivot] + (quick_sort(v1) + quick_sort(v2))",
+      "pivot = a[n // 2]\nv1 = get_smaller_than_or_equal_to(a, pivot)\nv1.remove (pivot)\nv2 = get_greater_than(a, pivot )\nreturn (quick_sort(v1) + quick_sort(v2)) + [pivot]",
+      "pivot = a[n // 2]\nv1 = get_smaller_than_or_equal_to(a, pivot)\nv1.remove (pivot)\nv2 = get_greater_than(a, pivot )\nreturn (quick_sort(v1) + [pivot]\n+ quick_sort(v2))"
     ]
   ],
   "correctSizeChoices": [0],

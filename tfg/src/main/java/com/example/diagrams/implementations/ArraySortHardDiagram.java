@@ -12,7 +12,7 @@ public class ArraySortHardDiagram implements IDiagramActions, IAuxFuncsActions{
     Map<Integer,String> functionNames = new HashMap<>(){{
         put(0,"def sort_list(a):\n\tn = len(a)");
         put(1,"def merge_sort(a):\n\tn = len(a)");
-        put(2,"def quick_sort(a,low,high):\n\tn = len(a)");
+        put(2,"def quick_sort(a):\n\tn = len(a)");
     }};
     static int[] array;
     static int mid;
