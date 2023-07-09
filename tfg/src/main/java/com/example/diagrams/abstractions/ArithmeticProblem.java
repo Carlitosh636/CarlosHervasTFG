@@ -101,13 +101,13 @@ public class ArithmeticProblem extends BaseProblem {
                 subParameters.add(new SimpleStringProperty(v));
             }
             if (k.equals("partSol")) {
-                subSolutions.add(new SimpleStringProperty(String.format("%s %.0f", data.get("prePartialSol"),Double.parseDouble(v))));
+                subSolutions.add(new SimpleStringProperty(String.format("%s = %.0f", data.get("prePartialSol"),Double.parseDouble(v))));
             }
             if (k.equals("reducedOperation2")) {
                 subParameters2.add(new SimpleStringProperty(v));
             }
             if (k.equals("partSol2")) {
-                subSolutions2.add(new SimpleStringProperty(String.format("%s %.0f", data.get("prePartialSol2"),Double.parseDouble(v))));
+                subSolutions2.add(new SimpleStringProperty(String.format("%s = %.0f", data.get("prePartialSol2"),Double.parseDouble(v))));
             }
         });
     }

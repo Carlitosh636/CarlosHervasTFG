@@ -106,17 +106,17 @@ public class ArrayProblem extends BaseProblem {
         }
         subParameters.add(new SimpleStringProperty(data.get("reducedOperation1")));
         if(data.containsKey("pivot")){
-            subParameters.add(new SimpleStringProperty(data.get("reducedOperation2")+"\npivot="+data.get("pivot")));
+            subParameters.add(new SimpleStringProperty(data.get("reducedOperation2")+"\npivot = "+data.get("pivot")));
         }
         else{
             subParameters.add(new SimpleStringProperty(data.get("reducedOperation2")));
         }
-        subSolutions.add(new SimpleStringProperty(data.get("prePartialSol1") +"=" + data.get("partSol1")));
+        subSolutions.add(new SimpleStringProperty(data.get("prePartialSol1") +" = " + data.get("partSol1")));
         if(data.containsKey("pivot")){
-            subSolutions.add(new SimpleStringProperty(data.get("prePartialSol2") +"=" + data.get("partSol2")));
+            subSolutions.add(new SimpleStringProperty(data.get("prePartialSol2") +" = " + data.get("partSol2")));
         }
         else{
-            subSolutions.add(new SimpleStringProperty(data.get("prePartialSol2") +"=" + data.get("partSol2")));
+            subSolutions.add(new SimpleStringProperty(data.get("prePartialSol2") +" = " + data.get("partSol2")));
         }
         partSols.add(data.get("partSol1"));
         partSols.add(data.get("partSol2"));

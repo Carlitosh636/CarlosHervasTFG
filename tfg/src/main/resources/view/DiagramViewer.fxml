@@ -119,7 +119,7 @@
                </padding>
                <VBox minWidth="125.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                <StackPane GridPane.columnIndex="2" GridPane.rowIndex="1" />
-               <Label contentDisplay="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <Label contentDisplay="CENTER" maxWidth="250.0" textFill="WHITE" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                   <font>
                      <Font size="18.0" />
                   </font>
