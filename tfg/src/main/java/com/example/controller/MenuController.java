@@ -30,6 +30,8 @@ public class MenuController {
     Button b7;
     @FXML
     Button b8;
+    @FXML
+    Button b9;
     private final Map<Button, BaseProblem> buttonsPaths = new HashMap<>();
     private MenuButtonHandler menuButtonHandler;
     private ExceptionHandler exceptionHandler;
@@ -48,6 +50,7 @@ public class MenuController {
         buttonsPaths.put(b6,new BooleanProblem(new ContainsDigitDiagram(),"/diagramData/ContainsDigitData.json"));
         buttonsPaths.put(b7,new StringProblem(new VowelsInStringDiagram(),"/diagramData/VowelsInStringData.json"));
         buttonsPaths.put(b8,new ArrayProblem(arraySortMediumDiagram,"/diagramData/SortListMediumData.json", arraySortMediumDiagram));
+        buttonsPaths.put(b9,new ArrayProblem(new DigitsSharedDiagram(),"/diagramData/DigitsSharedData.json", arraySortHardDiagram));
 
         buttonsPaths.forEach((k,v)-> k.setOnAction(actionEvent -> {
             try {

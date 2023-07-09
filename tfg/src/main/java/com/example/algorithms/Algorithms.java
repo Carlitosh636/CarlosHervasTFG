@@ -232,8 +232,6 @@ public class Algorithms {
             num = num / 10;
             mySet.add(digit);
         }
-        //Set<Integer> otherSet = new HashSet<>(List.of(2, 3));
-        //mySet.retainAll(otherSet);
         return mySet;
     }
 
@@ -250,6 +248,35 @@ public class Algorithms {
             return mySet;
         }
     }
+
+    public static Set<Integer> digitsUnion(int[] a){
+        int n = a.length;
+        if (n == 1){
+            return getDigitSet(a[0]);
+        }
+        else{
+            int ele = a[0];
+            int[] reducedArray = Arrays.stream(a).filter(v-> v != ele).toArray();
+            Set<Integer> mySet = digitsUnion(reducedArray);
+            mySet.addAll(getDigitSet(ele));
+            return mySet;
+        }
+    }
+
+    public static Set<Integer> digitsDifference(int[] a){
+        int n = a.length;
+        if (n == 1){
+            return getDigitSet(a[0]);
+        }
+        else{
+            int ele = a[0];
+            int[] reducedArray = Arrays.stream(a).filter(v-> v != ele).toArray();
+            Set<Integer> mySet = digitsDifference(reducedArray);
+            mySet.removeAll(getDigitSet(ele));
+            return mySet;
+        }
+    }
+
     public static Set<Integer> digitSharedDyV(int[] a){
         int n = a.length;
         if (n == 1){
@@ -265,6 +292,17 @@ public class Algorithms {
             Set<Integer> mySet2 = digitsSharedLineal(r);
             mySet1.retainAll(mySet2);
             return mySet1;
+        }
+    }
+
+    public static int[] stringToArrayInt(String data) {
+        data = data.replaceAll("[\\[\\]()\s{}]","");
+        try{
+            return Arrays.stream(data.split(",")).map(s->s.replace(" ","")).mapToInt(Integer::parseInt).toArray();
+        }
+        catch (NumberFormatException e){
+            e.printStackTrace();
+            throw e;
         }
     }
 }

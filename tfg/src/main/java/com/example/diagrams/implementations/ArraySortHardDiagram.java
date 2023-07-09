@@ -22,10 +22,10 @@ public class ArraySortHardDiagram implements IDiagramActions, IAuxFuncsActions{
     @Override
     public void setParams(Map<String, String> newValues) throws Exception {
         try{
-            array = stringToArrayInt(newValues.get("a"));
+            array = Algorithms.stringToArrayInt(newValues.get("a"));
             mid = Integer.parseInt(newValues.get("mid"));
-            l = stringToArrayInt(newValues.get("l"));
-            r = stringToArrayInt(newValues.get("r"));
+            l = Algorithms.stringToArrayInt(newValues.get("l"));
+            r = Algorithms.stringToArrayInt(newValues.get("r"));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -80,10 +80,10 @@ public class ArraySortHardDiagram implements IDiagramActions, IAuxFuncsActions{
         });
         algorithmMap.put(0, () -> {
             Map<String,String> returnVal = new HashMap<>();
-            returnVal.put("reducedOperation1","v1 = "+Arrays.toString(l));
-            returnVal.put("reducedOperation2","v2 = "+Arrays.toString(r));
-            returnVal.put("prePartialSol1","f'(v1)");
-            returnVal.put("prePartialSol2","f'(v2)");
+            returnVal.put("reducedOperation1","a = "+Arrays.toString(l));
+            returnVal.put("reducedOperation2","tail = "+Arrays.toString(r));
+            returnVal.put("prePartialSol1","f'(a)");
+            returnVal.put("prePartialSol2","tail");
             returnVal.put("partSol1",Arrays.toString(Algorithms.mergeSort(l)));
             returnVal.put("partSol2",Arrays.toString(Algorithms.mergeSort(r)));
             returnVal.put("currentReductionSolutions", String.valueOf(0));
@@ -107,7 +107,7 @@ public class ArraySortHardDiagram implements IDiagramActions, IAuxFuncsActions{
     }
     @Override
     public boolean checkNotBaseCase(List<String> baseCases,List<String> inputs) throws Exception {
-        int[] input = stringToArrayInt(inputs.get(0));
+        int[] input = Algorithms.stringToArrayInt(inputs.get(0));
         copyArray = input.clone();
         if(input.length>1){
             array = input.clone();
@@ -127,15 +127,4 @@ public class ArraySortHardDiagram implements IDiagramActions, IAuxFuncsActions{
         return algorithmMap.get(index).call();
     }
 
-
-    private int[] stringToArrayInt(String data) {
-        data = data.replaceAll("[\\[\\]()\s{}]","");
-        try{
-            return Arrays.stream(data.split(",")).map(s->s.replace(" ","")).mapToInt(Integer::parseInt).toArray();
-        }
-        catch (NumberFormatException e){
-            e.printStackTrace();
-            throw e;
-        }
-    }
 }

@@ -89,6 +89,11 @@
                            <Font size="24.0" />
                         </font>
                      </Button>
+                     <Button id="button1" fx:id="b9" alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="78.0" mnemonicParsing="false" prefWidth="350.0" stylesheets="@../css/button.css" text="Dígitos comunes" textAlignment="CENTER" wrapText="true">
+                        <font>
+                           <Font size="24.0" />
+                        </font>
+                     </Button>
                   </children>
                   <padding>
                      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

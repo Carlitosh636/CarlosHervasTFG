@@ -112,7 +112,7 @@ public class ArrayProblem extends BaseProblem {
         }
         subSolutions.add(new SimpleStringProperty(data.get("prePartialSol1") +"=" + data.get("partSol1")));
         if(data.containsKey("pivot")){
-            subSolutions.add(new SimpleStringProperty(data.get("prePartialSol2") +"=" + data.get("partSol2")+"\npivot="+data.get("pivot")));
+            subSolutions.add(new SimpleStringProperty(data.get("prePartialSol2") +"=" + data.get("partSol2")));
         }
         else{
             subSolutions.add(new SimpleStringProperty(data.get("prePartialSol2") +"=" + data.get("partSol2")));
