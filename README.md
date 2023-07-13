@@ -14,5 +14,9 @@ To package into an executable .jar file, you can either:
 ```
 mvn clean package
 ```
+To change to the root folder just execute:
+```
+cd tfg
+```
 - If your IDE has a Maven plugin, use the "clean" and "package" lifecycle actions in that order. Then execute the generated .jar in /target
 
