@@ -79,7 +79,7 @@
                </VBox>
                <VBox id="background" alignment="TOP_CENTER" spacing="15.0" stylesheets="@../css/boxes-background.css">
                   <children>
-                     <Label text="Dificultad Alta" textFill="RED">
+                     <Label text="Dificultad Alta" textFill="#ffae00">
                         <font>
                            <Font size="30.0" />
                         </font>
