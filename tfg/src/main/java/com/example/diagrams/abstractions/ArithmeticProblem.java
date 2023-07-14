@@ -22,7 +22,7 @@ public class ArithmeticProblem extends BaseProblem {
 
     @Override
     public void processInputs() throws Exception {
-        if (diagramActions.checkNotIncorrectInput(params.values().stream().map(SimpleStringProperty::get).toList())){
+        if (diagramActions.checkNotIncorrectInput(params.entrySet().stream().filter(k->paramKeys.contains(k.getKey())).map(k->k.getValue().get()).toList())){
             throw new IncorrectInputException("Los valores introducidos no son válidos");
         }
         paramsParsed = new HashMap<>();
