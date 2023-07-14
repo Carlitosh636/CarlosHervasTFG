@@ -19,7 +19,7 @@ public class App extends Application {
         Parent root = loader.load();
         Scene main = new Scene(root);
         stage.setScene(main);
-        stage.setTitle("Simple Recursion");
+        stage.setTitle("RecVis");
         stage.show();
         stage.setMaxHeight(1080);
         stage.setMaxWidth(1920);
