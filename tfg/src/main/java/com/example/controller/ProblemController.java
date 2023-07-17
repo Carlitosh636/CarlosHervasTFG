@@ -325,10 +325,11 @@ public class ProblemController implements Initializable {
         }
         catch (IncorrectInputException e){
             showErrorInputAlert(e);
+            return;
         }
         catch (Exception e) {
             showErrorInputAlert(new RuntimeException("Error desconocido"));
-                        return;
+            return;
         }
         diagramsVisualizers.get("Visualizer 1").getSubSolutions().getChildren().clear();
         diagramsVisualizers.get("Visualizer 1").getSubParameters().getChildren().clear();
