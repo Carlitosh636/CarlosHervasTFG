@@ -23,8 +23,10 @@ public class App extends Application {
         stage.show();
         stage.setMaxHeight(1080);
         stage.setMaxWidth(1920);
-        stage.setMinHeight(1200);
+        stage.setMinHeight(1000);
         stage.setMinWidth(1600);
+        stage.setHeight(1080);
+        stage.setWidth(1920);
         stage.setMaximized(true);
     }
 }
