@@ -85,6 +85,9 @@ public class ContainsDigitDiagram implements IDiagramActions{
 
     @Override
     public boolean checkNotIncorrectInput(List<String> inputs) {
+        if(d < 0 || d > 9){
+            return true;
+        }
         for (String input : inputs){
             try {
                 double d = Double.parseDouble(input);

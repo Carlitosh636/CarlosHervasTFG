@@ -266,8 +266,8 @@ public class ProblemController implements Initializable {
                                     visualizerData.getSubParameters().getChildren().clear();
                                     model.getSubParameters().clear();
                                     model.getSubSolutions().clear();
-                                } catch (Exception e) {
-                                    showErrorInputAlert(new IncorrectInputException("Los valores introducidos no son válidos"));
+                                } catch (IncorrectInputException e) {
+                                    showErrorInputAlert(e);
                                 }
                                 refreshDecomposition();
                             }
@@ -322,8 +322,12 @@ public class ProblemController implements Initializable {
     protected void handleDecomposition() {
         try {
             model.processSolutions();
-        } catch (Exception e) {
-            showErrorInputAlert(new RuntimeException("Error al introducir los datos de entrada"));
+        }
+        catch (IncorrectInputException e){
+            showErrorInputAlert(e);
+        }
+        catch (Exception e) {
+            showErrorInputAlert(new RuntimeException("Error desconocido"));
                         return;
         }
         diagramsVisualizers.get("Visualizer 1").getSubSolutions().getChildren().clear();

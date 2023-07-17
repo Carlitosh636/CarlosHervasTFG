@@ -32,11 +32,11 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button id="button4" fx:id="copyCodeButton" mnemonicParsing="false" onAction="#copyToClipboard" prefHeight="90.0" prefWidth="200.0" stylesheets="@../css/button.css" text="Copiar código generado" textAlignment="CENTER" wrapText="true">
+                  <Button id="button4" fx:id="copyCodeButton" mnemonicParsing="false" onAction="#copyToClipboard" prefHeight="100.0" prefWidth="200.0" stylesheets="@../css/button.css" text="Copiar código generado" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
-                  <Button id="button3" fx:id="showMoreFunctions" layoutX="20.0" layoutY="70.0" onAction="#showMoreFuncs" prefHeight="90.0" prefWidth="200.0" stylesheets="@../css/button.css" text="Mostrar funciones auxiliares" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
+                  <Button id="button3" fx:id="showMoreFunctions" layoutX="20.0" layoutY="70.0" onAction="#showMoreFuncs" prefHeight="100.0" prefWidth="200.0" stylesheets="@../css/button.css" text="Mostrar funciones auxiliares" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
