@@ -95,7 +95,7 @@ public class DigitsSharedDiagram implements IDiagramActions,IAuxFuncsActions{
         });
         algorithmMap.put(0, () -> {
             Map<String,String> returnVal = new HashMap<>();
-            ele = array[mid-1];
+            ele = copyArray[mid-1];
             reducedArray = Arrays.stream(array).filter(e->e!=ele).toArray();
             returnVal.put("prePartialSol1","f'(a)");
             returnVal.put("prePartialSol2","ele");
@@ -109,10 +109,10 @@ public class DigitsSharedDiagram implements IDiagramActions,IAuxFuncsActions{
         });
         algorithmMap.put(1,()->{
             Map<String,String> returnVal = new HashMap<>();
-            returnVal.put("reducedOperation1","v1 = "+Arrays.toString(l));
-            returnVal.put("reducedOperation2","v2 = "+Arrays.toString(r));
-            returnVal.put("prePartialSol1","f'(v1)");
-            returnVal.put("prePartialSol2","f'(v2)");
+            returnVal.put("reducedOperation1","l = "+Arrays.toString(l));
+            returnVal.put("reducedOperation2","r = "+Arrays.toString(r));
+            returnVal.put("prePartialSol1","f'(l)");
+            returnVal.put("prePartialSol2","f'(r)");
             Set<String> partSol1 = Algorithms.digitSharedDyV(l).stream().map(String::valueOf).collect(Collectors.toSet());
             returnVal.put("partSol1", partSol1.toString());
             Set<String> partSol2 = Algorithms.digitSharedDyV(r).stream().map(String::valueOf).collect(Collectors.toSet());
