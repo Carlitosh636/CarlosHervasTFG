@@ -85,7 +85,7 @@ public class ArraySortMediumDiagram implements IDiagramActions, IAuxFuncsActions
         });
         algorithmMap.put(0,()->{
             Map<String,String> returnVal = new HashMap<>();
-            ele = array[mid-1];
+            ele = copyArray[copyArray.length-1];
             reducedArray = Arrays.stream(copyArray).filter(e->e!=ele).toArray();
             returnVal.put("prePartialSol1","f'(a[:-1])");
             returnVal.put("prePartialSol2","tail");

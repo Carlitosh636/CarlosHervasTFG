@@ -114,7 +114,7 @@ public class SlowAdditionDiagram implements IDiagramActions{
                 returnVal.put("prePartialSol","f'(a,b-1)");
                 returnVal.put("partSol",String.valueOf(Algorithms.slowAdditionOption2(a,b-1,baseCaseValue)));
             }
-            returnVal.put("reducedOperation",String.format("min(a,b) = %.0f", Math.min(a, b - 1)));
+            returnVal.put("reducedOperation",String.format("min(a,b) = %.0f", Math.min(a, b)-1));
             returnVal.put("currentReductionSolutions",String.valueOf(4));
             return returnVal;
         });

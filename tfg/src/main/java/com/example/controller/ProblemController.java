@@ -381,7 +381,8 @@ public class ProblemController implements Initializable {
         }
 
         catch (Exception e){
-                    }
+            e.printStackTrace();
+        }
     }
 
     public void onSolutionChange2() {
@@ -393,7 +394,8 @@ public class ProblemController implements Initializable {
         }
 
         catch (Exception e){
-                    }
+            e.printStackTrace();
+        }
     }
 
     private void manageCalculatedSolution(DiagramVisualizerData diagramVisualizerData,ComboBox solSelect,int currentReductionSolutionsIndex,int indexAllSolved, int offset, boolean isOther) throws Exception {
